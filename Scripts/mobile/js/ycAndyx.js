@@ -4,7 +4,8 @@ function ycAndyx() {
     var url = urlstr[leng - 1].split("#")[1]
     var equip_no = url.split("&")[0];
     var name = url.split("&")[1];
-    $("#titleStats").text(name)
+
+    $(".sliding,.title-large-text").text(name);
     realShows(equip_no, name)
     var searchbar = myApp.searchbar.create({
         el: '.searchbar2',
@@ -17,7 +18,7 @@ function refresh(txt) {
     $(txt).scrollTop(1);
     $("#titleStats").attr("noTab", txt);
     var myScrollTop = $(txt).scrollTop();
-    $(txt).addClass("searchbar-found").siblings().removeClass("searchbar-found")
+    $(txt).addClass("searchbar-found").siblings().removeClass("searchbar-found");
     if (txt == "#ycp") {
         if (myScrollTop > 0) {
             $("#ycp").bind("scroll", function() {
@@ -113,21 +114,21 @@ function realShows(equip_no, name) {
 
 function realHtmls(countAll, equip_no, name) {
     if (countAll[0] > 0) {
-        var html = '<a href="#ycp" class="tab-link " onclick="refresh(\'#ycp\')">遥测点</a>';
+        var html = '<a href="#ycp" class="tab-link yc_b" onclick="refresh(\'#ycp\')">遥测点</a>';
         $("#ycAndyx .tabCon").append(html);
         loadYc(equip_no)
     } else {
         $("#ycp").remove();
     }
     if (countAll[1] > 0) {
-        var html = '<a href="#yxp" class="tab-link"  onclick="refresh(\'#yxp\')">遥信点</a>';
+        var html = '<a href="#yxp" class="tab-link yx_b"  onclick="refresh(\'#yxp\')">遥信点</a>';
         $("#ycAndyx .tabCon").append(html);
         loadYx(equip_no)
     } else {
         $("#yxp").remove();
     }
     if (countAll[2] > 0) {
-        var html = '<a href="#set" class="tab-link "  onclick="refresh(\'#set\')">设置</a>';
+        var html = '<a href="#set" class="tab-link set_b"  onclick="refresh(\'#set\')">设置</a>';
         $("#ycAndyx .tabCon").append(html);
         loadSet(equip_no)
     } else {
@@ -220,7 +221,9 @@ function tableFills(equip, alarm, tabList) {
 
 function jsonTodata(data, tableName, alarm) {
     var usera = JSON.parse(data);
+    
     if (tableName == "ycp") {
+        $(".yc_b").text("遥测点 "+usera.length);
         $("#" + tableName).html("");
         for (var i = 0; i < usera.length; i++) {
             dataCurve[i] = [usera[i].m_YCValue, usera[i].m_Unit]
@@ -235,15 +238,15 @@ function jsonTodata(data, tableName, alarm) {
                 alarmImg = 'alarm';
             }
             var newRow = `<li class="row oneLine no-gap" id="m_alarmycps_${usera[i].m_iYCNo}">
-                            <div class="col-15 iconWrap">
-                                <i class="iconfont icon-dian ${alarmImg}"></i>
+                            <div class="col-15 iconWrap iconWrap_center">
+                                <i class="icon iconfont icondian ${alarmImg}"></i>
                             </div>
                             <div class="item-title col-70 " id="valueycps_${usera[i].m_iYCNo}">
                                 <span class="name">${usera[i].m_YCNm}</span>
                                 <span class="val">${usera[i].m_YCValue}${usera[i].m_Unit}</spn>
                             </div>
-                            <div class="col-15 iconWrap" onclick="curveBox(${i},'${usera[i].m_YCNm}',this)">
-                                <i class="iconfont icon-tubiaofenxi"></i>
+                            <div class="col-15 iconWrap iconWrap_left" onclick="curveBox(${i},'${usera[i].m_YCNm}',this)">
+                                <i class="icon iconfont icon_liebiao_tubiaotongji"></i>
                             </div>
                         </li>`;
             if (alarmImg == 'alarm') {
@@ -253,6 +256,7 @@ function jsonTodata(data, tableName, alarm) {
             }
         }
     } else {
+        $(".yx_b").text("遥信点 "+usera.length);
         $("#" + tableName).html("");
         for (var j = 0; j < usera.length; j++) {
             var alarmImg = '';
@@ -266,8 +270,8 @@ function jsonTodata(data, tableName, alarm) {
                 alarmImg = 'alarm';
             }
             var newRow = `<li class="row oneLine no-gap" id="m_alarmyxps_${usera[j].m_iYXNo }">
-                            <div class="col-15 iconWrap">
-                                <i class="iconfont icon-dian ${alarmImg}"></i>
+                            <div class="col-15 iconWrap iconWrap_center">
+                                <i class="iconfont icondian ${alarmImg}"></i>
                             </div>
                             <div class="item-title col-85" id="valueyxps_${usera[j].m_iYXNo}">
                                 <span class="name">${usera[j].m_YXNm}</span>
@@ -284,7 +288,6 @@ function jsonTodata(data, tableName, alarm) {
 }
 //获取设置表数据
 function setTodata(equip) {
-    //  $("#" + tabLists).parent().addClass("tableAuto3");
     if (Control_Equip_List(equip) || Control_SetItem_List(equip, false)) {
         var _url = service + "/GetSystemConfig";
         var _dataSet = "equip_no_list=" + equip + "&&table_name=SetParm";
@@ -301,8 +304,10 @@ function setTodata(equip) {
 }
 //创建设置表按钮
 function jsonTobtn(data, confarr) {
+
     $("#set ").html("");
     var usera = JSON.parse(data);
+    $(".set_b").text("设置 "+usera.length);
     for (var i = 0; i < usera.length; i++) {
         var userb = usera[i];
         var userc = new Array(userb.set_nm, userb.main_instruction, userb.minor_instruction, userb.value, userb.set_type);
@@ -542,7 +547,7 @@ function refreshDatas() {
             } else {
                 alarmImg = 'alarm';
             }
-            $('#m_alarmycps_' + userb.m_iYCNo).find("i.icon-dian").addClass(alarmImg);
+            $('#m_alarmycps_' + userb.m_iYCNo).find("i.icondian").addClass(alarmImg);
             $("#valueycps_" + userb.m_iYCNo).find(".val").html(userc[1] + userc[4]);
             if (alarmImg == 'alarm') { //有报警置顶
                 var dom = $("#valueycps_" + userb.m_iYCNo).parent();
@@ -568,7 +573,7 @@ function refreshDatas() {
             } else {
                 alarmImg = 'alarm';
             }
-            $('#m_alarmyxps_' + userb.m_iYXNo).find('i.icon-dian').addClass(alarmImg);
+            $('#m_alarmyxps_' + userb.m_iYXNo).find('i.icondian').addClass(alarmImg);
             $("#valueyxps_" + userb.m_iYXNo).find(".val").html(userc[1]);
             if (alarmImg == 'HaveAlarm') {
                 var dom = $("#valueyxps_" + userb.m_iYXNo).parent();

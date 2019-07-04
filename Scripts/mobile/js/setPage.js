@@ -1,4 +1,5 @@
 ﻿function setPage() {
+    switchToolbar("setPageTool");
     try {
         myJavaFun.GetAppVersion();
     } catch (e) {}
@@ -14,7 +15,6 @@
     $("#languageListName>.item-after").html("中文");
     //用户
     $(".userClassName p").html(window.localStorage.userName);
-    // myApp.navbar.hide('.navbar');
     //切换背景
     var toggle = myApp.toggle.create({
         el: '.toggle',

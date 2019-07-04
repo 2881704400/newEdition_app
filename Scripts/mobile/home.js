@@ -4,10 +4,8 @@ function onHomePage() {
     authorizationName();
     getJurisdictionData();
     getAppStatusBarHeight();
-    //切换中英文右上角链接
     tranformMenu(window.localStorage.languageList);
 }
-
 //响应App绑定函数-获取状态栏高度 
 function getStatusBarHeight(height, ScreenHeight) {
     var heightRate = height / ScreenHeight;
@@ -65,44 +63,7 @@ function tipsInformtion(tipsStr, tipsEvent) {
         }]
     }).open();
 }
-//轮播
-function VideoBaner(className, slistName, jsonString) {
-    $(".KOvm_container>div,.wiper-paginationTrailer-KOvm").html("");
-    var countTrailer = jsonString.length;
-    var xhTrailer = 0,
-        signIndex = window.localStorage.languageList == 1 ? 6 : 8;
-    for (var i = 0; i < countTrailer; i++) {
-        var htmlTrailerChild = "<li class=\"" + (window.localStorage.languageList == 1 ? "col-33" : "col-25") + "\">" + "<a href=\"#\"  id=\"homeBtn" + (i + 1) + "\" class=\"homeBtn\" set_equip=\"" + jsonString[i].equipNo + "\" set_no=\"" + jsonString[i].setNo + "\" onclick=\"get_no_set(this," + jsonString[i].value + ")\">" + "<i class=\"" + jsonString[i].icon + "\" style=\"background:linear-gradient(45deg," + jsonString[i].color + ")\"></i>" + "<p class=\"p-ellipsis1\">" + (window.localStorage.languageList == 1 ? jsonString[i].name_en : jsonString[i].name) + "</p>" + "</a>" + "<a href=\"#\"  class=\"homeBtn displayNone\">" + "<i class=\"" + jsonString[i].icon + "\" ></i>" + "<p class=\"p-ellipsis1\">" + (window.localStorage.languageList == 1 ? jsonString[i].name_en : jsonString[i].name) + "</p>" + "</a>" + "<img src=\"#\" style=\"display:none;\"></li>";
-        if (i % signIndex == 0 || i == 0) {
-            xhTrailer++;
-            var htmlTrailer = "<div class=\"swiper-slide\" dataID='" + xhTrailer + "'>" + "<ul class=\"row\" >" + htmlTrailerChild + "</ul></div>";
-            $("." + className + " .swiper-wrapper").append(htmlTrailer);
-        } else {
-            $("." + className + " .swiper-wrapper .swiper-slide[dataID=" + xhTrailer + "] ul").append(htmlTrailerChild);
-        }
-        if (i == countTrailer - 1 && $("." + className + " .swiper-wrapper .swiper-slide[dataID=" + xhTrailer + "] ul").find("li").length < 8) {
-            $("." + className + " .swiper-wrapper .swiper-slide[dataID=" + xhTrailer + "] ul").addClass("homeControlFunction");
-        }
-    }
-    $(".swiper-paginationTrailer").html("");
-    var paginationDom = "";
-    for (var j = 0; j < xhTrailer; j++) {
-        if (j == 0) {
-            paginationDom = `<span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>`;
-        } else paginationDom += '<span class="swiper-pagination-bullet"></span>';
-    }
-    $(".swiper-paginationTrailer").append(paginationDom);
-    var swiper = myApp.swiper.create('.swiper-containerTrailer', {
-        speed: 400,
-        spaceBetween: 100,
-        pagination: '.swiper-pagination',
-    });
-    var activeIndex = 0;
-    $(".swiper-containerTrailer")[0].addEventListener('touchend', function() {
-        activeIndex = parseInt($(".swiper-slide-active").attr("dataid")) - 1;
-        $(".swiper-paginationTrailer span:eq(" + activeIndex + ")").addClass("swiper-pagination-bullet-active").siblings().removeClass("swiper-pagination-bullet-active");
-    }, false);
-}
+
 //常用
 function commonlyUsedFun(className, classListName, jsonString) {
     $("." + className).html("");
@@ -114,7 +75,6 @@ function commonlyUsedFun(className, classListName, jsonString) {
     }
     $("." + className).append(htmlTrailerChild);
 }
-
 //实时快照 
 var event_Level_list_home, btnInfoNames_home = [],
     btnInfoLevels_home = [];
@@ -187,7 +147,6 @@ function getJurisdictionData() {
     $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/getJurisdictionData", {
         async: false
     })).done(function(n) {
-
         let result = n.HttpData;
         var JurisdictionFunArray = result.data.filter((item, index) => {
             if (item.ClassName.indexOf("AlarmCenter.APP.Home") > -1) return item;
@@ -203,7 +162,7 @@ function getJurisdictionData() {
                     getWebUser = $(usersDt).children("UserItem");
                     let resultControl = $(usersDt).find("RoleItem").find("AddinModule_List").find("int"),
                         JurisdictionArrayList = [];
-                    if ($(usersDt).find("IsAdministrator").text() == "true") JurisdictionArray = ["HomeSnapShot", "HomeButton", "HomeCommonlyused", "HomeShortcutFunction", "HomeSystemMenu", "homeNewlyBuild"];
+                    if ($(usersDt).find("IsAdministrator").text() == "true") JurisdictionArray = ["HomeSnapShot", "HomeShortcutFunction", "HomeButton"];
                     else {
                         resultControl.each(function(index_p, item_p) {
                             JurisdictionArrayList.push($(item_p).text());
@@ -233,36 +192,25 @@ function getJurisdictionData() {
                                 });
                                 break;
                             case "HomeButton":
-                                VideoBaner("KOvm_container", "swiper-paginationTrailer-KOvm", KOvm);
-                                break;
-                            case "HomeCommonlyused":
-                                commonlyUsedFun("commonlyUsed", "25", commonlyUsed);
-                                break;
-                            case "HomeSystemMenu":
-                                commonlyUsedFun("sysFourMenu", "25", sysFourMenu);
-                                break;
-                            case "homeNewlyBuild1":
-                                //加载newlyBuild脚本
-                                initPageJS('newlyBuild', '/Scripts/mobile/');
+                                
                                 break;
                             default:
                                 break;
                         }
                     });
+
                 }
             });
         }
-    }).fail(function(e) {
-        // myApp.router.navigate("/home/");  
-    });
-
+    }).fail(function(e) {});
 }
 
 function functionalModule(className, htmlStr) {
     var html = "";
     switch (className) {
         case "HomeSnapShot":
-            html = `<li class="row HomeSnapShot statisticsTable no-gap">
+            html = `<li class="row HomeSnapShot statisticsTable no-gap bottomLine">
+                        <h2 class="title_2">实时快照</h2>
                         <a class="col-20"><p>0</p>${window.localStorage.languageList == 1?"Errors":"故障"}</a>
                         <a class="col-20"><p>0</p>${window.localStorage.languageList == 1?"Warnings":"警告"}</a>
                         <a class="col-20"><p>0</p>${window.localStorage.languageList == 1?"Informations":"信息"}</a>
@@ -271,58 +219,103 @@ function functionalModule(className, htmlStr) {
                     </li>`;
             break;
         case "HomeShortcutFunction":
-            html = `<li class="row HomeShortcutFunction">
-                 <div data-pagination='{"el": ".swiper-pagination"}' data-space-between="20" data-slides-per-view="1.5" class="swiper-container swiper-init HomeShortcutFunction-swiper">
-                  <div class="swiper-wrapper">
+            html = `<li class="row HomeShortcutFunction bottomLine">
+            <h2 class="title_2">大屏操控</h2>
 
-                    <div class="swiper-slide" onclick="videoExplain()">
-                       <div class="videoPatternHeader row">
-                          <span class="col-100">
-                             <h3>${window.localStorage.languageList == 1?"Video Explanation":"视频讲解"}</h3>
-                             ${window.localStorage.languageList == 1?"Remote control":"遥控器"}
-                          </span>
-                          <a><i class="iconfont icon-f7_icon_hf"></i></a>
-                       </div>
-                       <p>${window.localStorage.languageList == 1?"Current file":"当前文件"}: <label>敢为平台演示.mp4</label></p>
-                    </div>
 
-                    <div class="swiper-slide" onclick="pptPlay()">
-                       <div class="pptPatternHeader row">
-                          <span class="col-100">
-                             <h3>${window.localStorage.languageList == 1?"PPT Paly":"PPT播放"}</h3>
-                             ${window.localStorage.languageList == 1?"Remote control":"遥控器"}
-                          </span>
-                           <a><i class="iconfont icon-f7_ppt"></i></a>
-                       </div>
-                       <p>${window.localStorage.languageList == 1?"Current file":"当前文件"}: <label>敢为平台演示.pptx</label></p>
-                    </div>
+            <div class="col-50" onclick="videoExplain()">
+               <div class="videoPatternHeader row">
+                  <span class="col-100 title_4">
+                     <h3 class="title_3">${window.localStorage.languageList == 1?"Video Explanation":"视频讲解"}</h3>
+                     ${window.localStorage.languageList == 1?"Video Brief Introduction of Dare to Platform":"敢为平台视频简介"}
+                  </span>
+                  <a><i class="icon iconfont icon_PPTyanshi"></i></a>
+               </div>
+            </div>
 
-                  </div>
-                </div>                                  
+            <div class="col-50" onclick="pptPlay()">
+               <div class="pptPatternHeader row">
+                  <span class="col-100 title_4">
+                     <h3 class="title_3">${window.localStorage.languageList == 1?"PPT Paly":"PPT播放"}</h3>
+                     ${window.localStorage.languageList == 1?"Dare to Demonstrate PPT for Platform":"敢为平台PPT演示"}
+                  </span>
+                   <a><i class="icon iconfont icon_shipinjiangjie"></i></a>
+               </div>
+            </div>
+
+            <div class="col-50" onclick="pptPlay()">
+               <div class="pptPatternHeader row">
+                  <span class="col-100 title_4">
+                     <h3 class="title_3">${window.localStorage.languageList == 1?"Scene switching":"场景切换"}</h3>
+                     ${window.localStorage.languageList == 1?"Common Scenarios":"常用场景"}
+                  </span>
+                   <a><i class="icon iconfont icon_changjingqiehuan"></i></a>
+               </div>
+               
+            </div>
+
+                                
             </li>`;
             break;
         case "HomeButton":
-            html = `<li class="row HomeButton">
-              <div class="swiper-containerTrailer KOvm_container swiper-init swiper-container" data-space-between="50" >
-                <div class="swiper-paginationTrailer swiper-paginationTrailer-KOvm swiper-pagination"></div>
-                <div class="swiper-wrapper" style="margin-bottom: 5%;"></div>
-              </div>
+            html = `<li class="row HomeButton bottomLine">
+            <h2 class="title_2">功能模块</h2>
+
+
+            <div class="col-50" onclick="videoExplain()">
+               <div class="videoPatternHeader row">
+                  <span class="col-100 title_4">
+                     <h3 class="title_3">${window.localStorage.languageList == 1?"Video surveillance":"视频监控"}</h3>
+                     ${window.localStorage.languageList == 1?"View all monitoring devices":"查看所有监控设备"}
+                  </span>
+                  <a class="icon iconfont icon_gongnengrukou_ditu"><i class="icon iconfont icon_changjingzhiling_jiankong"></i></a>
+               </div>
+              
+            </div>
+
+            <div class="col-50" onclick="pptPlay()">
+               <div class="pptPatternHeader row">
+                  <span class="col-100 title_4">
+                     <h3 class="title_3">${window.localStorage.languageList == 1?"Map monitoring":"地图监控"}</h3>
+                     ${window.localStorage.languageList == 1?"View the location of the device":"查看设备所在位置"}
+                  </span>
+                   <a class="icon iconfont icon_gongnengrukou_ditu"><i class="icon iconfont icon_gongnengrukou_ditujiankong"></i></a>
+               </div>
+               
+            </div>
+
+            <div class="col-50" onclick="pptPlay()">
+               <div class="pptPatternHeader row">
+                  <span class="col-100 title_4">
+                     <h3 class="title_3">${window.localStorage.languageList == 1?"PPT Settings":"PPT设置"}</h3>
+                     ${window.localStorage.languageList == 1?"PPT Operational Control":"PPT操作控制"}
+                  </span>
+                   <a class="icon iconfont icon_gongnengrukou_ditu"><i class="icon iconfont icon_gongnengrukou_PPTshezhi"></i></a>
+               </div>
+               
+            </div>
+            <div class="col-50" onclick="pptPlay()">
+               <div class="pptPatternHeader row">
+                  <span class="col-100 title_4">
+                     <h3 class="title_3">${window.localStorage.languageList == 1?"Welcome speech":"欢迎词"}</h3>
+                     ${window.localStorage.languageList == 1?"Setting up Welcome Words to Show Contents":"设置欢迎词展示内容"}
+                  </span>
+                   <a class="icon iconfont icon_gongnengrukou_ditu"><i class="icon iconfont icon_gongnengrukou_huanyingci"></i></a>
+               </div>
+               
+            </div>
+            <div class="col-50" onclick="pptPlay()">
+               <div class="pptPatternHeader row">
+                  <span class="col-100 title_4">
+                     <h3 class="title_3">${window.localStorage.languageList == 1?"Module title":"模块标题"}</h3>
+                     ${window.localStorage.languageList == 1?"Module Content Interpretation":"模块内容解释"}
+                  </span>
+                   <a class="icon iconfont icon_gongnengrukou_ditu"><i class="icon iconfont icon_gongnengmokuai_shebeiliandong"></i></a>
+               </div>
+               
+            </div>            
+                                 
             </li>`;
-            break;
-        case "HomeCommonlyused":
-            html = `<li class="HomeCommonlyused">
-                    <ol class="row commonlyUsed">                                   
-                    </ol>
-            </li>`;
-            break;
-        case "HomeSystemMenu":
-            html = `<li class="HomeCommonlyused">
-                    <ol class="row sysFourMenu">                                   
-                    </ol>
-            </li>`;
-            break;
-        case "homeNewlyBuild1":
-            html = `<li class="homeNewlyBuild"></li>`;
             break;
         default:
             html = htmlStr;

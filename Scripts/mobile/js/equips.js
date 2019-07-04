@@ -35,23 +35,21 @@ function equips() {
     });
 
 }
-var AllEquipStat;
 
+var AllEquipStat;
 function allEquipSatatus() {
     AllEquipStat = null, _url = service + "/GetEquipAllState";
     JQajaxo("post", _url, true, "", _successf);
-
     function _successf(data) {
         var resultStr = $(data).children("string").text();
         if (resultStr != 'false') {
             AllEquipStat = resultStr.split(';');
             treeConfList();
-            //  获取设备的树状图
         }
     }
 }
-var GetEquipTreeLists2;
 
+var GetEquipTreeLists2;
 function treeConfList() {
     var _url = service + "/GWEquipTree";
     JQajaxo("post", _url, true, "", _successf);
@@ -80,6 +78,7 @@ function treeHTML(len, name, equip_no, thisDom) {
         signalR.connectServer(equip_no);
         equipListStatus = false;
     }
+
     var newRow = "";
     if (len > 0) {
         var alarm = selectAlarm(name);
@@ -89,19 +88,19 @@ function treeHTML(len, name, equip_no, thisDom) {
         } else {
             alarmClass = 'comOk';
         }
-        newRow = `<li class="accordion-item" onclick="onTreePar(this,'${name}',event)">
-                 <a href="#" class="item-content item-link">
+        // onclick="onTreePar(this,'${name}',event)" class="accordion-item"
+        newRow = `<li>
+                 <a href="/equipsDetails/#${name}" class="item-link item-content">
                     <div class="item-media equipListStatus_${equip_no}">
-                        <i class="iconfont icon-dian ${alarmClass}"></i>
+                        <i class="icon iconfont icondian ${alarmClass}"></i>
                     </div>
                     <div class="item-inner">
                       <div class="item-title">${name}</div>
+                      <div class="item-after"><span class="badge">${len}组</span></div>
                     </div>
                 </a>
                 <div class="accordion-item-content " style="padding-left: 15px;">
-                    <ul>
-                    
-                    </ul>
+                    <ul></ul>
                 </div>
             </li>`
         if (alarm > 0) {
@@ -116,18 +115,19 @@ function treeHTML(len, name, equip_no, thisDom) {
                 var iconColorClass = getIconColor(allEquipStat[2]);
                 if (equip_no == allEquipStat[0]) {
                     if (name == '') {
-                        name = allEquipStat[1];
+                      name = allEquipStat[1];
                     }
                     newRow = `<li>
                                 <a href="/ycAndyx/#${equip_no}&${name}" class="item-link item-content">
-                                        <div class="item-media equipListStatus_${equip_no}">
-                                            <i class="iconfont icon-dian ${iconColorClass}"></i>
-                                        </div>
-                                        <div class="item-inner">
-                                          <div class="item-title">${name}</div>
-                                        </div>
-                                    </a>
-                                </li>`;
+                                    <div class="item-media equipListStatus_${equip_no}">
+                                        <i class="icon iconfont icondian ${iconColorClass}"></i>
+                                    </div>
+                                    <div class="item-inner no-before">
+                                      <div class="item-title">${name}</div>
+
+                                    </div>
+                                </a>
+                             </li>`;
                     if (allEquipStat[2] == 'HaveAlarm') {
                         thisDom.prepend(newRow);
                     } else {
@@ -137,15 +137,14 @@ function treeHTML(len, name, equip_no, thisDom) {
             }
             if (newRow == "") {
                 newRow = `<li><a href="#" class="item-link item-content">
-                                        <div class="item-media equipListStatus_${equip_no}">
-                                            <i class="iconfont icon-dian noCom"></i>
-                                        </div>
-                                        <div class="item-inner">
-                                          <div class="item-title">${name}</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                `
+                                <div class="item-media equipListStatus_${equip_no}">
+                                    <i class="icon iconfont icondian noCom"></i>
+                                </div>
+                                <div class="item-inner no-before">
+                                  <div class="item-title">${name}</div>
+                                </div>
+                            </a>
+                        </li>`;
                 thisDom.append(newRow);
             }
             thisDom.attr('equiplist', 'true');
@@ -192,7 +191,7 @@ function selectAlarm(name) {
 }
 
 function onTreePar(dt, name, e) {
-
+    
     var doms = selectDom(name); 
     $(dt).find("ul").html("");
     doms.each(function() {
@@ -202,16 +201,16 @@ function onTreePar(dt, name, e) {
         $(dt).children("a").next(".accordion-item-content").css({
             height: "auto"
         })
-        
         treeHTML(len, name, equip_no, $(dt).find("ul"));
     });
-
     $(dt).children("a").next(".accordion-item-content").children("ul").click(function(e) {
-    e.stopPropagation()
+       e.stopPropagation();
     })
+
 }
 
 function selectDom(name) {
+
     var selectDomRT = null;
     $(GetEquipTreeLists2).find('GWEquipTreeItem').each(function() {
         if ($(this).attr('Name') == name) {
@@ -219,4 +218,5 @@ function selectDom(name) {
         }
     });
     return selectDomRT;
+
 }

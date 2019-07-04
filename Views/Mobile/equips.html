@@ -1,42 +1,18 @@
 ﻿<div class="page" data-page="equips" id="equips">
+
     <div class="navbar">
         <div class="navbar-inner">
-            <!-- 标题 -->
-            <div class="left">
-                <a href="#" id="scan" onclick="RichScan()">
-                    <i class="iconfont icon-scanIcon">
-                    </i>
-                </a>
-            </div>
-            <div class="center sliding title">
-                设备列表
-            </div>
+            <div class="left sliding auth_name_get title_1">设备列表</div>
             <div class="right">
-                <a class="link icon-only panel-open" href="/setPage/" id="setPageTool">
-                    <i class="iconfont icon-f7_right_user">
-                    </i>
+                <a href="#" onclick="RichScan()" id="scan"> 
+                    <i class="icon iconfont icon_Nav_sousuoshebei title_1"></i> 
+                    <p class="title_4">搜索设备</p>
                 </a>
             </div>
         </div>
     </div>
-    <form class="searchbar searchbarEquip">
-        <div class="searchbar-inner">
-            <div class="searchbar-input-wrap">
-                <input placeholder="设备名称搜索" style="font-size: 0.938rem;" type="search">
-                    <i class="searchbar-icon">
-                    </i>
-                    <span class="input-clear-button">
-                    </span>
-                </input>
-            </div>
-            <span class="searchbar-disable-button" style="font-size: 0.938rem;">
-                取消
-            </span>
-        </div>
-    </form>
+
     <div class="page-content  equipPageContent" >
-        <div class="searchbar-backdrop">
-        </div>
         <div class="list-block list-page list" style="margin:0;">
             <ul class="equip-list searchbar-found">
             </ul>

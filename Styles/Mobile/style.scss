@@ -4,14 +4,12 @@
 	box-sizing: border-box;
 	    font-family: unset;
 }
-
 html,
 body {
 	user-select: none;
 	-webkit-user-select: none;
 	overflow: hidden;
 }
-
 article,
 aside,
 canvas,
@@ -52,7 +50,7 @@ select {
 	vertical-align: middle;
 }
 @media screen and (max-width: 320px) {
-	.setPageContainer .exitLogin{    top: 2%!important;}
+	.setPageContainer .exitLogin{ top: 2%!important;}
 }
 
 @media screen and (min-width: 320px) {
@@ -85,7 +83,7 @@ select {
 		padding-bottom: constant(safe-area-inset-bottom);
 	}
 	.tabbar-labels {
-		height: 70px !important;
+		height: 88px !important;
 	}
 	.tabbar-labels .toolbar-inner {
 		padding-bottom: 20px;
@@ -103,17 +101,18 @@ select {
 
 .displayNone {display: none!important; }
 
-.view-menu-toolbar{position: relative;}
+.tabbar-labels {
+	height: 66px;
+	.toolbar-inner{
+		&>a{ i{font-size: 2rem;}}
+	}
+}
 
 .md .view-menu-toolbar {
-	height: 50px;
 	top: 100%;
 	transform: translateY(-100%);
 }
 
-.md .page-content {
-	padding-top: 44px!important;
-}
 
 .md .ptr-preloader {
 	top: 0!important;
@@ -165,3 +164,13 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .popup {
 	right: 0;bottom: 0;left: 0;
 	height: 100% !important;
 }
+
+// 标题
+.title_1{font-size: 24px;font-weight: 500;}
+.title_2{font-size: 16px;}
+.title_3{font-size: 14px;}
+.title_4{font-size: 12px;}
+.content_1{font-size: 14px;}
+.content_2{font-size: 12px;}
+.status_1{font-size: 12px;}
+

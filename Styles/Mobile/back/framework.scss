@@ -74,8 +74,8 @@ html.device-ios.device-iphone-x .statusbar{height: 20px;}
             .title{color: #{$toolbarFontColor};max-width: 200px;overflow: hidden;text-overflow: ellipsis; }
             .right{
                 a{
-                    padding: 0;font-size: 1.1rem;color: #{$toolbarFontColor}; width: 100%;height: 100%;line-height: 44px;display: inline-block;    
-                    text-align: right; i.icon-f7_right_user{font-size: 1.6rem;color: #{$toolbarFontColor};}
+                    padding: 0;font-size: 1.1rem;color: #{$toolbarFontColor}; width: 100%;height: 100%;line-height: 20px;display: inline-block;    
+                    text-align: center; i.icon-f7_right_user{font-size: 1.6rem;color: #{$toolbarFontColor};}
                 }
             }
         }
@@ -83,11 +83,11 @@ html.device-ios.device-iphone-x .statusbar{height: 20px;}
     .navbar:after{height: 0px;}
     /*底部菜单*/
     .view-menu-toolbar{
-        a.link{font-size: 12px;height: 50px!important;line-height: 25px!important;cursor: pointer;}
+        a.link{font-size: 12px;height: 50px;line-height: 50px;cursor: pointer;}
         .toolbar-inner{ 
             z-index: 99;
-            &>a.active{color: #{$selectedColor};}
-            &>a{color: #{$toolbarFontColor}; i{font-size: 2rem;}}
+  
+            &>a{color: #{$toolbarFontColor}; i{font-size: 2.2rem;}}
             #voiceBtn{ 
               &>span{width: 90%; height: 90%; position: relative; display: inline-block; 
                 border-radius: 50%; background: #{$toolbarBgc}; margin: 5%;
@@ -96,7 +96,6 @@ html.device-ios.device-iphone-x .statusbar{height: 20px;}
             #voiceBtn:active span,#voiceBtn:active i{ color: #{$selectedColor}!important; }
             a.link.active-state:before{opacity: 0!important;}
         }
-        // background: url(../../../Image/phone/black414.png) no-repeat center center/auto 100%;
          @include screenPiexl(bg);
     }
     .toolbar:before{height: 0;};

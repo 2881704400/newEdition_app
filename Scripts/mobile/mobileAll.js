@@ -183,8 +183,11 @@ var myApp = new Framework7({
         path: '/mobile-en/scheduleModifyChild_en/',
         url: 'mobile-en/scheduleModifyChild_en.html',
     }, {
-        path: '/test/',
-        url: 'test.html',
+        path: '/equipsDetails/',
+        url: 'equipsDetails.html',
+    }, {
+        path: '/mobile-en/equipsDetails_en/',
+        url: 'mobile-en/equipsDetails_en.html',
     }],
     on: {
         pageInit: function(page) {
@@ -192,7 +195,7 @@ var myApp = new Framework7({
                 hubConn.stop();
             } catch (e) {}
             $("#voiceContainer").addClass("voiceContainer");
-            window.localStorage.languageList == 1 ? $(".right a.icon-only").attr("href", "/mobile-en/setPage_en/") : $(".right a.icon-only").attr("href", "/setPage/");
+            // window.localStorage.languageList == 1 ? $(".right a.icon-only").attr("href", "/mobile-en/setPage_en/") : $(".right a.icon-only").attr("href", "/setPage/");
             //初始化
             IosToggle();
              $("#app").removeClass("appAttrity");
@@ -553,6 +556,7 @@ function exitLogin() {
 //切换底部工具栏
 function switchToolbar(id) {
     $("#" + id).addClass("active").siblings().removeClass("active");
+     
 }
 //语音信息提示
 function voiceTooip(txt) {
@@ -891,7 +895,7 @@ function tranformMenu(val) {
     val == 1 ? obj = selLanguageEN : obj = selLanguageZH;
     obj.forEach(function(item, index) {
         if (item.id == "setPageTool") {
-            $(".navbar div.right a").attr("href", item.url)
+            $(".navbar div.right a").attr("href", item.url);
         } else {
             $("#" + item.id).attr("href", item.url).find("span").text(item.name);
         }

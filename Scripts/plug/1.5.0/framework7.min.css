@@ -64,10 +64,6 @@ a {
     text-decoration: none
 }
 
-p {
-    margin: 1em 0
-}
-
 .disabled {
     opacity: .55!important;
     pointer-events: none!important
@@ -987,8 +983,8 @@ html.with-statusbar.device-iphone-x .framework7-root {
     display: none
 }
 
-.ios .navbar {
-    height: 44px;
+.navbar {
+    height: 59px;
     font-size: 17px;
     background: #f7f7f8
 }
@@ -1080,16 +1076,16 @@ html.with-statusbar.device-iphone-x .framework7-root {
     transform: scaleY(.33)
 }
 
-.ios .navbar-inner {
+.navbar-inner {
     -webkit-box-pack: justify;
     -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    padding: 0 8px
+    padding: 0 1rem;
 }
 
 .ios .navbar~.page-content,.ios .navbar~:not(.no-navbar) .page-content {
-    padding-top: 44px
+
 }
 
 .ios .navbar-previous {
@@ -1242,12 +1238,6 @@ html.with-statusbar.device-iphone-x .framework7-root {
     }
 }
 
-.md .navbar {
-    height: 56px;
-    background: #2196f3;
-    color: #fff;
-    font-size: 20px
-}
 
 .md .navbar:after {
     content: '';
@@ -1334,13 +1324,6 @@ html.with-statusbar.device-iphone-x .framework7-root {
     right: 16px
 }
 
-.md .navbar-inner {
-    -webkit-box-pack: start;
-    -webkit-justify-content: flex-start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-    overflow: hidden
-}
 
 .md .page-with-subnavbar .navbar-inner {
     overflow: visible
@@ -1602,10 +1585,7 @@ html.with-statusbar.device-iphone-x .framework7-root {
     position: absolute
 }
 
-.ios .toolbar {
-    height: 44px;
-    font-size: 17px;
-    background: #f7f7f8;
+.toolbar {
     bottom: 0
 }
 
@@ -1614,10 +1594,7 @@ html.with-statusbar.device-iphone-x .framework7-root {
     backface-visibility: hidden
 }
 
-.ios .toolbar a.link {
-    line-height: 44px;
-    height: 44px
-}
+
 
 .ios .toolbar a.link i+i,.ios .toolbar a.link i+span,.ios .toolbar a.link span+i,.ios .toolbar a.link span+span {
     margin-left: 7px
@@ -1675,9 +1652,7 @@ html.with-statusbar.device-iphone-x .framework7-root {
     transform: scaleY(.33)
 }
 
-.ios .toolbar-inner {
-    padding: 0 8px
-}
+
 
 .ios .tabbar,.ios .tabbar-labels {
     color: #929292
@@ -1691,18 +1666,6 @@ html.with-statusbar.device-iphone-x .framework7-root {
     color: #007aff
 }
 
-.ios .tabbar i.icon,.ios .tabbar-labels i.icon {
-    height: 30px
-}
-
-.ios .tabbar-labels {
-    height: 50px
-}
-
-.ios .tabbar-labels a.link,.ios .tabbar-labels a.tab-link {
-    padding-top: 4px;
-    padding-bottom: 4px
-}
 
 .ios .tabbar-labels a.link i+span,.ios .tabbar-labels a.tab-link i+span {
     margin: 0
@@ -1890,13 +1853,6 @@ html.with-statusbar.device-iphone-x .framework7-root {
     }
 }
 
-.md .toolbar {
-    background: #2196f3;
-    height: 48px;
-    color: #fff;
-    font-size: 14px;
-    top: 0
-}
 
 .md .toolbar:after {
     content: '';
@@ -1920,16 +1876,7 @@ html.with-statusbar.device-iphone-x .framework7-root {
     color: #fff
 }
 
-.md .toolbar a.link {
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    padding: 0 16px;
-    min-width: 48px;
-    line-height: 48px;
-    height: 48px
-}
+
 
 .md .toolbar a.link:before {
     content: '';
@@ -2027,14 +1974,8 @@ html.with-statusbar.device-iphone-x .framework7-root {
     top: 0
 }
 
-.md .tabbar-labels {
-    height: 72px
-}
 
-.md .tabbar-labels a.link,.md .tabbar-labels a.tab-link {
-    padding-top: 12px;
-    padding-bottom: 12px
-}
+
 
 .md .tabbar-labels .tabbar-label {
     margin-top: 10px;
@@ -3584,7 +3525,7 @@ li.list-group-title:before {
 }
 
 .ios .list ul {
-    background: #fff
+   
 }
 
 .ios .list ul ul {

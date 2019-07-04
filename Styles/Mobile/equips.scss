@@ -6,7 +6,7 @@
     display: none;
 }
 .md .page>.navbar~.searchbar {
-    top: 44px;
+    top: 56px;
 }
 .md .page>.searchbar~* .page-content, .md .page>.searchbar~.page-content {
     padding-top: 94px !important;
@@ -19,7 +19,7 @@
     transform: scaleY(.33);
 }
 .ios .navbar~.page:not(.no-navbar)>.searchbar, .ios .page>.navbar~.searchbar {
-    top: 44px;
+    top: 56px;
 }
 .md .popoverLink .list .list-button::after {
     -webkit-transform: scaleY(.33);
@@ -59,6 +59,7 @@
                     color: #54BB5C;
                 }
             }
+            a{.no-before:before{content: ""!important;};}
         }
         &:before {
             height: 0px !important;
@@ -95,14 +96,18 @@
             height: 1px;
         }
         .toolbar-inner {
-            overflow: hidden;
+            padding: 0 1rem;overflow: hidden;
             &>a {
                 &.tab-link {
-                    border: 2px solid transparent;
+                    font-size: 14px;
+                    background:  #F5F5F5;
+                    border-radius: 12px;
+                    padding: 5px 10px;
+                    margin-right: 1rem;
                 }
                 &.tab-link-active {
-                    color: #2d8cf0;
-                    border-bottom: 2px solid #2d8cf0;
+                   color: white;
+                   background: #2D2E30;
                 }
             }
         }
@@ -113,7 +118,7 @@
             padding: 1rem;
             overflow: auto;
             .oneLine {
-                padding: 1em 0; // background: #fff;  
+                padding: 0.5em 0; margin-bottom: 1rem;
                 position: relative;
                 .item-title {
                     position: relative;
@@ -137,11 +142,12 @@
                     position: absolute;
                     right: 5%;
                 }
+                .iconWrap_left{text-align: left;}
+                .iconWrap_center{text-align: center;}
                 .iconWrap {
-                    text-align: center;
                     i {
                         color: #7D828F;
-                        &.icon-tubiaofenxi {
+                        &.icon_liebiao_tubiaotongji {
                             font-size: 18px;
                             color: #3498db;
                         }
@@ -452,3 +458,26 @@
 .visibilitySelect {
     visibility: hidden;
 }
+//2-N级列表
+#equipsDetails{
+  .equipsDetails-equip-list{
+    padding: 1rem;
+    li{
+        background: white;margin-bottom: 0.5rem;
+        i {
+            color: #7D828F;
+            &.noCom {
+                color: #7D828F;
+            }
+            &.alarm {
+                color: #FE4445;
+            }
+            &.comOk {
+                color: #54BB5C;
+            }
+        }
+        a{.item-inner:before{content: ""!important;};}
+    }
+  }
+}
+

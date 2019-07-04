@@ -926,7 +926,14 @@ $(document).on("page:beforein", ".page[data-page='sceneEditModify_en']", functio
 $(document).on("page:beforein", ".page[data-page='test']", function (e) {
     initPageJS('test', '/Scripts/mobile/js/');
 });
-
+// equipsDetails
+$(document).on("page:beforein", ".page[data-page='equipsDetails']", function (e) {
+    initPageJS('equipsDetails', '/Scripts/mobile/js/');
+});
+// test
+$(document).on("page:beforein", ".page[data-page='equipsDetails_en']", function (e) {
+    initPageJS('equipsDetails_en', '/Scripts/mobile/js/mobile-en/');
+});
 
 
 
