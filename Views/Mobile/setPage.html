@@ -6,9 +6,9 @@
             <div class="navbar-inner">
                 <div class="left sliding auth_name_get title_1" >设置</div>
                 <div class="right">
-                    <a href="#" onclick="RichScan()" id="scan"> 
-                        <i class="icon iconfont icon_Nav_saoyisao title_1"></i> 
-                        <p class="title_4">扫一扫</p>
+                    <a href="#" onclick="onUserLogout()" > 
+                        <i class="icon iconfont icon_Nav_tuichudenglu title_1"></i> 
+                        <p class="title_4">退出登录</p>
                     </a>
                 </div>
             </div>
@@ -17,6 +17,19 @@
         <div  class="page-content setPageContainer" >
             <div class="list simple-list">
             <ul>
+
+                <li>
+                    <a href="#" class="item-link item-content" >
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon iconfont icon_liebiaoleixing_zhanghao"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">当前用户</div>
+                                <div class="item-after">admin</div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+
                 <li>  
                     <a href="#" class="item-link smart-select smart-select-init" id="voiceList" onchange="onVoiceList()" data-page-back-link-text="">
                         <select name="voiceTop">
@@ -24,7 +37,7 @@
                              <option value="1" data-value = "1">微软</option>
                         </select>
                         <div class="item-content">
-                            <div class="item-media"><i class="iconfont icon-f7_voice"></i></div>
+                            <div class="item-media"><i class="icon iconfont iconyuyin"></i></div>
                             <div class="item-inner" id="voiceListName">
                                 <div class="item-title">语音服务</div>
                             </div>
@@ -38,7 +51,7 @@
                             <option value="1" >英文</option>
                         </select>
                         <div class="item-content">
-                            <div class="item-media"><i class="iconfont icon-f7_language"></i></div>
+                            <div class="item-media"><i class="icon iconfont icon_liebiaoleixing_xitongyuyan"></i></div>
                             <div class="item-inner" id="languageListName">
                                 <div class="item-title">语言</div>
                             </div>
@@ -48,7 +61,7 @@
                   <li>
                     <a href="#" class=" item-content">
                         <div class="item-content">
-                            <div class="item-media"><i class="iconfont icon-f7_modul"></i></div>
+                            <div class="item-media"><i class="icon iconfont icon_liebiaoleixing_yejianmoshi"></i></div>
                             <div class="item-inner">
                                 <div class="item-title">夜间模式</div>
                                 <div class="item-content">
@@ -65,7 +78,7 @@
                     <li>
                         <a href="#" class="item-link item-content" onclick="onAppCacheClear()">
                             <div class="item-content">
-                                <div class="item-media"><i class="iconfont icon-f7_clear"></i></div>
+                                <div class="item-media"><i class="icon iconfont icon_liebiaoleixing_qingkonghuancun"></i></div>
                                 <div class="item-inner">
                                     <div class="item-title">清空缓存</div>
                                 </div>
@@ -75,7 +88,7 @@
                     <li>
                         <a href="#" class="item-link item-content" onclick="onAbout()">
                             <div class="item-content">
-                                <div class="item-media"><i class="iconfont icon-f7_about"></i></div>
+                                <div class="item-media"><i class="icon iconfont icon_liebiaoleixing_guanyu"></i></div>
                                 <div class="item-inner">
                                     <div class="item-title">关于</div>
                                 </div>
@@ -85,6 +98,5 @@
             </ul>
           </div>
 
-          <button class="col button button-fill color-pink exitLogin" onclick="onUserLogout()">退出登陆</button>
         </div>
     </div>

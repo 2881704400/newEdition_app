@@ -1,18 +1,8 @@
-var equip_list = null,
-    realEquipList = "",
-    EqpEvtData = null,
-    SetEvtData = null,
-    SysEvtData = null,
-    EqpEvtDataFlag = true,
-    SetEvtDataFlag = true,
-    SysEvtDataFlag = true;
-var equipPicker;
+var equip_list = null, realEquipList = "", EqpEvtData = null, SetEvtData = null, SysEvtData = null, EqpEvtDataFlag = true, SetEvtDataFlag = true, SysEvtDataFlag = true,equipPicker;
 
 function eventSearch() {
-    switchToolbar("configTool");
-    EqpEvtDataFlag = true,
-        SetEvtDataFlag = true,
-        SysEvtDataFlag = true;
+    switchToolbar("functionalModule_pageTool");
+    EqpEvtDataFlag = true, SetEvtDataFlag = true, SysEvtDataFlag = true;
     //初始化
     $("#eventSearchTimeId").val(getNowTime() + " - " + getNowTime());
     $("#eventSearchEquipId").val("全部设备");

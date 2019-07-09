@@ -1,7 +1,7 @@
 var scheduleTimeAler, scheduleAlert, scheduleAlertSusscess;
 
 function schedule() {
-    switchToolbar("configTool");
+    switchToolbar("functionalModule_pageTool");
     scheduleAlert = myApp.toast.create({
         text: "操作失败",
         position: 'center',

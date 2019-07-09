@@ -63,7 +63,6 @@ function tipsInformtion(tipsStr, tipsEvent) {
         }]
     }).open();
 }
-
 //常用
 function commonlyUsedFun(className, classListName, jsonString) {
     $("." + className).html("");
@@ -192,13 +191,11 @@ function getJurisdictionData() {
                                 });
                                 break;
                             case "HomeButton":
-                                
                                 break;
                             default:
                                 break;
                         }
                     });
-
                 }
             });
         }
@@ -221,8 +218,6 @@ function functionalModule(className, htmlStr) {
         case "HomeShortcutFunction":
             html = `<li class="row HomeShortcutFunction bottomLine">
             <h2 class="title_2">大屏操控</h2>
-
-
             <div class="col-50" onclick="videoExplain()">
                <div class="videoPatternHeader row">
                   <span class="col-100 title_4">
@@ -232,7 +227,6 @@ function functionalModule(className, htmlStr) {
                   <a><i class="icon iconfont icon_PPTyanshi"></i></a>
                </div>
             </div>
-
             <div class="col-50" onclick="pptPlay()">
                <div class="pptPatternHeader row">
                   <span class="col-100 title_4">
@@ -251,17 +245,12 @@ function functionalModule(className, htmlStr) {
                   </span>
                    <a><i class="icon iconfont icon_changjingqiehuan"></i></a>
                </div>
-               
-            </div>
-
-                                
+            </div>     
             </li>`;
             break;
         case "HomeButton":
             html = `<li class="row HomeButton bottomLine">
             <h2 class="title_2">功能模块</h2>
-
-
             <div class="col-50" onclick="videoExplain()">
                <div class="videoPatternHeader row">
                   <span class="col-100 title_4">
@@ -326,6 +315,7 @@ function functionalModule(className, htmlStr) {
 //视频讲解
 function videoExplain() {
     var htmlContent = `<div class="popoverVideoExplain">
+     <h4><span>功能指令</span></h4>
      <div class="row">
          <a href="#" class="popoverVideoExplain col-33"  set_equip="${jjPattern[0].equipNo}" set_no="${jjPattern[0].setNo}" onclick="get_no_set(this,null)" >
                <i class="${jjPattern[0].icon}"></i>
@@ -342,44 +332,46 @@ function videoExplain() {
      </div>
      <div class="row">
          <a href="#" class="popoverVideoExplain col-33"  set_equip="${jjPattern[4].equipNo}" set_no="${jjPattern[4].setNo}" onclick="get_no_set(this,null)" >
-            ${window.localStorage.languageList == 1 ?jjPattern[4].name_en:jjPattern[4].name}
+         <i class="${jjPattern[4].icon}"></i>
+            <p>${window.localStorage.languageList == 1 ?jjPattern[4].name_en:jjPattern[4].name}</p>
          </a>
          <a href="#" class="popoverVideoExplain col-33"  set_equip="${jjPattern[5].equipNo}" set_no="${jjPattern[5].setNo}" onclick="get_no_set(this,null)" >
-            ${window.localStorage.languageList == 1 ?jjPattern[5].name_en:jjPattern[5].name}
+         <i class="${jjPattern[5].icon}"></i>
+            <p>${window.localStorage.languageList == 1 ?jjPattern[5].name_en:jjPattern[5].name}</p>
          </a>
          <a href="#" class="popoverVideoExplain col-33"  set_equip="${jjPattern[6].equipNo}" set_no="${jjPattern[6].setNo}" onclick="JumpPage(this)" >
-            ${window.localStorage.languageList == 1 ?jjPattern[6].name_en:jjPattern[6].name}
+         <i class="${jjPattern[6].icon}"></i>
+            <p>${window.localStorage.languageList == 1 ?jjPattern[6].name_en:jjPattern[6].name}</p>
          </a>  
      </div>
-     <a href="#" class="popoverVideoExplain"  set_equip="${jjPattern[1].equipNo}" set_no="${jjPattern[1].setNo}" onclick="get_no_set(this,null)" >
-            ${window.localStorage.languageList == 1 ?jjPattern[1].name_en:jjPattern[1].name}
-      </a>  </div>
+
+       </div>
     `;
     ststemSet(window.localStorage.languageList == 1 ? "Video Explanation" : "视频讲解", "sceneBtnControl", htmlContent);
 }
 //ppt播放 
 function pptPlay() {
     var htmlContent = `<div class="popoverVideoExplain">
+    <h4><span>功能指令</span></h4>
      <div class="row">
          <a href="#" class="popoverVideoExplain col-33"  set_equip="${pptPattern[0].equipNo}" set_no="${pptPattern[0].setNo}" onclick="get_no_set(this,null)" >
                <i class="${pptPattern[0].icon}"></i>
             <p>${window.localStorage.languageList == 1 ?pptPattern[0].name_en:pptPattern[0].name}</p>
          </a>                                
-     </div>
-     <div class="row">
          <a href="#" class="popoverVideoExplain col-33"  set_equip="${pptPattern[2].equipNo}" set_no="${pptPattern[2].setNo}" onclick="get_no_set(this,null)" >
-            ${window.localStorage.languageList == 1 ?pptPattern[2].name_en:pptPattern[2].name}
+         <i class="${pptPattern[2].icon}"></i>
+            <p>${window.localStorage.languageList == 1 ?pptPattern[2].name_en:pptPattern[2].name}</p>
          </a>
          <a href="#" class="popoverVideoExplain col-33"  set_equip="${pptPattern[3].equipNo}" set_no="${pptPattern[3].setNo}" onclick="get_no_set(this,null)" >
-            ${window.localStorage.languageList == 1 ?pptPattern[3].name_en:pptPattern[3].name}
+         <i class="${pptPattern[3].icon}"></i>
+            <p>${window.localStorage.languageList == 1 ?pptPattern[3].name_en:pptPattern[3].name}</p>
          </a>
          <a href="#" class="popoverVideoExplain col-33"  set_equip="${pptPattern[4].equipNo}" set_no="${pptPattern[4].setNo}" onclick="JumpPage(this)" >
-            ${window.localStorage.languageList == 1 ?pptPattern[4].name_en:pptPattern[4].name}
+         <i class="${pptPattern[4].icon}"></i>
+            <p>${window.localStorage.languageList == 1 ?pptPattern[4].name_en:pptPattern[4].name}</p>
          </a>  
      </div>
-     <a href="#" class="popoverVideoExplain"  set_equip="${pptPattern[1].equipNo}" set_no="${pptPattern[1].setNo}" onclick="get_no_set(this,null)" >
-            ${window.localStorage.languageList == 1 ?pptPattern[1].name_en:pptPattern[1].name}
-      </a>  </div>
+    </div>
     `;
     ststemSet(window.localStorage.languageList == 1 ? "PPT Paly" : "PPT播放", "sceneBtnControl", htmlContent);
 }
@@ -389,4 +381,147 @@ function JumpPage(dt) {
         if (parseFloat(name).toString() == "NaN") myApp.dialog.alert(window.localStorage.languageList == 1 ? "Please enter a number" : "请输入数字");
         else get_no_set(dt, name);
     });
+}
+//模块功能
+function functionalModule_page() {
+
+    dynamicSheetAll = myApp.sheet.create({
+        content: `
+       <div class="sheet-modal my-sheet-swipe-to-step fm-modal" style="height:auto; --f7-sheet-bg-color: #fff;">
+          <div class="sheet-modal-inner">
+            <div class="sheet-modal-swipe-step">
+              <div class="display-flex padding justify-content-space-between align-items-center header_center_gray">
+                 <div></div>
+              </div>
+            </div>
+            <div class="block-title block-title-medium margin-top title_2" style="${window.localStorage.moduleRecord?"":"display: none;"}">近期使用</div>
+            <div class="no-hairlines">
+
+              <div data-pagination='{"el": ".swiper-pagination-header"}' data-space-between="10" data-slides-per-view="3" class="swiper-container-header swiper-init demo-swiper">
+                <div class="swiper-wrapper">
+                    ${historyHTML()}
+                </div>
+              </div>
+            </div>    
+            <hr class="transform-05"/>        
+            <div class="block-title block-title-medium margin-top title_2">系统模块</div>
+
+            <div class="no-hairlines">
+              <div data-pagination='{"el": ".swiper-pagination-content"}' data-space-between="10" data-slides-per-view="3" class="swiper-container-content swiper-init demo-swiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <a href="/eventSearch/">
+                      <p class="icon iconfont icon_gongnengrukou_ditu">
+                        <i class="icon iconfont icon_gongnengmokuai_shijianchaxun"></i>
+                      </p>
+                      <span class="title_4">事件查询</span>
+                    </a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a href="/equipConfigList/">
+                      <p class="icon iconfont icon_gongnengrukou_ditu">
+                      <i class="icon iconfont icon_gongnengmokuai_xitongpeizhi"></i>
+                      </p>
+                      <span class="title_4">系统配置</span>
+                    </a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a href="/schedule/">
+                      <p class="icon iconfont icon_gongnengrukou_ditu">
+                       <i class="icon iconfont icon_gongnengmokuai_baojingpaiban"></i>
+                      </p>
+                      <span class="title_4">报警排表</span>
+                    </a>
+                    
+                  </div>
+                  <div class="swiper-slide">
+                    <a href="/equipLinkage/">
+                      <p class="icon iconfont icon_gongnengrukou_ditu">
+                      <i class="icon iconfont icon_gongnengmokuai_shebeiliandong"></i>
+                      </p>
+                      <span class="title_4">设备联动</span>
+                    </a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a href="/sceneEdit/">
+                       <p class="icon iconfont icon_gongnengrukou_ditu">
+                         <i class="icon iconfont icon_gongnengmokuai_changjingpeizhi"></i>
+                      </p>
+                      <span class="title_4">场景编辑</span>
+                    </a>
+                  </div>                  
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>`,
+        // Events
+        on: {
+            open: function(sheet) {
+              var swiper = myApp.swiper.create('.swiper-container-header,.swiper-container-content', {
+                  speed: 400,
+                  spaceBetween: 10,
+                  slidesPerView: 4.5
+              });
+            },
+            opened: function(sheet) {},
+        },
+        swipeToClose: true,
+        swipeToStep: false,
+        backdrop: true,
+    });
+    dynamicSheetAll.open();
+}
+
+//近期使用
+function historyHTML(){
+  var historyRecord,html = "";
+   if(window.localStorage.moduleRecord)
+   {
+       historyRecord = JSON.parse(window.localStorage.moduleRecord);
+       for(var val of historyRecord)
+       {
+          
+          html += `
+           <div class="swiper-slide">
+            <a href="/${val.split("&")[0]}/">
+              <p class="icon iconfont icon_gongnengrukou_ditu">
+              <i class="${val.split("&")[1]}"></i>
+              </p>
+              <span class="title_4">${val.split("&")[2]}</span>
+            </a></div>`;
+       }  
+   }
+   return html;
+}
+function addModuleRecord(value){
+   var historyRecord;
+   if(window.localStorage.moduleRecord)
+   {
+       historyRecord = JSON.parse(window.localStorage.moduleRecord);
+       if(historyRecord.join(",").indexOf(value) == -1)
+          historyRecord.push(value);
+       if(historyRecord.length>3)
+          historyRecord.shift();   
+   }
+   else
+   {
+       historyRecord = [];
+       historyRecord.push(value);
+   }
+   window.localStorage.moduleRecord = JSON.stringify(historyRecord);
+}
+
+function judgeOpenPage(url){
+   switch(url)
+   {
+    case "/eventSearch/": addModuleRecord("eventSearch&icon iconfont icon_gongnengmokuai_shijianchaxun&事件查询");break;
+    case "/equipConfigList/": addModuleRecord("equipConfigList&icon iconfont icon_gongnengmokuai_xitongpeizhi&系统配置");break;
+    case "/schedule/": addModuleRecord("schedule&icon iconfont icon_gongnengmokuai_baojingpaiban&报警排表");break;
+    case "/equipLinkage/": addModuleRecord("equipLinkage&icon iconfont icon_gongnengmokuai_shebeiliandong&设备联动");break;
+    case "/sceneEdit/": addModuleRecord("sceneEdit&icon iconfont icon_gongnengmokuai_changjingpeizhi&场景编辑");break;
+    default: break;
+   }
+
 }

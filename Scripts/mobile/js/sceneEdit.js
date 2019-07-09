@@ -1,6 +1,6 @@
 ﻿var toastCenterLinkage,toastCenterLinkageSuccess,sceneFlag,removeSceneControl = [],equiplinkageStr = [];
 function sceneEdit() {
-    switchToolbar("configTool");
+    switchToolbar("functionalModule_pageTool");
     // 初始化设备
     myApp.dialog.progress('<a style="font-size: 1rem">加载中...</a>');
     toastCenterLinkage = myApp.toast.create({text: "操作失败", position: 'center', closeTimeout: 2000, });

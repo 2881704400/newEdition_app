@@ -1,6 +1,6 @@
 ﻿//移动端js主入口
 
-var myApp = new Framework7({
+var dynamicSheetAll,myApp = new Framework7({
     root: '#app',
     name: 'My App',
     id: 'com.myapp.gw',
@@ -188,12 +188,18 @@ var myApp = new Framework7({
     }, {
         path: '/mobile-en/equipsDetails_en/',
         url: 'mobile-en/equipsDetails_en.html',
-    }],
+    }, {
+        path: '/functionalModule_page/',
+        url: 'functionalModule_page.html',
+    }, {
+        path: '/mobile-en/functionalModule_page_en/',
+        url: 'mobile-en/functionalModule_page_en.html',
+    }
+    ],
     on: {
         pageInit: function(page) {
-            try {
-                hubConn.stop();
-            } catch (e) {}
+            try {hubConn.stop();} catch (e) {}
+            try{dynamicSheetAll.close();judgeOpenPage(page.route.path)}catch(e){}
             $("#voiceContainer").addClass("voiceContainer");
             // window.localStorage.languageList == 1 ? $(".right a.icon-only").attr("href", "/mobile-en/setPage_en/") : $(".right a.icon-only").attr("href", "/setPage/");
             //初始化

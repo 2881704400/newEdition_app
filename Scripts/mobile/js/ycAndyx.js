@@ -314,12 +314,13 @@ function jsonTobtn(data, confarr) {
         var set_nos1 = Control_Equip_List(confarr);
         var set_nos2 = Control_SetItem_List(confarr, userb.set_no);
         if (set_nos1 || set_nos2) {
-            var newRow = `<li class="link" onclick="onSetClickBtn(${confarr},'${userc[1]}','${userc[2]}','${userc[3]}','${userc[0]}','${userc[4]}')">
+            var newRow = `<li class="link col-50" onclick="onSetClickBtn(${confarr},'${userc[1]}','${userc[2]}','${userc[3]}','${userc[0]}','${userc[4]}')">
                             <p class="name item-title">${userc[0]}</p>
                         </li>`;
-            $("#set ").append(newRow);
+            $("#set").append(newRow);
         }
     }
+
 }
 
 function onSetClickBtn(str_1, str_2, str_3, str_4, btnName, str_5) {

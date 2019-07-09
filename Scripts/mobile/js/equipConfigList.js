@@ -1,5 +1,5 @@
 function equipConfigList(){
-	switchToolbar("configTool");
+	switchToolbar("functionalModule_pageTool");
 	myApp.searchbar.create({
 		el:'#search',
 		searchContainer:'.eq-list',

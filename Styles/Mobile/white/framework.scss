@@ -60,6 +60,7 @@ html.device-ios.device-iphone-x .statusbar{height: 20px;}
         }
     }
     /*顶部导航栏*/
+
     .navbar{
         background-color: #{$headerBgc}; box-shadow: 0 1px 0px 0 #{$headerBoxShadow};
         &>.navbar-inner{ 
@@ -69,7 +70,7 @@ html.device-ios.device-iphone-x .statusbar{height: 20px;}
                 i.icon-back{width: auto;height: auto;background-image: url()!important;}
                 i.icon{font-family: "iconfont" !important; font-size: 2rem; font-style: normal; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
                 a{
-                    padding: 0;font-size: 1.1rem;color: #{$toolbarFontColor}; width: 100%;height: 100%;line-height: 44px;display: inline-block;    
+                    padding: 0;font-size: 1.1rem;color: #{$toolbarFontColor}; width: 100%;height: 100%;line-height: 59px;display: inline-block;    
                     i.icon-f7_add{font-size: 2rem;color: #{$allFontColor};} i.icon-scanIcon{font-size: 1.5rem;}
                 }
              }
@@ -77,13 +78,14 @@ html.device-ios.device-iphone-x .statusbar{height: 20px;}
             .right{
                 width: 15%;height: 100%;margin: 0;text-align: right;    
                 a{
-                    padding: 0;color: #{$headerFontColor}; width: 100%;height: 100%;line-height: 30px;display: inline-block;    
+                    padding: 0;color: #{$headerFontColor}; width: 100%;height: 100%;line-height: 35px;display: inline-block;    
                     text-align: center; i{font-size: 2rem!important;}
                     p{    line-height: 20px;}
                 }
             }
         }
     }
+    // .navbar-large{box-shadow: none;}
     .navbar:after{height: 0px;}
     /*底部菜单*/
     .view-menu-toolbar{
@@ -236,16 +238,15 @@ html.ios:not(.device-ios):not(.device-android) .statusbar {
 // 欢迎词
 .welcomeWordContents{color: #{$situationFontColor};background: #{$situationBgc};}
 .welcome-Word-control-boxs{color: #{$situationFontColor};background: #{$situationContainerBgc};}
-
 //popover
 .popup-public{
   .publicHeader{
     color:  #{$situationFontColor};
-    background: #{$headerBgc};box-shadow: 0 3px 6px 0 rgba(0,0,0,0.20);
+    background: #{$headerBgc};
     span{color:  #{$situationFontColor};}
   }
   &>section{
-   background: #{$situationBgc}; 
+   background: #{$situationContainerBgc}; 
    .powerPointHtmlH3{color: #{$situationFontColor};}
    .powerPointHtmlUl{
      li{ color:  #{$situationFontColor}; background: #{$statsBgc};}
@@ -254,25 +255,11 @@ html.ios:not(.device-ios):not(.device-android) .statusbar {
       &>a{
         color: #{$popupbtnColor};
         background: #ff2d55;
-      }
-     &>div:nth-child(1){
-      a{
-        background: #{$statsBgc};
-        box-shadow: 0 4px 16px 0 rgba(0,0,0,0.1);
-      }
-     }
-     &>div:nth-child(2){
-      a{
-        background: #{$statsBgc};
-        box-shadow: 0 4px 16px 0 rgba(0,0,0,0.1);
-      }
-     }     
+      }   
    }  
   }
 }
-
-
 //分割线
 .bottomLine{position: relative;}
-.bottomLine:after{content: "";width: 100%;transform: scaleY(0.1);height: 1px;border-bottom: 1px solid  #b9b6ad;position: absolute;bottom: 0;left: 0%;}
+.bottomLine:after{content: "";width: 100%;transform: scaleY(0.3);height: 1px;border-bottom: 1px solid  #b9b6ad;position: absolute;bottom: 0;left: 0%;}
 

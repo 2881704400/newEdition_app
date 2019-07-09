@@ -424,7 +424,7 @@ var pptPattern = [
     name: '打开PPT',
     name_en: 'Open PPT',
     color: '#9cd5ea,#1892bd',
-    icon: 'iconfont icon-f7_ppt',
+    icon: 'icon iconfont icon_PPTkongzhi_dakaiPPT',
     equipNo: '4001',
     setNo: '1',
     value: 'D:\/PPT\/123.pptx',
@@ -432,7 +432,7 @@ var pptPattern = [
     name: '关闭',
     name_en: 'Close PPT',
     color: '#9cd5ea,#1892bd',
-    icon: 'iconfont icon-f7_c_l',
+    icon: 'icon iconfont icon_PPTkongzhi_guanbiPPT',
     equipNo: '4001',
     setNo: '7',
     value: null,
@@ -440,7 +440,7 @@ var pptPattern = [
     name: '上一页',
     name_en: 'Previous page',
     color: '#9cd5ea,#1892bd',
-    icon: 'iconfont icon-f7_prev',
+    icon: 'icon iconfont icon_PPTkongzhi_shangyiye',
     equipNo: '4001',
     setNo: '2',
     value: null,
@@ -448,7 +448,7 @@ var pptPattern = [
     name: '下一页',
     name_en: 'Next page',
     color: '#9cd5ea,#1892bd',
-    icon: 'iconfont icon-f7_next',
+    icon: 'icon iconfont icon_PPTkongzhi_xiayiye',
     equipNo: '4001',
     setNo: '3',
     value: null,
@@ -457,7 +457,7 @@ var pptPattern = [
     name: '跳页',
     name_en: 'Page skip',
     color: '#9cd5ea,#1892bd',
-    icon: '#9cd5ea,#1892bd',
+    icon: 'icon iconfont icon_PPTkongzhi_tiaoye',
     equipNo: '300',
     setNo: '10',
     value: null,
@@ -473,7 +473,7 @@ var jjPattern = [{
     name: '开始讲解',
     name_en: 'Explain',
     color: '#e4c586,#e89e08',
-    icon: 'iconfont icon-f7_jj',
+    icon: 'icon iconfont icon_shipinkongzhi_kaishijiangjie',
     equipNo: '1007',
     setNo: '1',
     value: null,
@@ -481,7 +481,7 @@ var jjPattern = [{
     name: '停止讲解',
     name_en: 'Stop',
     color: '#e4c586,#e89e08',
-    icon: 'iconfont icon-f7_s_t',
+    icon: 'icon iconfont icon_shipinkongzhi_zantingjiangjie',
     equipNo: '1007',
     setNo: '2',
     value: null,
@@ -489,7 +489,7 @@ var jjPattern = [{
     name: '暂停讲解',
     name_en: 'Suspend',
     color: '#e4c586,#e89e08',
-    icon: 'iconfont icon-f7_stop_0',
+    icon: 'icon iconfont icon_shipinkongzhi_zantingjiangjie',
     equipNo: '1007',
     setNo: '3',
     value: null,
@@ -497,7 +497,7 @@ var jjPattern = [{
     name: '继续讲解',
     name_en: 'Continue',
     color: '#e4c586,#e89e08',
-    icon: 'iconfont icon-f7_j_x',
+    icon: 'icon iconfont icon_shipinkongzhi_jixubofang',
     equipNo: '1007',
     setNo: '4',
     value: null,
@@ -506,7 +506,7 @@ var jjPattern = [{
     name: '上一页',
     name_en: 'Previous page',
     color: '#e4c586,#e89e08',
-    icon: 'iconfont icon-f7_j_x',
+    icon: 'icon iconfont icon_PPTkongzhi_shangyiye',
     equipNo: '300',
     setNo: '10',
     value: null,
@@ -515,7 +515,7 @@ var jjPattern = [{
     name: '下一页',
     name_en: 'Next page',
     color: '#e4c586,#e89e08',
-    icon: 'iconfont icon-f7_j_x',
+    icon: 'icon iconfont icon_PPTkongzhi_xiayiye',
     equipNo: '300',
     setNo: '10',
     value: null,
@@ -524,7 +524,7 @@ var jjPattern = [{
     name: '跳页',
     name_en: 'Page skip',
     color: '#e4c586,#e89e08',
-    icon: 'iconfont icon-f7_j_x',
+    icon: 'icon iconfont icon_PPTkongzhi_tiaoye',
     equipNo: '300',
     setNo: '10',
     value: null,
@@ -930,12 +930,19 @@ $(document).on("page:beforein", ".page[data-page='test']", function (e) {
 $(document).on("page:beforein", ".page[data-page='equipsDetails']", function (e) {
     initPageJS('equipsDetails', '/Scripts/mobile/js/');
 });
-// test
+
 $(document).on("page:beforein", ".page[data-page='equipsDetails_en']", function (e) {
     initPageJS('equipsDetails_en', '/Scripts/mobile/js/mobile-en/');
 });
 
+// equipsDetails
+$(document).on("page:beforein", ".page[data-page='functionalModule_page']", function (e) {
+    initPageJS('functionalModule_page', '/Scripts/mobile/js/');
+});
 
+$(document).on("page:beforein", ".page[data-page='functionalModule_page_en']", function (e) {
+    initPageJS('functionalModule_page_en', '/Scripts/mobile/js/mobile-en/');
+});
 
 
 

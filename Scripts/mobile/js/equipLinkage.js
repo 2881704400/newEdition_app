@@ -1,7 +1,7 @@
 ﻿var toastCenterLinkage, toastCenterLinkageSuccess;
 
 function equipLinkage() {
-    switchToolbar("configTool");
+    switchToolbar("functionalModule_pageTool");
     myApp.dialog.progress('<a style="font-size: 1rem">加载中...</a>');
     initAddList(); //联动设置
     toastCenterLinkage = myApp.toast.create({
