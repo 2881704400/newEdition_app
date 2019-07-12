@@ -1,0 +1,59 @@
+/*PPT*/
+@charset "utf-8";
+@import 'public.scss';
+.snapshot-main{
+    height: 100%;position: relative;
+    .snashot-header{
+        height: 44px;line-height: 44px;padding: 0 1rem;background: white;box-shadow: 0 1px 0px 0 rgba(45,46,48,0.2);
+        a{
+            color: white;font-size: 14px;
+            border-radius: 12px;
+            padding: 5px 10px;
+            margin-right: 1rem;background: rgba(45,46,48,0.1);   
+        }
+    }
+    &>div:nth-child(2){
+        margin: 0;position: absolute;left: 0;top: 44px;right: 0;bottom: 0;padding: 1rem;    overflow: auto;
+    }
+    .selectListType{background: #2D2E30!important;}
+}
+
+.view .page-content .snapshot-main .snapshotMessage-ul li {
+    margin-bottom: 0.5rem;
+    i{font-size: 2rem;}
+}
+
+.snapshot-main-details{
+    height: 100%;padding: 1rem;overflow: auto;
+    &>div{
+        &>div{
+            background: white;position: relative;padding-bottom: 1rem;
+            &>label{padding: 10px 0;}
+            textarea{font-size: 14px;
+            color: #8e8e93;
+            width: 100%;
+            min-height: 70px;
+            height: 70px;
+            border: none;
+            box-sizing: border-box;}
+            input{background: #2D2E30;}
+            .snapshotEvent{
+                width: 100%;
+                max-height: 90px;    
+                overflow: auto;
+                background: white;
+                position: relative;
+                &>div{width: 100%;height: 100%;background: #F5F5F5;padding: 10px;}
+            }
+            
+        }
+        &>div{label.col-60{text-align: right;};}
+        .msgInfo{
+            &>label{height: 44px;line-height: 44px;padding: 0;}
+            .procsContent{max-height:300px;overflow-y: auto;display:block;margin: 0;}
+        }
+       &>a{height: 44px;line-height: 44px;color: white;font-size: 1.2rem;background: #2D2E30;}
+       &>div:after{content: "";width: 100%;height: 1px;display: inline-block;border-top: 1px solid #999;transform: scaleY(0.2);    position: absolute;
+        left: 0;bottom: 0;}
+    }
+}

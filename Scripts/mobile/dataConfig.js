@@ -92,331 +92,330 @@ var commonlyUsed = [{
 
 // 列表数据模型
 var KOvm = [
-    // {
-    //     name: '周界报警',
-    //     name_en: 'Return software',
-    //     icon: 'iconfont icon-f7_home',
-    //     equipNo: '1000',
-    //     setNo: '1',
-    //     color: '#8bc3ef,#3c81b7',
-    //     value: null,
-    // }, {
-    //     name: '周界恢复报警',
-    //     name_en: 'Intelligent building',
-    //     icon: 'iconfont icon-f7_icon_jz',
-    //     equipNo: '1000',
-    //     setNo: '2',
-    //     color: '#d49ca8,#f50538',
-    //     value: null,
-    // }, {
-    //     name: 'BA系统多屏展示',
-    //     name_en: 'Lecong environmental protection',
-    //     icon: 'iconfont icon-f7_icon_hb',
-    //     equipNo: '1005',
-    //     setNo: '6',
-    //     color: '#d7b1ea,#a40df3',
-    //     value: null,
-    // }, {
-    //     name: '返回软件',
-    //     name_en: 'Lecong River Monitoring',
-    //     icon: 'iconfont icon-f7_icon_hl',
-    //     equipNo: '1005',
-    //     setNo: '2000',
-    //     color: '#96d2e6,#00BAF9',
-    //     value: null,
-    // }, {
-    //     name: '停车系统单屏展示',
-    //     name_en: 'Lecong River Alarm',
-    //     icon: 'iconfont icon-f7_icon_bj',
-    //     equipNo: '1005',
-    //     setNo: '7',
-    //     color: '#f5999e,#F22834',
-    //     value: null,
-    // }
     {
-        name: '返回软件',
-        name_en: 'Return software',
-        icon: 'iconfont icon-f7_home',
-        equipNo: '300',
-        setNo: '10',
-        color: '#8bc3ef,#3c81b7',
-        value: null,
-    }, {
-        name: '智能建筑',
-        name_en: 'Intelligent building',
-        icon: 'iconfont icon-f7_icon_jz',
-        equipNo: '300',
-        setNo: '2',
-        color: '#d49ca8,#f50538',
-        value: null,
-    }, {
-        name: '乐从环保首页',
-        name_en: 'Lecong environmental protection',
-        icon: 'iconfont icon-f7_icon_hb',
-        equipNo: '300',
-        setNo: '31',
-        color: '#d7b1ea,#a40df3',
-        value: null,
-    }, {
-        name: '乐从河流监测',
-        name_en: 'Lecong River Monitoring',
-        icon: 'iconfont icon-f7_icon_hl',
-        equipNo: '300',
-        setNo: '32',
-        color: '#96d2e6,#00BAF9',
-        value: null,
-    }, {
-        name: '乐从河流报警',
-        name_en: 'Lecong River Alarm',
-        icon: 'iconfont icon-f7_icon_bj',
-        equipNo: '300',
-        setNo: '33',
-        color: '#f5999e,#F22834',
-        value: null,
-    }, 
-    {
-        name: '开闸排污',
-        name_en: 'Sluice discharge',
-        icon: 'iconfont icon-f7_icon_pw',
-        equipNo: '300',
-        setNo: '34',
-        color: '#f1d499,#f3ac1e',
-        value: null,
-    }, {
-        name: '数据中心',
-        name_en: 'Data center',
-        icon: 'iconfont icon-f7_icon_dj',
-        equipNo: '300',
-        setNo: '3',
-        color: '#eca7a0,#FC6758',
-        value: null,
-    }, {
-        name: '智能交通',
-        name_en: 'Intelligent Transportation',
-        icon: 'iconfont icon-f7_icon_jt',
-        equipNo: '300',
-        setNo: '4',
-        color: '#b8e29d,#55a91f',
-        value: null,
-    }, {
-        name: '智能电网',
-        name_en: 'Smart grid',
-        icon: 'iconfont icon-f7_icon_dw',
-        equipNo: '300',
-        setNo: '11',
-        color: '#efd29c,#e29b12',
-        value: null,
-    }, {
-        name: '能源系统',
-        name_en: 'Energy system',
-        icon: 'iconfont icon-f7_icon_dsj1',
-        equipNo: '300',
-        setNo: '17',
-        color: '#d0f3b2,#6cde08',
-        value: null,
-    }, {
-        name: '智慧监狱',
-        name_en: 'Wisdom prison',
-        icon: 'iconfont icon-f7_icon_jy',
-        equipNo: '300',
-        setNo: '18',
-        color: '#a6dbe0,#22bbca',
-        value: null,
-    }, {
-        name: '戒毒所模式',
-        name_en: 'Drug Rehabilitation Center Model',
-        icon: 'iconfont icon-f7_icon_jd',
-        equipNo: '300',
-        setNo: '25',
-        color: '#ecd5a7,#FBB730',
-        value: null,
-    }, {
-        name: '智慧城管',
-        name_en: 'Smart City Administration',
-        icon: 'iconfont icon-f7_icon_cg',
-        equipNo: '300',
-        setNo: '81',
-        color: '#bacea3,#7cbd31',
-        value: null,
-    }, {
-        name: '智慧公交',
-        name_en: 'Smart bus',
-        icon: 'iconfont icon-f7_icon_gj',
-        equipNo: '300',
-        setNo: '82',
-        color: '#a6f1ed,#16cdea',
-        value: null,
-    }, {
-        name: '城市3D',
-        name_en: 'City 3D',
-        icon: 'iconfont icon-f7_icon_3d3d',
-        equipNo: '300',
-        setNo: '83',
-        color: '#e09c96,#e81c08',
-        value: null,
-    }, {
-        name: '智慧环保',
-        name_en: 'Wisdom and environmental protection',
-        icon: 'iconfont icon-f7_icon_hbxx',
-        equipNo: '300',
-        setNo: '84',
-        color: '#ecdc93,#e8c118',
-        value: null,
-    }, {
-        name: '智慧影院',
-        name_en: 'Smart cinema',
-        icon: 'iconfont icon-f7_icon_3d',
-        equipNo: '300',
-        setNo: '85',
-        color: '#eaafc5,#FE2F7D',
-        value: null,
-    }, {
-        name: '大数据',
-        name_en: 'Big data',
-        icon: 'iconfont icon-f7_icon_dj',
-        equipNo: '300',
-        setNo: '86',
-        color: '#a4cce8,#1095f3',
-        value: null,
-    }, {
-        name: '智慧电梯',
-        name_en: 'Intelligent elevator',
-        icon: 'iconfont icon-f7_icon_dt',
-        equipNo: '300',
-        setNo: '92',
-        color: '#de98aa,#e00f44',
-        value: null,
-    }, {
-        name: '智慧工厂',
-        name_en: 'Smart factory',
-        icon: 'iconfont icon-f7_icon_xz',
-        equipNo: '300',
-        setNo: '100',
-        color: '#9fd9de,#03B8C9',
-        value: null,
-    }, {
-        name: '智慧小镇',
-        name_en: 'Smart Town',
-        icon: 'iconfont icon-f7_equipList',
-        equipNo: '300',
-        setNo: '98',
-        color: '#ec9da6,#ec263c',
-        value: null,
-    }, {
-        name: '智慧城市',
-        name_en: 'Smart city',
-        icon: 'iconfont icon-f7_icon_xz',
-        equipNo: '300',
-        setNo: '99',
-        color: '#d3b4ea,#9e2aea',
-        value: null,
-    }, {
-        name: '城市管控',
-        name_en: 'City management and control',
-        icon: 'iconfont icon-f7_icon_gk',
-        equipNo: '300',
-        setNo: '2000',
-        color: '#e8cea1,#FBB132',
-        value: null,
-    }, {
-        name: '智慧照明',
-        name_en: 'Intelligent lighting',
-        icon: 'iconfont icon-f7_icon_zm',
-        equipNo: '300',
-        setNo: '101',
-        color: '#98b3ec,#0a52ea',
-        value: null,
-    }, {
-        name: '欢迎词',
-        name_en: 'Welcome speech',
-        icon: 'iconfont icon-f7_welcome',
-        equipNo: '300',
-        setNo: '10112',
-        color: '#86bfe8,#2093e8',
-        value: null,
+       title: "常用场景",
+       child: [
+            {
+                name: '返回软件',
+                name_en: 'Return software',
+                icon: 'icon iconfont icon_Tab_shouye_Initial',
+                equipNo: '300',
+                setNo: '10',
+                color: '#8bc3ef,#3c81b7',
+                value: null,
+            },
+            {
+                name: '总部会议室监控',
+                name_en: 'Headquarters conference room monitoring',
+                icon: 'icon iconfont icon_changjingzhiling_kongzhi',
+                equipNo: '1005',
+                setNo: '1000',
+                color: '#e99bef,#e420d5',
+                value: null,
+            },
+            {
+                name: '欢迎词',
+                name_en: 'Welcome speech',
+                icon: 'icon iconfont icon_changjingzhiling_huanyingci',
+                equipNo: '300',
+                setNo: '10112',
+                color: '#86bfe8,#2093e8',
+                value: null,
+            },             
+            {
+                name: '展厅监控',
+                name_en: 'Exhibition hall monitoring',
+                icon: 'icon iconfont icon_changjingzhiling_jiankong',
+                equipNo: '300',
+                setNo: '10096',
+                color: '#f1c7a4,#ea7815',
+                value: null,
+            }, 
+            {
+                name: '总部前台监控',
+                name_en: 'Headquarters Front Desk Monitoring',
+                icon: 'icon iconfont icon_changjingzhiling_jiankong',
+                equipNo: '1005',
+                setNo: '1500',
+                color: '#d3f3b5,#82d632',
+                value: null,
+            },  
+            {
+                name: '城市3D',
+                name_en: 'City 3D',
+                icon: 'icon iconfont icon_changjingzhiling_sanwei',
+                equipNo: '300',
+                setNo: '83',
+                color: '#e09c96,#e81c08',
+                value: null,
+            },  
+            {
+                name: '城市管控',
+                name_en: 'City management and control',
+                icon: 'icon iconfont icon_changjingzhiling_chengshi',
+                equipNo: '300',
+                setNo: '2000',
+                color: '#e8cea1,#FBB132',
+                value: null,
+            },                              
+       ],
     },
     {
-        name: '消防报警',
-        name_en: 'Fire alarm',
-        icon: 'iconfont icon-f7_icon_xf',
-        equipNo: '300',
-        setNo: '10107',
-        color: '#8ed5ec,#0baee4',
-        value: null,
+       title: "项目切换",
+       child: [
+            {
+                name: '智能交通',
+                name_en: 'Intelligent Transportation',
+                icon: 'icon iconfont icon_changjingzhiling_jiaotong1',
+                equipNo: '300',
+                setNo: '4',
+                color: '#b8e29d,#55a91f',
+                value: null,
+            },       
+            {
+                name: '智能建筑',
+                name_en: 'Intelligent building',
+                icon: 'icon iconfont icon_changjingzhiling_jianzhu',
+                equipNo: '300',
+                setNo: '2',
+                color: '#d49ca8,#f50538',
+                value: null,
+            },
+            {
+                name: '数据中心',
+                name_en: 'Data center',
+                icon: 'icon iconfont icon_changjingzhiling_zhongxin',
+                equipNo: '300',
+                setNo: '3',
+                color: '#eca7a0,#FC6758',
+                value: null,
+            },  
+            {
+                name: '智慧监狱',
+                name_en: 'Wisdom prison',
+                icon: 'icon iconfont icon_changjingzhiling_jianyu',
+                equipNo: '300',
+                setNo: '18',
+                color: '#a6dbe0,#22bbca',
+                value: null,
+            },   
+            {
+                name: '智慧公交',
+                name_en: 'Smart bus',
+                icon: 'icon iconfont icon_changjingzhiling_gongjiao',
+                equipNo: '300',
+                setNo: '82',
+                color: '#a6f1ed,#16cdea',
+                value: null,
+            },  {
+                name: '智慧环保',
+                name_en: 'Wisdom and environmental protection',
+                icon: 'icon iconfont icon_changjingzhiling_huanbao',
+                equipNo: '300',
+                setNo: '84',
+                color: '#ecdc93,#e8c118',
+                value: null,
+            }, {
+                name: '智慧影院',
+                name_en: 'Smart cinema',
+                icon: 'icon iconfont icon_changjingzhiling_yingyuan',
+                equipNo: '300',
+                setNo: '85',
+                color: '#eaafc5,#FE2F7D',
+                value: null,
+            },
+            {
+                name: '大数据',
+                name_en: 'Big data',
+                icon: 'icon iconfont icon_changjingzhiling_dashuju',
+                equipNo: '300',
+                setNo: '86',
+                color: '#a4cce8,#1095f3',
+                value: null,
+            },   
+            {
+                name: '智慧电梯',
+                name_en: 'Intelligent elevator',
+                icon: 'icon iconfont icon_changjingzhiling_dianti',
+                equipNo: '300',
+                setNo: '92',
+                color: '#de98aa,#e00f44',
+                value: null,
+            }, {
+                name: '智慧工厂',
+                name_en: 'Smart factory',
+                icon: 'icon iconfont icon_changjingzhiling_gongchang',
+                equipNo: '300',
+                setNo: '100',
+                color: '#9fd9de,#03B8C9',
+                value: null,
+            }, {
+                name: '智慧小镇',
+                name_en: 'Smart Town',
+                icon: 'icon iconfont icon_changjingzhiling_xiaozhen',
+                equipNo: '300',
+                setNo: '98',
+                color: '#ec9da6,#ec263c',
+                value: null,
+            }, {
+                name: '智慧城市',
+                name_en: 'Smart city',
+                icon: 'icon iconfont icon_changjingzhiling_chengshi',
+                equipNo: '300',
+                setNo: '99',
+                color: '#d3b4ea,#9e2aea',
+                value: null,
+            },   
+            {
+                name: '智慧城管',
+                name_en: 'Smart City Administration',
+                icon: 'icon iconfont icon_changjingzhiling_chengguan',
+                equipNo: '300',
+                setNo: '81',
+                color: '#bacea3,#7cbd31',
+                value: null,
+            },     {
+                name: '智慧照明',
+                name_en: 'Intelligent lighting',
+                icon: 'icon iconfont icon_changjingzhiling_zhaoming',
+                equipNo: '300',
+                setNo: '101',
+                color: '#98b3ec,#0a52ea',
+                value: null,
+            },{
+                name: '智能电网',
+                name_en: 'Smart grid',
+                icon: 'icon iconfont icon_changjingzhiling_dianwang',
+                equipNo: '300',
+                setNo: '11',
+                color: '#efd29c,#e29b12',
+                value: null,
+            }                                                                    
+       ],
     },
     {
-        name: '消防恢复正常',
-        name_en: 'Fire Protection returned to normal',
-        icon: 'iconfont icon-f7_icon_hf',
-        equipNo: '300',
-        setNo: '6',
-        color: '#b5a1ec,#460de0',
-        value: null,
+       title: "系统模块",
+       child: [
+            {
+                name: '防区报警',
+                name_en: 'Defense alarm',
+                icon: 'icon iconfont icon_changjingzhiling_fangqubaojing',
+                equipNo: '300',
+                setNo: '10106',
+                color: '#23407d,#3961B6',
+                value: null,
+            },
+            {
+                name: '空调报警',
+                name_en: 'Air conditioning alarm',
+                icon: 'icon iconfont icon_changjingzhiling_kongtiaobaojing',
+                equipNo: '300',
+                setNo: '10105',
+                color: '#dec9a8,#FCB540',
+                value: null,
+            },
+            {
+                name: '消防报警',
+                name_en: 'Fire alarm',
+                icon: 'icon iconfont icon_changjingzhiling_xiaofangbaojing',
+                equipNo: '300',
+                setNo: '10107',
+                color: '#8ed5ec,#0baee4',
+                value: null,
+            },
+            {
+                name: '消防恢复正常',
+                name_en: 'Fire Protection returned to normal',
+                icon: 'icon iconfont icon_changjingzhiling_xiaofangbaojinghuifu',
+                equipNo: '300',
+                setNo: '6',
+                color: '#b5a1ec,#460de0',
+                value: null,
+            }, {
+                name: '能源系统',
+                name_en: 'Energy system',
+                icon: 'icon iconfont icon_changjingzhiling_nengyuan',
+                equipNo: '300',
+                setNo: '17',
+                color: '#d0f3b2,#6cde08',
+                value: null,
+            },  
+            {
+                name: '开闸排污',
+                name_en: 'Sluice discharge',
+                icon: 'icon iconfont icon_changjingzhiling_kaizhapaiwu',
+                equipNo: '300',
+                setNo: '34',
+                color: '#f1d499,#f3ac1e',
+                value: null,
+            }                                  
+       ],
     },
     {
-        name: '防区报警',
-        name_en: 'Defense alarm',
-        icon: 'iconfont icon-f7_icon_fq',
-        equipNo: '300',
-        setNo: '10106',
-        color: '#23407d,#3961B6',
-        value: null,
+       title: "模式切换",
+       child: [
+            {
+                name: '欢迎模式',
+                name_en: 'Welcome mode',
+                icon: 'icon iconfont icon_changjingzhiling_huanyingmoshi',
+                equipNo: '300',
+                setNo: '10112',
+                color: '#93aeea,#1b60f1',
+                value: null,
+            },
+            {
+                name: '戒毒所模式',
+                name_en: 'Drug Rehabilitation Center Model',
+                icon: 'icon iconfont icon_changjingzhiling_jiedusuomoshi',
+                equipNo: '300',
+                setNo: '25',
+                color: '#ecd5a7,#FBB730',
+                value: null,
+            },{
+                name: '宣传片播放',
+                name_en: 'Town Live Demonstration',
+                icon: 'icon iconfont icon_changjingzhiling_chengguan',
+                equipNo: '300',
+                setNo: '10093',
+                color: '#a2d3e4,#12afe8',
+                value: null,
+            }
+       ],
     },
     {
-        name: '空调报警',
-        name_en: 'Air conditioning alarm',
-        icon: 'iconfont icon-f7_icon_kt',
-        equipNo: '300',
-        setNo: '10105',
-        color: '#dec9a8,#FCB540',
-        value: null,
-    },
-    {
-        name: '总部前台监控',
-        name_en: 'Headquarters Front Desk Monitoring',
-        icon: 'iconfont icon-f7_icon_jk',
-        equipNo: '1005',
-        setNo: '1500',
-        color: '#d3f3b5,#82d632',
-        value: null,
-    },
-    {
-        name: '总部会议室监控',
-        name_en: 'Headquarters conference room monitoring',
-        icon: 'iconfont icon-f7_icon_hys',
-        equipNo: '1005',
-        setNo: '1000',
-        color: '#e99bef,#e420d5',
-        value: null,
-    },
-    {
-        name: '展厅监控',
-        name_en: 'Exhibition hall monitoring',
-        icon: 'iconfont icon-f7_icon_jk',
-        equipNo: '300',
-        setNo: '10096',
-        color: '#f1c7a4,#ea7815',
-        value: null,
-    },
-    {
-        name: '欢迎模式',
-        name_en: 'Welcome mode',
-        icon: 'iconfont icon-f7_icon_xf',
-        equipNo: '300',
-        setNo: '10112',
-        color: '#93aeea,#1b60f1',
-        value: null,
-    },
-    {
-        name: '宣传片播放',
-        name_en: 'Town Live Demonstration',
-        icon: 'iconfont icon-f7_icon_xz',
-        equipNo: '300',
-        setNo: '10093',
-        color: '#a2d3e4,#12afe8',
-        value: null,
+       title: "乐从项目",
+       child: [
+            {
+                name: '乐从环保首页',
+                name_en: 'Lecong environmental protection',
+                icon: 'icon iconfont icon_changjingzhiling_shouye',
+                equipNo: '300',
+                setNo: '31',
+                color: '#d7b1ea,#a40df3',
+                value: null,
+            }, {
+                name: '乐从河流监测',
+                name_en: 'Lecong River Monitoring',
+                icon: 'icon iconfont icon_changjingzhiling_heliujiance',
+                equipNo: '300',
+                setNo: '32',
+                color: '#96d2e6,#00BAF9',
+                value: null,
+            }, {
+                name: '乐从河流报警',
+                name_en: 'Lecong River Alarm',
+                icon: 'icon iconfont icon_changjingzhiling_heliubaojing',
+                equipNo: '300',
+                setNo: '33',
+                color: '#f5999e,#F22834',
+                value: null,
+            }
+       ],
     }
 ];
+
+
+
 
 //首页PPT
 var pptPattern = [
@@ -936,15 +935,37 @@ $(document).on("page:beforein", ".page[data-page='equipsDetails_en']", function 
 });
 
 // equipsDetails
-$(document).on("page:beforein", ".page[data-page='functionalModule_page']", function (e) {
-    initPageJS('functionalModule_page', '/Scripts/mobile/js/');
+$(document).on("page:beforein", ".page[data-page='functionalModule']", function (e) {
+    initPageJS('functionalModule', '/Scripts/mobile/js/');
 });
 
-$(document).on("page:beforein", ".page[data-page='functionalModule_page_en']", function (e) {
-    initPageJS('functionalModule_page_en', '/Scripts/mobile/js/mobile-en/');
+$(document).on("page:beforein", ".page[data-page='functionalModule_en']", function (e) {
+    initPageJS('functionalModule_en', '/Scripts/mobile/js/mobile-en/');
 });
 
+// videoDetails
+$(document).on("page:beforein", ".page[data-page='VideoDetails']", function (e) {
+    initPageJS('VideoDetails', '/Scripts/mobile/js/');
+});
 
+$(document).on("page:beforein", ".page[data-page='VideoDetails_en']", function (e) {
+    initPageJS('VideoDetails_en', '/Scripts/mobile/js/mobile-en/');
+});
+
+// videoDetails
+$(document).on("page:beforein", ".page[data-page='pptSelectionDetails']", function (e) {
+    initPageJS('pptSelectionDetails', '/Scripts/mobile/js/');
+});
+
+// snashot Details
+$(document).on("page:beforein", ".page[data-page='snapShotInfoDetail']", function (e) {
+    initPageJS('snapShotInfoDetail', '/Scripts/mobile/js/');
+});
+
+//search
+$(document).on("page:beforein", ".page[data-page='search']", function (e) {
+    initPageJS('search', '/Scripts/mobile/js/');
+});
 
 // *************************************************
 // ------------------接口配置 start----------------- 

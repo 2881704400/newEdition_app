@@ -1,6 +1,6 @@
 ﻿//移动端js主入口
 
-var dynamicSheetAll,myApp = new Framework7({
+var dynamicSheetAll,searchResult = [],myApp = new Framework7({
     root: '#app',
     name: 'My App',
     id: 'com.myapp.gw',
@@ -189,11 +189,36 @@ var dynamicSheetAll,myApp = new Framework7({
         path: '/mobile-en/equipsDetails_en/',
         url: 'mobile-en/equipsDetails_en.html',
     }, {
-        path: '/functionalModule_page/',
-        url: 'functionalModule_page.html',
+        path: '/functionalModule/',
+        url: 'functionalModule.html',
     }, {
-        path: '/mobile-en/functionalModule_page_en/',
-        url: 'mobile-en/functionalModule_page_en.html',
+        path: '/mobile-en/functionalModule_en/',
+        url: 'mobile-en/functionalModule_en.html',
+    }, {
+        path: '/VideoDetails/',
+        url: 'VideoDetails.html',
+    }, {
+        path: '/mobile-en/VideoDetails_en/',
+        url: 'mobile-en/VideoDetails_en.html',
+    }, {
+        path: '/pptSelectionDetails/',
+        url: 'pptSelectionDetails.html',
+    }, {
+        path: '/mobile-en/pptSelectionDetails_en/',
+        url: 'mobile-en/pptSelectionDetails_en.html',
+    }, 
+    {
+        path: '/snapShotInfoDetail/',
+        url: 'snapShotInfoDetail.html',
+    }, {
+        path: '/mobile-en/snapShotInfoDetail_en/',
+        url: 'mobile-en/snapShotInfoDetail_en.html',
+    }, {
+        path: '/search/',
+        url: 'search.html',
+    }, {
+        path: '/mobile-en/search_en/',
+        url: 'mobile-en/search_en.html',
     }
     ],
     on: {

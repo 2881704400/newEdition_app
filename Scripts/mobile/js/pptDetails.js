@@ -89,7 +89,7 @@ function pptDetails() {
         }
     });
     /*=============================init==========================================*/
-    $(".detailsTiTle").html(window.localStorage.pptUsername);
+    $(".pptDetails-title").html(window.localStorage.pptUsername);
     setHtml = "";
     ajaxRequst();
     $(".mettingDetailsBottom div a").unbind();

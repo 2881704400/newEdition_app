@@ -6,6 +6,7 @@ mixin：sass宏mixin
 .view{
   .page-content{padding-bottom: 66px;padding-top: 59px;}
   .pageContent_102{padding-top: 85px;}
+  .pageContent_0{padding-bottom: 0px;}
   .equipPageContent{&>div{padding: 1rem;}}
   .navbar{
     .navbar-inner-large{
@@ -43,7 +44,7 @@ mixin：sass宏mixin
         a:nth-of-type(5):after{height: 0px;}
         text-align: center;
       }
-      .HomeShortcutFunction,.HomeButton{
+      .HomeShortcutFunction{
         &>div{
           position: relative;padding: 10px 0px 10px 70px;border-radius: 6px;margin-bottom: 1rem;
           span{
@@ -64,11 +65,17 @@ mixin：sass宏mixin
 
       }
       .HomeButton{ 
-        &>div{
-          a{
-            left: 20px;
+        &>a{
+          position: relative;padding: 10px 0px 10px 70px;border-radius: 6px;margin-bottom: 1rem;
+          span{
+            font-weight: 300;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            h3{font-weight: 500;line-height: 30px;
+               i{font-size: 1.5rem;margin-right: 10px;vertical-align: middle;position: relative;top: -2px;}} 
+          }          
+          b{
+            color:  #979797;position: absolute;left: 20px;top: 50%;transform: translateY(-50%);
             &:before{font-size: 50px;position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: -1; opacity: 0.1;}
-            i{font-size: 30px;}
+            i{font-size: 30px;font-weight: 500;    color: #5e5757;}
           }
         }           
        }
@@ -156,11 +163,11 @@ mixin：sass宏mixin
       }
      &>div{
       a{
-        text-align: center;
+        color: #333;text-align: center;
         border-radius: 12px;
         padding: 8px 0;
-        margin-bottom: 20px;    
-        i{font-size: 2rem;display: inline-block;}
+        margin-bottom: 10px;    
+        i{font-size: 2rem;display: inline-block;margin-bottom: 10px;}
       }
      }   
    }  
@@ -203,7 +210,9 @@ mixin：sass宏mixin
     font-size: 25px;
     font-weight: 300;
     background: #fff;
-    color: #000;
+    a{
+      color: #333;
+    }
   }
   .demo-swiper .swiper-slide {
     box-sizing: border-box;text-align: center;

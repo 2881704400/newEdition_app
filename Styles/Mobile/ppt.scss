@@ -1,13 +1,20 @@
 /*PPT*/
 @charset "utf-8";
 @import 'public.scss';
+.pptSelectionDetailsContainer{
+    padding: 1rem;
+}
+.pptActive{padding: 1rem;}
 .pptActive a {
     font-size: 0.8rem;
-    height: 4rem;
-    line-height: 4rem;
+    height: 3rem;
+    line-height: 3rem;
     display: inline-block;
     padding-left: 4rem;
     position: relative;
+    border-radius: 6px;
+    margin-top: 20px;
+    background: white;
 }
 .pptActive a i {
     font-size: 2rem;
@@ -19,11 +26,7 @@
     margin-right: 1rem;
     color: #F22424;
 }
-.listTitle {
-    font-size: 1rem;
-  
-    padding: 10px;
-}
+
 .listTitle em {
     font-size: 1.5rem;
     color:#{$tabBackground};
@@ -40,7 +43,7 @@
     color:#{$tabBackground};
 }
 #Filelist {
-    width: 100%;
+    width: 100%;padding: 1rem;
     position: relative;
 }
 #Filelist>ul {
@@ -110,6 +113,8 @@
     // background:#{$tableHeaderBgc}; 
 }
 .pptActive>a, .pptSelect>a {
+    font-size: 1rem;
+    color: #333;
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
@@ -161,13 +166,13 @@
 }
 .powerPointHtmlH3{
     font-size: 1rem;
-    padding: 0 20px;
     height: 40px;
     line-height: 40px;
 }
 .powerPointHtmlUl{
-    margin: 0!important;position: absolute;left: 0;top: 40px;right: 0;bottom: 0;overflow-y: auto;
+    margin: 0;
     li{
+        background: white;margin-bottom: 0.5em;
         a{    
             font-size: 1rem;
             display: inline-block!important;

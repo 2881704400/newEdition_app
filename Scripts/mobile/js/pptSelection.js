@@ -1,7 +1,14 @@
-﻿var PowerPointHtml =[{html:"",arry:[]},{html:"",arry:[]}];
+﻿var PowerPointHtml = [{
+    html: "",
+    arry: []
+}, {
+    html: "",
+    arry: []
+}];
+
 function pptSelection() {
     if ($("#Filelist>ul>li").html() == " " || $("#Filelist>ul>li").html() == undefined) {
-        fileStuctureChild("", "");
+        fileStuctureChild("D:\\ppt", "");
         fileStuctureChild("u", "");
     }
     //文件选择 
@@ -9,9 +16,11 @@ function pptSelection() {
     $(".pptFileSelectContent>div").bind('click', function() {
         let htmlContent = "";
         if ($(this).attr("dataset") == "1") {
-            ststemSetPPT(window.localStorage.languageList == 1?"PowerPoint":"PowerPoint","sceneBtnControl",PowerPointHtml[0].html,"");  
+            myApp.views.main.router.navigate('/pptSelectionDetails/'); 
+            //ststemSetPPT(window.localStorage.languageList == 1 ? "PowerPoint" : "PowerPoint", "sceneBtnControl", PowerPointHtml[0].html, "");
         } else {
-            ststemSetPPT(window.localStorage.languageList == 1?"Mobile Storage":"移动设备","sceneBtnControl",PowerPointHtml[1].html,"u");  
+            myApp.views.main.router.navigate('/pptSelectionDetails/'); 
+            //ststemSetPPT(window.localStorage.languageList == 1 ? "Mobile Storage" : "移动设备", "sceneBtnControl", PowerPointHtml[1].html, "u");
         }
     });
     isFilePPT();
@@ -25,36 +34,54 @@ $.extend({
     }
 })
 // 文件结构处理
-var stringFile, UsbDriveTips = myApp.toast.create({text: "没有检测到对应设备.", position: 'center', closeTimeout: 2000, });
+var stringFile, UsbDriveTips = myApp.toast.create({
+    text: "没有检测到对应设备.",
+    position: 'center',
+    closeTimeout: 2000,
+});
+
 function fileStuctureChild(url, objectList) {
-    $.when(AlarmCenterContext.post("/api/Other/GetFileStructure",{filePath: url,fileName: "",})).done(function(n){
+    $.when(AlarmCenterContext.post("/api/Other/GetFileStructure", {
+        filePath: url,
+        fileName: "",
+    })).done(function(n) {
         $(".modalDiv").addClass("displayNone");
-        var result = n.HttpData, contentHtml = "";
+        var result = n.HttpData,
+            contentHtml = "";
         if (result != "false" && result != "null") {
             stringFile = JSON.parse(result);
             //继续查询每项列表下的子目录
             for (var i = 0; i < stringFile.length; i++) {
-                if($.trim(stringFile[i]).split("\\")[2] != "") //排除 D:\PPT\ 格式文件夹
+                if ($.trim(stringFile[i]).split("\\")[2] != "") //排除 D:\PPT\ 格式文件夹
                 {
                     if (isStucture(stringFile[i]) && stringFile[i] != "") //如果为文件夹  
                     {
-                        contentHtml += '<li class="bottomBorderLine"><a href="#" class="item-content item-link fileListActive"  data-url="' + stringFile[i] + '" onclick="opeChildFile(this)"><i class="iconfont icon-file"></i>' + getSubstrNmae(stringFile[i]) + '<b class="iconfont icon-rightDire"></b></a><ul></ul></li>';
+                        contentHtml += '<li class="bottomBorderLine"><a href="#" class="item-content item-link fileListActive"  data-url="' + stringFile[i] + '" onclick="opeChildFile(this)"><i class="icon iconfont iconPPTyanshi"></i>' + getSubstrNmae(stringFile[i]) + '<b class="iconfont icon-rightDire"></b></a><ul></ul></li>';
                     } else if (stringFile[i] != "") {
-                        contentHtml += '<li class="bottomBorderLine"><a href="#" class="item-content item-link fileListActive"  data-url="' + stringFile[i] + '" set_no=' + PPTcommand.openPPT.setNo + ' set_equip=' + PPTcommand.openPPT.equipNo + ' set_id=' + PPTcommand.openPPT.setNo + ' onclick=\"setMenu(this,null,null)\"><i class="iconfont icon-pptIcon"></i>' + getSubstrNmae(stringFile[i]) + '</a></li>';
+                        contentHtml += '<li class="bottomBorderLine"><a href="#" class="item-content item-link fileListActive"  data-url="' + stringFile[i] + '" set_no=' + PPTcommand.openPPT.setNo + ' set_equip=' + PPTcommand.openPPT.equipNo + ' set_id=' + PPTcommand.openPPT.setNo + ' onclick=\"setMenu(this,null,null)\"><i class="icon iconfont iconPPTyanshi"></i>' + getSubstrNmae(stringFile[i]) + '</a></li>';
                     }
                 }
             }
-            if(url == "u")
-              { PowerPointHtml[1].html =  "<h3 class='powerPointHtmlH3'>文件列表</h3><ul class='list list-block powerPointHtmlUl'>"+contentHtml+"</ul>";PowerPointHtml[1].arry = stringFile;$(".pptFileSelectContent>div:eq(1) label").text(stringFile.length+"项");}
-            else
-              {PowerPointHtml[0].html =  "<h3 class='powerPointHtmlH3'>文件列表</h3><ul class='list list-block powerPointHtmlUl'>"+contentHtml+"</ul>";PowerPointHtml[0].arry = stringFile;$(".pptFileSelectContent>div:eq(0) label").text(stringFile.length+"项");}
+            if (url == "u") {
+                PowerPointHtml[1].html = "<h3 class='powerPointHtmlH3'>文件列表</h3><ul class='list list-block powerPointHtmlUl'>" + contentHtml + "</ul>";
+                PowerPointHtml[1].arry = stringFile;
+                $(".pptFileSelectContent>div:eq(1) label").text(stringFile.length + "项");
+            } else {
+                PowerPointHtml[0].html = "<h3 class='powerPointHtmlH3'>文件列表</h3><ul class='list list-block powerPointHtmlUl'>" + contentHtml + "</ul>";
+                PowerPointHtml[0].arry = stringFile;
+                $(".pptFileSelectContent>div:eq(0) label").text(stringFile.length + "项");
+            }
         }
-    }).fail(function(e){
-
-          if(url == "u")
-              {PowerPointHtml[1].html =  "";PowerPointHtml[1].arry = []; $(".pptFileSelectContent>div:eq(1) label").text("0项"); }
-            else
-              {PowerPointHtml[0].html =  "";PowerPointHtml[0].arry = [];$(".pptFileSelectContent>div:eq(0) label").text("0项");}
+    }).fail(function(e) {
+        if (url == "u") {
+            PowerPointHtml[1].html = "";
+            PowerPointHtml[1].arry = [];
+            $(".pptFileSelectContent>div:eq(1) label").text("0项");
+        } else {
+            PowerPointHtml[0].html = "";
+            PowerPointHtml[0].arry = [];
+            $(".pptFileSelectContent>div:eq(0) label").text("0项");
+        }
     });
 }
 //文件夹 true
@@ -98,10 +125,11 @@ function writeResh() {
 function isFilePPT() {
     if (window.localStorage.storageI != undefined && window.localStorage.storageI != "") {
         $(".pptActive").find("a").remove();
-        $(".pptActive").append('<a href="#" class="item-content item-link historyPPT" data-url="' + window.localStorage.dataURL + '"  set_no=' + PPTcommand.openPPT.setNo + ' set_equip=' + PPTcommand.openPPT.equipNo + ' set_id=' + PPTcommand.openPPT.setNo + ' onclick=\"setMenu(this,null,null)\"></i><i class="iconfont icon-pptIcon"></i>' + window.localStorage.storageI + '</a>');
+        $(".pptActive").append('<a href="#" class="item-content item-link historyPPT" data-url="' + window.localStorage.dataURL + '"  set_no=' + PPTcommand.openPPT.setNo + ' set_equip=' + PPTcommand.openPPT.equipNo + ' set_id=' + PPTcommand.openPPT.setNo + ' onclick=\"setMenu(this,null,null)\"></i><i class="icon iconfont iconPPTyanshi"></i>' + window.localStorage.storageI + '</a>');
         $(".pptActive a").attr("data-url", window.localStorage.dataURL);
     }
 }
+
 function setMenu(that, value, slideIndex) {
     openFileCommand(that, $(that).attr("set_equip"), 1, "-", (value ? value : $(that).attr("data-url")), "test", slideIndex);
 }
@@ -126,38 +154,23 @@ function openFileCommand(dt, equip_no, main_instruction, minor_instruction, valu
             if ($(".page-current>div").hasClass("mettingPPTContent")) //ppt列表
             {
                 var setTimeout = setInterval(function() {
-
-                    // $.when(AlarmCenterContext.pptConfig($(dt).attr("set_equip"))).done(function(n) {
-                    //     var result = n.HttpData;
-                    //     if (result.PageCount != -1) {
-                    //         window.localStorage.sessionFilename = result.Session; //data[1];
-                    //         window.localStorage.sessionValue = result.PageCount; //data[1];
-                    //         myApp.dialog.close();
-                    //         clearInterval(setTimeout);
-                    //         myApp.popover.close(".popup-public");
-                    //         myApp.router.navigate('/pptDetails/');
-                    //     }
-                    // }).fail(function(e) {});
-
                     $.when(AlarmCenterContext.setYcConfig(4001)).done(function(n) {
                         var result = n.HttpData;
-                        if(result.code == 200 && result.data[1].Reserve1 != -1)
-                        {
+                        if (result.code == 200 && result.data[1].Reserve1 != -1) {
                             window.localStorage.sessionFilename = result.data[0].Reserve1; //data[1];
                             window.localStorage.sessionValue = result.data[1].Reserve1; //data[1];
                             myApp.dialog.close();
                             clearInterval(setTimeout);
                             myApp.popover.close(".popup-public");
-                            myApp.router.navigate('/mettingDetails/');                            
+                
+                            myApp.views.main.router.navigate('/pptDetails/');
                         }
                     }).fail(function(e) {
                         myApp.dialog.close();
                         clearInterval(setTimeout);
-                         myApp.popover.close(".popup-public");
+                        myApp.popover.close(".popup-public");
                         myApp.popover.close(".popup-public");
                     });
-
-
                 }, 500);
             }
         } else {
@@ -169,16 +182,20 @@ function openFileCommand(dt, equip_no, main_instruction, minor_instruction, valu
 }
 //ppt 弹窗
 var popoverPPT;
-function ststemSetPPT(title,id,html,value){
-    myApp.request.get("plug/popoverTemplate.html", "", function (data) {
-        var popoverHTML=data;
-        popoverPPT  = myApp.popover.create({
-            targetEl: "#"+id,
+
+function ststemSetPPT(title, id, html, value) {
+    myApp.request.get("plug/popoverTemplate.html", "", function(data) {
+        var popoverHTML = data;
+        popoverPPT = myApp.popover.create({
+            targetEl: "#" + id,
             content: popoverHTML,
         }).open();
-        $(".publicHeader-back").unbind().bind("click",function(){ try{toastBottom.close();} catch(e){}});
+        $(".publicHeader-back").unbind().bind("click", function() {
+            try {
+                toastBottom.close();
+            } catch (e) {}
+        });
         $(".publicHeader span").html(title);
         $(".popup-public section").html(html);
-
     });
 }

@@ -27,10 +27,10 @@ function welcomeWords() {
                     groupPhotoArray[i] = welcome_getNmae(result[i]).split(".")[0]; //获得数字名称
                     typeEnd[i] = welcome_getNmae(result[i]).split(".")[welcome_getNmae(result[i]).split(".").length - 1]; //获取第一个文件名最后一个后缀
                     if (i == 0) {
-                        setHtml += '<div class="swiper-slide"><img src="/Image/bg/' + groupPhotoArray[i] + "." + typeEnd[i] + '"><i class="iconfont icon-xuanzhongbiaoshi welcome-Word-control-icon-check" style="display:inline;"></i></div>';
+                        setHtml += '<div class="swiper-slide"><img src="/Image/bg/' + groupPhotoArray[i] + "." + typeEnd[i] + '"><i class="icon iconfont icongouxuan welcome-Word-control-icon-check" style="display:inline;"></i></div>';
                         $(".welComeInitImg").attr("src", "/Image/bg/" + groupPhotoArray[i] + "." + typeEnd[i]);
                     } else {
-                        setHtml += '<div class="swiper-slide"><img src="/Image/bg/' + groupPhotoArray[i] + "." + typeEnd[i] + '"><i class="iconfont icon-xuanzhongbiaoshi welcome-Word-control-icon-check"></i></div>';
+                        setHtml += '<div class="swiper-slide"><img src="/Image/bg/' + groupPhotoArray[i] + "." + typeEnd[i] + '"><i class="iconfont icongouxuan welcome-Word-control-icon-check"></i></div>';
                     }
                 }
                 $(".setBackground").html(setHtml);

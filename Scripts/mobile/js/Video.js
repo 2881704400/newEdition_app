@@ -4,7 +4,6 @@ function Video() {
     }
     // $$('#Video_content_ref').on("ptr:refresh", refresh_Video);
 }
-
 function refresh_Video(e) {
     setTimeout(function() {
         $("#Video_tree").html("");
@@ -19,7 +18,6 @@ function refresh_Video(e) {
     }, 2000);
 }
 var tableVideoConfig;
-
 function equipVideoList() {
     var _url = service + "/VideoConfigs";
     var _data = "data=equip";
@@ -35,8 +33,8 @@ function equipVideoList() {
                 var jsonString = JSON.stringify(userb);
                 var userc = new Array(userb.equip_no, userb.equip_nm, userb.local_addr, userb.equip_addr);
                 tableVideoConfig[i] = userc;
-                newRow += "<li class=\"accordion-item\"><a dll='" + userb.communication_drv + "' href=\"#\" onclick='onVideoShow(this,\"" + userc[0] + "\",\"" + userb.communication_param + "\",\"" + userb.Reserve1 + "\")' class=\"item-link item-content\">";
-                newRow += "<div class=\"item-media\"><i class=\"iconfont icon-xiayiye rt_listIcon\"></i></div>";
+                newRow += "<li ><a dll='" + userb.communication_drv + "' href=\"#\" onclick='onVideoShow(this,\"" + userc[0] + "\",\"" + userb.communication_param + "\",\"" + userb.Reserve1 + "\")' class=\"item-link item-content\">";
+                newRow += "<div class=\"item-media\"><i class=\"icon iconfont icon_liebiaoleixing_jiankongfuzhi\"></i></div>";
                 newRow += "<div class=\"item-inner\"><div class=\"item-title\">" + userc[1] + "</div></div></a>";
                 if (userb.communication_drv == 'HikYun.NET.dll') {
                     newRow += "<div class=\"accordion-item-content rt_tree_1\"><div class=\"list-block\"><ul id='videoList_" + i + "' dll='" + userb.communication_drv + "'></ul></div></div>";
@@ -63,22 +61,23 @@ function onVideoShow(dt, equip_no, key, accessToken) {
             ul.attr('appKey', appKey);
             ul.attr('appSecret', appSecret);
             ul.attr('accessToken', accessToken);
-            videoListLi(dll, equip_no, dt);
+             // videoListLi(dll, equip_no, dt);
         } else {
             var sUserAgent = navigator.userAgent.toLowerCase();
             var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
             var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
             if (bIsIphoneOs || bIsIpad) {
-                videoListLi(dll, equip_no, dt);
+                // videoListLi(dll, equip_no, dt);
             } else {
-                videoListLi(dll, equip_no, dt);
+                // videoListLi(dll, equip_no, dt);
             }
         }
+        myApp.views.main.router.navigate('/VideoDetails/#'+dll+"-"+equip_no); 
     }
 }
 //添加节点
 function videoListLi(dll, equip_no, dt) {
-    var ul = $(dt).next().children('div').children('ul');
+    var ul = $(dt);//.next().children('div').children('ul');
     var _url = service + "/VideoConfigs";
     var _data = "data=" + equip_no;
 
@@ -96,7 +95,7 @@ function videoListLi(dll, equip_no, dt) {
                 } else {
                     newRow += "<li><a href=\"#\" jsonString='" + jsonString + "' onclick='videoListClick(this)' class=\"item-link item-content\">";
                 }
-                newRow += "<div class=\"item-media\"><i class=\"iconfont icon-shipin rt_listIcon\"></i></div>";
+                newRow += "<div class=\"item-media\"><i class=\"icon iconfont icon_liebiaoleixing_jiankongfuzhi\"></i></div>";
                 newRow += "<div class=\"item-inner\"><div class=\"item-title\">" + userc[2] + "</div></div></a>";
                 newRow += "</li>";
                 if (Browse_Equip_List(equip_no) || Browse_SpecialEquip_List(equip_no, userb.ID)) {
@@ -231,8 +230,8 @@ function listFromSDK(dt, a) {
         nowDom.html("");
         for (var i = 1; i < dataObj.length; i++) {
             var newRow = "";
-            newRow += "<li class=\"accordion-item\"><a href=\"#\" type='" + dataObj[i][0] + "' nodeid='" + dataObj[i][1] + "' onclick='openNode(this)' class=\"item-link item-content\">";
-            newRow += "<div class=\"item-media\"><i class=\"iconfont icon-xiayiye rt_listIcon\"></i></div>";
+            newRow += "<li ><a href=\"#\" type='" + dataObj[i][0] + "' nodeid='" + dataObj[i][1] + "' onclick='openNode(this)' class=\"item-link item-content\">";
+            newRow += "<div class=\"item-media\"><i class=\"icon iconfont icon_liebiaoleixing_jiankongfuzhi\"></i></div>";
             newRow += "<div class=\"item-inner\"><div class=\"item-title\">" + dataObj[i][2] + "</div></div></a>";
             newRow += "<div class=\"accordion-item-content rt_tree_1\"><div class=\"list-block\"><ul></ul></div></div>";
             newRow += "</li>";
@@ -249,7 +248,7 @@ function listFromSDK(dt, a) {
         var newRow = "";
         for (var i = 1; i < dataObj.length; i++) {
             newRow += "<li><a href=\"#\" type='" + dataObj[i][0] + "' nodeid='" + dataObj[i][1] + "' onclick='listNode(this)' class=\"item-link item-content\">";
-            newRow += "<div class=\"item-media\"><i class=\"iconfont icon-shipin rt_listIcon\"></i></div>";
+            newRow += "<div class=\"item-media\"><i class=\"icon iconfont icon_liebiaoleixing_jiankongfuzhi\"></i></div>";
             newRow += "<div class=\"item-inner\"><div class=\"item-title\">" + dataObj[i][2] + "</div></div></a>";
             newRow += "</li>";
         }

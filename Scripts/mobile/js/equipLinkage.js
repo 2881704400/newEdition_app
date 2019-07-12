@@ -139,13 +139,13 @@ function equipLinkList() {
         }
         if (ycpData_table != "ycp" && yxpData_table != "yxp") {
             $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/get_DataForListStr", {
-                    "tType": ycpData_table_type,
-                    "equip_nos": equip_ycp_nos,
-                    "yc_nos": yc_ycp_nos
+                "tType": ycpData_table_type,
+                "equip_nos": equip_ycp_nos,
+                "yc_nos": yc_ycp_nos
             }), AlarmCenterContext.post("/api/GWServiceWebAPI/get_DataForListStr", {
-                    "tType": yxpData_table_type,
-                    "equip_nos": equip_yxp_nos,
-                    "yc_nos": yc_yxp_nos
+                "tType": yxpData_table_type,
+                "equip_nos": equip_yxp_nos,
+                "yc_nos": yc_yxp_nos
             })).done(function(n, l) {
                 if (n.HttpData.code == 200 && n.HttpData.code == 200) {
                     ycpData_table_5 = n.HttpData;
@@ -250,9 +250,9 @@ function publicFun(ycpData, yxpData) {
         }
         html += `<li class="swipeout bottomBorderLine">
           <div class="item-content swipeout-content schedule-content row no-gap" onclick="newlyBuildLinkage(this,1)" TrID="${result.id}" TrRow = '${index}'>
-            <div class="col-33">${result.equipName}</div>
-            <div class="col-33">${result.linkageEquip}</div> 
-            <div class="col-33">${result.remarks}</div> 
+            <div class="col-50">${result.equipName}</div>
+            <div class="col-50">${result.linkageEquip}</div> 
+            <div class="col-100">${result.remarks}</div> 
           </div>
           <div class="swipeout-actions-right">
             <a href="#" class="delBtn" onclick="deleteLinkage(this)">删除</a>
@@ -281,9 +281,7 @@ function newlyBuildLinkage(dt, index) {
         linkageOpt: "",
         remarks: ""
     };
-   //var html = '<div class="popup popup-aboutuser">' + '<h1>设备联动</h1>' + '<div class="popupContent list inline-labels no-hairlines-md">' + '<ul>' + '<li class="item-content item-input" style="padding-left: 0;">' + '<div class="item-inner">' + '<div class="item-title item-label">触发设备</div>' + '<div class="item-input-wrap">' + '<input type="text" placeholder="选择触发设备" value = "' + (result.equipName ? result.equipName : "") + '"  class="equipTiggerName" id="equipTiggerName" >' + '<span class="input-clear-button"></span>' + '</div>' + '</div>' + '</li>' + '<li class="item-content item-input" style="padding-left: 0;">' + '<div class="item-inner">' + '<div class="item-title item-label">触发类型</div>' + '<div class="item-input-wrap">' + '<input type="text" placeholder="选择触发类型" value = "' + (result.cType ? result.cType : "") + '"  class="equipTiggerType" id="equipTiggerType" >' + '<span class="input-clear-button"></span>' + '</div>' + '</div>' + '</li>' + '<li class="item-content item-input" style="padding-left: 0;">' + '<div class="item-inner">' + '<div class="item-title item-label">触发点</div>' + '<div class="item-input-wrap">' + '<input type="text" placeholder="选择触发点" value = "' + (result.cCurren ? result.cCurren : "") + '"  class="equipTiggerSpot" id="equipTiggerSpot" >' + '<span class="input-clear-button"></span>' + '</div>' + '</div>' + '</li>' + '<li class="item-content item-input" style="padding-left: 0;">' + '<div class="item-inner">' + '<div class="item-title item-label">延时(ms)</div>' + '<div class="item-input-wrap">' + '<input type="number" placeholder="输入延迟时间" value = "' + (result.delayTime ? result.delayTime : 0) + '" class="equipTiggerTime" id="equipTiggerTime">' + '<span class="input-clear-button"></span>' + '</div>' + '</div>' + '</li>' + '<li class="item-content item-input" style="padding-left: 0;">' + '<div class="item-inner">' + '<div class="item-title item-label">联动设备</div>' + '<div class="item-input-wrap">' + '<input type="text" placeholder="选择联动设备" value = "' + (result.linkageEquip ? result.linkageEquip : "") + '" class="equipTigger_Link" id="equipTigger_Link">' + '<span class="input-clear-button"></span>' + '</div>' + '</div>' + '</li>' + '<li class="item-content item-input" style="padding-left: 0;">' + '<div class="item-inner">' + '<div class="item-title item-label">联动命令</div>' + '<div class="item-input-wrap">' + '<input type="text" placeholder="选择联动命令" value = "' + (result.linkageOpt ? result.linkageOpt : "") + '" class="equipTiggerCom" id="equipTiggerCom">' + '<span class="input-clear-button"></span>' + '</div>' + '</div>' + '</li>' + '<li class="item-content item-input" style="padding-left: 0;">' + '<div class="item-inner">' + '<div class="item-title item-label">备注信息</div>' + '<div class="item-input-wrap">' + '<input type="text" placeholder="输入备注信息" value = "' + (result.remarks ? result.remarks : "") + '" class="equipTiggerInfo" id="equipTiggerInfo">' + '<span class="input-clear-button"></span>' + '</div>' + '</div>' + '</li>' + '</ul>' + '</div>' + '<div class="popupBtb row">' + '<a class="link popup-close col-50 button" href="#">返回</a>' + '<a class="link popupOpenBtn col-50 button" href="#" onclick="addLinkage(this,' + index + ')" dataID=' + result.id + '>确认</a>' + '</div>' + '</div>';
-    myApp.router.navigate("/equipLinkageModify/?" + result.equipName + "&" + result.cType + "&" + result.cCurren + "&" + result.delayTime + "&" + result.linkageEquip + "&" + result.linkageOpt + "&" + result.optCode + "&" + result.remarks + "&" + result.id + "&" + index + "");
-    
+    myApp.views.main.router.navigate("/equipLinkageModify/?" + result.equipName + "&" + result.cType + "&" + result.cCurren + "&" + result.delayTime + "&" + result.linkageEquip + "&" + result.linkageOpt + "&" + result.optCode + "&" + result.remarks + "&" + result.id + "&" + index + "");
     setTimeout(function() {
         link_listInit_equip("equipTiggerName", listAdd.map(item => {
             return item.label;
@@ -379,8 +377,8 @@ function writeContent() {
         })); //触发类型
     } else {}
 }
-
 var equipTiggerCommand;
+
 function loadLinkageEquips(data) {
     equipTiggerCommand = data;
     try {

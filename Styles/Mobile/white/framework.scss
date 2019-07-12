@@ -15,7 +15,6 @@ html.with-statusbar.device-android .panel {
 .ios .statusbar,.md .statusbar,.statusbar {
     background: #{$headerBgc};
 }
-.ios a,.md a,.ios .button{color: #{$situationFontColor};}
 
 html.with-statusbar.device-iphone-x .framework7-root{padding-top: 20px;}
 html.device-ios.device-iphone-x .statusbar{height: 20px;}
@@ -42,7 +41,7 @@ html.device-ios.device-iphone-x .statusbar{height: 20px;}
                     a{color: #{$statsFontColor};background: #{$statsBgc};}
                 }
                 .HomeShortcutFunction,.HomeButton{
-                  &>div{
+                  &>div,&>a{
                     background: #{$situationContainerBgc};
                     span{
                       color: #{$situationFontColor_sub};
@@ -66,7 +65,7 @@ html.device-ios.device-iphone-x .statusbar{height: 20px;}
         &>.navbar-inner{ 
             .left{
                height: 100%;margin: 0;
-                i{font-size: 1.5rem;color: #{$toolbarFontColor};}
+                i{font-size: 1.5rem;color: #{$toolbarFontColor};margin-left: -7px;}
                 i.icon-back{width: auto;height: auto;background-image: url()!important;}
                 i.icon{font-family: "iconfont" !important; font-size: 2rem; font-style: normal; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
                 a{
@@ -214,15 +213,20 @@ html.ios:not(.device-ios):not(.device-android) .statusbar {
 // 设备联动
 .equipLinkageContainer>.equipLinkageContent #equipLinkage_edit{background: #{$situationBgc};}
 .equipLinkageContainer>.subnavbarTabel,.equipLinkageContainer>.equipLinkageContent #equipLinkage_edit>ul,.equipLinkage_edit_modify .equipLinkage_edit_header>div{color: #{$situationFontColor};background: #{$situationContainerBgc};}
-.equipLinkageContainer>.equipLinkageContent .equipGroupPublic>ul{background: #{$situationContainerBgc};li{color: #{$situationFontColor};}}
+.equipLinkageContainer>.equipLinkageContent .equipGroupPublic>ul{li{color: #{$situationFontColor};background: #{$situationContainerBgc};}}
 .sheet-modal div.right a{color: #007aff!important;}
 .equipLinkage_edit_modify .equipLinkage_edit_header>div #equipLinkage_input{color: #{$situationFontColor};}
 
 // 修改列表
-.ios .scheduleModifyPageContent .list,.md .scheduleModifyPageContent .list{margin: 0;padding-top: 10px;}
+.ios .scheduleModifyPageContent .list,.md .scheduleModifyPageContent .list{margin: 0;}
 
 //实时视频
-#Video_content_ref  div.accordion-list{height: 100%; position: relative; top: 0%;margin: 0;ul{color: #{$situationFontColor};background: #{$situationContainerBgc};}}
+#Video_content_ref  div.accordion-list,#VideoDetails_content_ref div.accordion-list{height: 100%; position: relative; top: 0%;margin: 0;
+  ul{
+    color: #{$situationFontColor};
+    li{background: #{$situationContainerBgc};}
+   }
+}
 
 // PPT
 .pptActive,#Filelist{margin: 10px 0;color: #{$situationFontColor};}

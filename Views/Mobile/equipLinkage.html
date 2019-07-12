@@ -4,9 +4,9 @@
         <div class="navbar-inner">
             <div class="left sliding auth_name_get title_1">设备联动</div>
             <div class="right">
-                <a href="#" onclick="RichScan()" id="scan"> 
-                    <i class="icon iconfont icon_Nav_saoyisao title_1"></i> 
-                    <p class="title_4">扫一扫</p>
+                <a href="#" onclick='newlyBuildLinkage(" ",2);'  TrID="getMaxID_en()" TrRow = ""> 
+                    <i class="icon iconfont icon_Nav_xinjianliandong title_1"></i> 
+                    <p class="title_4">新增联动</p>
                 </a>
             </div>
         </div>
@@ -14,31 +14,13 @@
 
     <div class="page-content">
         <div class="equipLinkageContainer">
-            <div class="subnavbarTabel row no-gap">
-                <a class="col-33" >
-                    触发设备 
-                </a>
-                <a class="col-33">
-                    联动设备 
-                </a>
-                <a class="col-33">
-                    备注 
-                </a>                
-            </div>
             <div class="equipLinkageContent">
                 <section class="equipGroupPublic" id="equipLinkage_set">
                     <ul class="publicTable">
                     </ul>
                 </section>
-                <div class="scheduleRightBottomBtn transformReportingMenu">
-                    <a class="link" href="#" id="equipLinkage_set_nav" >
-                        <span>
-                             <button onclick='newlyBuildLinkage(" ",2);'  TrID="getMaxID_en()" TrRow = "">新增联动</button>
-                         </span>
-                        <img src="/Image/phone/directionjt.png" alt="" onclick="transformReportingObstaciesMenu1()"/>
-                    </a>
-                </div>
             </div>
         </div>
     </div>
+    
 </div>

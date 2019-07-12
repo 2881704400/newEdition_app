@@ -1,40 +1,40 @@
 <div data-page="snapShotDetail" class="page" id="snapShotDetail">
 
-    <div class="navbar">
-        <div class="navbar-inner">
-            <div class="left sliding auth_name_get title_1" id="snapShotDetailTitleId"></div>
-            <div class="right">
-                <a href="#" onclick="RichScan()" id="scan"> 
-                    <i class="icon iconfont icon_Nav_saoyisao title_1"></i> 
-                    <p class="title_4">扫一扫</p>
+    <div class="navbar navbar-large">
+        <div class="navbar-inner navbar-inner-large navbar-current">
+            <div class="left">
+                <a class="back" href="#">
+                    <i class="icon iconfont icon_Nav_fanhui"></i>
                 </a>
             </div>
+            <div class="title sliding title_1 auth_name_get" id="snapShotDetailTitleId">
+                
+            </div>
+            <div class="right">
+                <a href="/search/" class="link icon-only"  style="line-height: 59px;">
+                    <i class="icon iconfont icon_Nav_sousuo"></i>
+                </a>
+            </div>
+            <div class="title-large">
+                <div class="title-large-text title_1 auth_name_get">
+                    
+                </div>
+            </div>
+
         </div>
     </div>
 
-	<form class="searchbar searchbarSnapDetail">
-		<div class="searchbar-inner">
-			<div class="searchbar-input-wrap">
-				<input type="search" placeholder="时间/事件搜索" style="font-size: 0.938rem;">
-				<i class="searchbar-icon"></i>
-				<span class="input-clear-button"></span>
+	<div class="page-content pageContent_102 snapashotMessage-page-content" >
+
+		<div class="snapshot-main">
+			<div class="snashot-header">
+				<a href="#" class="selectListType" data-menu="1">全部 0</a>
+				<a href="#" data-menu="2">待确认 0</a>
+				<a href="#" data-menu="3">已确认 0</a>
 			</div>
-			<span class="searchbar-disable-button" style="font-size: 0.938rem;">取消</span>
-		</div>
-	</form>
-	<div class="page-content ptr-content snapashotMessage-page-content" data-ptr-distance="55">
-		<div class="ptr-preloader">
-			<div class="preloader"></div>
-			<div class="ptr-arrow"></div>
-		</div>
-		<div class="searchbar-backdrop"></div>
-		<div class="block searchbar-not-found" style="text-align: center;">
-			<div class="block-inner">Nothing found</div>
-		</div>
-		<div class="list media-list snapshot-main" style="margin:0;">
-			<ul class="snapshotMessage-ul searchbar-found" id="snapShotDetailListId">
-				
-			</ul>
+			<div class="list media-list">
+				<ul class="snapshotMessage-ul searchbar-found" id="snapShotDetailListId"></ul>
+		    </div>
 		</div>
 	</div>
 </div>

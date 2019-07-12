@@ -236,8 +236,7 @@ function functionalModule(className, htmlStr) {
                    <a><i class="icon iconfont icon_shipinjiangjie"></i></a>
                </div>
             </div>
-
-            <div class="col-50" onclick="pptPlay()">
+            <div class="col-50" onclick="sceneSwitching()">
                <div class="pptPatternHeader row">
                   <span class="col-100 title_4">
                      <h3 class="title_3">${window.localStorage.languageList == 1?"Scene switching":"场景切换"}</h3>
@@ -251,58 +250,58 @@ function functionalModule(className, htmlStr) {
         case "HomeButton":
             html = `<li class="row HomeButton bottomLine">
             <h2 class="title_2">功能模块</h2>
-            <div class="col-50" onclick="videoExplain()">
-               <div class="videoPatternHeader row">
+            <a class="col-50" href="/Video/">
+               <div class="videoPatternHeader row" >
                   <span class="col-100 title_4">
                      <h3 class="title_3">${window.localStorage.languageList == 1?"Video surveillance":"视频监控"}</h3>
                      ${window.localStorage.languageList == 1?"View all monitoring devices":"查看所有监控设备"}
                   </span>
-                  <a class="icon iconfont icon_gongnengrukou_ditu"><i class="icon iconfont icon_changjingzhiling_jiankong"></i></a>
+                  <b class="icon iconfont icon_gongnengrukou_ditu"><i class="icon iconfont icon_changjingzhiling_jiankong"></i></b>
                </div>
               
-            </div>
+            </a>
 
-            <div class="col-50" onclick="pptPlay()">
+            <a class="col-50" href="/videoControl/">
                <div class="pptPatternHeader row">
                   <span class="col-100 title_4">
                      <h3 class="title_3">${window.localStorage.languageList == 1?"Map monitoring":"地图监控"}</h3>
                      ${window.localStorage.languageList == 1?"View the location of the device":"查看设备所在位置"}
                   </span>
-                   <a class="icon iconfont icon_gongnengrukou_ditu"><i class="icon iconfont icon_gongnengrukou_ditujiankong"></i></a>
+                   <b class="icon iconfont icon_gongnengrukou_ditu"><i class="icon iconfont icon_gongnengrukou_ditujiankong"></i></b>
                </div>
                
-            </div>
+            </a>
 
-            <div class="col-50" onclick="pptPlay()">
+            <a class="col-50" href="/pptSelection/">
                <div class="pptPatternHeader row">
                   <span class="col-100 title_4">
                      <h3 class="title_3">${window.localStorage.languageList == 1?"PPT Settings":"PPT设置"}</h3>
                      ${window.localStorage.languageList == 1?"PPT Operational Control":"PPT操作控制"}
                   </span>
-                   <a class="icon iconfont icon_gongnengrukou_ditu"><i class="icon iconfont icon_gongnengrukou_PPTshezhi"></i></a>
+                   <b class="icon iconfont icon_gongnengrukou_ditu"><i class="icon iconfont icon_gongnengrukou_PPTshezhi"></i></b>
                </div>
                
-            </div>
-            <div class="col-50" onclick="pptPlay()">
+            </a>
+            <a class="col-50" href="/welcomeWords/">
                <div class="pptPatternHeader row">
                   <span class="col-100 title_4">
                      <h3 class="title_3">${window.localStorage.languageList == 1?"Welcome speech":"欢迎词"}</h3>
                      ${window.localStorage.languageList == 1?"Setting up Welcome Words to Show Contents":"设置欢迎词展示内容"}
                   </span>
-                   <a class="icon iconfont icon_gongnengrukou_ditu"><i class="icon iconfont icon_gongnengrukou_huanyingci"></i></a>
+                   <b class="icon iconfont icon_gongnengrukou_ditu"><i class="icon iconfont icon_gongnengrukou_huanyingci"></i></b>
                </div>
                
-            </div>
-            <div class="col-50" onclick="pptPlay()">
+            </a>
+            <a class="col-50" >
                <div class="pptPatternHeader row">
                   <span class="col-100 title_4">
                      <h3 class="title_3">${window.localStorage.languageList == 1?"Module title":"模块标题"}</h3>
                      ${window.localStorage.languageList == 1?"Module Content Interpretation":"模块内容解释"}
                   </span>
-                   <a class="icon iconfont icon_gongnengrukou_ditu"><i class="icon iconfont icon_gongnengmokuai_shebeiliandong"></i></a>
+                   <b class="icon iconfont icon_gongnengrukou_ditu"><i class="icon iconfont icon_gongnengmokuai_shebeiliandong"></i></b>
                </div>
                
-            </div>            
+            </a>            
                                  
             </li>`;
             break;
@@ -312,37 +311,38 @@ function functionalModule(className, htmlStr) {
     }
     return html;
 }
+
 //视频讲解
 function videoExplain() {
     var htmlContent = `<div class="popoverVideoExplain">
      <h4><span>功能指令</span></h4>
      <div class="row">
-         <a href="#" class="popoverVideoExplain col-33"  set_equip="${jjPattern[0].equipNo}" set_no="${jjPattern[0].setNo}" onclick="get_no_set(this,null)" >
+         <a href="#" class="popoverVideoExplain col-25"  set_equip="${jjPattern[0].equipNo}" set_no="${jjPattern[0].setNo}" onclick="get_no_set(this,null)" >
                <i class="${jjPattern[0].icon}"></i>
-            <p>${window.localStorage.languageList == 1 ?jjPattern[0].name_en:jjPattern[0].name}</p>
+            <p class="title_4">${window.localStorage.languageList == 1 ?jjPattern[0].name_en:jjPattern[0].name}</p>
          </a>
-         <a href="#" class="popoverVideoExplain col-33"  set_equip="${jjPattern[2].equipNo}" set_no="${jjPattern[2].setNo}" onclick="get_no_set(this,null)" >
+         <a href="#" class="popoverVideoExplain col-25"  set_equip="${jjPattern[2].equipNo}" set_no="${jjPattern[2].setNo}" onclick="get_no_set(this,null)" >
                <i class="${jjPattern[2].icon}"></i>
-               <p>${window.localStorage.languageList == 1 ?jjPattern[2].name_en:jjPattern[2].name}</p>
+               <p class="title_4">${window.localStorage.languageList == 1 ?jjPattern[2].name_en:jjPattern[2].name}</p>
          </a>
-         <a href="#" class="popoverVideoExplain col-33"  set_equip="${jjPattern[3].equipNo}" set_no="${jjPattern[3].setNo}" onclick="get_no_set(this,null)" >
+         <a href="#" class="popoverVideoExplain col-25"  set_equip="${jjPattern[3].equipNo}" set_no="${jjPattern[3].setNo}" onclick="get_no_set(this,null)" >
                <i class="${jjPattern[3].icon}"></i>
-            <p>${window.localStorage.languageList == 1 ?jjPattern[3].name_en:jjPattern[3].name}</p>
+            <p class="title_4">${window.localStorage.languageList == 1 ?jjPattern[3].name_en:jjPattern[3].name}</p>
          </a>                                 
-     </div>
-     <div class="row">
-         <a href="#" class="popoverVideoExplain col-33"  set_equip="${jjPattern[4].equipNo}" set_no="${jjPattern[4].setNo}" onclick="get_no_set(this,null)" >
+         <a href="#" class="popoverVideoExplain col-25"  set_equip="${jjPattern[4].equipNo}" set_no="${jjPattern[4].setNo}" onclick="get_no_set(this,null)" >
          <i class="${jjPattern[4].icon}"></i>
-            <p>${window.localStorage.languageList == 1 ?jjPattern[4].name_en:jjPattern[4].name}</p>
+            <p class="title_4">${window.localStorage.languageList == 1 ?jjPattern[4].name_en:jjPattern[4].name}</p>
          </a>
-         <a href="#" class="popoverVideoExplain col-33"  set_equip="${jjPattern[5].equipNo}" set_no="${jjPattern[5].setNo}" onclick="get_no_set(this,null)" >
+         <a href="#" class="popoverVideoExplain col-25"  set_equip="${jjPattern[5].equipNo}" set_no="${jjPattern[5].setNo}" onclick="get_no_set(this,null)" >
          <i class="${jjPattern[5].icon}"></i>
-            <p>${window.localStorage.languageList == 1 ?jjPattern[5].name_en:jjPattern[5].name}</p>
+            <p class="title_4">${window.localStorage.languageList == 1 ?jjPattern[5].name_en:jjPattern[5].name}</p>
          </a>
-         <a href="#" class="popoverVideoExplain col-33"  set_equip="${jjPattern[6].equipNo}" set_no="${jjPattern[6].setNo}" onclick="JumpPage(this)" >
+         <a href="#" class="popoverVideoExplain col-25"  set_equip="${jjPattern[6].equipNo}" set_no="${jjPattern[6].setNo}" onclick="JumpPage(this)" >
          <i class="${jjPattern[6].icon}"></i>
-            <p>${window.localStorage.languageList == 1 ?jjPattern[6].name_en:jjPattern[6].name}</p>
+            <p class="title_4">${window.localStorage.languageList == 1 ?jjPattern[6].name_en:jjPattern[6].name}</p>
          </a>  
+         <a href="#" class="col-25"></a>
+         <a href="#" class="col-25"></a>
      </div>
 
        </div>
@@ -354,21 +354,25 @@ function pptPlay() {
     var htmlContent = `<div class="popoverVideoExplain">
     <h4><span>功能指令</span></h4>
      <div class="row">
-         <a href="#" class="popoverVideoExplain col-33"  set_equip="${pptPattern[0].equipNo}" set_no="${pptPattern[0].setNo}" onclick="get_no_set(this,null)" >
+         <a href="#" class="popoverVideoExplain col-25"  set_equip="${pptPattern[0].equipNo}" set_no="${pptPattern[0].setNo}" onclick="get_no_set(this,null)" >
                <i class="${pptPattern[0].icon}"></i>
-            <p>${window.localStorage.languageList == 1 ?pptPattern[0].name_en:pptPattern[0].name}</p>
-         </a>                                
-         <a href="#" class="popoverVideoExplain col-33"  set_equip="${pptPattern[2].equipNo}" set_no="${pptPattern[2].setNo}" onclick="get_no_set(this,null)" >
+            <p class="title_4">${window.localStorage.languageList == 1 ?pptPattern[0].name_en:pptPattern[0].name}</p>
+         </a> 
+         <a href="#" class="popoverVideoExplain col-25"  set_equip="${pptPattern[1].equipNo}" set_no="${pptPattern[1].setNo}" onclick="get_no_set(this,null)" >
+               <i class="${pptPattern[1].icon}"></i>
+            <p class="title_4">${window.localStorage.languageList == 1 ?pptPattern[1].name_en:pptPattern[1].name}</p>
+         </a>                                         
+         <a href="#" class="popoverVideoExplain col-25"  set_equip="${pptPattern[2].equipNo}" set_no="${pptPattern[2].setNo}" onclick="get_no_set(this,null)" >
          <i class="${pptPattern[2].icon}"></i>
-            <p>${window.localStorage.languageList == 1 ?pptPattern[2].name_en:pptPattern[2].name}</p>
+            <p class="title_4">${window.localStorage.languageList == 1 ?pptPattern[2].name_en:pptPattern[2].name}</p>
          </a>
-         <a href="#" class="popoverVideoExplain col-33"  set_equip="${pptPattern[3].equipNo}" set_no="${pptPattern[3].setNo}" onclick="get_no_set(this,null)" >
+         <a href="#" class="popoverVideoExplain col-25"  set_equip="${pptPattern[3].equipNo}" set_no="${pptPattern[3].setNo}" onclick="get_no_set(this,null)" >
          <i class="${pptPattern[3].icon}"></i>
-            <p>${window.localStorage.languageList == 1 ?pptPattern[3].name_en:pptPattern[3].name}</p>
+            <p class="title_4">${window.localStorage.languageList == 1 ?pptPattern[3].name_en:pptPattern[3].name}</p>
          </a>
-         <a href="#" class="popoverVideoExplain col-33"  set_equip="${pptPattern[4].equipNo}" set_no="${pptPattern[4].setNo}" onclick="JumpPage(this)" >
+         <a href="#" class="popoverVideoExplain col-25"  set_equip="${pptPattern[4].equipNo}" set_no="${pptPattern[4].setNo}" onclick="JumpPage(this)" >
          <i class="${pptPattern[4].icon}"></i>
-            <p>${window.localStorage.languageList == 1 ?pptPattern[4].name_en:pptPattern[4].name}</p>
+            <p class="title_4">${window.localStorage.languageList == 1 ?pptPattern[4].name_en:pptPattern[4].name}</p>
          </a>  
      </div>
     </div>
@@ -382,6 +386,41 @@ function JumpPage(dt) {
         else get_no_set(dt, name);
     });
 }
+//场景切换
+function sceneSwitching() {
+    var htmlContent = `<div class="popoverVideoExplain">
+       ${returnSceneHtml()}
+    </div>
+    `;
+    ststemSet(window.localStorage.languageList == 1 ? "Scene switching" : "场景切换", "sceneBtnControl", htmlContent);
+}
+function returnSceneHtml(){
+   var headerHtml = "",contentHtml = "",allHtml = "";
+    KOvm.forEach((item,index)=>{
+       headerHtml = `<h4><span>${item.title}</span></h4>`;
+       contentHtml = `
+         <div class="row">
+            ${returnSceneChildHtml(item.child)}                            
+         </div>
+       `;
+       allHtml += (headerHtml + contentHtml);
+    });
+   return allHtml;
+}
+function returnSceneChildHtml(dom){
+  var allHtml = "";
+  dom.forEach((item,index)=>{
+     allHtml += `
+           <a href="#" class="popoverVideoExplain col-25"  set_equip="${item.equipNo}" set_no="${item.setNo}" onclick="get_no_set(this,null)" >
+                 <i class="${item.icon}"></i>
+              <p class="title_4">${window.localStorage.languageList == 1 ?item.name_en:item.name}</p>
+           </a>                              
+     `;
+  });
+  allHtml +=`<a href="#" class="col-25"></a><a href="#" class="col-25"></a><a href="#" class="col-25"></a>`;
+  return allHtml;
+}
+
 //模块功能
 function functionalModule_page() {
 
@@ -405,7 +444,6 @@ function functionalModule_page() {
             </div>    
             <hr class="transform-05"/>        
             <div class="block-title block-title-medium margin-top title_2">系统模块</div>
-
             <div class="no-hairlines">
               <div data-pagination='{"el": ".swiper-pagination-content"}' data-space-between="10" data-slides-per-view="3" class="swiper-container-content swiper-init demo-swiper">
                 <div class="swiper-wrapper">
@@ -452,7 +490,6 @@ function functionalModule_page() {
                   </div>                  
                 </div>
               </div>
-
             </div>
           </div>
         </div>`,
@@ -482,7 +519,6 @@ function historyHTML(){
        historyRecord = JSON.parse(window.localStorage.moduleRecord);
        for(var val of historyRecord)
        {
-          
           html += `
            <div class="swiper-slide">
             <a href="/${val.split("&")[0]}/">
@@ -490,7 +526,7 @@ function historyHTML(){
               <i class="${val.split("&")[1]}"></i>
               </p>
               <span class="title_4">${val.split("&")[2]}</span>
-            </a></div>`;
+           </a></div>`;
        }  
    }
    return html;
@@ -523,5 +559,4 @@ function judgeOpenPage(url){
     case "/sceneEdit/": addModuleRecord("sceneEdit&icon iconfont icon_gongnengmokuai_changjingpeizhi&场景编辑");break;
     default: break;
    }
-
 }

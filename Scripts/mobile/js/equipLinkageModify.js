@@ -1,4 +1,7 @@
 function equipLinkageModify() {
+   // myApp.toolbar.hide(".view-menu-toolbar",true);
+   // $("#equipLinkageModify").addClass("no-toolbar");
+
 	var chatObject = myApp.views.main.history,
 		urlLength = chatObject.length - 1,
 		receiveUser = chatObject[urlLength].split("?")[1],
