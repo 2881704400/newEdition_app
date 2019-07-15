@@ -158,7 +158,7 @@ html.md:not(.device-ios):not(.device-android) .statusbar {
 
 html.device-ios .statusbar,
 html.ios:not(.device-ios):not(.device-android) .statusbar {
-    background: #{$headerBgc};
+    background: transparent;
 }
 
 //实时快照
@@ -169,7 +169,6 @@ html.ios:not(.device-ios):not(.device-android) .statusbar {
 #ycAndyx #tabsWrap .tab .oneLine, #ycAndyx_en #tabsWrap .tab .oneLine{ background: #{$situationContainerBgc}; }
 #ycAndyx .toolbar .toolbar-inner, #ycAndyx_en .toolbar .toolbar-inner{color: #{$situationFontColor};background: #{$situationContainerBgc};}
 #ycAndyx .toolbar .toolbar-inner>a.tab-link, #ycAndyx_en .toolbar .toolbar-inner>a.tab-link{color: #{$situationFontColor};}
-#set li{ background: #{$btnBackground};}
 
 // 设置页 
 .setPageContainer>div.userClassName,.setPageContainer>div.simple-list ul{
@@ -195,13 +194,13 @@ html.ios:not(.device-ios):not(.device-android) .statusbar {
 
 //系统配置
 #equipConfigList .content-wrap .sele-tile{color:  #{$situationFontColor};}
-#equipConfigList .list ul,#eventQuery .tabList, #systemConfig .tabList, #systemConfig_en .tabList{color: #{$situationFontColor};background: #{$situationContainerBgc};}
+#eventQuery .tabList, #systemConfig .tabList{color: #{$situationFontColor};background: #{$situationContainerBgc};}
 #eventQuery .eventWrap li, #systemConfig .eventWrap li, #systemConfig_en .eventWrap li,#sysConfigEdict .page-content .list, #sysConfigEdict_en .page-content .list{color: #{$situationFontColor};}
 .item-input-wrap input{color: #{$situationFontColor}!important;}
 #sysConfigEdict .page-content .list ul, #sysConfigEdict_en .page-content .list ul{background: transparent;}
 #sysConfigEdict{ div.page-content{ ul:before{height: 0px;} } }
 #eventQuery .tabList .tab-link-active, #systemConfig .tabList .tab-link-active, #systemConfig_en .tabList .tab-link-active{color: #{$situationFontColor};}
-#equipConfigList_en .equipConfigList_container .eq-list ul, #equipConfigList .equipConfigList_container .eq-list ul{color: #{$situationFontColor};background: #{$situationContainerBgc};}
+#equipConfigList_en .equipConfigList_container .eq-list ul, #equipConfigList .equipConfigList_container .eq-list ul{color: #{$situationFontColor};li{background: #{$situationContainerBgc};}}
 
 // 报警排表
 .scheduleContainer>.scheduleContent .equipGroupPublic>ul{color: #{$situationFontColor};}
@@ -212,7 +211,23 @@ html.ios:not(.device-ios):not(.device-android) .statusbar {
 
 // 设备联动
 .equipLinkageContainer>.equipLinkageContent #equipLinkage_edit{background: #{$situationBgc};}
-.equipLinkageContainer>.subnavbarTabel,.equipLinkageContainer>.equipLinkageContent #equipLinkage_edit>ul,.equipLinkage_edit_modify .equipLinkage_edit_header>div{color: #{$situationFontColor};background: #{$situationContainerBgc};}
+.equipLinkageContainer>.subnavbarTabel,.equipLinkage_edit_modify .equipLinkage_edit_header>div{color: #{$situationFontColor};background: #{$situationContainerBgc};}
+.equipLinkage_edit_modify .equipLinkage_edit_header>div{position: relative;}
+.equipLinkage_edit_modify .equipLinkage_edit_header>div:after {
+    content: '';
+    position: absolute;
+    background-color: rgba(45,46,48,0.2);
+    display: block;
+    z-index: 15;
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    transform-origin: 50% 100%;
+    transform: scaleY(0.5);
+}
 .equipLinkageContainer>.equipLinkageContent .equipGroupPublic>ul{li{color: #{$situationFontColor};background: #{$situationContainerBgc};}}
 .sheet-modal div.right a{color: #007aff!important;}
 .equipLinkage_edit_modify .equipLinkage_edit_header>div #equipLinkage_input{color: #{$situationFontColor};}

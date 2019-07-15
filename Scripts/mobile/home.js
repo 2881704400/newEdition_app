@@ -5,7 +5,9 @@ function onHomePage() {
     getJurisdictionData();
     getAppStatusBarHeight();
     tranformMenu(window.localStorage.languageList);
+    
 }
+
 //响应App绑定函数-获取状态栏高度 
 function getStatusBarHeight(height, ScreenHeight) {
     var heightRate = height / ScreenHeight;

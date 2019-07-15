@@ -511,11 +511,11 @@ function initSceneList_view() {
                         ValueFlag = equiplinkageStr[i].indexOf(",");
                         ValueFlag != -1 ? equip_no_flg = true : equip_no_flg = false;
                     } catch (e) {}
-                    htmlContent += `<li class="swipeout " equipcomb="${equiplinkageStr[i]}">
+                    htmlContent += `<li class="swipeout bottomBorderLine" equipcomb="${equiplinkageStr[i]}">
                         <div class="item-content swipeout-content schedule-content row no-gap" >
                             <div class="item-inner">
                               <div class="item-title">${i+1}、${(equip_no_flg?filterFun(equipList,equiplinkageStr[i].split(",")[0],null):(equiplinkageStr[i]?(window.localStorage.languageList == 1?"Interval operation":"间隔操作"):""))}: <strong>${(equip_no_flg?filterFun(setList,equiplinkageStr[i].split(",")[0],equiplinkageStr[i].split(",")[1]):(equiplinkageStr[i]?(window.localStorage.languageList == 1?"Delay interval":"延迟间隔")+equiplinkageStr[i]+(window.localStorage.languageList == 1?"Millisecond":"毫秒"):""))}</strong></div>
-                              <div class="item-after" onclick="scenalControlPro(this)" index="${i}"><i class="iconfont icon-f7_top_jt"></i></div>
+                              <div class="item-after" onclick="scenalControlPro(this)" index="${i}"><i class="icon iconfont iconjiantouarrow502"></i></div>
                             </div>
                         </div>
                         <div class="swipeout-actions-right">
@@ -649,9 +649,9 @@ function scenalControlPro(dt) {
     window.localStorage.sceneName = $("#equipLinkage_input").val();
     if (indexAll == 1) {
         let val = $(dt).attr("index");
-        myApp.router.navigate("/scheduleModifyChild/?" + val);
+        myApp.views.main.router.navigate("/scheduleModifyChild/?" + val);
     } else {
-        myApp.router.navigate("/scheduleModifyChild/?last");
+        myApp.views.main.router.navigate("/scheduleModifyChild/?last");
     }
 }
 //新增控制初始化  900
@@ -679,6 +679,7 @@ function scenalControlPro_init() {
         myApp.dialog.close();
     });
 }
+
 //删除当前控制项 
 function currentControl(dt) {
     myApp.dialog.confirm(window.localStorage.languageList == 1 ? "Whether to delete the current control" : "是否删除当前项", window.localStorage.languageList == 1 ? "Tips" : "提示", function() {

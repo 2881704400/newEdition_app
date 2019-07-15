@@ -586,8 +586,15 @@ function exitLogin() {
 }
 //切换底部工具栏
 function switchToolbar(id) {
+    var srcOld = $(".view-menu-toolbar .no-gap").find("a.active img").attr("src").replace(".gif",".png");
+    $(".view-menu-toolbar .no-gap").find("a.active img").attr("src",srcOld);
+
     $("#" + id).addClass("active").siblings().removeClass("active");
-     
+
+    var srcNew = $(".view-menu-toolbar .no-gap").find("a.active img").attr("src").replace(".png",".gif");
+    $(".view-menu-toolbar .no-gap").find("a.active img").attr("src",srcNew);
+
+    
 }
 //语音信息提示
 function voiceTooip(txt) {

@@ -62,9 +62,9 @@ function initSceneList() {
 function scanelEdit(that,status){
     window.localStorage.sceneName = "";
     if(status == 1)
-      myApp.router.navigate("/scheduleModify/?title=场景编辑&index=1&table=equipLinkage_edit_modify&equip_no="+$(that).attr("equip_no")+"&set_no="+$(that).attr("set_no")+"&combination="+$(that).attr("combination")+"&currentTxt="+$(that).find(".item-title").text()); 
+      myApp.views.main.router.navigate("/scheduleModify/?title=场景编辑&index=1&table=equipLinkage_edit_modify&equip_no="+$(that).attr("equip_no")+"&set_no="+$(that).attr("set_no")+"&combination="+$(that).attr("combination")+"&currentTxt="+$(that).find(".item-title").text()); 
     else
-      myApp.router.navigate("/scheduleModify/?title=场景编辑&index=2&table=equipLinkage_edit_modify"); 
+      myApp.views.main.router.navigate("/scheduleModify/?title=场景编辑&index=2&table=equipLinkage_edit_modify"); 
 }
 
 //删除场景

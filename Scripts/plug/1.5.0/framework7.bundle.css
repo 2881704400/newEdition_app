@@ -1328,7 +1328,7 @@ html.device-full-viewport body {
   left: 0;
   top: 0;
   width: 100%;
-  z-index: 500;
+  z-index: 498;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   box-sizing: border-box;

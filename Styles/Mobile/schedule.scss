@@ -63,7 +63,7 @@
         &>a{font-size: #{$tableHeaderFontSize}*1.1;color: #a8a9a9;height: 100%;white-space: nowrap;text-align: center;}
     }
     &>.equipLinkageContent{
-       width: 100%;height: 100%;
+       width: 100%;
         &>div.equipGroupPublic{height: 100%;margin: 0;overflow: auto;}
             thead{ font-size: #{$tableHeaderFontSize};color: #{$tableHeaderFontColor};background: #{$tableHeaderBgc};}
             tbody{
@@ -101,7 +101,7 @@
         #schedule_user>table{min-width: auto;}
         .icon-f7_modify,.icon-f7_delete{font-size: 1.5rem;padding: 0px 10px;}
         #equipLinkage_edit{
-            &>ul{ &>li{position: relative;
+            &>ul{ &>li{position: relative;margin-bottom: 0.5rem;background: white;border-radius: 6px;
                 .item-title{font-size: 0.9rem;}
                 .delBtn{padding: 20px;text-align: center; background: #FF3B30;}
                  a{width: 100%;font-size: 1rem;.item-inner:after{height: 0px!important;}}
@@ -135,12 +135,19 @@
 }
 
 // 修改子页
+.equipLinkage_edit_modify{
+    padding: 1rem;
+    &>div.equipLinkage_edit_header{
+        &>div{height: 40px;line-height: 40px;}
+    }
+}
 .scheduleModifyContainer{
     height: 100%;background: white;
     input,select{font-size: 1rem !important;}
-    &>div{
+    &>div.linkageBtn{
         position: absolute;
         width: 100%;
+        left: 0;
         bottom: 0.2rem;
         padding: 1rem;
     }
@@ -167,19 +174,29 @@
 // 场景编辑
 .equipLinkage_edit_modify{
     .equipLinkage_edit_header{
-      &>div{font-size: 0.9rem;height: 40px;line-height: 40px;padding-left: 8%; #equipLinkage_input{ height: 100%;text-align: center; border-bottom: 1px solid #007aff;}span{a{color: #{$tabSelected}!important;}text-align: right; padding-right: 5%;}}
+      &>div{ span{a{color: #{$tabSelected}!important;}text-align: right; padding-right: 5%;}}
       &>div:nth-child(1){margin-bottom: 10px;}
     }
-    ul{max-height: 60%;
-    overflow-y: auto;li{padding-left: 6%;.item-content,.item-inner{width: 100%;} .item-inner{i{font-size: 1.8rem;}} .delBtn{background: #FF3B30;}}}
+    ul{max-height: 60%;overflow-y: auto;
+        li{
+            .item-content{width: 100%;color: #333;font-size: 14px;} 
+            .item-inner{i{font-size: 1.8rem;color: #4177e6;}} 
+            .delBtn{color: white;background: #FF3B30;}
+        }
+    }
     ul:after{height: 0!important;}
+    input{height: 40px; line-height: 40px; text-align: right;}
 }
 // 场景控制项目
 .equipLinkage_edit_modify_child {
-    ul{li.equipLinkage_edit_modify_childFirst{
-            padding: 20px 0;text-align: center;
-        &>div{i{font-size: 2rem;vertical-align: sub;}}
-        .selectedIcorlor i{color: #{$selectedColor};}
+    padding: 1rem;
+    ul{
+        li.equipLinkage_edit_modify_childFirst{
+            padding: 20px 0;
+            &>div{
+              i{font-size: 2rem;vertical-align: sub;}}
+              .selectedIcorlor i{color: #{$selectedColor};
+           }
         }
     }
 }
@@ -202,12 +219,11 @@
 
 .equipAlertHeader{padding: 10px;&>label{margin: 0px 5px;}}
 .equipAlertContent{&>div{line-height: 40px;padding: 10px;} select,input{font-size: 0.8rem;height: 40px;line-height: 40px;text-indent: 10px;border: 1px solid #{$inputBorderColor};}}
-.bottomBorderLine:after{content:"";width: 100%;height: 1px;display: inline-block; position: absolute;bottom: 0;left: 0;border-bottom: 1px solid #{$inputBorderColor};transform: scaleY(0.2);}
+.bottomBorderLine:after{content:"";width: 100%;height: 1px;display: inline-block; position: absolute;bottom: 0;left: 0;border-bottom: 1px solid #{$inputBorderColor};transform: scaleY(0.5);}
 .linkColor{color: #{$tabSelected}!important;}
 //选中菜单颜色
 .selectScheduleMenu{font-size: 12px;border-bottom: 1px solid #{$tabSelected};}
-//添加按钮
-// .scheduleRightBottomBtn{position: absolute;right: 5%;bottom: 10%;&>a{&>i{font-size: 3rem;color: #{$tabSelected};}}}
+
 .item-input-wrap input{border: 0;}
 .dialog-input-field .item-input-wrap input{border-bottom: 1px solid #{$tabSelected}!important;}
 //左侧按钮 
@@ -218,3 +234,23 @@
 .scheduleRightBottomBtn img{position: absolute;left: 100%;top: 50%;margin-top: -1rem;width:2rem;height: 2rem;}
 .scheduleRightBottomBtn span{width: 100%;height: 100%;display: inline-block;border-top-right-radius: 20px; border-bottom-right-radius: 20px; background: #007AFF;overflow: hidden;}
 .scheduleRightBottomBtn button{    width: 100%; height: 100%; border: 0; background: transparent; color: white;}
+
+//控制项增加上滑卡片
+.equipSelectSheet{
+
+    .no-hairlines{
+        position: absolute;left: 0;top: 80px;right: 0;bottom: 0;padding: 1rem;overflow: auto;
+        a{
+
+            padding: 10px;
+            border-radius: 6px;
+            background: #F5F5F5;//#2D2E30;
+            margin-bottom: 1rem;
+            color: #333;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .selectedBgColor{color: white;background: #2D2E30;}
+    }
+}

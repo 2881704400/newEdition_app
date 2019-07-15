@@ -219,12 +219,14 @@
         }
     }
     .equipCon {
-        height: 99%;
-        position: relative;
-        top: 1%;
+        height: 100%;
+        position: relative;    overflow: hidden;
         .eventWrap {
-            height: 100%;
-            overflow-y: auto;
+            position: absolute;
+            top: 44px;
+            left: 0;
+            right: 0;
+            bottom: 0;
         }
         .item-title {
             font-size: 14px;
@@ -232,12 +234,22 @@
     }
     .tabList {
         margin: 0;
-        height: 50px;
+        height: 44px;
         width: 100%;
+        box-shadow: 0 1px 0px 0 rgba(45,46,48,0.2);
+        border-radius: 0;
+        padding: 0 1rem;
+        align-items: center;
+        align-content: center;
+        align-self: auto;
         a {
-            height: 100%;
-            line-height: 50px;
             overflow: unset;
+            color: #333;
+            font-size: 14px;
+            background: #F5F5F5;
+            border-radius: 12px!important;
+            padding: 5px 15px;
+            margin-right: 1rem;
         }
         .button {
             transition-duration: 0s;
@@ -251,14 +263,13 @@
             }
         }
         .tab-link-active {
-            background: transparent;
-            border-bottom: 2px solid $activeBg !important; // color: $activeBg;
+            color: white;
+            background: #2D2E30;
         }
     }
     .eventWrap {
         width: 100%;
         .tab {
-            //border: 1px solid red;
             width: 100%;
             .list {
                 height: 100%;
@@ -270,12 +281,22 @@
                 .item-title {
                     color: $titColor;
                 }
+                li{
+                    background: white;overflow: hidden;
+                    &>div{flex-direction: row;padding: 0;}
+                    .item-title{width: 30%;height: 44px;line-height: 44px;display: inline-block;}
+                    .item-input-wrap{width: 70%;height: 44px;line-height: 44px;display: inline-block;}
+                }
             }
             .btn {
                 margin: 35px auto;
                 width: 60%;
             }
         }
+        #tab-2,#tab-3,#tab-4{
+            ul{padding: 1rem 1rem 50px 1rem;li{background: white;margin-bottom: 0.5rem;}}
+        }
+       
         li {
             .eventList {
                 padding: 5px 0;
@@ -365,7 +386,7 @@
     .page-content {
         .list {
             margin: 0 0;
-            height: 100%;
+            height: 100%;overflow: hidden;
             &.edictList {
                 .btn {
                     width: 95%;
@@ -382,8 +403,15 @@
                 }
             }
             ul {
-                height: calc(100% - 35px);
+                height: 100%;
+                padding-bottom: 100px;
                 overflow: auto;
+                li{
+                    background: white;overflow: hidden;
+                    &>div{flex-direction: row;padding: 0;}
+                    .item-title{width: 30%;height: 44px;line-height: 44px;display: inline-block;}
+                    .item-input-wrap{width: 70%;height: 44px;line-height: 44px;display: inline-block;}
+                }
                 &:after {
                     height: 0px;
                 }
@@ -423,7 +451,6 @@
     }
     .list {
         margin: 0;
-        height: calc(100% - 90px);
         ul {
             &:after {
                 height: 0;
@@ -442,18 +469,18 @@
         width: 100%;
         height: 100%;
         margin: 0;
-        padding: 10px;
-        overflow: hidden;
         .equipConfigList_en_header {
             form {
                 background: transparent;
             }
         }
         .eq-list {
-            height: 100%;
-            padding-bottom: 50px;
-            margin: 0;
-            overflow-y: auto;
+            height: 100%;position: relative;padding: 1rem;
+            p{color: #333;height: 40px;line-height: 40px;}
+            &>div{
+                height: 100%;overflow: auto;
+                ul{li{margin-bottom: 0.5rem;}}
+            }
         }
     }
 }

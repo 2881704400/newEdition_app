@@ -1,42 +1,52 @@
-﻿<div class="page " data-page="scheduleModifyChild" id="scheduleModifyChild">
+﻿<div class="page no-toolbar" data-page="scheduleModifyChild" id="scheduleModifyChild">
 
-    <div class="navbar">
-        <div class="navbar-inner">
-            <div class="left sliding auth_name_get title_1" >内容修改</div>
-            <div class="right">
-                <a href="#" onclick="RichScan()" id="scan"> 
-                    <i class="icon iconfont icon_Nav_saoyisao title_1"></i> 
-                    <p class="title_4">扫一扫</p>
+    <div class="navbar navbar-large">
+        <div class="navbar-inner navbar-inner-large navbar-current">
+            <div class="left">
+                <a class="back" href="#">
+                    <i class="icon iconfont icon_Nav_fanhui"> </i>
                 </a>
+            </div>
+            <div class="title sliding title_1" >
+                内容修改
+            </div>
+            <div class="right">
+                
+            </div>
+            <div class="title-large">
+                <div class="title-large-text title_1">
+                    内容修改
+                </div>
             </div>
         </div>
     </div>
 
 
 
-    <div class="page-content scheduleModifyPageContent">
+    <div class="page-content scheduleModifyPageContent pageContent_102 pageContent_0">
         <!-- 场景控制项目 -->
         <div class="scheduleModifyContainer equipLinkage_edit_modify_child list" >
            <ul>
               <li class="row equipLinkage_edit_modify_childFirst bottomBorderLine">
                     <div class="col-50 selectedIcorlor" div_attribute="equipLinkage_edit_modify_childSecond">
-                      <i class="iconfont icon-selectUD"></i> 控制设备
+                      <i class="icon iconfont icongouxuan"></i> 控制设备
                     </div>
                     <div class="col-50" div_attribute="equipLinkage_edit_modify_childThree">
-                      <i class="iconfont icon-selectUD"></i> 设置延迟
+                      <i class="icon iconfont icongouxuan"></i> 设置延迟
                     </div>
               </li>
-              <li class="equipLinkage_edit_modify_childSecond">
+              <li class="equipLinkage_edit_modify_childSecond bottomBorderLine">
                 <div class="item-content item-input">
                   <div class="item-inner">
                     <div class="item-title item-label">选择控制设备</div>
                     <div class="item-input-wrap">
-                    <select name="gender" class="equipLinkage_edit_modify_child_equip"></select>
+                    <!-- <select name="gender" class="equipLinkage_edit_modify_child_equip"></select> -->
+                    <input type="text" class="addEquipInfo" placeholder="请选择要添加的设备" readonly="true" />
                   </div>
                   </div>
                 </div>
               </li>
-              <li class="equipLinkage_edit_modify_childThree displayNone">
+              <li class="equipLinkage_edit_modify_childThree displayNone bottomBorderLine">
                 <div class="item-content item-input">
                   <div class="item-inner">
                     <div class="item-title item-label">时长(ms):</div>
@@ -47,8 +57,10 @@
                 </div>
               </li>
            </ul>
-          <button class="comfirmModify comfirmCancel color-red" onclick="myApp.router.back();">取消</button>
-          <button class="comfirmModify" onclick="comfirmScaneControl()">确认</button>
+           <div class="row linkageBtn">
+          <a class="col-50 comfirmModify comfirmCancel color-red back">取消</a>
+          <a class="col-50 comfirmModify" onclick="comfirmScaneControl()">确认</a>
+        </div>
         </div> 
     </div>
 </div>

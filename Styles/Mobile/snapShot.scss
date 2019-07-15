@@ -13,7 +13,8 @@
         }
     }
     &>div:nth-child(2){
-        margin: 0;position: absolute;left: 0;top: 44px;right: 0;bottom: 0;padding: 1rem;    overflow: auto;
+        margin: 0;position: absolute;left: 0;top: 44px;right: 0;bottom: -50px;padding: 1rem;    overflow: auto;
+        &>ul{padding-bottom: 50px;}
     }
     .selectListType{background: #2D2E30!important;}
 }

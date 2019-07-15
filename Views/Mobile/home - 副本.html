@@ -13,7 +13,7 @@
         <title>AlarmCenter | 首页</title>
         <link href="/Image/logo.png" rel="icon" type="image/x-icon" />
         <link href="/Scripts/plug/1.5.0/framework7.bundle.css" rel="stylesheet" type="text/css" />
-        <link href="//at.alicdn.com/t/font_1265750_jr1ihtwdq3k.css" rel="stylesheet" type="text/css"/>
+        <link href="//at.alicdn.com/t/font_1265750_40wvhcp1qxt.css" rel="stylesheet" type="text/css"/>
         <link href="/Styles/Plugin/waveAnimation.css" rel="stylesheet" type="text/css"/> <!--声波动画-->
         <link class="whiteColor" href="/Styles/Mobile/back/framework.css" rel="stylesheet"/><!--皮肤-->
         <link href="/Styles/Mobile/gw.css" rel="stylesheet" type="text/css"/><!--本页样式-->
@@ -45,12 +45,14 @@
                 <div class="toolbar toolbar-bottom view-menu-toolbar tabbar tabbar-labels displayNone">
                     <div class="toolbar-inner row no-gap">
                         <a class="link active animation-no col-20" href="/home/" id="homeTool">
-                            <img src="/Image/homeIcon.png" alt="" />
+                            <i class="icon iconfont icon_Tab_shouye_Initial"></i>
+                            <i class="icon iconfont icon_Tab_shouye_Selected"></i>
                         </a>
                         <a class="link animation-no col-20"  href="/equips/" id="equipsTool">
-                            <img src="/Image/equipIcon.png" alt="" />
+                            <i class="icon iconfont icon_Tab_shebeiliebiao_Initial"></i>
+                            <i class="icon iconfont icon_Tab_shebeiliebiao_Selected"></i>
                         </a>
-                        <a class="link col-20"  href="#" id="voiceBtn">
+                        <a class="link col-20 popover-open" data-popover=".popover-links" href="#" id="voiceBtn">
                             <div class="video-content-btn">
                                 <div>
                                     <img src="/Image/phone/voiceBtn.png"/>
@@ -58,10 +60,12 @@
                             </div>
                         </a>
                         <a class="link animation-no col-20" href="#" id="functionalModule_pageTool" onclick="functionalModule_page()">
-                            <img src="/Image/funmoduleIcon.png" alt="" />
+                            <i class="icon iconfont icon_Tab_gongnengmokuai_Initial"></i>
+                            <i class="icon iconfont icon_Tab_gongnengmokuai_Selected"></i>
                         </a>
                         <a class="link animation-no col-20"  href="/setPage/" id="setPageTool">
-                            <img src="/Image/setIcon.png" alt="" />
+                            <i class="icon iconfont icon_Tab_shezhi_Initial"></i>
+                            <i class="icon iconfont icon_Tab_shezhi_Selected"></i>
                         </a>
                     </div>
                 </div>
@@ -72,13 +76,19 @@
 
     <!-- 2、返回，则关闭监听 -->
 
- <!--                  <div  class="voice-container displayNone">
-                    <div>
-                        <p class="title_1">请说，我在听</p>
-                        <div></div>
+                  <div  style="width: 100%;height: 100%;position: absolute;left: 0;bottom: 0;z-index: 499;background: rgba(0,0,0,0.5)">
+                    <div style="width: 90%;bottom: 80px;
+    margin: auto;
+    position: absolute;
+    margin-left: 5%;
+    background: white;
+    padding: 1rem;
+    border-radius: 6px;">
+                        <p class="title_2" style="text-align: center;margin-bottom: 1rem;">请说，我在听</p>
+                        <div style="width: 200px;height: 200px;margin: auto;border: 1px solid red;"></div>
                     </div>
                   </div>
- -->
+
 
 
 

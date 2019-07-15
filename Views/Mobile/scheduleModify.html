@@ -1,19 +1,28 @@
-﻿<div class="page " data-page="scheduleModify" id="scheduleModify">
+﻿<div class="page no-toolbar" data-page="scheduleModify" id="scheduleModify">
 
 
-    <div class="navbar">
-        <div class="navbar-inner">
-            <div class="left sliding auth_name_get title_1" >内容修改</div>
-            <div class="right">
-                <a href="#" onclick="RichScan()" id="scan"> 
-                    <i class="icon iconfont icon_Nav_saoyisao title_1"></i> 
-                    <p class="title_4">扫一扫</p>
+    <div class="navbar navbar-large">
+        <div class="navbar-inner navbar-inner-large navbar-current">
+            <div class="left">
+                <a class="back" href="#">
+                    <i class="icon iconfont icon_Nav_fanhui"> </i>
                 </a>
+            </div>
+            <div class="title sliding title_1" >
+                新增场景
+            </div>
+            <div class="right">
+                
+            </div>
+            <div class="title-large">
+                <div class="title-large-text title_1">
+                    新增场景
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="page-content scheduleModifyPageContent">
+    <div class="page-content scheduleModifyPageContent pageContent_102 pageContent_0">
         <div class="scheduleModifyContainer scheduleModifyContainer_user list displayNone">
           <ul>
             <li>
@@ -21,7 +30,7 @@
                 <div class="item-inner">
                   <div class="item-title item-label">人员姓名</div>
                   <div class="item-input-wrap">
-                    <input type="text" name="name" placeholder="你的姓名" class="schedule1_username">
+                    <input type="text" name="name" placeholder="你的姓名" class="schedule1_username" />
                   </div>
                 </div>
               </div>
@@ -31,7 +40,7 @@
                 <div class="item-inner">
                   <div class="item-title item-label">电话号码</div>
                   <div class="item-input-wrap">
-                    <input type="text" name="email" placeholder="你的电话号码" class="schedule1_hpone">
+                    <input type="text" name="email" placeholder="你的电话号码" class="schedule1_hpone" />
                   </div>
                 </div>
               </div>
@@ -41,7 +50,7 @@
                 <div class="item-inner">
                   <div class="item-title item-label">短信号码</div>
                   <div class="item-input-wrap">
-                    <input type="text" name="email" placeholder="你的短信号码" class="schedule1_msm">
+                    <input type="text" name="email" placeholder="你的短信号码" class="schedule1_msm" />
                   </div>
                 </div>
               </div>
@@ -51,7 +60,7 @@
                 <div class="item-inner">
                   <div class="item-title item-label">电子邮箱</div>
                   <div class="item-input-wrap">
-                    <input type="email" name="email" placeholder="你的电子邮箱" class="schedule1_email">
+                    <input type="email" name="email" placeholder="你的电子邮箱" class="schedule1_email" />
                   </div>
                 </div>
               </div>
@@ -208,17 +217,19 @@
         <div class="scheduleModifyContainer equipLinkage_edit_modify list displayNone" >
            <div class="equipLinkage_edit_header">
                <div class="row">
-                  <label class="col-50">场景名称</label>
-                  <input type="text" value="输入场景名称" class="col-50" id="equipLinkage_input"/>
+                  <label class="col-30">场景名称</label>
+                  <span class="col-70"><input type="text" value="" placeholder="点击输入场景名称"  id="equipLinkage_input"/></span>
                </div>
                <div class="row">
-                  <label class="col-50">场景控制项</label>
-                   <span class="col-50"><a href="#" onclick="scenalControlPro(this)" index="last">添加</a></span>
+                  <label class="col-30">场景控制项</label>
+                   <span class="col-70"><a href="#" onclick="scenalControlPro(this)" index="last">添加</a></span>
                </div>               
            </div>
            <ul></ul>
-          <button class="comfirmModify comfirmCancel color-red" onclick="myApp.router.back();">取消</button>
-          <button class="comfirmModify" onclick="submitScene(this)">保存</button>
+           <div class="row linkageBtn">
+              <a class="col-50 comfirmModify comfirmCancel color-red back">取消</a>
+              <a class="col-50 comfirmModify" onclick="submitScene(this)">保存</a>
+          </div>
         </div>  
     </div>
 </div>
