@@ -339,3 +339,43 @@
     }
 }
 .background_05{background: rgba(0,0,0,0.5);}
+.voiceView{
+  label{    position: absolute; left: 50%; transform: translateX(-50%) skew(-10deg, 0deg); color: #999;}
+  h2{font-weight: 500;text-align: center;padding-top: 2rem;}
+  div{ 
+    width: 150px; height: 150px; margin: 0 auto 2rem auto;
+    svg{pointer-events: none;}
+  }
+}
+.voiceAnimateShow{
+   animation: fadeInUp 0.3s 0s linear;
+}
+.voiceAnimateHide{
+   animation: slideOutUp 0.3s 0s linear;
+}
+.displayNone{display: none;}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 50%, 0);
+    transform: translate3d(0, 50%, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@-webkit-keyframes slideOutUp {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  to {
+    -webkit-transform: translate3d(0, -50%, 0);
+    transform: translate3d(0, -50%, 0);
+    opacity: 0;
+  }
+}

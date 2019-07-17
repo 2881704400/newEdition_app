@@ -26,6 +26,7 @@ function getAppStatusBarHeight() {
         }
     }
 }
+
 //授权名称
 function authorizationName() {
     var ajaxVar = $.ajax({
@@ -50,6 +51,7 @@ function authorizationName() {
         }
     });
 }
+
 //提示窗口
 function tipsInformtion(tipsStr, tipsEvent) {
     myApp.dialog.create({
@@ -533,6 +535,7 @@ function historyHTML(){
    }
    return html;
 }
+
 function addModuleRecord(value){
    var historyRecord;
    if(window.localStorage.moduleRecord)
@@ -554,11 +557,132 @@ function addModuleRecord(value){
 function judgeOpenPage(url){
    switch(url)
    {
-    case "/eventSearch/": addModuleRecord("eventSearch&icon iconfont icon_gongnengmokuai_shijianchaxun&事件查询");break;
-    case "/equipConfigList/": addModuleRecord("equipConfigList&icon iconfont icon_gongnengmokuai_xitongpeizhi&系统配置");break;
-    case "/schedule/": addModuleRecord("schedule&icon iconfont icon_gongnengmokuai_baojingpaiban&报警排表");break;
-    case "/equipLinkage/": addModuleRecord("equipLinkage&icon iconfont icon_gongnengmokuai_shebeiliandong&设备联动");break;
-    case "/sceneEdit/": addModuleRecord("sceneEdit&icon iconfont icon_gongnengmokuai_changjingpeizhi&场景编辑");break;
-    default: break;
+      case "/eventSearch/": addModuleRecord("eventSearch&icon iconfont icon_gongnengmokuai_shijianchaxun&事件查询");break;
+      case "/equipConfigList/": addModuleRecord("equipConfigList&icon iconfont icon_gongnengmokuai_xitongpeizhi&系统配置");break;
+      case "/schedule/": addModuleRecord("schedule&icon iconfont icon_gongnengmokuai_baojingpaiban&报警排表");break;
+      case "/equipLinkage/": addModuleRecord("equipLinkage&icon iconfont icon_gongnengmokuai_shebeiliandong&设备联动");break;
+      case "/sceneEdit/": addModuleRecord("sceneEdit&icon iconfont icon_gongnengmokuai_changjingpeizhi&场景编辑");break;
+      default: break;
    }
+}
+
+//语音
+function voiceSheet() {
+    var voiceSheet = myApp.sheet.create({
+        content: `
+       <div class="sheet-modal my-sheet-swipe-to-step fm-modal" style="height:auto; --f7-sheet-bg-color: #fff;">
+          <div class="sheet-modal-inner">
+
+            <div class="sheet-modal-swipe-step">
+              <div class="display-flex padding justify-content-space-between align-items-center header_center_gray">
+                 <div></div>
+              </div>
+            </div>
+
+            <div class="voiceView">
+                <label class="displayNone"></label>
+                <h2 class="title_1"> </h2>
+                <div id="videoContentBtnId"></div>
+            </div> 
+
+          </div>
+        </div>`,
+        on: {
+            open: function(sheet) {
+              addScript("voiceAnimate");
+              voiceAnimateStart();
+            },
+            opened: function(sheet) {
+              voice();
+            },
+            close: function(sheet){
+
+            }
+        },
+        swipeToClose: true,
+        swipeToStep: false,
+        backdrop: true,
+    });
+    voiceSheet.open();
+}
+
+function voiceAnimateStart(){
+    $("#videoContentBtnId").html("");
+    $(".voiceView").find("h2").addClass("voiceAnimateShow").text("想要做什么呢？");
+    try{
+      var paramsStart = {
+            container: document.getElementById('videoContentBtnId'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            animationData: animationDataStart
+        };
+      lottie.loadAnimation(paramsStart);}catch(e){}
+}
+
+function voiceAnimateMove(){
+  
+  $("#videoContentBtnId").html("");
+    strAnimate("识别中...");
+    try{
+      var paramsMove = {
+            container: document.getElementById('videoContentBtnId'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            animationData: animationDataStart//animationDataMove
+        };
+      lottie.loadAnimation(paramsMove);}catch(e){}
+}
+
+function voiceAnimateEnd(){
+  $("#videoContentBtnId").html("");
+    try{
+      var paramsEnd = {
+            container: document.getElementById('videoContentBtnId'),
+            renderer: 'svg',
+            loop: false,
+            autoplay: true,
+            animationData: animationDataEnd
+        };
+      lottie.loadAnimation(paramsEnd);}catch(e){}
+}
+
+function voiceInt(){
+
+    $("#videoContentBtnId").html("");
+    strAnimate("还有什么可以效劳呢？");
+
+    try{
+      var paramsStart = {
+            container: document.getElementById('videoContentBtnId'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            animationData: animationDataStart
+        };
+    lottie.loadAnimation(paramsStart);}catch(e){}
+
+}
+
+
+//添加脚本
+function addScript(dt){
+     if ($("#" + dt + "_id").length == 0) {
+        var pagejs = document.createElement("script");
+        pagejs.id = dt + "_id";
+        pagejs.setAttribute("src", "/Scripts/mobile/js/voice/" + dt + ".js?v" + Math.random());
+        document.body.appendChild(pagejs);
+     }
+}
+
+//字符动画
+function strAnimate(str){
+
+  $(".voiceView").find("h2").removeClass("voiceAnimateShow").addClass("voiceAnimateHide");
+  setTimeout(function(){
+    $(".voiceView").find("h2").removeClass("voiceAnimateHide").addClass("voiceAnimateShow");
+    $(".voiceView").find("h2").text(str);
+  },300);
+
 }

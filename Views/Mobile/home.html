@@ -40,7 +40,6 @@
                             </ul>
                         </div>
                     </div>
-
                 </div>
                 <div class="toolbar toolbar-bottom view-menu-toolbar tabbar tabbar-labels displayNone">
                     <div class="toolbar-inner row no-gap">
@@ -50,7 +49,7 @@
                         <a class="link animation-no col-20"  href="/equips/" id="equipsTool">
                             <img src="/Image/equipIcon.png" alt="" />
                         </a>
-                        <a class="link col-20"  href="#" id="voiceBtn">
+                        <a class="link col-20"  href="#" id="voiceBtn" onclick="voiceSheet()">
                             <div class="video-content-btn">
                                 <div>
                                     <img src="/Image/phone/voiceBtn.png"/>
@@ -65,53 +64,6 @@
                         </a>
                     </div>
                 </div>
-
-  
-    
-    <!-- 1、开始监听监听按钮，如果不存在弹窗，则弹窗；如果存在弹窗，则开启结束监听 -->
-
-    <!-- 2、返回，则关闭监听 -->
-
- <!--                  <div  class="voice-container displayNone">
-                    <div>
-                        <p class="title_1">请说，我在听</p>
-                        <div></div>
-                    </div>
-                  </div>
- -->
-
-
-
-<!--                 <div class="popover popup-voices popover-about">
-                    <div class="voice-header">
-                        <div class="voice-header-back popup-close" onclick="voiceCloseFun()">
-                            <i class="iconfont icon-back"></i>
-                        </div>
-                        <span>
-                            语音控制
-                        </span>
-                    </div>
-                    <div class="voice-container">
-                        <div class="pannel-chat-info">
-                            <div class="chart-content chart-content-old">
-                                <span>
-                                    请告诉我，您想要进行的操作
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="voice-arrow-dialog">
-                        按下说话
-                    </div>
-                    <div class="video-content-btn video-content-btn-Curtain" id="videoContentBtnId" style="background-color: transparent;">
-                        <div class="homeHuanAnimation">
-                            <img src="/Image/video.png" style="height: 50%;"/>
-                        </div>
-                    </div>
-                </div> -->
-
-
-
             </div>
         </div>
         <!-- 框架js -->
@@ -127,5 +79,6 @@
         <script src="/Scripts/mobile/mobileAll.js" type="text/javascript"></script>
         <script src="/Scripts/mobile/js/Voice.js" type="text/javascript"></script>
         <script src="http://api.map.baidu.com/api?v=2.0&ak=rfoFCQF6wWFKVgnW7M9dihXscceje5cs" type="text/javascript"></script>
+
     </body>
 </html>

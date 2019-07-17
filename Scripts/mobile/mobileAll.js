@@ -1,5 +1,4 @@
 ﻿//移动端js主入口
-
 var dynamicSheetAll,searchResult = [],myApp = new Framework7({
     root: '#app',
     name: 'My App',
@@ -772,13 +771,7 @@ function videoControlDirction(EquipNum, main_instruction, direction) {
 }
 //修改界面字体
 function modifyZnUs() {
-    if (window.localStorage.languageList == "1") {
-        $(".voice-arrow-dialog").text("Press to speak");
-        $(".voice-header span").text("Voice control");
-    } else {
-        $(".voice-arrow-dialog").text("按下说话");
-        $(".voice-header span").text("语音控制");
-    }
+
     getLanguageChoice(window.localStorage.languageList, window.localStorage.voiceType);
 }
 //切换语音
