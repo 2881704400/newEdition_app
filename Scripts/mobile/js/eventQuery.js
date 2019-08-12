@@ -80,6 +80,7 @@ function getEventSet(data) {
 function getEventSys(data) {
     $.when(AlarmCenterContext.getSysSet()).done(function(e) {})
 }
+
 function getData() {
     $.ajax({
         type: "post",
@@ -133,7 +134,6 @@ function QueryEquipEvt(data) {
                                     </a>
                                   <div class="accordion-item-content">
                                     <div class="block">
-                                      
                                       <div class="row  eventList">
                                         <div class="col-35 name">设备名称：</div>
                                         <div class="col-65 con">${dat[i].equip_nm}</div>
@@ -153,6 +153,8 @@ function QueryEquipEvt(data) {
                 $("#equipEventContent>div").html("<ul>" + html + "</ul>");
             }
         }
+
+
     });
 }
 function QuerySetupsEvt(data) {

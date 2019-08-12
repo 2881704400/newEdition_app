@@ -1523,7 +1523,7 @@ html.device-full-viewport body {
 var(--f7-navbar-border-color, var(--f7-bars-border-color));
 calc(1 / var(--f7-device-pixel-ratio))
 */
-.navbar .title-large:after {
+/*.navbar .title-large:after {
   content: '';
   position: absolute;
   background-color: rgba(45,46,48,0.2);
@@ -1537,7 +1537,8 @@ calc(1 / var(--f7-device-pixel-ratio))
   width: 100%;
   transform-origin: 50% 100%;
   transform: scaleY(0.5);
-}
+}*/
+
 .title-large-text,
 .title-large-inner .title {
   text-overflow: ellipsis;
@@ -3795,7 +3796,6 @@ calc(1 / var(--f7-device-pixel-ratio))
   justify-content: space-between;
   box-sizing: border-box;
   align-items: center;
-  min-height: var(--f7-list-item-min-height);
   padding-left: calc(var(--f7-list-item-padding-horizontal) + var(--f7-safe-area-left));
 }
 .list .item-subtitle {
@@ -6409,7 +6409,7 @@ html.with-modal-popup .framework7-root > .panel .page-content {
   --f7-sheet-border-color: transparent;
 }
 .sheet-backdrop {
-  z-index: 11000;
+  z-index: 112400;
 }
 .sheet-modal {
   position: absolute;
@@ -6422,7 +6422,7 @@ html.with-modal-popup .framework7-root > .panel .page-content {
   transition-property: transform;
   transform: translate3d(0, 100%, 0);
   background: var(--f7-sheet-bg-color);
-  z-index: 12500;
+  z-index: 112500;
   will-change: transform;
 }
 .sheet-modal.modal-in,
@@ -12428,7 +12428,7 @@ label.item-radio.disabled,
   transform: translate3d(-50%, 100%, 0);
   transition-property: transform;
   display: flex;
-  z-index: 12000;
+  z-index: 112000;
   background: var(--f7-calendar-modal-bg-color);
   width: 90%;
   border-radius: var(--f7-calendar-modal-border-radius);

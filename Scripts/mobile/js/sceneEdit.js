@@ -2,7 +2,7 @@
 function sceneEdit() {
     switchToolbar("functionalModule_pageTool");
     // 初始化设备
-    myApp.dialog.progress('<a style="font-size: 1rem">加载中...</a>');
+    loadFun();
     toastCenterLinkage = myApp.toast.create({text: "操作失败", position: 'center', closeTimeout: 2000, });
     toastCenterLinkageSuccess = myApp.toast.create({text: "操作成功", position: 'center', closeTimeout: 2000, });
     initSceneList();
@@ -52,10 +52,9 @@ function initSceneList() {
               return item;
             });
             $("#equipLinkage_edit>ul").append(htmlHeader);
-             myApp.dialog.close();
      }
     }).fail(function(e){
-          myApp.dialog.close();
+       
     });
 }
 //场景URL

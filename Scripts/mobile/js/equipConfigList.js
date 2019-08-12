@@ -5,6 +5,7 @@ function equipConfigList(){
 		searchContainer:'.eq-list',
 		searchIn:'.eq-list a'
 	})
+	searchResult.length = 0;
 	getEquipList();
 }
 function getEquipList(){
@@ -18,6 +19,7 @@ function getEquipList(){
 					var html='<li>'+
 								'<li><a href="/systemConfig/?equipId='+value.value+'&equipName='+value.name+'">'+value.name+'</a></li>'+
 							'</li>';
+						searchResult.push(html);	
 					$("#equipConfigList .eq-list ul").append(html)
 				}
 			}
@@ -25,6 +27,7 @@ function getEquipList(){
 			var html='<li style="text-align:center;">'+
 						    '暂无设备数据可加载'+
 						'</li>';
+						searchResult.push(html);	
 			$("#equipConfigList .eq-list ul").append(html)
 		}
 	});

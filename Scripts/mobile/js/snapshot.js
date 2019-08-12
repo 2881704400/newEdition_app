@@ -3,8 +3,9 @@ function snapshot() {
     switchToolbar("snapshotTool");
     var snapashot_ptr = $$('.snapashot-page-content');
     snapashot_ptr.on("ptr:refresh", refreshpg);
-    myApp.dialog.progress('<a style="font-size: 1rem">加载中...</a>');
+    loadFun();
     initData();
+
 }
 //获取事件的报警配置
 function initData() {
@@ -74,7 +75,7 @@ function getRealTimeEventCount() {
                         strData += '<li>' + '<a href="/snapShotDetail/?' + judgeSnapshotName(btnInfoNames[i]) + '&' + btnInfoLevels[i] + '" class="item-link item-content">' + '	<div class="item-media"><i class="iconfont ' + iconData + '"></i></div>' + '	<div class="item-inner" id="snapShotDetail_0">' + '		<div class="item-title">' + judgeSnapshotName(btnInfoNames[i]) + '</div>' + '		<div class="item-after"><span class="badge">' + resultDataArr[i] + '</span></div>' + '	</div>' + '</a>' + '</li>';
                     }
                     $("#snapshotMenuListId").html(strData);
-                    myApp.dialog.close();
+                    
                 }
             }
         });

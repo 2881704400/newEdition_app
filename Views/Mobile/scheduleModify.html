@@ -1,6 +1,5 @@
 ﻿<div class="page no-toolbar" data-page="scheduleModify" id="scheduleModify">
 
-
     <div class="navbar navbar-large">
         <div class="navbar-inner navbar-inner-large navbar-current">
             <div class="left">
@@ -8,210 +7,297 @@
                     <i class="icon iconfont icon_Nav_fanhui"> </i>
                 </a>
             </div>
-            <div class="title sliding title_1" >
-                新增场景
-            </div>
-            <div class="right">
+            <div class="title sliding title_1 scheduleModify-title" >
                 
             </div>
+            <div class="right"></div>
             <div class="title-large">
-                <div class="title-large-text title_1">
-                    新增场景
+                <div class="title-large-text title_1 scheduleModify-title">
+                    
                 </div>
             </div>
         </div>
     </div>
 
     <div class="page-content scheduleModifyPageContent pageContent_102 pageContent_0">
-        <div class="scheduleModifyContainer scheduleModifyContainer_user list displayNone">
-          <ul>
-            <li>
-              <div class="item-content item-input">
-                <div class="item-inner">
-                  <div class="item-title item-label">人员姓名</div>
-                  <div class="item-input-wrap">
-                    <input type="text" name="name" placeholder="你的姓名" class="schedule1_username" />
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="item-content item-input">
-                <div class="item-inner">
-                  <div class="item-title item-label">电话号码</div>
-                  <div class="item-input-wrap">
-                    <input type="text" name="email" placeholder="你的电话号码" class="schedule1_hpone" />
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="item-content item-input">
-                <div class="item-inner">
-                  <div class="item-title item-label">短信号码</div>
-                  <div class="item-input-wrap">
-                    <input type="text" name="email" placeholder="你的短信号码" class="schedule1_msm" />
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="item-content item-input">
-                <div class="item-inner">
-                  <div class="item-title item-label">电子邮箱</div>
-                  <div class="item-input-wrap">
-                    <input type="email" name="email" placeholder="你的电子邮箱" class="schedule1_email" />
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="item-content item-input">
-                <div class="item-inner">
-                  <div class="item-title item-label">报警级别</div>
-                  <div class="item-input-wrap">
-                    <input type="number" name="email" placeholder="报警级别" class="schedule1_level">
-                  </div>
-                </div>
-              </div>
-            </li>                        
-          </ul>
-          <button class="comfirmModify comfirmCancel color-red" onclick="myApp.router.back();">取消</button>
-          <button class="comfirmModify" onclick="updateUserModify(this)">保存</button>
-        </div>  
-       <!-- 分组 -->
-        <div class="scheduleModifyContainer scheduleModifyContainer_equipgroup list displayNone" >
-           <div></div>
-          <button class="comfirmModify comfirmCancel color-red" onclick="myApp.router.back();">取消</button>
-          <button class="comfirmModify" onclick="updateEquip(this)">保存</button>
-        </div>  
-       <!-- 管理范围 -->
-        <div class="scheduleModifyContainer scheduleModifyContainer_administartor list displayNone" >
+
+         <!-- 新建排表 -->
+        <div class="NewlyBuildTable list displayNone">
            <ul>
-               <li>
-                <div class="item-content item-input">
-                  <div class="item-inner">
-                    <div class="item-title item-label">人员姓名</div>
-                   <div class="item-input-wrap">
-                    <select name="gender" class="scheduleModifyContainer_administartor_user">
-   
-                    </select>
-                  </div>
-                  </div>
-                </div>
+               <li class="row bottomLine">
+                  <div class="col-40">人员姓名</div>
+                  <div class="col-60">
+                    <input type="text"  placeholder="" value="" class="NewlyBuildTable-name" readonly="true" />
+                   </div>
               </li>
-              <li>
-                <div class="item-content item-input">
-                  <div class="item-inner">
-                    <div class="item-title item-label">分组名称</div>
-                    <div class="item-input-wrap">
-                    <select name="gender" class="scheduleModifyContainer_administartor_group">
-   
-                    </select>
+              <li class="row bottomLine">
+                    <div class="col-40">排班类型</div>
+                    <div class="col-60">
+                      <input type="text"  placeholder="" value = "周排表" class="NewlyBuildTable-type" readonly="true"/>
                   </div>
+              </li>              
+              <li class="row bottomLine NewlyBuildTable-time-week">
+                    <div class="col-40">星期</div>
+                    <div class="col-60">
+                      <input type="text"  placeholder="" value="" class="NewlyBuildTable-week" readonly="true" />
                   </div>
-                </div>
               </li>
+               <li class="row bottomLine NewlyBuildTable-time-week">
+                    <div class="col-40">开始时间</div>
+                    <div class="col-60">
+                      <input type="text"  placeholder="" value="00:00" class="NewlyBuildTable-stime">
+                    </div>
+              </li>
+              <li class="row bottomLine NewlyBuildTable-time-week">
+                    <div class="col-40">结束时间</div>
+                    <div class="col-60">
+                      <input type="text"  placeholder=""  value="00:00" class="NewlyBuildTable-etime">
+                    </div>
+              </li> 
+              <li class="row bottomLine NewlyBuildTable-time-spe displayNone">
+                    <div class="col-40">开始时间</div>
+                    <div class="col-60">
+                      <input type="text"  placeholder="" value="" class="NewlyBuildTable-stime-spe" />
+                    </div>
+              </li>
+              <li class="row bottomLine NewlyBuildTable-time-spe displayNone">
+                    <div class="col-40">结束时间</div>
+                    <div class="col-60">
+                      <input type="text"  placeholder=""  value="" class="NewlyBuildTable-etime-spe">
+                    </div>
+              </li>                                         
            </ul>
-          <button class="comfirmModify comfirmCancel color-red" onclick="myApp.router.back();">取消</button>
-          <button class="comfirmModify" onclick="updateAlmReport(this)">保存</button>
+           <div class="row linkageBtn">
+              <a class="comfirmModify comfirmCancel color-red col-50" onclick="myApp.views.main.router.back()">取消</a>
+              <a class="comfirmModify col-50" onclick="scheduleInsertData(this)">保存</a>
+            </div>
+        </div> 
+         <!-- 人员添加 -->
+        <div class="NewlyBuildTableUser list displayNone">
+           <ul>
+               <li class="row bottomLine">
+                  <div class="col-40">人员姓名</div>
+                  <div class="col-60">
+                    <input type="text"  placeholder="你的姓名" value="" class="NewlyBuildTableUser-name"  />
+                </div>
+              </li>
+              <li class="row bottomLine">
+                    <div class="col-40">电话号码</div>
+                    <div class="col-60">
+                      <input type="number"  placeholder="你的电话号码" value = "" class="NewlyBuildTableUser-phone" />
+                  </div>
+              </li>   
+              <li class="row bottomLine">
+                    <div class="col-40">短信号码</div>
+                    <div class="col-60">
+                     <input type="text" name="number" placeholder="你的短信号码" class="NewlyBuildTableUser-msn" />
+                  </div>
+              </li>                  
+                  
+              <li class="row bottomLine">
+                    <div class="col-40">电子邮箱</div>
+                    <div class="col-60">
+                      <input type="email"  placeholder="你的电子邮箱" value="" class="NewlyBuildTableUser-email" />
+                  </div>
+              </li>
+               <li class="row bottomLine">
+                    <div class="col-40">报警级别</div>
+                    <div class="col-60">
+                      <input type="number"  placeholder="" value="0" class="NewlyBuildTableUser-level">
+                    </div>
+              </li>                                       
+           </ul>
+           <div class="row linkageBtn">
+              <a class="comfirmModify comfirmCancel color-red col-50" onclick="myApp.views.main.router.back()">取消</a>
+              <a class="comfirmModify col-50" onclick="addUserInfo(this)">保存</a>
+            </div>
+        </div>         
+        <!-- 人员更新 -->
+        <div class="NewlyBuildTableUser-udate list displayNone">
+           <ul>
+               <li class="row bottomLine">
+                  <div class="col-40">人员姓名</div>
+                  <div class="col-60">
+                    <input type="text"  placeholder="你的姓名" value="" class="NewlyBuildTableUser-name-ud"  />
+                </div>
+              </li>
+              <li class="row bottomLine">
+                    <div class="col-40">电话号码</div>
+                    <div class="col-60">
+                      <input type="number"  placeholder="你的电话号码" value = "" class="NewlyBuildTableUser-phone-ud" />
+                  </div>
+              </li>   
+              <li class="row bottomLine">
+                    <div class="col-40">短信号码</div>
+                    <div class="col-60">
+                     <input type="text" name="number" placeholder="你的短信号码" class="NewlyBuildTableUser-msn-ud" />
+                  </div>
+              </li>                  
+                  
+              <li class="row bottomLine">
+                    <div class="col-40">电子邮箱</div>
+                    <div class="col-60">
+                      <input type="email"  placeholder="你的电子邮箱" value="" class="NewlyBuildTableUser-email-ud" />
+                  </div>
+              </li>
+               <li class="row bottomLine">
+                    <div class="col-40">报警级别</div>
+                    <div class="col-60">
+                      <input type="number"  placeholder="" value="0" class="NewlyBuildTableUser-level-ud">
+                    </div>
+              </li>                                       
+           </ul>
+           <div class="row linkageBtn">
+              <a class="comfirmModify comfirmCancel color-red col-50" onclick="delUser()">删除</a>
+              <a class="comfirmModify col-50" onclick="updateUserInfo()">保存</a>
+            </div>
         </div>  
+        <!-- 新建分组管理 -->
+        <div class="NewlyBuildTableGroup list displayNone">
+           <ul>
+               <li class="row bottomLine">
+                  <div class="col-40">分组名称</div>
+                  <div class="col-60">
+                    <input type="text"  placeholder="输入分组名称" value="" class="NewlyBuildTableGroup-name"  />
+                </div>
+              </li>
+              <li class="row bottomLine">
+                    <div class="col-40">分组设备</div>
+                    <div class="col-60">
+                      <input type="text"  placeholder="选择分组设备" value = "" class="NewlyBuildTableGroup-equip" readonly="true" />
+                  </div>
+              </li>                                                      
+           </ul>
+           <div class="row linkageBtn">
+              <a class="comfirmModify comfirmCancel color-red col-50" onclick="myApp.views.main.router.back()">取消</a>
+              <a class="comfirmModify col-50" onclick="NewlyBuildTableGroup()">保存</a>
+            </div>
+        </div>          
+       <!-- 分组编辑 -->
+        <div class="GroupEdit list displayNone">
+           <ul>
+               <li class="row bottomLine">
+                  <div class="col-40">分组名称</div>
+                  <div class="col-60">
+                    <input type="text"  placeholder="输入分组名称" value="" class="NewlyBuildTableGroup-name-ud"  />
+                </div>
+              </li>
+              <li class="row bottomLine">
+                    <div class="col-40">分组设备</div>
+                    <div class="col-60">
+                      <input type="text"  placeholder="选择分组设备" value = "" class="NewlyBuildTableGroup-equip-ud" readonly="true" />
+                  </div>
+              </li>                                                      
+           </ul>
+           <div class="row linkageBtn">
+              <a class="comfirmModify comfirmCancel color-red col-50" onclick="delGroupEdit()">删除</a>
+              <a class="comfirmModify col-50" onclick="groupEdit()">保存</a>
+            </div>
+        </div>  
+       <!-- 新建管理范围 -->
+        <div class="NewlyBuildTableScope list displayNone">
+           <ul>
+               <li class="row bottomLine">
+                  <div class="col-40">分组名称</div>
+                  <div class="col-60">
+                    <input type="text"  placeholder="请选择人员名称" value="" class="NewlyBuildTableScope-name" readonly="true" />
+                </div>
+              </li>
+              <li class="row bottomLine">
+                  <div class="col-40">分组设备</div>
+                  <div class="col-60">
+                      <input type="text"  placeholder="请选择分组名称" value = "" class="NewlyBuildTableScope-equip" readonly="true" />
+                  </div>
+              </li>                                                      
+           </ul>
+           <div class="row linkageBtn">
+              <a class="comfirmModify comfirmCancel color-red col-50" onclick="myApp.views.main.router.back()">取消</a>
+              <a class="comfirmModify col-50" onclick="NewlyBuildTableScope()">保存</a>
+            </div>
+        </div> 
+        <div class="NewlyBuildTableScopeEdit list displayNone">
+           <ul>
+               <li class="row bottomLine">
+                  <div class="col-40">分组名称</div>
+                  <div class="col-60">
+                    <input type="text"  placeholder="请选择人员名称" value="" class="NewlyBuildTableScopeEdit-name-ud" readonly="true" />
+                </div>
+              </li>
+              <li class="row bottomLine">
+                  <div class="col-40">分组设备</div>
+                  <div class="col-60">
+                      <input type="text"  placeholder="请选择分组名称" value = "" class="NewlyBuildTableScopeEdit-equip-ud" readonly="true" />
+                  </div>
+              </li>                                                      
+           </ul>
+           <div class="row linkageBtn">
+              <a class="comfirmModify comfirmCancel color-red col-50" onclick="delScope()">删除</a>
+              <a class="comfirmModify col-50" onclick="editScope()">保存</a>
+            </div>
+        </div>         
          <!-- 周排表 -->
         <div class="scheduleModifyContainer scheduleModifyContainer_specificDate list displayNone">
            <ul>
-               <li>
-                <div class="item-content item-input">
-                  <div class="item-inner">
-                    <div class="item-title item-label">人员姓名</div>
-                    <div class="item-input-wrap">
-                    <select name="gender" class="scheduleModifyContainer_specificDate_username">
+               <li class="row bottomLine">
+                  <div class="col-40">人员姓名</div>
+                  <div class="col-60">
+                    <input type="text" name="stime" placeholder="" value="" class="scheduleModifyContainer_specificDate_username">
+                </div>
+              </li>
+              <li class="row bottomLine">
+                    <div class="col-40">星期</div>
+                    <div class="col-60">
+                      <input type="text" name="stime" placeholder="" value="" class="scheduleModifyContainer_specificDate_wk">
+                  </div>
+              </li>
+               <li class="row bottomLine">
 
-                    </select>
-                  </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="item-content item-input">
-                  <div class="item-inner">
-                    <div class="item-title item-label">星期</div>
-                    <div class="item-input-wrap">
-                    <select name="gender" class="scheduleModifyContainer_specificDate_wk">
-                      <option value="0" selected>每天</option>
-                      <option value="2">星期一</option>
-                      <option value="3">星期二</option>
-                      <option value="4">星期三</option>
-                      <option value="5">星期四</option>
-                      <option value="6">星期五</option>
-                      <option value="7">星期六</option>
-                      <option value="1">星期日</option>
-                    </select>
-                  </div>
-                  </div>
-                </div>
-              </li>
-               <li>
-                <div class="item-content item-input">
-                  <div class="item-inner">
-                    <div class="item-title item-label">开始时间</div>
-                    <div class="item-input-wrap">
+                    <div class="col-40">开始时间</div>
+                    <div class="col-60">
                       <input type="text" name="stime" placeholder="00:00" value="00:00" class="scheduleModifyContainer_specificDate_stime">
                     </div>
-                  </div>
-                </div>
+
               </li>
-              <li>
-                <div class="item-content item-input">
-                  <div class="item-inner">
-                    <div class="item-title item-label">结束时间</div>
-                    <div class="item-input-wrap">
+              <li class="row bottomLine">
+
+                    <div class="col-40">结束时间</div>
+                    <div class="col-60">
                       <input type="text" name="etime" placeholder="00:00"  value="00:00" class="scheduleModifyContainer_specificDate_etime">
                     </div>
-                  </div>
-                </div>
               </li>                           
            </ul>
-          <button class="comfirmModify comfirmCancel color-red" onclick="myApp.router.back();">取消</button>
-          <button class="comfirmModify" onclick="updateWeekAlmReport(this)">保存</button>
+           <div class="row linkageBtn">
+              <a class="comfirmModify comfirmCancel color-red col-50" onclick="delWeekAlmReport(this)">删除</a>
+              <a class="comfirmModify col-50" onclick="updateWeekAlmReport(this)">保存</a>
+            </div>
         </div>  
         <!-- 特定排表 -->
         <div class="scheduleModifyContainer scheduleModifyContainer_weeklytable list displayNone" >
            <ul>
-               <li>
-                <div class="item-content item-input">
-                  <div class="item-inner">
-                    <div class="item-title item-label">人员姓名</div>
-                    <div class="item-input-wrap">
-                    <select name="gender" class="scheduleModifyContainer_weeklytable_username">
+               <li class="row bottomLine">
+                  <div class="col-40">人员姓名</div>
+                  <div class="col-60">
+                    <input type="text" name="stime" placeholder="" value="" class="scheduleModifyContainer_weeklytable_username">
+                </div>
+              </li>
+               <li class="row bottomLine">
+                    <div class="col-40">开始时间</div>
+                    <div class="col-60">
+                      <input type="text" name="stime"  placeholder="开始日期" class="scheduleModifyContainer_weeklytable_stime" id="Spe_stime">
+                    </div>
+              </li>
+              <li class="row bottomLine">
+                    <div class="col-40">结束时间</div>
+                    <div class="col-60">
+                      <input type="text" name="etime" placeholder="结束日期" class="scheduleModifyContainer_weeklytable_etime" id="Spe_etime">
+                    </div>
+              </li> 
 
-                    </select>
-                  </div>
-                  </div>
-                </div>
-              </li>
-               <li>
-                <div class="item-content item-input">
-                  <div class="item-inner">
-                    <div class="item-title item-label">开始日期</div>
-                    <div class="item-input-wrap">
-                      <input type="text" name="name" placeholder="开始日期" class="scheduleModifyContainer_weeklytable_stime" id="Spe_stime">
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="item-content item-input">
-                  <div class="item-inner">
-                    <div class="item-title item-label">结束日期</div>
-                    <div class="item-input-wrap">
-                      <input type="email" name="email" placeholder="结束日期" class="scheduleModifyContainer_weeklytable_etime" id="Spe_etime">
-                    </div>
-                  </div>
-                </div>
-              </li>                           
            </ul>
-          <button class="comfirmModify comfirmCancel color-red" onclick="myApp.router.back();">取消</button>
-          <button class="comfirmModify" onclick="updateSpeAlmReport(this)">保存</button>
+           <div class="row linkageBtn">
+              <a class="comfirmModify comfirmCancel color-red col-50" onclick="delSpeAlmReport(this)">删除</a>
+              <a class="comfirmModify col-50" onclick="updateSpeAlmReport(this)">保存</a>
+            </div>
         </div>  
         <!-- 场景编辑 -->
         <div class="scheduleModifyContainer equipLinkage_edit_modify list displayNone" >

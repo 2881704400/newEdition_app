@@ -1,25 +1,23 @@
 var indexAll = 0,
+    allEquip = [],
+    allGroupEqup = [],
+    colnum = "#",
     msgArray = [],
-    scheduleModifyTooip, scheduleModifySuccessTooip; //1更新\2插入
+    scheduleWeek = ["每天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"],
+    scheduleType = ["周排表", "特定排表"],
+    scheduleModifyTooip, successfulPreservation, delSuccess, saveFailed; //1更新\2插入
 function scheduleModify() {
     var chatObject = myApp.views.main.history,
         urlLength = chatObject.length - 1,
         receiveUser = chatObject[urlLength].split("?")[1];
     msgArray.length = 0;
     msgArray = receiveUser.split("&");
-    if (isArray("index", msgArray) == 1) indexAll = 1;
-    else indexAll = 2;
-    $(".scheduleModify").html(isArray("title", msgArray));
+    colnum = "#";
+    indexAll = isArray("index", msgArray);
+    $(".scheduleModify-title").text(isArray("title", msgArray));
     switch (isArray("table", msgArray)) {
         case "schedule_user":
             $(".scheduleModifyContainer_user").removeClass("displayNone").siblings().addClass("displayNone");
-            if (indexAll == 1) {
-                $(".schedule1_username").attr("disabled", true).val(isArray("schedule1_username", msgArray));
-                $(".schedule1_hpone").val(isArray("schedule1_hpone", msgArray));
-                $(".schedule1_msm").val(isArray("schedule1_msm", msgArray));
-                $(".schedule1_email").val(isArray("schedule1_email", msgArray));
-                $(".schedule1_level").val(isArray("schedule1_level", msgArray));
-            }
             break;
         case "schedule_equip":
             $(".scheduleModifyContainer_equipgroup").removeClass("displayNone").siblings().addClass("displayNone");
@@ -31,16 +29,50 @@ function scheduleModify() {
             break;
         case "schedule_specificDate":
             $(".scheduleModifyContainer_specificDate").removeClass("displayNone").siblings().addClass("displayNone");
-            newlyBuildWeekAlmReport_view();
+            getUser();
+            scheduleSpecificInit();
             break;
         case "schedule_weeklytable":
             $(".scheduleModifyContainer_weeklytable").removeClass("displayNone").siblings().addClass("displayNone");
-            newlyBuildSpeAlmReport_view();
+            scheduleWeeklyInit();
             break;
         case "equipLinkage_edit_modify":
             $(".equipLinkage_edit_modify").removeClass("displayNone").siblings().addClass("displayNone");
             if (window.localStorage.sceneName) msgArray[msgArray.length - 1] = "currentTxt=" + window.localStorage.sceneName;
             initSceneList_view();
+            break;
+        case "NewlyBuildTable": //新建排表
+            $(".NewlyBuildTable").removeClass("displayNone").siblings().addClass("displayNone");
+            getUser();
+            break;
+        case "NewlyBuildTableUser":
+            $(".NewlyBuildTableUser").removeClass("displayNone").siblings().addClass("displayNone");
+            break;
+        case "UserEdit":
+            $(".NewlyBuildTableUser-udate").removeClass("displayNone").siblings().addClass("displayNone");
+            editUserInit();
+            break;
+        case "NewlyBuildTableGroup":
+            $(".NewlyBuildTableGroup").removeClass("displayNone").siblings().addClass("displayNone");
+            selectAllEquip();
+            $(".NewlyBuildTableGroup-equip").unbind().bind("click", function() {
+                dataSelect(this, allEquip);
+            });
+            break;
+        case "GroupEditInit":
+            $(".GroupEdit").removeClass("displayNone").siblings().addClass("displayNone");
+            selectAllEquip();
+            GroupEditInit();
+            break;
+        case "NewlyBuildTableScopeInit":
+            $(".NewlyBuildTableScope").removeClass("displayNone").siblings().addClass("displayNone");
+            NewlyBuildTableScopeInit();
+            break;
+        case "NewlyBuildTableScopeEdit":
+            $(".NewlyBuildTableScopeEdit").removeClass("displayNone").siblings().addClass("displayNone");
+            $(".NewlyBuildTableScopeEdit-name-ud").val(isArray("Administrator", msgArray));
+            $(".NewlyBuildTableScopeEdit-equip-ud").val(isArray("group_no_name", msgArray)).attr("group_no", isArray("group_no", msgArray));
+            NewlyBuildTableScopeInit();
             break;
         default:
             break;
@@ -55,12 +87,21 @@ function scheduleModify() {
         position: 'center',
         closeTimeout: 2000,
     });
-    scheduleModifySuccessTooip = window.localStorage.languageList == 1 ? myApp.toast.create({
+    successfulPreservation = window.localStorage.languageList == 1 ? myApp.toast.create({
         text: "Save successfully",
         position: 'center',
         closeTimeout: 2000,
     }) : myApp.toast.create({
         text: "保存成功",
+        position: 'center',
+        closeTimeout: 2000,
+    });
+    delSuccess = window.localStorage.languageList == 1 ? myApp.toast.create({
+        text: "Successful deletion",
+        position: 'center',
+        closeTimeout: 2000,
+    }) : myApp.toast.create({
+        text: "删除成功",
         position: 'center',
         closeTimeout: 2000,
     });
@@ -73,6 +114,15 @@ function scheduleModify() {
         position: 'center',
         closeTimeout: 2000,
     });
+    saveFailed = window.localStorage.languageList == 1 ? myApp.toast.create({
+        text: "Save failed",
+        position: 'center',
+        closeTimeout: 2000,
+    }) : myApp.toast.create({
+        text: "保存失败",
+        position: 'center',
+        closeTimeout: 2000,
+    });
 }
 
 function isArray(str, arrayStr) {
@@ -82,388 +132,521 @@ function isArray(str, arrayStr) {
         }
     }
 }
-// ********************************************************************************
-//人员数据库表更新
-function updateUserModify(that) {
-    var dt = $(that).siblings("ul");
-    let AdministratorUpdate = {
-        getDataTable: "Administrator",
-        Administrator: dt.find("input.schedule1_username").val(),
-        Telphone: dt.find("input.schedule1_hpone").val(),
-        MobileTel: dt.find("input.schedule1_msm").val(),
-        EMail: dt.find("input.schedule1_email").val(),
-        AckLevel: parseInt(dt.find("input.schedule1_level").val()),
-        ifName: "Administrator",
-        ifValue: dt.find("input.schedule1_username").val()
-    };
-    if (indexAll == 1) publicAjaxModify(AdministratorUpdate, "/api/GWServiceWebAPI/updateEquipGroup", 1);
-    else publicAjaxModify(AdministratorUpdate, "/api/GWServiceWebAPI/insertEquipGroup", 1);
-}
-//人员表公共请求
-function publicAjaxModify(jsonString, url, index) {
-    var jsonData = {
-        "url": url,
-        "data": jsonString
-    };
-    $.when(AlarmCenterContext.post(jsonData.url,jsonData.data)).done(function(data){
-            let arrayLike = data.HttpStatus;
-            if (arrayLike == 200 && data.HttpData.data != 0) {
-                scheduleAlertSusscess.open();
-                switch (index) {
-                    case 1:
-                        requestUser();
-                        break;
-                    case 2:
-                        requestEquipGroup();
-                        break;
-                    case 3:
-                        requestAlmReport(requestEGAReport);
-                        break;
-                    case 4:
-                        requestWeekAlmReport();
-                        break;
-                    case 5:
-                        requestSpeAlmReport();
-                        break;
-                    default:
-                        break;
-                }
-            } else {
-                scheduleAlert.open();
-            }
-    }).fail(function(e){
-     scheduleAlert.open();
-    });
+//人员初始化
+var schedule_public_username = [];
 
-
-}
-
-//设备分组
-var currentArray = [];
-
-function newlyBuildEquip(str) {
-    currentArray.length = 0;
-    var jsonData = {
-        "url": "/api/GWServiceWebAPI/get_EquipData",
-        "data": {
-            getDataTable: ""
+function getUser() {
+    $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/get_AdministratorData", {
+        data: {
+            getDataTable: "0"
         }
-    };
-
-    var coutResult;
-    str ? coutResult = str.split("#") || "#" : coutResult = "#";
-    $.when(AlarmCenterContext.post(jsonData.url,jsonData.data)).done(function(data){
+    })).done(function(data) {
+        let arrayLike = data.HttpData.data,
+            code = data.HttpData.code,
+            html = "";
+        if (code == 200) {
+            schedule_public_username = arrayLike;
+            $(".NewlyBuildTable-name,.NewlyBuildTable-type,.NewlyBuildTable-week").unbind().bind("click", function() {
+                if ($(this).hasClass("NewlyBuildTable-name")) {
+                    dataSelect(this, arrayLike);
+                } else if ($(this).hasClass("NewlyBuildTable-type")) {
+                    dataSelect(this, scheduleType);
+                } else if ($(this).hasClass("NewlyBuildTable-week")) {
+                    dataSelect(this, scheduleWeek);
+                }
+            });
+            $(".NewlyBuildTable-name").val(arrayLike[0].Administrator);
+            $(".NewlyBuildTable-type").val(scheduleType[0]);
+            $(".NewlyBuildTable-week").val(scheduleWeek[0]);
+        }
+    }).fail(function(e) {});
+}
+//添加人员信息
+function addUserInfo() {
+    $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/insertEquipGroup", {
+        getDataTable: "Administrator",
+        Administrator: $(".NewlyBuildTableUser-name").val(),
+        Telphone: $(".NewlyBuildTableUser-phone").val(),
+        MobileTel: $(".NewlyBuildTableUser-msn").val(),
+        EMail: $(".NewlyBuildTableUser-email").val(),
+        AckLevel: parseInt($(".NewlyBuildTableUser-level").val()),
+    })).done(function(data) {
+        let arrayLike = data.HttpData.data,
+            code = data.HttpData.code,
+            html = "";
+        if (code == 200) {
+            $(".NewlyBuildTableUser-name").val("");
+            $(".NewlyBuildTableUser-phone").val("");
+            $(".NewlyBuildTableUser-msn").val("");
+            $(".NewlyBuildTableUser-email").val("");
+            $(".NewlyBuildTableUser-level").val("");
+            successfulPreservation.open();
+        } else saveFailed.open();
+    }).fail(function(e) {
+        saveFailed.open();
+    });
+}
+//编辑人员信息
+function editUserInit() {
+    $(".NewlyBuildTableUser-name-ud").val(isArray("name", msgArray));
+    $(".NewlyBuildTableUser-phone-ud").val(isArray("phone", msgArray));
+    $(".NewlyBuildTableUser-msn-ud").val(isArray("msn", msgArray));
+    $(".NewlyBuildTableUser-email-ud").val(isArray("email", msgArray));
+    $(".NewlyBuildTableUser-level-ud").val(isArray("level", msgArray));
+}
+//更新人员信息
+function updateUserInfo() {
+    $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/updateEquipGroup", {
+        getDataTable: "Administrator",
+        Administrator: $(".NewlyBuildTableUser-name-ud").val(),
+        Telphone: $(".NewlyBuildTableUser-phone-ud").val(),
+        MobileTel: $(".NewlyBuildTableUser-msn-ud").val(),
+        EMail: $(".NewlyBuildTableUser-email-ud").val(),
+        AckLevel: parseInt($(".NewlyBuildTableUser-level-ud").val()),
+        ifName: "Administrator",
+        ifValue: $(".NewlyBuildTableUser-name-ud").val()
+    })).done(function(data) {
+        let arrayLike = data.HttpData.data,
+            code = data.HttpData.code,
+            html = "";
+        if (code == 200) {
+            successfulPreservation.open();
+        } else saveFailed.open();
+    }).fail(function(e) {
+        saveFailed.open();
+    });
+}
+//人员删除
+function delUser() {
+    myApp.dialog.confirm("是否删除该人员", "提示", function() {
+        $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/deleteEquipGroup", {
+            getDataTable: "Administrator",
+            ifName: "Administrator",
+            ifValue: $(".NewlyBuildTableUser-name-ud").val(),
+            type: "string"
+        })).done(function(data) {
+            let arrayLike = data.HttpData.data,
+                code = data.HttpData.code,
+                html = "";
+            if (code == 200) {
+                delSuccess.open();
+                myApp.views.main.router.back();
+            } else saveFailed.open();
+        }).fail(function(e) {
+            saveFailed.open();
+        });
+    });
+}
+//新增分组
+function NewlyBuildTableGroup() {
+    
+    var maxVal = 0,group_name = $(".NewlyBuildTableGroup-name").val(),
+        colnumStr = $(".NewlyBuildTableGroup-equip").attr("colnum"),
+        group_equip = $(".NewlyBuildTableGroup-equip").val(),
+        group_repeat = groupManagementArray.some((item,index)=>{
+            return group_name == item.group_name;
+        });
+    if(!group_name)
+    {
+        groupNameToast.open();
+        return;
+    }
+    else if(!group_equip)
+    {
+        groupEquipNameToast.open();
+        return;
+    }
+    else if(group_repeat){
+        groupNameRepeatToast.open();
+        return;
+    }    
+    if (colnumStr) colnumStr = colnumStr.substr(0, colnumStr.length - 1);
+    allGroupEqup.forEach((item, index) => {
+        let num = parseInt(item.group_no);
+        num > maxVal ? maxVal = num : "";
+    });
+    $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/insertsEquipGroup", {
+        group_no: maxVal + 1,
+        group_name: group_name,
+        equipcomb: colnumStr
+    })).done(function(data) {
+        let arrayLike = data.HttpData.data,
+            code = data.HttpData.code,
+            html = "";
+        if (code == 200) {
+            successfulPreservation.open();
+        } else saveFailed.open();
+    }).fail(function(e) {
+        saveFailed.open();
+    });
+}
+//编辑分组初始化
+function GroupEditInit() {
+    colnum = (isArray("equipcomb", msgArray) ? isArray("equipcomb", msgArray) : "");
+    $(".NewlyBuildTableGroup-name-ud").val(isArray("group_name", msgArray));
+    $(".NewlyBuildTableGroup-equip-ud").attr("colnum", colnum + "#");
+    if (colnum) {
+        console.log(colnum);
+        $(".NewlyBuildTableGroup-equip-ud").val(colnum.split("#").length - 1 + " 台");
+        colnum = colnum + "#";
+    } else $(".NewlyBuildTableGroup-equip-ud").val("0 台");
+    $(".NewlyBuildTableGroup-equip-ud").unbind().bind("click", function() {
+        dataSelect(this, allEquip);
+    });
+}
+//分组更新
+function groupEdit() {
+    var colnumStr = $(".NewlyBuildTableGroup-equip-ud").attr("colnum");
+    if (colnumStr) colnumStr = colnumStr.substr(0, colnumStr.length - 1)
+    $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/updatesEquipGroup", {
+        group_name: $(".NewlyBuildTableGroup-name-ud").val(),
+        equipcomb: colnumStr,
+        group_no: isArray("group_no", msgArray)
+    })).done(function(data) {
         let arrayLike = data.HttpData.data,
             code = data.HttpData.code;
-        var item = "",
-            html = '<div class="allSelect"><label class="item-checkbox item-content" onclick="allSelectEquip()">' + '<input type="checkbox" name="checkbox" >' + '<i class="icon icon-checkbox"></i>' + '<div class="item-inner">' + '<div class="item-title">全选</div>' + '</div>' + '</label></div>' + '<ul class="equipTypeSelect">';
         if (code == 200) {
-            var AlarmTabulateLenth = arrayLike.length;
-            for (var i = 0; i < AlarmTabulateLenth; i++) {
-                let checkboxSet = "";
-                for (var j = 0; j < coutResult.length; j++) {
-                    if (coutResult[j] == arrayLike[i].equip_no) {
-                        currentArray.push(arrayLike[i].equip_no);
-                        checkboxSet = "checked";
+            successfulPreservation.open();
+        } else saveFailed.open();
+    }).fail(function(e) {
+        saveFailed.open();
+    });
+}
+//分组删除
+function delGroupEdit() {
+
+
+    myApp.dialog.create({
+        title: window.localStorage.languageList == 1 ? "Tips" : "提示",
+        text: "确认删除该分组?",
+        buttons: [{
+            text: window.localStorage.languageList == 1 ? "Cancel" : "取消"
+        }, {
+            text: window.localStorage.languageList == 1 ? "confirm" : "确定",
+            onClick: function() {
+                $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/delEquipGroup", {
+                    group_no: isArray("group_no", msgArray)
+                })).done(function(data) {
+                    let arrayLike = data.HttpData.data,
+                        code = data.HttpData.code;
+                    if (code == 200) {
+                        successfulPreservation.open();
+                    } else saveFailed.open();
+                }).fail(function(e) {
+                    saveFailed.open();
+                });
+            }
+        }]
+    }).open();
+
+
+
+
+}
+//新增分组中--查询所有设备
+function selectAllEquip() {
+    $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/get_EquipData"), AlarmCenterContext.post("/api/GWServiceWebAPI/get_EquipGroupData")).done(function(data, l) {
+        let arrayLike = data.HttpData.data,
+            code = data.HttpData.code,
+            arrayLike_l = l.HttpData.data,
+            code_l = l.HttpData.code;
+        if (code == 200 && code_l == 200) {
+            allEquip = arrayLike;
+            allGroupEqup = arrayLike_l;
+        }
+    }).fail(function(e) {});
+}
+//新建管理范围初始化
+function NewlyBuildTableScopeInit() {
+    $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/get_AdministratorData", {
+        data: {
+            getDataTable: "0"
+        }
+    }), AlarmCenterContext.post("/api/GWServiceWebAPI/get_EquipGroupData")).done(function(data, l) {
+        let arrayLike = data.HttpData.data,
+            code = data.HttpData.code,
+            arrayLike_l = l.HttpData.data,
+            code_l = l.HttpData.code;
+        if (code == 200) {
+            $(".NewlyBuildTableScope-name,.NewlyBuildTableScope-equip,.NewlyBuildTableScopeEdit-equip-ud").unbind().bind("click", function() {
+                if ($(this).hasClass("NewlyBuildTableScope-name")) dataSelect(this, arrayLike);
+                else dataSelect(this, arrayLike_l);
+            });
+        }
+    }).fail(function(e) {});
+}
+//管理范围新建
+function NewlyBuildTableScope() {
+    $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/insertsAlmReport", {
+        group_no: $(".NewlyBuildTableScope-equip").attr("group_no"),
+        Administrator: $(".NewlyBuildTableScope-name").val()
+    })).done(function(data) {
+        let arrayLike = data.HttpData.data,
+            code = data.HttpData.code;
+        if (code == 200) {
+            successfulPreservation.open();
+        } else saveFailed.open();
+    }).fail(function(e) {
+        saveFailed.open();
+    });
+}
+//管理范围编辑
+function editScope() {
+    $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/updatesAlmReport", {
+        group_no: $(".NewlyBuildTableScopeEdit-equip-ud").attr("group_no"),
+        Administrator: $(".NewlyBuildTableScopeEdit-name-ud").val(),
+        id: isArray("id", msgArray)
+    })).done(function(data) {
+        let arrayLike = data.HttpData.data,
+            code = data.HttpData.code;
+        if (code == 200) {
+            successfulPreservation.open();
+        } else saveFailed.open();
+    }).fail(function(e) {
+        saveFailed.open();
+    });
+}
+//管理范围删除
+function delScope() {
+    myApp.dialog.create({
+        title: window.localStorage.languageList == 1 ? "Tips" : "提示",
+        text: "确认删除该范围?",
+        buttons: [{
+            text: window.localStorage.languageList == 1 ? "Cancel" : "取消"
+        }, {
+            text: window.localStorage.languageList == 1 ? "confirm" : "确定",
+            onClick: function() {
+                $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/delAlmReport", {
+                    group_no: $(".NewlyBuildTableScopeEdit-equip-ud").attr("group_no"),
+                    Administrator: $(".NewlyBuildTableScopeEdit-name-ud").val(),
+                    id: isArray("id", msgArray)
+                })).done(function(data) {
+                    let arrayLike = data.HttpData.data,
+                        code = data.HttpData.code;
+                    if (code == 200) {
+                        successfulPreservation.open();
+                    } else saveFailed.open();
+                }).fail(function(e) {
+                    saveFailed.open();
+                });
+            }
+        }]
+    }).open();
+}
+//底部弹窗
+function dataSelect(dt, arry) {
+    myApp.sheet.create({
+        content: `
+       <div class="sheet-modal my-sheet-swipe-to-step fm-modal equipSelectSheet" style="height:50%; --f7-sheet-bg-color: #fff;">
+          <div class="sheet-modal-inner">
+            <div class="sheet-modal-swipe-step">
+              <div class="display-flex padding justify-content-space-between align-items-center header_center_gray">
+                 <div></div>
+              </div>
+            </div> 
+            <div class="block-title block-title-medium margin-top title_2" style="">请选择输入</div>
+            <hr class="transform-05"/>        
+            <div class="no-hairlines">
+                <div class="row">${getEquipData(dt,arry)}</div> 
+            </div>
+          </div>
+        </div>`,
+        // Events
+        on: {
+            open: function(sheet) {},
+            opened: function(sheet) {
+                $(".equipSelectSheet div.no-hairlines a").unbind().bind("click", function() {
+                    //选择
+                    if ($(dt).hasClass("NewlyBuildTableGroup-equip") || $(dt).hasClass("NewlyBuildTableGroup-equip-ud")) //新建分组管理
+                    {
+                        if ($(this).hasClass("selectedBgColor")) {
+                            if (colnum.indexOf("#" + $(this).attr("equip_no") + "#") != -1) {
+                                colnum = colnum.replace("#" + $(this).attr("equip_no") + "#", "#");
+                            }
+                            $(this).removeClass("selectedBgColor");
+                        } else {
+                            colnum += ($(this).attr("equip_no") + "#");
+                            $(this).addClass("selectedBgColor");
+                        }
+                        $(dt).val($(".selectedBgColor").length + " 台").attr("colnum", colnum);
+                    } else if ($(dt).hasClass("NewlyBuildTableScope-equip") || $(dt).hasClass("NewlyBuildTableScopeEdit-equip-ud")) { //新建管理范围
+                        $(this).addClass("selectedBgColor").siblings().removeClass("selectedBgColor");
+                        $(dt).val($(this).text()).attr("group_no", $(this).attr("group_no"));
+                    }
+                    // else if($(dt).hasClass("scheduleModifyContainer_specificDate_wk")){ //周排表
+                    //     $(this).addClass("selectedBgColor").siblings().removeClass("selectedBgColor");
+                    //     $(dt).attr("week",weekReturn($(this).text())).val($(this).text());
+                    // }
+                    else if (!$(this).hasClass("selectedBgColor")) {
+                        $(this).addClass("selectedBgColor").siblings().removeClass("selectedBgColor");
+                        $(dt).val($(this).text());
+                    }
+                    //新建周排表和特定排表切换
+                    if ($(this).text() == "周排表" && $(dt).hasClass("NewlyBuildTable-type")) {
+                        $(".NewlyBuildTable-time-week").removeClass("displayNone");
+                        $(".NewlyBuildTable-time-spe").addClass("displayNone");
+                    } else if ($(dt).hasClass("NewlyBuildTable-type")) {
+                        $(".NewlyBuildTable-time-week").addClass("displayNone");
+                        $(".NewlyBuildTable-time-spe").removeClass("displayNone");
+                        $(".NewlyBuildTable-stime-spe").val(GetDateHandle(new Date(), 0) + " 00:00:00");
+                        $(".NewlyBuildTable-etime-spe").val(GetDateHandle(new Date(), 0) + " 23:59:59");
+                    }
+                });
+                //初始化 
+                if ($(dt).hasClass("NewlyBuildTableGroup-equip") || $(dt).hasClass("NewlyBuildTableGroup-equip-ud")) {
+                    var str = $(dt).attr("colnum");
+                    if (str) {
+                        str = str.split("#");
+                        str.forEach((item, index) => {
+                            if (item) $('.equipSelectSheet div.no-hairlines a[equip_no="' + item + '"]').addClass("selectedBgColor");
+                        });
                     }
                 }
-                html += '<li class="">' + '<label class="item-checkbox item-content" onclick="actionString(this)" equip_no="' + arrayLike[i].equip_no + '">' + '<input type="checkbox" name="checkbox-' + i + '"  value="' + arrayLike[i].equip_nm + '" ' + checkboxSet + '>' + '<i class="icon icon-checkbox"></i>' + '<div class="item-inner">' + '<div class="item-title">' + arrayLike[i].equip_nm + '</div>' + '</div>' + '</label>' + '</li>';
-            }
-            $(".scheduleModifyContainer_equipgroup>div").append(html + '</ul>');
-            // 判断是否全选
-            if (currentArray.length == $(".equipTypeSelect li").length) $(".allSelect input").prop("checked", true);
-            else $(".allSelect input").prop("checked", false);
-        } else {
-            newlyBuildEquip(that);
-            return false;
-        }
-    }).fail(function(e){
-     scheduleAlert.open();
+            },
+        },
+        swipeToClose: false,
+        swipeToStep: false,
+        backdrop: true,
+    }).open();
+}
+
+function getEquipData(dt, arry) {
+    var l_html = "";
+    if ($(dt).hasClass("NewlyBuildTableGroup-equip") || $(dt).hasClass("NewlyBuildTableGroup-equip-ud")) arry.forEach(function(item, index) {
+        l_html += `<a href="#" class="col-33" equip_no="${item.equip_no}" colnum="">${item.equip_nm}</a>`;
     });
-
-
-}
-
-function actionString(dt) {
-    !$(dt).find("input").is(':checked') ? currentArray.push($(dt).attr("equip_no")) : currentArray.splice(currentArray.indexOf($(dt).attr("equip_no")), 1);
-    if (currentArray.length == $(".equipTypeSelect li").length) $(".allSelect input").prop("checked", true);
-    else $(".allSelect input").prop("checked", false);
-}
-//设备更新添加
-function updateEquip(that) {
-    var dt = $(that).siblings("div");
-    if (indexAll == 1) {
-        let updateJson = {
-            getDataTable: "EquipGroup",
-            equipcomb: currentArray.length > 0 ? "#" + currentArray.join("#") : "#",
-            group_name: isArray("currentTxt", msgArray),
-            ifValue: isArray("group_no", msgArray)
-        };
-        publicAjaxModify(updateJson, "/api/GWServiceWebAPI/updateEquipGroup", 2);
-    } else {
-        var NewLineVal, NewLineArray = [];
-        $("#schedule_equip").find("li").each(function(index) {
-            NewLineArray.push($(this).find("div.equipGroupInput span").attr("group_no"));
-        });
-        NewLineVal = NewLineArray.length == 0 ? 1 : Math.max.apply(null, NewLineArray) + 1;
-        let insertJson = {
-            getDataTable: "EquipGroup",
-            groupName: "New projects",
-            groupNo: NewLineVal
-        };
-        publicAjaxModify(insertJson, "/api/GWServiceWebAPI/insertEquipGroup", 2);
-    }
-}
-//全选 
-function allSelectEquip() {
-    currentArray.length = 0;
-    if (!$(".allSelect").find("input").is(':checked')) {
-        $(".equipTypeSelect li").each(function(i) {
-            $(this).find("input").prop("checked", true);
-            currentArray.push($(this).find("label").attr("equip_no"));
+    else if ($(dt).hasClass("NewlyBuildTableScope-equip") || $(dt).hasClass("NewlyBuildTableScopeEdit-equip-ud")) {
+        arry.forEach(function(item, index) {
+            l_html += `<a href="#" class="col-33" group_no="${item.group_no}" colnum="${item.equipcomb}">${item.group_name}</a>`;
         });
     } else {
-        $(".equipTypeSelect li").each(function(i) {
-            $(this).find("input").prop("checked", false);
-            currentArray.length = 0;
+        arry.forEach(function(item, index) {
+            l_html += `<a href="#" class="col-33" >${item.Administrator?item.Administrator: item}</a>`;
         });
     }
+    return l_html + `<a href="#" class="col-33 opacity"></a><a href="#" class="col-33 opacity"></a>`;
 }
-//处理equipcomb
-var groupNOArray = [];
 
-function allEquipCom(dt, value) {
-    $(dt).parent().next().find("li").each(function(index) {
-        groupNOArray.push($(this).find("label").attr("equip_no"));
-    });
-    if (value == 1) {
-        $(that_parent).attr("equipcomb", "#");
-    } else {
-        $(that_parent).attr("equipcomb", "#" + groupNOArray.join("#") + "#");
-    }
-}
-// ********************************************************************************
-//管理范围 
-function aminitsrator_view() {
-    $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/get_AdministratorData", {
-        getDataTable: "0"
-    }), AlarmCenterContext.post("/api/GWServiceWebAPI/get_EquipGroupData", {
-        getDataTable: "0"
-    })).done(function(n, l) {
-        var n_result = n.HttpData,
-            l_result = l.HttpData;
-        if (n_result.code == 200 && l_result.code == 200) {
-            $(".scheduleModifyContainer_administartor_user,.scheduleModifyContainer_administartor_group").html("");
-            var n_html = "",
-                l_html = "";
-            n_result.data.forEach(function(item, index) {
-                if (indexAll == 1) {
-                    if (isArray("username", msgArray) == item.Administrator) n_html += `<option value="male" selected>${item.Administrator}</option>`;
-                    else n_html += `<option value="male">${item.Administrator}</option>`;
-                } else {
-                    if (index == 0) n_html += `<option value="male" selected>${item.Administrator}</option>`;
-                    else n_html += `<option value="male">${item.Administrator}</option>`;
-                }
-            });
-            l_result.data.forEach(function(item, index) {
-                if (indexAll == 1) {
-                    if (isArray("groupname", msgArray) == item.group_name) l_html += `<option value="${item.group_name}" selected group_no="${item.group_no}">${item.group_name}</option>`;
-                    else l_html += `<option value="${item.group_name}" group_no="${item.group_no}">${item.group_name}</option>`;
-                } else {
-                    if (index == 0) l_html += `<option value="${item.group_name}" selected group_no="${item.group_no}">${item.group_name}</option>`;
-                    else l_html += `<option value="${item.group_name}" group_no="${item.group_no}">${item.group_name}</option>`;
-                }
-            });
-            $(".scheduleModifyContainer_administartor_user").html(n_html);
-            $(".scheduleModifyContainer_administartor_group").html(l_html);
-        } else {
-            scheduleAlert.open();
-        }
-    }).fail(function(e) {});
-}
-//设备更新添加
-function updateAlmReport(that) {
-    var weekID = getMaxId("schedule_administartor"); //获取新建id主键
-    var dt = $(that).parent().prev();
-    if (indexAll == 1) {
-        let updateJson = {
-            getDataTable: "AlmReport",
-            group_no: $(".scheduleModifyContainer_administartor_group ").find("option:selected").attr("group_no"),
-            Administrator: $(".scheduleModifyContainer_administartor_user").find("option:selected").text(),
-            ifValue: isArray("dataid", msgArray),
-        };
-        publicAjaxModify(updateJson, "/api/GWServiceWebAPI/updateEquipGroup", 3);
-    } else {
-        let insertJson = {
-            getDataTable: "AlmReport",
-            group_no: $(".scheduleModifyContainer_administartor_group").find("option:selected").attr("group_no"),
-            Administrator: $(".scheduleModifyContainer_administartor_user").find("option:selected").text(),
-            ifValue: weekID
-        };
-        publicAjaxModify(insertJson, "/api/GWServiceWebAPI/insertEquipGroup", 3);
-    }
-}
-//最大ID添加1
-function getMaxId(id) {
-    var parentDt = $("#" + id).find("ul"),
-        arrayIndex = [];
-    parentDt.find("li").each(function(index) {
-        arrayIndex.push($(this).attr("dataid"));
-    });
-    return arrayIndex.length == 0 ? 1 : Math.max.apply(null, arrayIndex) + 1;
-}
 //周排表html
-function newlyBuildWeekAlmReport_view() {
-    $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/get_AdministratorData", {
-        getDataTable: "0"
-    })).done(function(n) {
-        var n_result = n.HttpData;
-        if (n_result.code == 200) {
-            $(".scheduleModifyContainer_specificDate_username").html("");
-            var n_html = "";
-            n_result.data.forEach(function(item, index) {
-                if (indexAll == 1) {
-                    if (isArray("username", msgArray) == item.Administrator) n_html += `<option value="${item.Administrator}" selected>${item.Administrator}</option>`;
-                    else n_html += `<option value="${item.Administrator}">${item.Administrator}</option>`;
-                } else {
-                    if (index == 0) n_html += `<option value="${item.Administrator}" selected>${item.Administrator}</option>`;
-                    else n_html += `<option value="${item.Administrator}">${item.Administrator}</option>`;
-                }
-            });
-            $(".scheduleModifyContainer_specificDate_wk").find("option:contains('" + isArray("week", msgArray) + "')").attr("selected", true);
-            $(".scheduleModifyContainer_specificDate_username").html(n_html);
-            $(".scheduleModifyContainer_specificDate_stime").val(isArray("stime", msgArray) ? isArray("stime", msgArray) : "00:00");
-            $(".scheduleModifyContainer_specificDate_etime").val(isArray("etime", msgArray) ? isArray("etime", msgArray) : "00:00");
-        } else {
-            scheduleAlert.open();
+function scheduleSpecificInit() {
+    $(".scheduleModifyContainer_specificDate_wk").val(weekReturn(parseInt(isArray("week", msgArray)))).attr("week", isArray("week", msgArray));
+    $(".scheduleModifyContainer_specificDate_username").val(isArray("name", msgArray));
+    $(".scheduleModifyContainer_specificDate_stime").val(isArray("stime", msgArray) ? isArray("stime", msgArray) : "00:00");
+    $(".scheduleModifyContainer_specificDate_etime").val(isArray("etime", msgArray) ? isArray("etime", msgArray) : "00:00");
+    $(".linkageBtn a").attr("data-id", isArray("id", msgArray));
+    $(".scheduleModifyContainer_specificDate_wk,.scheduleModifyContainer_specificDate_username").unbind().bind("click", function() {
+        if ($(this).hasClass("scheduleModifyContainer_specificDate_username")) {
+            dataSelect(this, schedule_public_username);
+        } else if ($(this).hasClass("scheduleModifyContainer_specificDate_wk")) {
+            dataSelect(this, scheduleWeek);
         }
-    }).fail(function(e) {});
+    });
 }
-//周排表更新
+
 function updateWeekAlmReport(that) {
-    var reg = /^(20|21|22|23|[0-1]\d):[0-5]\d$/,
-        weekID, dt, week_day;
-    if (!reg.test($(".scheduleModifyContainer_specificDate_stime").val()) || !reg.test($(".scheduleModifyContainer_specificDate_stime").val())) {
-        scheduleTimeAlert("Error in time format").open();
-        return;
-    }
-    if (parseInt($(".scheduleModifyContainer_specificDate_stime").val().replace(":", "")) > parseInt($(".scheduleModifyContainer_specificDate_stime").val().replace(":", ""))) {
-        scheduleTimeAlert("The start time should not be greater than the end time.").open();
-        return;
-    }
-    if (indexAll == 1) {
-        weekID = isArray("dataid", msgArray);
-        week_day = $(".scheduleModifyContainer_specificDate_wk").find("option:selected").val();
-    } else {
-        weekID = getMaxId("schedule_specificDate");
-        week_day = $(".scheduleModifyContainer_specificDate_wk").find("option:selected").val();
-    } //获取新建id主键
     let WeekAlmReportInsert = {
-        getDataTable: "WeekAlmReport",
-        Administrator: $(".scheduleModifyContainer_specificDate_username").find("option:selected").text(),
-        week_day: week_day,
+        Administrator: $(".scheduleModifyContainer_specificDate_username").val(),
+        week_day: weekReturn($(".scheduleModifyContainer_specificDate_wk").val()),
         begin_time: $(".scheduleModifyContainer_specificDate_stime").val(),
         end_time: $(".scheduleModifyContainer_specificDate_etime").val(),
-        ifValue: weekID
+        id: $(that).attr("data-id")
     };
-    if (indexAll == 1) publicAjaxModify(WeekAlmReportInsert, "/api/GWServiceWebAPI/updateEquipGroup", 4);
-    else publicAjaxModify(WeekAlmReportInsert, "/api/GWServiceWebAPI/insertEquipGroup", 4);
+    $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/updateWeekAlmReport", WeekAlmReportInsert)).done(function(data) {
+        let arrayLike = data.HttpStatus;
+        if (arrayLike == 200 && data.HttpData.data != 0) {
+            successfulPreservation.open();
+        } else {}
+    }).fail(function(e) {});
 }
-//特定排表更新
+
+function delWeekAlmReport(that) {
+    myApp.dialog.create({
+        title: window.localStorage.languageList == 1 ? "Tips" : "提示",
+        text: "确认删除该项?",
+        buttons: [{
+            text: window.localStorage.languageList == 1 ? "Cancel" : "取消"
+        }, {
+            text: window.localStorage.languageList == 1 ? "confirm" : "确定",
+            onClick: function() {
+                let WeekAlmReportInsert = {
+                    id: $(that).attr("data-id")
+                };
+                $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/delWeekAlmReport", WeekAlmReportInsert)).done(function(data) {
+                    let arrayLike = data.HttpStatus;
+                    if (arrayLike == 200 && data.HttpData.data != 0) {
+                        delSuccess.open();
+                    } else {}
+                }).fail(function(e) {});
+            }
+        }]
+    }).open();
+}
+//特定排表
+function scheduleWeeklyInit() {
+    $(".scheduleModifyContainer_weeklytable_username").val(isArray("name", msgArray));
+    $(".scheduleModifyContainer_weeklytable_stime").val(isArray("stime", msgArray) ? isArray("stime", msgArray) : "00:00");
+    $(".scheduleModifyContainer_weeklytable_etime").val(isArray("etime", msgArray) ? isArray("etime", msgArray) : "00:00");
+    $(".linkageBtn a").attr("data-id", isArray("id", msgArray));
+}
+
 function updateSpeAlmReport(that) {
-    var weekID, dt, week_day;
-    if (indexAll == 1) {
-        weekID = isArray("dataid", msgArray);
-    } else {
-        weekID = getMaxId("schedule_weeklytable");
-    } //获取新建id主键
     let WeekAlmReportInsert = {
-        getDataTable: "SpeAlmReport",
         Administrator: $(".scheduleModifyContainer_weeklytable_username").val(),
         begin_time: $(".scheduleModifyContainer_weeklytable_stime").val(),
-        end_time: $(".scheduleModifyContainer_weeklytable_etime").val(),
-        ifValue: weekID
+        end_time: $(".scheduleModifyContainer_weeklytable_etime").val()
     };
-    if (indexAll == 1) publicAjaxModify(WeekAlmReportInsert, "/api/GWServiceWebAPI/updateEquipGroup", 5);
-    else publicAjaxModify(WeekAlmReportInsert, "/api/GWServiceWebAPI/insertEquipGroup", 5);
-}
-function newlyBuildSpeAlmReport_view() {
-    $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/get_AdministratorData", {
-        getDataTable: "0"
-    })).done(function(n) {
-        var n_result = n.HttpData;
-        if (n_result.code == 200) {
-            $(".scheduleModifyContainer_weeklytable_username").html("");
-            var n_html = "";
-            n_result.data.forEach(function(item, index) {
-                if (indexAll == 1) {
-                    if (isArray("username", msgArray) == item.Administrator) n_html += `<option value="${item.Administrator}" selected>${item.Administrator}</option>`;
-                    else n_html += `<option value="${item.Administrator}">${item.Administrator}</option>`;
-                } else {
-                    if (index == 0) n_html += `<option value="${item.Administrator}" selected>${item.Administrator}</option>`;
-                    else n_html += `<option value="${item.Administrator}">${item.Administrator}</option>`;
-                }
-            });
-            $(".scheduleModifyContainer_weeklytable_username").html(n_html);
-            $(".scheduleModifyContainer_weeklytable_stime").val(isArray("stime", msgArray));
-            $(".scheduleModifyContainer_weeklytable_etime").val(isArray("etime", msgArray));
-        } else {
-            scheduleAlert.open();
-        }
+    $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/updateSpeAlmReport", WeekAlmReportInsert)).done(function(data) {
+        let arrayLike = data.HttpStatus;
+        if (arrayLike == 200 && data.HttpData.data != 0) {
+            successfulPreservation.open();
+        } else {}
     }).fail(function(e) {});
-    if (indexAll == 2) {
-        myApp.calendar.create({
-            inputEl: '#Spe_stime',
-            openIn: 'customModal',
-            header: false,
-            footer: true,
-            monthNames: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
-            dateFormat: 'yyyy/mm/dd 00:00:00',
-            cssClass: "startTime",
-            headerPlaceholder: "End date",
-            toolbarCloseText: "Confirm",
-            value: [new Date()],
-        })
-        myApp.calendar.create({
-            inputEl: '#Spe_etime',
-            openIn: 'customModal',
-            header: false,
-            footer: true,
-            monthNames: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
-            dateFormat: 'yyyy/mm/dd 00:00:00',
-            cssClass: "startTime",
-            headerPlaceholder: "End date",
-            toolbarCloseText: "Confirm",
-            value: [new Date()],
-        })
-    } else {
-        myApp.calendar.create({
-            inputEl: '#Spe_stime',
-            openIn: 'customModal',
-            header: false,
-            footer: true,
-            monthNames: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
-            dateFormat: 'yyyy/mm/dd 00:00:00',
-            cssClass: "startTime",
-            headerPlaceholder: "End date",
-            toolbarCloseText: "Confirm",
-        })
-        myApp.calendar.create({
-            inputEl: '#Spe_etime',
-            openIn: 'customModal',
-            header: false,
-            footer: true,
-            monthNames: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
-            dateFormat: 'yyyy/mm/dd 00:00:00',
-            cssClass: "startTime",
-            headerPlaceholder: "End date",
-            toolbarCloseText: "Confirm",
-        })
-    }
+}
+
+function delSpeAlmReport(that) {
+    myApp.dialog.create({
+        title: window.localStorage.languageList == 1 ? "Tips" : "提示",
+        text: "确认删除该项?",
+        buttons: [{
+            text: window.localStorage.languageList == 1 ? "Cancel" : "取消"
+        }, {
+            text: window.localStorage.languageList == 1 ? "confirm" : "确定",
+            onClick: function() {
+                let WeekAlmReportInsert = {
+                    id: $(that).attr("data-id")
+                };
+                $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/delSpeAlmReport", WeekAlmReportInsert)).done(function(data) {
+                    let arrayLike = data.HttpStatus;
+                    if (arrayLike == 200 && data.HttpData.data != 0) {
+                        delSuccess.open();
+                    } else {}
+                }).fail(function(e) {});
+            }
+        }]
+    }).open();
+}
+//报警排表和周排表插入
+function scheduleInsertData(dt) {
+    var url = "",
+        isFlag = ($(".NewlyBuildTable-type").val() == "周排表");
+    isFlag ? url = "/api/GWServiceWebAPI/insertWeekAlmReport" : url = "/api/GWServiceWebAPI/insertSpeAlmReport";
+    let WeekAlmReportInsert = {
+        Administrator: $(".NewlyBuildTable-name").val(),
+        week_day: weekReturn($(".NewlyBuildTable-week").val()),
+        begin_time: isFlag ? $(".NewlyBuildTable-stime").val() : $(".NewlyBuildTable-stime-spe").val(),
+        end_time: isFlag ? $(".NewlyBuildTable-etime").val() : $(".NewlyBuildTable-etime-spe").val(),
+    };
+    $.when(AlarmCenterContext.post(url, WeekAlmReportInsert)).done(function(data) {
+        let arrayLike = data.HttpStatus;
+        if (arrayLike == 200 && data.HttpData.data != 0) {
+            successfulPreservation.open();
+        } else {}
+    }).fail(function(e) {});
 }
 // 场景编辑
 var sceneData = [],
     scaneEquipData = [];
+
 function initSceneList_view() {
     var controlEquipList, setList, equipList;
     $(".equipLinkage_edit_modify>ul").html("");
@@ -561,12 +744,9 @@ function submitScene(dt) {
             sceneName: sceneName,
             dataStr: dataStr
         }
-        $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/updateScene", {
-            data: reqData,
-            async: false
-        })).done(function(n) {
+        $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/updateScene", reqData)).done(function(n) {
             initSceneList();
-            scheduleModifySuccessTooip.open();
+            successfulPreservation.open();
         }).fail(function(e) {});
     } else {
         addScene();
@@ -610,10 +790,7 @@ function addScene() {
         setNo: sceneSetNo,
         value: str,
     }
-    $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/addScene", {
-        data: reqData,
-        async: false
-    })).done(function(n) {
+    $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/addScene", reqData)).done(function(n) {
         //更新
         if ($(".equipLinkage_edit_modify ul li").length > 0) {
             var dataStr = "";
@@ -634,7 +811,7 @@ function addScene() {
                 async: false
             })).done(function(n) {
                 initSceneList();
-                scheduleModifySuccessTooip.open();
+                successfulPreservation.open();
             }).fail(function(e) {});
         }
     }).fail(function(e) {});
@@ -654,7 +831,7 @@ function scenalControlPro(dt) {
         myApp.views.main.router.navigate("/scheduleModifyChild/?last");
     }
 }
-//新增控制初始化  900
+//新增控制初始化 
 function scenalControlPro_init() {
     var controlEquipList, setList, equipList;
     $(".equipLinkage_edit_modify_child_equip").html("");
@@ -679,7 +856,6 @@ function scenalControlPro_init() {
         myApp.dialog.close();
     });
 }
-
 //删除当前控制项 
 function currentControl(dt) {
     myApp.dialog.confirm(window.localStorage.languageList == 1 ? "Whether to delete the current control" : "是否删除当前项", window.localStorage.languageList == 1 ? "Tips" : "提示", function() {

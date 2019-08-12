@@ -1,7 +1,6 @@
 var scheduleModifyChildpositionList, comfirmEquip;
 
 function scheduleModifyChild() {
-    // scenalControlPro_init();
     //控制子项目点击事件
     $(".equipLinkage_edit_modify_childFirst>div").unbind();
     $(".equipLinkage_edit_modify_childFirst>div").bind("click", function() {
@@ -37,7 +36,7 @@ function comfirmScaneControl() {
     }
     scheduleModifyChildSuccessTooip.open();
 }
-//新增控制初始化  900
+//新增控制初始化 1.7
 function scenalControlPro_init1() {
     $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/getSetparmList", {
         findEquip: false
@@ -64,8 +63,8 @@ function comfirmEquip(arry) {
             </div> 
             <div class="block-title block-title-medium margin-top title_2" style="">选择添加的设备</div>
             <hr class="transform-05"/>        
-            <div class="no-hairlines row">
-                ${returnModifyHtml(arry)} 
+            <div class="no-hairlines">
+                <div class="row">${returnModifyHtml(arry)} </div>
             </div>
           </div>
         </div>`,
@@ -88,7 +87,7 @@ function comfirmEquip(arry) {
                });
             },
         },
-        swipeToClose: true,
+        swipeToClose: false,
         swipeToStep: false,
         backdrop: true,
     }).open();
@@ -105,5 +104,5 @@ function returnModifyHtml(arry) {
             else l_html += `<a href="#" class="col-33" combination="${item.equip_no},${item.set_no}">${item.set_nm}</a>`;
         }
     });
-    return l_html;
+    return l_html+`<a href="#" class="col-33 opacity"></a><a href="#" class="col-33 opacity"></a>`;
 }

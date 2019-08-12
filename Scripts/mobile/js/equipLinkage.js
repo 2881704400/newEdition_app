@@ -2,7 +2,7 @@
 
 function equipLinkage() {
     switchToolbar("functionalModule_pageTool");
-    myApp.dialog.progress('<a style="font-size: 1rem">加载中...</a>');
+    loadFun();
     initAddList(); //联动设置
     toastCenterLinkage = myApp.toast.create({
         text: "操作失败",
@@ -15,13 +15,9 @@ function equipLinkage() {
         closeTimeout: 2000,
     });
 }
-//左侧添加菜单
-function transformReportingObstaciesMenu1() {
-    $(".scheduleRightBottomBtn").hasClass("transformReportingMenu") ? $(".scheduleRightBottomBtn").removeClass("transformReportingMenu") : $(".scheduleRightBottomBtn").addClass("transformReportingMenu");
-}
+
 //初始化列表
-var linkage_init, setparm_init;
-var listAdd = [],
+var linkage_init, setparm_init, listAdd = [],
     linkageEquips = [];
 
 function initAddList() {
@@ -59,16 +55,14 @@ function initAddList() {
             linkage_init = hObject;
             equipLinkList();
         }
-        myApp.dialog.close();
+
     }).fail(function(e) {
         toastCenterLinkage.open();
-        myApp.dialog.close();
     });
 }
+
 //公共请求
-var publicFirstData;
-//列表处理
-var tableNameNoYcp, tableNameNoYxp, ycpData_table_5, yxpData_table_6, ycpData_table_7, yxpData_table_8, ycpData_table_9, yxpData_table_10,
+var publicFirstData,tableNameNoYcp, tableNameNoYxp, ycpData_table_5, yxpData_table_6, ycpData_table_7, yxpData_table_8, ycpData_table_9, yxpData_table_10,
     typeList = [{
         value: "X",
         label: "状态量报警",
@@ -114,19 +108,17 @@ function equipLinkList() {
             yxpData_table = 'yxp';
         var ycpData_table_type = 'ycp',
             yxpData_table_type = 'yxp';
-        var equip_ycp_nos = "";
-        var yc_ycp_nos = "";
-        var equip_yxp_nos = "";
-        var yc_yxp_nos = "";
+        var equip_ycp_nos = "",yc_ycp_nos = "",equip_yxp_nos = "",yc_yxp_nos = "";
+
         data.forEach(function(item, index) {
             if (item.iycyx_type === "c" || item.iycyx_type === "C") {
                 ycpData_table == 'ycp' ? ycpData_table += (' where (equip_no =' + item.iequip_no + ' and yc_no =' + item.iycyx_no + ')') : ycpData_table += (' or (equip_no =' + item.iequip_no + ' and yc_no =' + item.iycyx_no + ')');
-                equip_ycp_nos += item.iequip_no + ",";
-                yc_ycp_nos += item.iequip_no + ",";
+                equip_ycp_nos += (item.iequip_no + ",");
+                yc_ycp_nos += (item.iycyx_no + ",");
             } else if (item.iycyx_type === "x" || item.iycyx_type === "X") {
                 yxpData_table == 'yxp' ? yxpData_table += (' where (equip_no =' + item.iequip_no + ' and yx_no =' + item.iycyx_no + ')') : yxpData_table += (' or (equip_no =' + item.iequip_no + ' and yx_no =' + item.iycyx_no + ')');
-                equip_yxp_nos += item.iequip_no + ",";
-                yc_yxp_nos += item.iequip_no + ",";
+                equip_yxp_nos += (item.iequip_no + ",");
+                yc_yxp_nos += (item.yc_yxp_nos + ",");
             }
         });
         if (equip_ycp_nos.length > 0) {
@@ -137,6 +129,7 @@ function equipLinkList() {
             equip_yxp_nos = equip_yxp_nos.substring(0, equip_yxp_nos.length - 1);
             yc_yxp_nos = yc_yxp_nos.substring(0, yc_yxp_nos.length - 1);
         }
+
         if (ycpData_table != "ycp" && yxpData_table != "yxp") {
             $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/get_DataForListStr", {
                 "tType": ycpData_table_type,
@@ -148,19 +141,20 @@ function equipLinkList() {
                 "yc_nos": yc_yxp_nos
             })).done(function(n, l) {
                 if (n.HttpData.code == 200 && n.HttpData.code == 200) {
-                    ycpData_table_5 = n.HttpData;
-                    yxpData_table_6 = l.HttpData;
+                    ycpData_table_5 = n.HttpData.data;
+                    yxpData_table_6 = l.HttpData.data;
                     notEqualToYCPYXP();
                 } else {}
             }).fail(function(e) {});
         } else if (ycpData_table != "ycp") {
+
             $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/get_DataForListStr", {
                 "tType": ycpData_table_type,
                 "equip_nos": equip_ycp_nos,
                 "yc_nos": yc_ycp_nos
             })).done(function(n) {
                 if (n.HttpData.code == 200) {
-                    ycpData_table_7 = data;
+                    ycpData_table_7 = n.HttpData.data;
                     notEqualToYCP();
                 }
             }).fail(function(e) {});
@@ -171,7 +165,7 @@ function equipLinkList() {
                 "yc_nos": yc_yxp_nos
             })).done(function(n) {
                 if (n.HttpData.code == 200) {
-                    yxpData_table_8 = data;
+                    yxpData_table_8 = n.HttpData.data;
                     notEqualToYXP();
                 }
             }).fail(function(e) {});
@@ -180,23 +174,25 @@ function equipLinkList() {
         }
     }
 }
+
 // 不等于ycp yxp
 function notEqualToYCPYXP() {
     let ycpRt = ycpData_table_5,
         yxpRt = yxpData_table_6;
-    if (ycpRt.code === 200 && yxpRt.code === 200) {
-        let ycpData = ycpRt.data,
-            yxpData = yxpRt.data;
-        publicFun(ycpData, yxpData);
-    }
+
+
+        publicFun(ycpRt, yxpRt);
+
 }
+
 //不等于ycp 
 function notEqualToYCP() {
     let ycpRt = ycpData_table_7;
-    let ycpData = ycpRt,
-        yxpData = null;
-    publicFun(ycpData, yxpData);
+    let ycpData_ycp = ycpRt,
+        yxpData_yxp = null;
+    publicFun(ycpData_ycp, yxpData_yxp);
 }
+
 //不等于yxp
 function notEqualToYXP() {
     let yxpRt = yxpData_table_8;
@@ -204,8 +200,8 @@ function notEqualToYXP() {
         yxpData = yxpRt;
     publicFun(ycpData, yxpData);
 }
-var equipLinkage_public_list = [];
 
+var equipLinkage_public_list = [];
 function publicFun(ycpData, yxpData) {
     var html = "";
     equipLinkage_public_list = linkage_init.data.map((row, index) => {
@@ -236,6 +232,7 @@ function publicFun(ycpData, yxpData) {
         if (row.iycyx_type === "c" || row.iycyx_type === "C") {
             if (ycpData) ycpData.forEach(item => {
                 if (row.iequip_no === item.equip_no && row.iycyx_no === item.yc_no) {
+
                     result.cCurren = item.yc_nm
                 }
             })
@@ -248,6 +245,7 @@ function publicFun(ycpData, yxpData) {
         } else {
             result.cCurren = "无"
         }
+
         html += `<li class="swipeout bottomBorderLine">
           <div class="item-content swipeout-content schedule-content row no-gap" onclick="newlyBuildLinkage(this,1)" TrID="${result.id}" TrRow = '${index}'>
             <div class="col-50">${result.equipName}</div>
@@ -262,6 +260,7 @@ function publicFun(ycpData, yxpData) {
     })
     $("#equipLinkage_set ul").html(html);
 }
+
 //联动设置添加
 var equipTiggerType = [],
     equipTiggerSpot = [],
@@ -282,49 +281,9 @@ function newlyBuildLinkage(dt, index) {
         remarks: ""
     };
     myApp.views.main.router.navigate("/equipLinkageModify/?" + result.equipName + "&" + result.cType + "&" + result.cCurren + "&" + result.delayTime + "&" + result.linkageEquip + "&" + result.linkageOpt + "&" + result.optCode + "&" + result.remarks + "&" + result.id + "&" + index + "");
-    setTimeout(function() {
-        link_listInit_equip("equipTiggerName", listAdd.map(item => {
-            return item.label;
-        }), result.equipName, index); //触发设备
-        link_listInit_equip("equipTigger_Link", linkageEquips.map(item => {
-            return item.label;
-        }), result.linkageEquip, index); //联动设备
-        try {
-            link_listInit_no = listAdd.filter((equip, index) => {
-                if (equip.label === $("#equipTiggerName").val()) {
-                    return equip;
-                }
-            })[0].value;
-        } catch (e) {
-            link_listInit_no = "";
-        }
-        if (link_listInit_no) $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/getYcp", {
-            equip_nos: link_listInit_no
-        }), AlarmCenterContext.post("/api/GWServiceWebAPI/getYxp", {
-            equip_nos: link_listInit_no
-        })).done(function(n, l) {
-            if (n.HttpData.code == 200 && l.HttpData.code == 200) {
-                ycpData_table_9 = n.HttpData;
-                yxpData_table_10 = l.HttpData;
-                writeContent();
-            }
-        }).fail(function(e) {});
-        $.when(AlarmCenterContext.post("/api/real/get_setparm", {
-            equip_nos: linkageEquips.filter((item, index) => {
-                if (item.label == $("#equipTigger_Link").val()) return item;
-                else return [{
-                    value: ""
-                }];
-            })[0].value
-        })).done(function(n, l) {
-            if (n.HttpData.code == 200) {
-                loadLinkageEquips(n.HttpData.data);
-            }
-        }).fail(function(e) {});
-    }, 50);
+
 }
-//确认
-function updateEquipLink(dt) {}
+
 //列表联动
 function writeContent() {
     let ycpRt = ycpData_table_9,
@@ -369,43 +328,40 @@ function writeContent() {
                 }
             })
         }
-        try {
-            link_listInit_type.destroy();
-        } catch (e) {}
-        Init_type_fun("equipTiggerType", equipTiggerType.map(item => {
-            return item.label;
-        })); //触发类型
     } else {}
-}
-var equipTiggerCommand;
 
-function loadLinkageEquips(data) {
-    equipTiggerCommand = data;
-    try {
-        link_listInit_com.destroy();
-    } catch (e) {}
-    try {
-        Init_com_fun("equipTiggerCom", data.map(item => {
-            return item.set_nm
-        }));
-    } catch (e) {}
+    link_listInit_spot = equipTiggerType.filter((item, index) => {
+      if (item.children.length > 0 && item.label == $("#equipTiggerType").val()) return item;
+    });
+
+}
+
+//获取存在条件对象
+function getObject(arrayObject, className, index) {
+    if (index == 1) return arrayObject.filter((item, index) => {
+        if (item.children.length > 0 && item.label == $("." + className).val()) return item;
+    });
+    else if (index == 2) return arrayObject.filter((item, index) => {
+        if (item.label == $("." + className).val()) return item;
+    });
+    else if (index == 3) return arrayObject.filter((item, index) => {
+        if (item.set_nm == $("." + className).val()) return item;
+    });
 }
 // 插入或者更新记录 
 function addLinkage(dt, index) { //index = 1 更新，index = 2 插入
+    
     let equipLink_cType = getObject(equipTiggerType, "equipTiggerType", 2);
-    let equipLink_spot = getObject(equipTiggerType, "equipTiggerType", 1);
+    // let equipLink_spot = getObject(link_listInit_spot, "equipTiggerSpot", 1);
     let equipLink_linkEquipNo = getObject(linkageEquips, "equipTigger_Link", 2);
-    let equipLink_linkNo = getObject(equipTiggerCommand, "equipTiggerCom", 3);
+    let equipLink_linkNo = getObject(link_listInit_com, "equipTiggerCom", 3);
     var equipLink_cNo;
     try {
-        equipLink_cNo = equipLink_spot[0].children.filter((item, index) => {
+        equipLink_cNo = link_listInit_spot[0].children.filter((item, index) => {
             if (item.label == $(".equipTiggerSpot").val()) return item;
         })[0].value;
     } catch (e) {}
-    if (!link_listInit_no) {
-        toastCenterLinkage.open();
-        return false;
-    }
+
     var reqData = {
         id: $(dt).attr("dataID") || 1,
         equipNo: link_listInit_no,
@@ -413,16 +369,14 @@ function addLinkage(dt, index) { //index = 1 更新，index = 2 插入
         cNo: equipLink_cNo ? equipLink_cNo : 0,
         delay: $(".equipTiggerTime").val(),
         linkEquipNo: equipLink_linkEquipNo.length > 0 ? equipLink_linkEquipNo[0].value : "''",
-        linkNo: equipLink_linkNo.length > 0 && equipLink_linkNo ? equipLink_linkNo[0].set_no : "null",
+        linkNo: (equipLink_linkNo.length > 0 && equipLink_linkNo)? equipLink_linkNo[0].set_no : "null",
         optCode: '""',
         remarks: $(".equipTiggerInfo").val() || ""
     }
     if (index == 1) {
         $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/updateLinkage", reqData)).done(function(n) {
             if (n.HttpData.code == 200) {
-                initAddList();
                 toastCenterLinkageSuccess.open();
-                myApp.router.back();
             }
         }).fail(function(e) {
             toastCenterLinkage.open();
@@ -430,12 +384,7 @@ function addLinkage(dt, index) { //index = 1 更新，index = 2 插入
     } else {
         $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/addLinkage", reqData)).done(function(n) {
             if (n.HttpData.code == 200) {
-                initAddList();
-                $("#equipLinkage_set ul").animate({
-                    scrollTop: $("#equipLinkage_set ul")[0].scrollHeight + 'px'
-                }, 50);
                 toastCenterLinkageSuccess.open();
-                myApp.router.back();
             }
         }).fail(function(e) {
             toastCenterLinkage.open();
@@ -459,180 +408,88 @@ function deleteLinkage(dt) {
         });
     });
 }
-//动态创建弹窗
-var popupLinkage;
 
-function link_popupAlert(html) {
-    popupLinkage = myApp.popup.create({
-        content: html,
+//触发点
+var link_listInit_spot = [];
+//触发命令
+var link_listInit_com = [],link_listInit_no = 0;
+
+//底部弹窗
+function quipLinkageAlert(dt, arry) {
+    myApp.sheet.create({
+        content: `
+       <div class="sheet-modal my-sheet-swipe-to-step fm-modal equipSelectSheet" style="height:50%; --f7-sheet-bg-color: #fff;">
+          <div class="sheet-modal-inner">
+            <div class="sheet-modal-swipe-step">
+              <div class="display-flex padding justify-content-space-between align-items-center header_center_gray">
+                 <div></div>
+              </div>
+            </div> 
+            <div class="block-title block-title-medium margin-top title_2" style="">请选择输入</div>
+            <hr class="transform-05"/>        
+            <div class="no-hairlines">
+                <div class="row">${equipLinkageHtml(dt,arry)}</div> 
+            </div>
+          </div>
+        </div>`,
         on: {
-            opened: function(e) {}
-        }
+            open: function(sheet) {},
+            opened: function(sheet) {
+                $(".equipSelectSheet div.no-hairlines a").unbind().bind("click", function() {
+                    var that = this;
+                    //选择 
+                    if ($(dt).hasClass("equipTiggerName")) {
+                        link_listInit_no = listAdd.filter((equip, index) => {
+                            if (equip.label === $(that).text()) {
+                                return equip;
+                            }
+                        })[0].value;
+                        if (link_listInit_no) $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/getYcp", {
+                            equip_nos: link_listInit_no
+                        }), AlarmCenterContext.post("/api/GWServiceWebAPI/getYxp", {
+                            equip_nos: link_listInit_no
+                        })).done(function(n, l) {
+                            if (n.HttpData.code == 200 && l.HttpData.code == 200) {
+                                ycpData_table_9 = n.HttpData;
+                                yxpData_table_10 = l.HttpData;
+                                writeContent();
+                            }
+                        }).fail(function(e) {});
+                        $(".equipTiggerType,.equipTiggerSpot").val("");
+                    } else if ($(dt).hasClass("equipTiggerType")) {
+                        $(".equipTiggerSpot").val("");
+                        link_listInit_spot = equipTiggerType.filter((item, index) => {
+                            if (item.children.length > 0 && item.label == $(that).text()) return item;
+                        });
+                    } else if ($(dt).hasClass("equipTigger_Link")) {
+                        $(".equipTiggerCom").val("");
+                        $.when(AlarmCenterContext.post("/api/real/get_setparm", {
+                            equip_nos: linkageEquips.filter((item, index) => {
+                                if (item.label == $(that).text()) return item;
+                            })[0].value
+                        })).done(function(n, l) {
+                            if (n.HttpData.code == 200) {
+                                link_listInit_com = n.HttpData.data;
+                            }
+                        }).fail(function(e) {});
+                    }
+                    if (!$(this).hasClass("selectedBgColor")) {
+                        $(this).addClass("selectedBgColor").siblings().removeClass("selectedBgColor");
+                        $(dt).val($(this).text());
+                    }
+                });
+            },
+        },
+        swipeToClose: false,
+        swipeToStep: false,
+        backdrop: true,
     }).open();
 }
-//触发设备
-function link_listInit_equip(id, equipArray, equipNameValue, equipNameType) {
-    if (equipNameType == 1) {
-        myApp.picker.create({
-            inputEl: '#' + id,
-            value: [equipNameValue],
-            cols: [{
-                textAlign: 'center',
-                values: equipArray,
-                onChange: function(picker, country) {
-                    switch (id) {
-                        case "equipTiggerName":
-                            link_listInit_no = listAdd.filter((equip, index) => {
-                                if (equip.label === country) {
-                                    return equip;
-                                }
-                            })[0].value;
-                            if (link_listInit_no) $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/getYcp", {
-                                equip_nos: link_listInit_no
-                            }), AlarmCenterContext.post("/api/GWServiceWebAPI/getYxp", {
-                                equip_nos: link_listInit_no
-                            })).done(function(n, l) {
-                                if (n.HttpData.code == 200 && l.HttpData.code == 200) {
-                                    ycpData_table_9 = n.HttpData;
-                                    yxpData_table_10 = l.HttpData;
-                                    writeContent();
-                                }
-                            }).fail(function(e) {});
-                            $(".equipTiggerType,.equipTiggerSpot").val("");
-                            break;
-                        case "equipTigger_Link":
-                            $(".equipTiggerCom").val("");
-                            $.when(AlarmCenterContext.post("/api/real/get_setparm", {
-                                equip_nos: linkageEquips.filter((item, index) => {
-                                    if (item.label == country) return item;
-                                })[0].value
-                            })).done(function(n, l) {
-                                if (n.HttpData.code == 200) {
-                                    loadLinkageEquips(n.HttpData.data);
-                                }
-                            }).fail(function(e) {});
-                            break;
-                        case "":
-                            break;
-                    }
-                }
-            }],
-        });
-    } else {
-        myApp.picker.create({
-            inputEl: '#' + id,
-            cols: [{
-                textAlign: 'center',
-                values: equipArray,
-                onChange: function(picker, country) {
-                    switch (id) {
-                        case "equipTiggerName":
-                            link_listInit_no = listAdd.filter((equip, index) => {
-                                if (equip.label === country) {
-                                    return equip;
-                                }
-                            })[0].value;
-                            if (link_listInit_no) $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/getYcp", {
-                                equip_nos: link_listInit_no
-                            }), AlarmCenterContext.post("/api/GWServiceWebAPI/getYxp", {
-                                equip_nos: link_listInit_no
-                            })).done(function(n, l) {
-                                if (n.HttpData.code == 200 && l.HttpData.code == 200) {
-                                    ycpData_table_9 = n.HttpData;
-                                    yxpData_table_10 = l.HttpData;
-                                    writeContent();
-                                }
-                            }).fail(function(e) {});
-                            $(".equipTiggerType,.equipTiggerSpot").val("");
-                            break;
-                        case "equipTigger_Link":
-                            $(".equipTiggerCom").val("");
-                            $.when(AlarmCenterContext.post("/api/real/get_setparm", {
-                                equip_nos: linkageEquips.filter((item, index) => {
-                                    if (item.label == country) return item;
-                                })[0].value
-                            })).done(function(n, l) {
-                                if (n.HttpData.code == 200) {
-                                    loadLinkageEquips(n.HttpData.data);
-                                }
-                            }).fail(function(e) {});
-                            break;
-                        case "":
-                            break;
-                    }
-                }
-            }],
-        });
-    }
-}
-//触发类型 
-var link_listInit_type;
 
-function Init_type_fun(id, equipArray) {
-    link_listInit_type = myApp.picker.create({
-        inputEl: '#' + id,
-        cols: [{
-            textAlign: 'center',
-            values: equipArray,
-            onChange: function(picker, country) {
-                $(".equipTiggerSpot").val("");
-                let getType = equipTiggerType.filter((item, index) => {
-                    if (item.children.length > 0 && item.label == country) return item;
-                });
-                try {
-                    link_listInit_spot.destroy();
-                } catch (e) {}
-                try {
-                    Init_spot_fun("equipTiggerSpot", getType[0].children.map(item => {
-                        return item.label
-                    }));
-                } catch (e) {}
-            }
-        }],
+function equipLinkageHtml(dt, array) {
+    var l_html = "";
+    array.forEach(function(item, index) {
+        l_html += `<a href="#" class="col-33">${item}</a>`;
     });
-}
-//触发点
-var link_listInit_spot;
-
-function Init_spot_fun(id, equipArray) {
-    link_listInit_spot = myApp.picker.create({
-        inputEl: '#' + id,
-        cols: [{
-            textAlign: 'center',
-            values: equipArray
-        }],
-    });
-}
-//触发命令
-var link_listInit_com;
-
-function Init_com_fun(id, equipArray) {
-    link_listInit_com = myApp.picker.create({
-        inputEl: '#' + id,
-        cols: [{
-            textAlign: 'center',
-            values: equipArray
-        }],
-    });
-}
-//获取最大ID
-function getMaxID() {
-    var arrayID = [];
-    $("#equipLinkage_set tbody tr").each(function(item) {
-        arrayID.push($(this).attr("TrID"));
-    });
-    if (arrayID.length > 0) return Math.max.apply(null, arrayID) + 1;
-    else return 1;
-}
-//获取存在条件对象
-function getObject(arrayObject, className, index) {
-    if (index == 1) return arrayObject.filter((item, index) => {
-        if (item.children.length > 0 && item.label == $("." + className).val()) return item;
-    });
-    else if (index == 2) return arrayObject.filter((item, index) => {
-        if (item.label == $("." + className).val()) return item;
-    });
-    else if (index == 3) return arrayObject.filter((item, index) => {
-        if (item.set_nm == $("." + className).val()) return item;
-    });
+    return l_html + `<a href="#" class="col-33 opacity"></a><a href="#" class="col-33 opacity"></a>`;
 }

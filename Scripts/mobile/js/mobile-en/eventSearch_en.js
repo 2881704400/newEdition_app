@@ -156,7 +156,7 @@ function onEquipLists() {
 }
 
 function searchEquipItems() {
-    myApp.dialog.progress('<a style="font-size: 1rem">Loading...</a>');
+    loadFun();
     var searchTime = $("#eventSearchTimeId").val();
     var realSearchTime = "";
     if (searchTime) {
@@ -201,7 +201,6 @@ function searchEquipItems() {
                 strData = "<li style='border-bottom:none;text-align:center;line-height:38px'>Check no data</li>";
             }
             $("#eventSearchEquipsId").html(strData);
-            myApp.dialog.close();
             if (EqpEvtDataFlag) {
                 var allowInfinite = true,
                     lastItemIndex = $$('#eventSearchEquipsId li').length,
@@ -214,12 +213,11 @@ function searchEquipItems() {
                     nScrollHight = $(this)[0].scrollHeight;
                     nScrollTop = $(this)[0].scrollTop;
                     if (nScrollTop + nDivHight >= nScrollHight && allowInfinite) {
-                        myApp.dialog.progress('<a style="font-size: 1rem">加载中...</a>');
+                        loadFun();
                         allowInfinite = false;
                         setTimeout(function() {
                             allowInfinite = true;
                             if (lastItemIndex >= maxItems) {
-                                myApp.dialog.close();
                                 return;
                             }
                             var html = '',
@@ -230,7 +228,6 @@ function searchEquipItems() {
                             }
                             $$('#eventSearchEquipsId').append(html);
                             lastItemIndex = $$('#eventSearchEquipsId li').length;
-                            myApp.dialog.close();
                         }, 1000);
                     }
                 });
@@ -255,7 +252,6 @@ function searchEquipItems() {
                 strData = "<li style='border-bottom:none;text-align:center;line-height:38px'>查无数据</li>";
             }
             $("#eventSearchSetId").html(strData);
-            myApp.dialog.close();
             if (SetEvtDataFlag) {
                 var allowInfinite = true,
                     lastItemIndex = $$('#eventSearchSetId li').length,
@@ -268,12 +264,12 @@ function searchEquipItems() {
                     nScrollHight = $(this)[0].scrollHeight;
                     nScrollTop = $(this)[0].scrollTop;
                     if (nScrollTop + nDivHight >= nScrollHight && allowInfinite) {
-                        myApp.dialog.progress('<a style="font-size: 1rem">Loading...</a>');
+                        loadFun();
                         allowInfinite = false;
                         setTimeout(function() {
                             allowInfinite = true;
                             if (lastItemIndex >= maxItems) {
-                                myApp.dialog.close();
+                                
                                 return;
                             }
                             var html = '';
@@ -284,7 +280,7 @@ function searchEquipItems() {
                             }
                             $$('#eventSearchSetId').append(html);
                             lastItemIndex = $$('#eventSearchSetId li').length;
-                            myApp.dialog.close();
+                           
                         }, 1000);
                     }
                 });
@@ -309,7 +305,7 @@ function searchEquipItems() {
                 strData = "<li style='border-bottom:none;text-align:center;line-height:38px'>Check no data</li>";
             }
             $("#eventSearchSystemId").html(strData);
-            myApp.dialog.close();
+   
             if (SysEvtDataFlag) {
                 var allowInfinite = true;
                 var lastItemIndex = $$('#eventSearchSystemId li').length;
@@ -323,11 +319,11 @@ function searchEquipItems() {
                     nScrollTop = $(this)[0].scrollTop;
                     if (nScrollTop + nDivHight >= nScrollHight && allowInfinite) {
                         allowInfinite = false;
-                        myApp.dialog.progress('<a style="font-size: 1rem">Loading...</a>');
+                        loadFun();
                         setTimeout(function() {
                             allowInfinite = true;
                             if (lastItemIndex >= maxItems) {
-                                myApp.dialog.close();
+                               
                                 return;
                             }
                             var html = '';
@@ -338,7 +334,7 @@ function searchEquipItems() {
                             }
                             $$('#eventSearchSystemId').append(html);
                             lastItemIndex = $$('#eventSearchSystemId li').length;
-                            myApp.dialog.close();
+                           
                         }, 1000);
                     }
                 });

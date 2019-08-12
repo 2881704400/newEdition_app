@@ -1,8 +1,7 @@
 ﻿var toastCenterLinkage,toastCenterLinkageSuccess,sceneFlag,removeSceneControl = [],equiplinkageStr = [];
 function sceneEdit_en() {
     switchToolbar("configTool");
-    myApp.dialog.progress('<a style="font-size: 1rem">Loading...</a>');
-    // initAddList();//联动设置
+    loadFun();
     toastCenterLinkage = myApp.toast.create({text: "operation failed", position: 'center', closeTimeout: 2000, });
     toastCenterLinkageSuccess = myApp.toast.create({text: "Successful operation", position: 'center', closeTimeout: 2000, });
 
@@ -32,7 +31,7 @@ function initSceneList_en() {
     })).done(function(n,l){
         let rt = n.HttpData,equipRt = l.HttpData;
         if (n.HttpData.code ==200 && l.HttpData.code ==200) {
-            myApp.dialog.close();
+          
             setList = rt.data, equipList = equipRt.data; 
             //可控设备
             controlEquipList = setList.filter(item => {
@@ -60,10 +59,10 @@ function initSceneList_en() {
                     return item;
             });
             $("#equipLinkage_edit>ul").append(htmlHeader);
-            myApp.dialog.close();
+            
      }
     }).fail(function(e){
-         myApp.dialog.close();
+        
     });
 }
 //场景URL

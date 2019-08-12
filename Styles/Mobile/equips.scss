@@ -407,12 +407,15 @@
             ul {
                 height: 100%;
                 padding-bottom: 100px;
-                overflow: auto;
+                overflow: auto;padding: 1rem;
                 li{
                     background: white;overflow: hidden;
                     &>div{flex-direction: row;padding: 0;}
                     .item-title{width: 30%;height: 44px;line-height: 44px;display: inline-block;}
-                    .item-input-wrap{width: 70%;height: 44px;line-height: 44px;display: inline-block;}
+                    .item-input-wrap{
+                        width: 70%;height: 44px;line-height: 44px;display: inline-block;
+                        input{text-align: center;}
+                    }
                 }
                 &:after {
                     height: 0px;
@@ -492,7 +495,7 @@
 //2-N级列表
 #equipsDetails{
   .equipsDetails-equip-list{
-    padding: 1rem;
+    padding: 1rem;height: 100%;overflow: auto;padding-bottom: 20%;
     li{
         background: white;margin-bottom: 0.5rem;
         i {

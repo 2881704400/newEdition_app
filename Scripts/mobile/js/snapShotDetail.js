@@ -1,4 +1,5 @@
-var userAdmin = [];
+var userAdmin = [],
+    alertMsg = [];
 var chatList, chatTitleName;
 var snapshotDetailArrs = [];
 
@@ -10,7 +11,7 @@ function snapShotDetail() {
     var chatValue = chatObject[urlLength].split("?")[1].split("&");
     chatTitleName = chatValue[0];
     chatList = chatValue[1];
-    $(".auth_name_get").html(chatTitleName)
+    $(".auth_name_get").html(chatTitleName);
     var snapashot_ptr = $$('.snapashotMessage-page-content');
     snapashot_ptr.on("ptr:refresh", refreshpg);
     loadMessage();
@@ -22,25 +23,31 @@ function snapShotDetail() {
     //菜单切换
     $(".snashot-header a").unbind().bind("click", function() {
         $(this).addClass("selectListType").siblings().removeClass("selectListType");
-        var num = parseInt($(this).attr("data-menu"));
-        switch (num) {
-            case 1:
-                $("#snapShotDetailListId").find('li').removeClass("displayNone");
-                break;
-            case 2:
-                $("#snapShotDetailListId").find('li[data-Flag="1"]').removeClass("displayNone");
-                $("#snapShotDetailListId").find('li[data-Flag="2"]').addClass("displayNone");
-                break;
-            case 3:
-                $("#snapShotDetailListId").find('li[data-Flag="1"]').addClass("displayNone");
-                $("#snapShotDetailListId").find('li[data-Flag="2"]').removeClass("displayNone");
-                break;
-            default:
-                break;
-        }
+        initRetrieval();
     });
     //查询内容初始化
     searchResult.length = 0;
+    alertMsg.length = 0;
+    loadFun();
+}
+
+function initRetrieval() {
+    var num = parseInt($(".selectListType").attr("data-menu"));
+    switch (num) {
+        case 1:
+            $("#snapShotDetailListId").find('li').removeClass("displayNone");
+            break;
+        case 2:
+            $("#snapShotDetailListId").find('li[data-Flag="1"]').removeClass("displayNone");
+            $("#snapShotDetailListId").find('li[data-Flag="2"]').addClass("displayNone");
+            break;
+        case 3:
+            $("#snapShotDetailListId").find('li[data-Flag="1"]').addClass("displayNone");
+            $("#snapShotDetailListId").find('li[data-Flag="2"]').removeClass("displayNone");
+            break;
+        default:
+            break;
+    }
 }
 
 function loadMessage() {
@@ -80,7 +87,8 @@ function loadMessage() {
             if (dt.HttpStatus == 200 && dt.HttpData.data) {
                 var result = dt.HttpData.data;
                 statistics(result);
-                let tableListData = [],current = "";
+                let tableListData = [],
+                    current = "";
                 var strSureData = "",
                     strData = "",
                     countNum = 0;
@@ -100,42 +108,49 @@ function loadMessage() {
                             textareaAdviceMsg = result[i].Proc_advice_Msg;
                         }
                         var isSureSpan = "";
+                        alertMsg.push({
+                            obj: result[i],
+                            msg: textareaEventMsg,
+                            adMsg: textareaAdviceMsg
+                        });
                         if (result[i].bConfirmed == false) {
-                            isSureSpan = `<span class="span-color-notsure sure-flag">未确认</span>`;
-                            strData += current =`<li data-Flag="1">
-								<a href='/snapShotInfoDetail/#1&${JSON.stringify(result[i])}&${textareaEventMsg}&${countNum}'  class="item-link item-content"> 
-								    <div class="item-media"><i class="${iconType()}"></i></div>
-									<div class="item-inner"> 
-										<div class="item-title-row"> 
-											<div class="item-subtitle">  ${formatDate(result[i].Time)}  </div> 
-											<div class="item-after">  ${isSureSpan}  </div> 
-										</div> 
-										<div class="item-text item-title fontweight-normal">  ${result[i].EventMsg}  </div> 
-									</div> 
-								</a> 
-								</li>`;
+                            isSureSpan = `<span class="span-color-notsure notConfirmed">未确认</span>`;
+                            strData += current = `<li data-Flag="1">
+                                <a href='/snapShotInfoDetail/#1&${i}&${countNum}'  class="item-link item-content"> 
+                                    <div class="item-media"><i class="${iconType()}"></i></div>
+                                    <div class="item-inner"> 
+                                        <div class="item-title-row"> 
+                                            <div class="item-subtitle">  ${formatDate(result[i].Time)}  </div> 
+                                            <div class="item-after">  ${isSureSpan}  </div> 
+                                        </div> 
+                                        <div class="item-text item-title fontweight-normal">  ${result[i].EventMsg}  </div> 
+                                    </div> 
+                                </a> 
+                                </li>`;
                             countNum++;
                         } else {
-                            isSureSpan = `<span class="span-color-sure sure-flag">已确认</span>`;
+                            isSureSpan = `<span class="span-color-sure confirmed">已确认</span>`;
                             strSureData += current = `<li data-Flag="2"> 
-								<a href='/snapShotInfoDetail/#2&${JSON.stringify(result[i])}&${textareaEventMsg}&${textareaAdviceMsg}'  class="item-link item-content"> 
-								    <div class="item-media"><i class="${iconType()}"></i></div>
-									<div class="item-inner"> 
-										<div class="item-title-row"> 
-											<div class="item-subtitle">  ${formatDate(result[i].Time)}  </div> 
-											<div class="item-after">  ${isSureSpan}  </div> 
-										</div> 
-										<div class="item-text item-title fontweight-normal">  ${result[i].EventMsg}  </div> 
-									</div> 
-								</a> 
-								</li>`;
+                                <a href='/snapShotInfoDetail/#2&${i}'  class="item-link item-content"> 
+                                    <div class="item-media"><i class="${iconType()}"></i></div>
+                                    <div class="item-inner"> 
+                                        <div class="item-title-row"> 
+                                            <div class="item-subtitle">  ${formatDate(result[i].Time)}  </div> 
+                                            <div class="item-after">  ${isSureSpan}  </div> 
+                                        </div> 
+                                        <div class="item-text item-title fontweight-normal">  ${result[i].EventMsg}  </div> 
+                                    </div> 
+                                </a> 
+                                </li>`;
                         }
-                      //查询条件
-                      searchResult.push(current);
+                        //查询条件
+                        searchResult.push(current);
                     }
                     $("#snapShotDetailListId").html(strData + strSureData);
+                    initRetrieval();
                 } else {
                     $("#snapShotDetailListId").html(strData + strSureData);
+                    initRetrieval();
                 }
             }
         }
@@ -179,7 +194,7 @@ function OnSureMessage(countNum, strTime, dt) {
     /*阻止事件冒泡*/
     event.stopPropagation();
     var checkValArr = []; //短信联系人选中值
-    var strAdviceMsg = $("#snapShotInfoDetail").find("textarea").val(); //处理意见值
+    var strAdviceMsg = $(dt).parent().find(".advice-textarea").val(); //处理意见值
     var isShortMsg = "";
     if ($("#snapShotInfoDetail").find('.isProcsInput').is(':checked')) {
         $("#snapShotInfoDetail").find('input[name="my-checkbox"]:checked').each(function() {
@@ -207,12 +222,12 @@ function OnSureMessage(countNum, strTime, dt) {
             Authorization: window.localStorage.ac_appkey + '-' + window.localStorage.ac_infokey
         },
         data: {
-            msg: strAdviceMsg, //处理意见
             shortmsg: isShortMsg, //是否发送短信
             telUser: checkValArr.toString(), //发送人的电话
             evtname: strEventMsg, //事件名
             time: TimeArr[0] + "." + strTimeArr, //事件时间
-            userName: window.localStorage.userName //是否发送短信
+            userName: window.localStorage.userName, //是否发送短信
+            msg: strAdviceMsg //处理意见
         },
         success: function(dt) {
             if (dt.HttpStatus == 200 && dt.HttpData.data) {

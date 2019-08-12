@@ -132,7 +132,7 @@ function openFileCommand_en(dt, equip_no, main_instruction, minor_instruction, v
         value: value
     })).done(function(n) { 
         if (n.HttpData.code == 200 || n.HttpData.code == 201) {
-            myApp.dialog.progress('<a style="font-size: 1rem">Loading...</a>');
+            loadFun();
             //辨别点击历史记录或者普通记录
             $(dt).hasClass("historyPPT") ? window.localStorage.historyis = 1 : window.localStorage.historyis = 0;
             //点击的是文件,则保存点击记录
@@ -151,7 +151,7 @@ function openFileCommand_en(dt, equip_no, main_instruction, minor_instruction, v
 
                             window.localStorage.sessionFilename = result.Session; //data[1];
                             window.localStorage.sessionValue = result.PageCount; //data[1];
-                            myApp.dialog.close();
+                           
                             clearInterval(setTimeout);
                             myApp.router.navigate('/mobile-en/pptDetails_en/');
                         }
@@ -164,9 +164,9 @@ function openFileCommand_en(dt, equip_no, main_instruction, minor_instruction, v
                 $(".setviewPng").attr('src', src);
             }
         } else {
-            myApp.dialog.close();
+            
         }
     }).fail(function(e) {
-        myApp.dialog.close();
+       
     });
 }

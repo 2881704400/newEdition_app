@@ -1,17 +1,25 @@
-.eventSearchPageContent {
-    padding-bottom: 50px !important;
+.equipSearchDetailContent {
+   overflow: hidden;
 }
 .equipSearchDetailContent.page-content {
     .eventDetailList {
-        margin: 0.5rem;    padding: 20px 0;
+       padding: 1rem;margin: 0;
+       height: 100%;
+       background: white;
+       ul{
+        li{padding-bottom: 0.5rem;padding-left: 0;}
+        li:nth-child(1){input{text-align: right;}};
+        li:nth-child(2){.item-input-wrap{margin: 1rem 0 0.5rem 0;padding: 0 10px;background: #F5F5F5;}};
+        li:nth-child(3){.item-input-wrap{margin: 1rem 0 0.5rem 0;padding: 10px;background: #F5F5F5;}};
+        li:nth-child(4){.item-input-wrap{margin: 1rem 0 0.5rem 0;padding: 10px;background: #F5F5F5;}};
+
+       }
         input,
         textarea {
             font-size: 0.875rem;
         }
         textarea{height: auto;}
-        .item-input-wrap {
-            border-bottom: 0px solid rgba(0, 0, 0, .12);
-        }
+  
     }
 }
 .equipSearchDetailContent .navbar {
@@ -80,6 +88,18 @@
     width: 100%;
     height: 100%;
     padding: 0.5rem;
+    &>div{margin: 0;padding-bottom: 100px;
+        h2{padding: 1rem 0;font-weight: 500;}
+        ul{
+            padding-bottom: 20px;
+            li{
+            background: white;margin-bottom: 0.5rem;
+            .item-text{
+                color: #ccc;
+                font-size: 12px;
+                font-weight: 500;
+            }
+            }}}
     .event-search-box {
         width: 100%;
         height: 78px;
@@ -435,7 +455,6 @@
             .tab-table-header {
                 width: 100%;
                 height: 36px;
-                // background-color: white; 
                 position: relative;
                 span {
                     width: 25%;
@@ -520,3 +539,36 @@
         }
     }
 }
+
+//筛选事件
+.popoverEventSearch{
+   padding: 1rem;
+   .popoverEventSearch-head{
+    div{width: 46%!important;
+     fieldset{
+        legend{font-size: 12px;padding: 0 10px;}
+         color: #BFBFBF;border: 2px solid #BFBFBF;border-radius: 6px;   
+        input{color: #000;width: 100%; text-align: center; padding: 5px 0; }
+     }}
+   }
+   .popoverEventSearch-footer{
+    &>div{width: 46%!important;border: 2px solid #BFBFBF;border-radius: 6px;padding: 10px 0;}
+    input{color: #000;width: 100%; text-align: center; padding: 5px 0;}
+   }
+   &>div{position: relative;}
+   &>div:after{content: "—";color: #999;position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);}
+}
+.eventSearchConfirm{    
+    font-size: 1.2rem;
+    color: white;
+    width: calc(100% - 2rem);
+    text-align: center;
+    display: inline-block;
+    position: absolute;
+    bottom: 1rem;
+    background: #2D2E30;
+    border-radius: 6px;
+    left: 1rem;
+    padding: 0.8rem;
+}
+.eventSearchSheet{.no-hairlines{a{text-align: center;}}}

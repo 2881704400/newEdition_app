@@ -1,114 +1,125 @@
-﻿
-var hubConn,hubProxy,AlarmCenterContext = {
-
+﻿var hubConn, hubProxy, AlarmCenterContext = {
     projectName: "AlarmCenter",
-    //单个设备实时状态 
-    getYCStatus: function (equipno, ycno) {
-        return this.get("/api/DataCenter/YCStatus?equipno="+equipno+"&ycno="+ycno);
+    //设置命令-需要传值
+    setCommandValue: function(equipno, set_no, value) {
+        return this.post("/api/DataCenter/SetParmControl", {
+            data: {
+                equipno: equipno,
+                set_no: set_no,
+                value: value
+            }
+        });
     },
-     //获取指定设备所有状态
-    getAllYCStatus: function (equipno) {
-        return this.get("/api/DataCenter/YCStatus?equipno="+equipno)
+
+    // 系统配置
+    getEquipList: function() {//获取设备列表
+        return this.post("/GWService.asmx/EquipItemList", {}, null);
     },
-     //获取设备的当前状态
-    getEquipById: function (equipno) {
-        return this.get("/api/DataCenter/EquipStatus?equipno="+equipno);
+    
+    getAccess: function() {//获取资产列表
+        return this.post("/api/GWServiceWebAPI/get_GWZiChanTableData", {
+            getDataTable: ""
+        }, null);
     },
-     //设置命令
-    setCommand: function (equipno,set_no) {
-        return this.post("/api/DataCenter/SetParmControl",{equipno: equipno,set_no: set_no});
-    }, 
-     //设置命令-需要传值
-    setCommandValue: function (equipno,set_no,value) {
-        return this.post("/api/DataCenter/SetParmControl",{data:{equipno: equipno,set_no: set_no,value:value}});
-    }, 
-    /*获取设备列表*/
-    getEquipList:function (){
-  		return this.post("/GWService.asmx/EquipItemList",{},null);
+    getPlan: function() {//获取预案号列表
+        return this.post("/api/GWServiceWebAPI/get_PlanData", {
+            getDataTable: ""
+        });
     },
-    /*获取设备事件*/
-    getEquipEvent:function(equipno,start,end){
-    	
+    getAlarmWay: function() {//获取报警方式列表
+        return this.post("/api/GWServiceWebAPI/get_AlarmProcData", {
+            getDataTable: ""
+        });
     },
-    /*获取设置事件*/
-    getSetEvent:function(equipno,start,end){
-    	
+    getLinkVideo: function() {//获取关联视频列表
+        return this.post("/api/GWServiceWebAPI/get_VideoInfoData", {
+            getDataTable: ""
+        });
     },
-    /*获取系统事件*/
-    getSysEvent:function(start,end){
-    	
+    setEquipConfig: function(data) {//设备配置多个
+        return this.post("/api/real/get_equip", {
+            equip_nos: data
+        }, null);
     },
-    /*获取系统配置*/
-    getSysSet:function(tabType,equipno){
-   	
+    setYcConfig: function(data) {//遥测配置多个
+        return this.post("/api/real/get_ycp", {
+            equip_nos: data
+        });
     },
-    /*获取资产列表*/
-    getAccess:function(){
-    	return this.post("/api/GWServiceWebAPI/get_GWZiChanTableData",{getDataTable:""},null);
+    setYxConfig: function(data) {//遥信配置多个
+        return this.post("/api/real/get_yxp", {
+            equip_nos: data
+        });
     },
-    /*获取预案号列表*/
-    getPlan:function(){
-    	return this.post("/api/GWServiceWebAPI/get_PlanData",{getDataTable:""});
+    setSetConfig: function(data) {//设置配置多个
+        return this.post("/api/real/get_setparm", {
+            equip_nos: data
+        });
     },
-    /*获取报警方式列表*/
-    getAlarmWay:function(){
-    	return this.post("/api/GWServiceWebAPI/get_AlarmProcData",{getDataTable:""});
+    setYcConfigSingle: function(equipNo, ycpNo) {//配置表 
+        return this.post("/api/real/get_ycp_single", {
+            equip_no: equipNo,
+            ycp_no: ycpNo
+        });
     },
-    /*获取关联视频列表*/
-    getLinkVideo:function(){
-    	return this.post("/api/GWServiceWebAPI/get_VideoInfoData",{getDataTable:""});
+    setYxConfigSingle: function(equipNo, yxpNo) {
+        return this.post("/api/real/get_yxp_single", {
+            equip_no: equipNo,
+            yxp_no: yxpNo
+        });
     },
-    /*设备配置多个*/
-    setEquipConfig:function(data){
-    	return this.post("/api/real/get_equip",{equip_nos:data},null);
+    setSetConfigSingle: function(equipNo, setNo) {
+        return this.post("/api/real/get_setparm_single", {
+            equip_no: equipNo,
+            set_no: setNo
+        });
     },
-    /*遥测配置多个*/
-    setYcConfig:function(data){
-    	return this.post("/api/real/get_ycp",{equip_nos:data});
+    updEquipConfig: function(data) {
+        return this.post("/api/real/update_equip", {
+            update: data
+        });
     },
-    /*遥信配置多个*/
-    setYxConfig:function(data){
-    	return this.post("/api/real/get_yxp",{equip_nos:data});
+    updYcConfig: function(data) {
+        return this.post("/api/real/update_ycp", {
+            update: data
+        });
     },
- 	/*设置配置多个*/
- 	setSetConfig:function(data){
-    	return this.post("/api/real/get_setparm",{equip_nos:data });
+    updYxConfig: function(data) {
+        return this.post("/api/real/update_yxp", {
+            update: data
+        });
     },
-    //配置表 
-    setYcConfigSingle:function(equipNo,ycpNo){
-    	return this.post("/api/real/get_ycp_single",{equip_no:equipNo,ycp_no:ycpNo });
+    updSetConfig: function(data) {
+        return this.post("/api/real/update_setparm", {
+            update: data
+        });
     },
-    setYxConfigSingle:function(equipNo,yxpNo){
-    	return this.post("/api/real/get_yxp_single",{equip_no:equipNo,yxp_no:yxpNo });
+    //系统查询
+    QueryEquipEvt: function(times,equip_no_list){  //设备事件
+         return this.post("/GWService.asmx/QueryEquipEvt", {
+            "times": times,
+            "equip_no_list": equip_no_list
+        });       
     },
-    setSetConfigSingle:function(equipNo,setNo){
-    	return this.post("/api/real/get_setparm_single",{equip_no:equipNo,set_no:setNo });
+    QuerySetupsEvt: function(times,equip_no_list){  //设置事件
+        return this.post("/GWService.asmx/QuerySetupsEvt", {
+            "times": times,
+            "equip_no_list": equip_no_list
+        });
     },
-    updEquipConfig:function(data){
-    	return this.post("/api/real/update_equip",{update:data});
+    QuerySystemEvt: function(times,equip_no_list){  //系统时间
+        return this.post("/GWService.asmx/QuerySystemEvt", {
+            "times": times,
+            "equip_no_list": equip_no_list
+        });
     },
-    updYcConfig:function(data){
-    	return this.post("/api/real/update_ycp",{update:data});
+    //欢迎词
+    GetFileStructure: function(url,fileName){
+        return this.post("/api/Other/GetFileStructure", {
+            filePath: url,
+            fileName: fileName,
+        });  
     },
-    updYxConfig:function(data){
-    	return this.post("/api/real/update_yxp",{update:data});
-    },
-    updSetConfig:function(data){
-    	return this.post("/api/real/update_setparm",{update:data});
-    },
-    //PPT 
-     pptConfig:function(equip){
-        return this.get("/api/PPT/GetCurrenSession?equip="+equip,{});
-    },   
-     equip_yxp_state:function(equipno, yxno){//旧版本遥信
-        return this.post("/api/real/equip_yxp_state",{equip_no: equipno,yxp_no: yxno});
-    },  
-     equip_ycp_state:function(equipno, ycno){//旧版本遥测
-        return this.post("/api/real/equip_ycp_state",{equip_no: equipno,ycp_no: ycno});
-    },   
-     setup:function(equipno){//旧版本控制
-        return this.post("/api/real/setup",{equip_no: '51',main_instr: 'SetYCYXValue',mino_instr: 'X_38',value: '1'});
-    },    
     connectServer: function(equipNo) {
         hubConn = null
         hubConn = $.hubConnection();
@@ -124,21 +135,19 @@ var hubConn,hubProxy,AlarmCenterContext = {
         hubProxy.on('sendYcpSingle', data => {
             // console.log('yccccp----------------', data)
             try {
-                var index = data.split(",")[0],name = data.split(",")[1],
-                    value = data.split(",")[2],statusY = new Boolean(data.split(",")[4]),
+                var index = data.split(",")[0],
+                    name = data.split(",")[1],
+                    value = data.split(",")[2],
+                    statusY = new Boolean(data.split(",")[4]),
                     companyString = data.split(",")[5];
-
-                    $(".edName[data-no = '"+index+"']").text(name);
-                    $(".edValue[data-no = '"+index+"']").text(value);
-                    $(".edCompany[data-no = '"+index+"']").text(companyString);
-                    if(!statusY)
-                    {
-                        $(".edIcon[data-no = '"+index+"']").removeClass("circle_green").addClass("circle_red");
-                    }
-                    else
-                    {
-                        $(".edIcon[data-no = '"+index+"']").addClass("circle_green").removeClass("circle_red");
-                    }
+                $(".edName[data-no = '" + index + "']").text(name);
+                $(".edValue[data-no = '" + index + "']").text(value);
+                $(".edCompany[data-no = '" + index + "']").text(companyString);
+                if (!statusY) {
+                    $(".edIcon[data-no = '" + index + "']").removeClass("circle_green").addClass("circle_red");
+                } else {
+                    $(".edIcon[data-no = '" + index + "']").addClass("circle_green").removeClass("circle_red");
+                }
             } catch (e) {}
         });
         // yxp有广播消息
@@ -190,13 +199,11 @@ var hubConn,hubProxy,AlarmCenterContext = {
             hubConn.stop();
         })
         // 高频连接触发
-        hubConn.connectionSlow((err) => {
-        })
+        hubConn.connectionSlow((err) => {})
         // 收到signalr消息触发
-        hubConn.received((err) => {
-        })
-    },                    
-    get: function (url, data) {
+        hubConn.received((err) => {})
+    },
+    get: function(url, data) {
         var i = $.Deferred();
         $.ajax({
             url: url,
@@ -207,19 +214,19 @@ var hubConn,hubProxy,AlarmCenterContext = {
             dataType: "JSON",
             headers: {
                 Authorization: window.localStorage.ac_appkey + '-' + window.localStorage.ac_infokey,
-            },             
+            },
             timeout: 3e4,
-            success: function (e) {
+            success: function(e) {
                 i.resolveWith(this, [e])
             },
-            error: function (e, n) {
+            error: function(e, n) {
                 i.rejectWith(this, ["网络异常，请稍候重试"]);
                 // console.log(JSON.stringify(e), n)
             }
         });
         return i.promise()
     },
-    post: function (url, data) {
+    post: function(url, data) {
         var i = $.Deferred();
         return $.ajax({
             url: url,
@@ -227,22 +234,20 @@ var hubConn,hubProxy,AlarmCenterContext = {
             type: "POST",
             headers: {
                 Authorization: window.localStorage.ac_appkey + '-' + window.localStorage.ac_infokey,
-            },              
+            },
             timeout: 3e4,
-            success: function (e) {
+            success: function(e) {
                 i.resolveWith(this, [e])
             },
-            error: function (e, n) {
+            error: function(e, n) {
                 i.rejectWith(this, ["网络异常，请稍候重试"]);
-                    // console.log(JSON.stringify(e), n)
+                // console.log(JSON.stringify(e), n)
             }
         }), i.promise();
     }
 }
-
 // 示例
 // $.when(AlarmCenterContext.getYCStatus(1,1)).done(function(n,l){
 //   console.log(n);
 // }).fail(function(e){
-
 // });

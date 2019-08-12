@@ -5,7 +5,8 @@ function ycAndyx() {
     var equip_no = url.split("&")[0];
     var name = url.split("&")[1];
 
-    $(".sliding,.title-large-text").text(name);
+    $(".sliding,.ycAndyx-title-large").text(name);
+    
     realShows(equip_no, name)
     var searchbar = myApp.searchbar.create({
         el: '.searchbar2',

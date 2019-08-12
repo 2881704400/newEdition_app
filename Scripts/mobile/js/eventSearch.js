@@ -1,342 +1,136 @@
-var equip_list = null, realEquipList = "", EqpEvtData = null, SetEvtData = null, SysEvtData = null, EqpEvtDataFlag = true, SetEvtDataFlag = true, SysEvtDataFlag = true,equipPicker;
+var toastCenter,allEquip = [],
+    allEvent = ['设备事件', '设置事件', '系统事件'];
 
 function eventSearch() {
     switchToolbar("functionalModule_pageTool");
-    EqpEvtDataFlag = true, SetEvtDataFlag = true, SysEvtDataFlag = true;
+    var startTime = myApp.calendar.create({
+            inputEl: '#startTime',
+            value: [new Date()],
+            openIn: 'customModal',
+            toolbarCloseText: "确定",
+            footer: false,
+            dateFormat: 'yyyy年mm月dd日',
+            monthNames: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+            dayNamesShort: ["日", "一", "二", "三", "四", "五", "六"],
+            rangePicker: false,
+            on: {
+                init: function(e) {
+                    setDateAttr(e, "startTime");
+                },
+                closed: function(e) {
+                    setDateAttr(e, "startTime");
+                },
+            }
+        }),
+        endTime = myApp.calendar.create({
+            inputEl: '#endTime',
+            value: [new Date()],
+            openIn: 'customModal',
+            toolbarCloseText: "确定",
+            footer: false,
+            dateFormat: 'yyyy年mm月dd日',
+            monthNames: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+            dayNamesShort: ["日", "一", "二", "三", "四", "五", "六"],
+            rangePicker: false,
+            on: {
+                init: function(e) {
+                    setDateAttr(e, "endTime");
+                },
+                closed: function(e) {
+                    setDateAttr(e, "endTime");
+                },
+            }
+        });
+        toastCenter = myApp.toast.create({
+          text: '暂无数据',
+          position: 'center',
+          closeTimeout: 2000,
+        });
     //初始化
-    $("#eventSearchTimeId").val(getNowTime() + " - " + getNowTime());
-    $("#eventSearchEquipId").val("全部设备");
-    $("#eventSearchTypeId").val("设备事件");
-    //加载所有设备
+    $("#searchAllEquip").val("全部设备");
+    $("#searchAllEvent").val("设备事件");
     onEquipLists();
-    var calendarModal = myApp.calendar.create({
-        inputEl: '#eventSearchTimeId',
-        openIn: 'customModal',
-        toolbarCloseText: "确定",
-        footer: true,
-        dateFormat: 'yyyy/mm/dd',
-        monthNames: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
-        dayNamesShort: ["日", "一", "二", "三", "四", "五", "六"],
-        rangePicker: true,
-        on: {
-            closed: function(e) {
-                var value = $("#eventSearchTimeId").val();
-                var searchTime = $("#eventSearchTimeId").val();
-                var realSearchTime = "";
-                if (searchTime) {
-                    var searchTimeArrs = searchTime.split(" - ");
-                    if (searchTimeArrs.length == 1) {
-                        realSearchTime += searchTimeArrs[0] + " - " + searchTimeArrs[0];
-                    } else {
-                        realSearchTime = searchTime;
-                    }
-                    $("#eventSearchTimeId").val(realSearchTime);
-                }
-            },
-        }
-    });
-    //事件类型选择
-    var pickerModel = myApp.picker.create({
-        inputEl: '#eventSearchTypeId',
-        rotateEffect: false,
-        renderToolbar: function() {
-            return '<div class="toolbar">' + '<div class="toolbar-inner">' + '<div class="left">' + '<a href="#" class="link sheet-close popover-close">取消</a>' + '</div>' + '<div class="center">' + '<a href="#" class="link toolbar-randomize-link">选择设备</a>' + '</div>' + '<div class="right">' + '<a href="#" class="link sheet-close popover-close">确定</a>' + '</div>' + '</div>' + '</div>';
-        },
-        cols: [{
-            textAlign: 'center',
-            values: ['设备事件', '设置事件', '系统事件']
-        }],
-        on: {
-            change: function(picker, values, displayValues) {
-                $("#eventSearchTypeId").html(values);
-                values = values + "";
-                $(".eventSearchContent .tabs .tab").each(function() {
-                    $(this).removeClass("tab-active");
-                });
-                if (values == "设备事件") {
-                    $(".eventSearchContent .tabs .tab").eq(0).addClass("tab-active");
-                } else if (values == "设置事件") {
-                    $(".eventSearchContent .tabs .tab").eq(1).addClass("tab-active");
-                } else {
-                    $(".eventSearchContent .tabs .tab").eq(2).addClass("tab-active");
-                }
-            },
-        }
-    })
 }
 //加载所有设备
 function onEquipLists() {
     var _url = service + "/EquipItemList";
-
     function _successf(data) {
         var resultJs = $(data).children("string").text();
         if (resultJs != "false") {
             equip_list = new Array();
-            var usera = JSON.parse(resultJs);
-            var allEquipList = ["全部设备"];
-            equip_list[0] = new Array('全部设备', 'x');
-            for (var i = 1; i < usera.length; i++) {
-                var userb = usera[i];
-                var userc = new Array(userb.name, userb.value);
-                equip_list[i] = userc;
-                allEquipList.push(userb.name);
-                realEquipList += userb.value + ",";
+            allEquip = JSON.parse(resultJs);
+            var str = "";
+            for (var arry in allEquip) {
+                if (allEquip[arry].value && arry == allEquip.length - 1) str += allEquip[arry].value;
+                else if (allEquip[arry].value) str += (allEquip[arry].value + ",");
             }
-            if (realEquipList.length > 0) {
-                realEquipList = realEquipList.substring(0, realEquipList.length - 1);
-            }
-            //设备选择
-            equipPicker = myApp.picker.create({
-                inputEl: '#eventSearchEquipId',
-                rotateEffect: false,
-                renderToolbar: function() {
-                    return '<div class="toolbar">' + '<div class="toolbar-inner">' + '<div class="left">' + '<a href="#" class="link sheet-close popover-close">取消</a>' + '</div>' + '<div class="center">' + '<a href="#" class="link toolbar-randomize-link">选择设备</a>' + '</div>' + '<div class="right">' + '<a href="#" class="link sheet-close popover-close">确定</a>' + '</div>' + '</div>' + '</div>';
-                },
-                cols: [{
-                    textAlign: 'center',
-                    values: allEquipList
-                }],
-                on: {
-                    change: function(picker, values, displayValues) {
-                        $("#eventSearchEquipId").html(values);
-                        $("#eventSearchEquipId").attr("readonly", false);
-                    },
-                    closed: function(picker) {
-                        if (picker.cols[0].values.length > 0) {
-                            var value = picker.cols[0].values[0];
-                            var realValue = equipPicker.cols[0].value;
-                            equipPicker.cols[0].replaceValues(allEquipList, "");
-                            var inputValue = $("#eventSearchEquipId").val();
-                            var equipCountNum = false;
-                            for (var n = 0; n < allEquipList.length; n++) {
-                                if (allEquipList[n] == inputValue) {
-                                    equipCountNum = true;
-                                    break;
-                                }
-                            }
-                            if (!equipCountNum) {
-                                equipPicker.cols[0].setValue(value);
-                                $("#eventSearchEquipId").val(value);
-                            } else {
-                                equipPicker.cols[0].setValue(realValue);
-                            }
-                        } else {
-                            equipPicker.cols[0].replaceValues(allEquipList, "");
-                        }
-                        $("#eventSearchEquipId").attr("readonly", true);
-                    },
-                    opened: function(e) {
-                        $("#eventSearchEquipId").attr("readonly", false);
-                    }
-                }
+            allEquip.unshift({
+                name: "全部设备",
+                value: str
             });
-            $("#eventSearchEquipId").bind('input', function() {
-                var value = $(this).val();
-                var strValueArr = [];
-                for (var n = 0; n < allEquipList.length; n++) {
-                    if (allEquipList[n].indexOf(value) > -1) {
-                        strValueArr.push(allEquipList[n]);
-                    }
-                }
-                equipPicker.cols[0].replaceValues(strValueArr, "");
+            $("#searchAllEquip").attr("data-no", str);
+            allEquip = allEquip.filter((item, index) => {
+                if (item.value) return item;
             });
+            searchEquipItems();
         }
     }
-    JQajaxoNoCancel("post", _url, false, "", _successf);
-}
 
+    function _error(e) {}
+    JQajaxoNoCancel("post", _url, false, "", _successf, _error);
+}
+//请求
 function searchEquipItems() {
-    myApp.dialog.progress('<a style="font-size: 1rem">加载中...</a>');
-    var searchTime = $("#eventSearchTimeId").val();
-    var realSearchTime = "";
-    if (searchTime) {
-        var searchTimeArrs = searchTime.split(" - ");
-        if (searchTimeArrs.length == 1) {
-            realSearchTime += searchTimeArrs[0] + " 00:00:00";
-        } else if (searchTimeArrs.length == 2) {
-            realSearchTime += searchTimeArrs[0] + " 00:00:00," + searchTimeArrs[1] + " 23:59:59";
-        } else {
-            realSearchTime += getNowTime() + " 00:00:00";
-        }
-    }
-    var searchEquip = $("#eventSearchEquipId").val();
-    var realSearchEquip = "";
-    for (var n = 0; n < equip_list.length; n++) {
-        if (equip_list[n][0] == searchEquip) {
-            if (equip_list[n][0] == "全部设备") {
-                realSearchEquip = realEquipList;
-            } else {
-                realSearchEquip = equip_list[n][1];
-            }
-            break;
-        }
-    }
-    var searchTabType = $("#eventSearchTypeId").val();
-    var _url = "",
-        _data = "";
+    $(".eventSearchContent>div").html("");
+    loadFun();
+    var startimeval = $("#startTime").attr("date-val"),
+        endtimeval = $("#endTime").attr("date-val"),
+        realSearchTime = startimeval + "," + endtimeval,
+        realSearchEquip = $("#searchAllEquip").attr("data-no"),
+        searchTabType = $("#searchAllEvent").val(),eventList = [],inNum,postData;
+    //把时间线填充进eventList中
+    eventList = eventListHandle(startimeval.split(" ")[0],endtimeval.split(" ")[0]);
     if (searchTabType == "设备事件") {
-        _url = service + "/QueryEquipEvt";
-        _data = "times=" + realSearchTime + "&&equip_no_list=" + realSearchEquip;
-
-        function _successEqp(data) {
-            var resultJs = $(data).children("string").text();
-            var result = EqpEvtData = JSON.parse(resultJs);
-            var resultLength = result.length > 20 ? 20 : result.length;
-            var strData = "";
-            if (result && result != "false") {
-                for (var i = 0; i < resultLength; i++) {
-                    strData += "<li onclick='showEventDetail(0,\"" + result[i].time + "\",\"" + result[i].event + "\")'>" + '		<span>' + result[i].time + '</span>' + '		<span>' + result[i].equip_nm + '</span>' + '		<span>' + result[i].event + '</span>' + '	</li>';
-                }
-            } else {
-                strData = "<li style='border-bottom:none;text-align:center;line-height:38px'>查无数据</li>";
-            }
-            $("#eventSearchEquipsId").html(strData);
-            myApp.dialog.close();
-            if (EqpEvtDataFlag) {
-                var allowInfinite = true;
-                var lastItemIndex = $$('#eventSearchEquipsId li').length;
-                var maxItems = EqpEvtData.length;
-                var itemsPerLoad = 20;
-                var nScrollHight = 0; //滚动距离总长(注意不是滚动条的长度)
-                var nScrollTop = 0; //滚动到的当前位置
-                var nDivHight = $("#tab1").height();
-                $("#tab1").unbind('srcoll').bind('scroll', function() {
-                    nScrollHight = $(this)[0].scrollHeight;
-                    nScrollTop = $(this)[0].scrollTop;
-                    if (nScrollTop + nDivHight >= nScrollHight && allowInfinite) {
-                        allowInfinite = false;
-                        setTimeout(function() {
-                            allowInfinite = true;
-                            if (lastItemIndex >= maxItems) {
-                                return;
-                            }
-                            var html = '';
-                            var lastItemIndexMax = lastItemIndex + itemsPerLoad;
-                            lastItemIndexMax = lastItemIndexMax >= maxItems ? maxItems : lastItemIndexMax;
-                            for (var i = lastItemIndex; i < lastItemIndexMax; i++) {
-                                html += "<li onclick='showEventDetail(0,\"" + EqpEvtData[i].time + "\",\"" + EqpEvtData[i].event + "\")'>" + '		<span>' + EqpEvtData[i].time + '</span>' + '		<span>' + EqpEvtData[i].equip_nm + '</span>' + '		<span>' + EqpEvtData[i].event + '</span>' + '	</li>';
-                            }
-                            $$('#eventSearchEquipsId').append(html);
-                            lastItemIndex = $$('#eventSearchEquipsId li').length;
-                            myApp.dialog.close();
-                        }, 1000);
-                    }
-                });
-                EqpEvtDataFlag = false;
-            }
-        }
-        JQajaxoNoCancel("post", _url, true, _data, _successEqp);
+        postData = AlarmCenterContext.QueryEquipEvt(realSearchTime,realSearchEquip);
+        inNum = 0;
     } else if (searchTabType == "设置事件") {
-        _url = service + "/QuerySetupsEvt";
-        _data = "times=" + realSearchTime + "&&equip_no_list=" + realSearchEquip;
-
-        function _successSet(data) {
-            var resultJs = $(data).children("string").text();
-            var result = SetEvtData = JSON.parse(resultJs);
-            var strData = "";
-            var resultLength = result.length > 20 ? 20 : result.length;
-            if (result && result != "false") {
-                for (var i = 0; i < resultLength; i++) {
-                    strData += "<li onclick='showEventDetail(1,\"" + result[i].time + "\",\"" + result[i].event + "\")'>" + '		<span>' + result[i].time + '</span>' + '		<span>' + result[i].equip_nm + '</span>' + '		<span>' + result[i].event + '</span>' + '	</li>';
-                }
-            } else {
-                strData = "<li style='border-bottom:none;text-align:center;line-height:38px'>查无数据</li>";
-            }
-            $("#eventSearchSetId").html(strData);
-            myApp.dialog.close();
-            if (SetEvtDataFlag) {
-                var allowInfinite = true;
-                var lastItemIndex = $$('#eventSearchSetId li').length;
-                var maxItems = SetEvtData.length;
-                var itemsPerLoad = 20;
-                var nScrollHight = 0; //滚动距离总长(注意不是滚动条的长度)
-                var nScrollTop = 0; //滚动到的当前位置
-                var nDivHight = $("#tab2").height();
-                $("#tab2").unbind('srcoll').bind('scroll', function() {
-                    nScrollHight = $(this)[0].scrollHeight;
-                    nScrollTop = $(this)[0].scrollTop;
-                    if (nScrollTop + nDivHight >= nScrollHight && allowInfinite) {
-                        allowInfinite = false;
-                        setTimeout(function() {
-                            allowInfinite = true;
-                            if (lastItemIndex >= maxItems) {
-                                return;
-                            }
-                            var html = '';
-                            var lastItemIndexMax = lastItemIndex + itemsPerLoad;
-                            lastItemIndexMax = lastItemIndexMax >= maxItems ? maxItems : lastItemIndexMax;
-                            for (var i = lastItemIndex; i < lastItemIndexMax; i++) {
-                                html += "<li onclick='showEventDetail(1,\"" + SetEvtData[i].time + "\",\"" + SetEvtData[i].event + "\")'>" + '		<span>' + SetEvtData[i].time + '</span>' + '		<span>' + SetEvtData[i].equip_nm + '</span>' + '		<span>' + SetEvtData[i].event + '</span>' + '	</li>';
-                            }
-                            $$('#eventSearchSetId').append(html);
-                            lastItemIndex = $$('#eventSearchSetId li').length;
-                            myApp.dialog.close();
-                        }, 1000);
-                    }
-                });
-                SetEvtDataFlag = false;
-            }
-        }
-        JQajaxoNoCancel("post", _url, true, _data, _successSet);
+        postData = AlarmCenterContext.QuerySetupsEvt(realSearchTime,realSearchEquip);
+        inNum = 1;
     } else {
-        _url = service + "/QuerySystemEvt";
-        _data = "times=" + realSearchTime;
-
-        function _successSys(data) {
-            var resultJs = $(data).children("string").text();
-            var result = SysEvtData = JSON.parse(resultJs);
-            var resultLength = result.length > 20 ? 20 : result.length;
-            var strData = "";
-            if (result && result != "false") {
-                for (var i = 0; i < resultLength; i++) {
-                    strData += "<li onclick='showEventDetail(2,\"" + result[i].time + "\",\"" + result[i].event + "\")'>" + '		<span>' + result[i].time + '</span>' + '		<span>' + result[i].event + '</span>' + '	</li>';
-                }
-            } else {
-                strData = "<li style='border-bottom:none;text-align:center;line-height:38px'>查无数据</li>";
-            }
-            $("#eventSearchSystemId").html(strData);
-            myApp.dialog.close();
-            if (SysEvtDataFlag) {
-                var allowInfinite = true;
-                var lastItemIndex = $$('#eventSearchSystemId li').length;
-                var maxItems = SysEvtData.length;
-                var itemsPerLoad = 20;
-                var nScrollHight = 0; //滚动距离总长(注意不是滚动条的长度)
-                var nScrollTop = 0; //滚动到的当前位置
-                var nDivHight = $("#tab3").height();
-                $("#tab3").unbind('srcoll').bind('scroll', function() {
-                    nScrollHight = $(this)[0].scrollHeight;
-                    nScrollTop = $(this)[0].scrollTop;
-                    if (nScrollTop + nDivHight >= nScrollHight && allowInfinite) {
-                        allowInfinite = false;
-                        setTimeout(function() {
-                            allowInfinite = true;
-                            if (lastItemIndex >= maxItems) {
-                                return;
-                            }
-                            var html = '';
-                            var lastItemIndexMax = lastItemIndex + itemsPerLoad;
-                            lastItemIndexMax = lastItemIndexMax >= maxItems ? maxItems : lastItemIndexMax;
-                            for (var i = lastItemIndex; i < lastItemIndexMax; i++) {
-                                html += "<li onclick='showEventDetail(2,\"" + SysEvtData[i].time + "\",\"" + SysEvtData[i].event + "\")'>" + '		<span>' + SysEvtData[i].time + '</span>' + '		<span>' + SysEvtData[i].event + '</span>' + '	</li>';
-                            }
-                            $$('#eventSearchSystemId').append(html);
-                            lastItemIndex = $$('#eventSearchSystemId li').length;
-                            myApp.dialog.close();
-                        }, 1000);
-                    }
-                });
-                SysEvtDataFlag = false;
-            }
-        }
-        JQajaxoNoCancel("post", _url, true, _data, _successSys);
+        postData = AlarmCenterContext.QuerySystemEvt(realSearchTime,realSearchEquip);
+        inNum = 2;
     }
-}
+    $.when(postData).done(function(n){
+        var resultJs = $(n).children("string").text();
+        if(resultJs == "false")
+        {
+            toastCenter.open();
+            return;
+        }
+        var result =  JSON.parse(resultJs);
+        result.forEach((item,index)=>{
+            var timeInit = new Date(item.time.split(" ")[0]).getTime();
+            eventList.forEach((itemChild,indexChild)=>{
+              var timeInitChild = new Date(itemChild.time).getTime();
+              if(timeInit == timeInitChild)
+                eventList[indexChild].children.push({"time":item.time,"name":item.equip_nm,"event":item.event});
+            });
+        });
+        $(".eventSearchContent>div").html(renderingUI(eventList,inNum));
+        myApp.popup.close();   
 
-function showEventDetail(type, time, event) {
-    myApp.router.navigate("/equipSearchDetail/?" + type + "&" + time + "&" + event + "");
-}
+    }).fail(function(e){
+        
+    });
 
+
+
+}
+//详情
+function showEventDetail(type, time, name,user, event) {
+    myApp.views.main.router.navigate("/equipSearchDetail/?" + type + "&" + time + "&" + name + "&" + user + "&" + event + "");
+}
+//返回时间
 function getNowTime() {
     var date = new Date();
     var seperator1 = "/";
@@ -353,7 +147,7 @@ function getNowTime() {
     return currentdate;
 }
 //封装ajax
-function JQajaxoNoCancel(_type, _url, _asycn, _data, _success) {
+function JQajaxoNoCancel(_type, _url, _asycn, _data, _success, _error) {
     var ajaxs = $.ajax({
         type: _type,
         url: _url,
@@ -373,14 +167,88 @@ function JQajaxoNoCancel(_type, _url, _asycn, _data, _success) {
             }
             XMLHttpRequest = null;
         },
-        error: function() {
-            myApp.dialog.create({
-                title: "系统提示",
-                text: '请求错误，请查看网络是否已连接！',
-                buttons: [{
-                    text: '确定'
-                }]
-            }).open();
-        }
+        error: _error
     });
+}
+//设置日期属性 
+function setDateAttr(dt, id) {
+    var d = new Date(dt.value);
+    var datetime = d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate() + ' ' + (id == "startTime" ? '00:00:00' : '23:59:59');
+    $("#" + id).attr("date-val", datetime);
+}
+//设备选择
+function eventSearchallEquip(index, dt) {
+    myApp.sheet.create({
+        content: `
+       <div class="sheet-modal my-sheet-swipe-to-step fm-modal equipSelectSheet eventSearchSheet" style=" --f7-sheet-bg-color: #fff;">
+          <div class="sheet-modal-inner">
+            <div class="sheet-modal-swipe-step">
+              <div class="display-flex padding justify-content-space-between align-items-center header_center_gray">
+                 <div></div>
+              </div>
+            </div> 
+            <div class="block-title block-title-medium margin-top title_2" style="">请选择对应项</div>
+            <hr class="transform-05"/>        
+            <div class="no-hairlines row">
+                ${eventReturnModifyHtml(index)} 
+            </div>
+          </div>
+        </div>`,
+        // Events
+        on: {
+            open: function(sheet) {},
+            opened: function(sheet) {
+                $(".eventSearchSheet div.no-hairlines a").unbind().bind("click", function() {
+                    $(this).addClass("selectedBgColor").siblings().removeClass("selectedBgColor");
+                    $(dt).val($(this).text()).attr("data-no", $(this).attr("data-no"));
+                });
+            },
+        },
+        swipeToClose: false,
+        swipeToStep: false,
+        backdrop: true,
+    }).open();
+}
+
+function eventReturnModifyHtml(no) {
+    var l_html = "",
+        arry = [];
+    no == "1" ? arry = allEquip : arry = allEvent;
+    arry.forEach(function(item, index) {
+        l_html += `<a href="#" class="col-33" data-no="${no == 1?item.value:0}">${no == 1?item.name:item}</a>`;
+    });
+    return l_html;
+}
+
+
+
+//渲染界面UI
+function renderingUI(arry,inNum){
+    var html = "";
+    arry.forEach((item,index)=>{
+       html += `<h2 class="title_2" ${!childrenList(item.children)?'style="display: none;"':''}>${transformDate(item.time)}</h2><ul class="bottomLine" ${!childrenList(item.children)?'style="display: none;"':''}>${childrenList(item.children,inNum)}</ul>`;
+    });
+    return html;
+}
+//日期转换
+function transformDate(stime){
+    return stime.replace("/","年").replace("/","月").replace("/","日");
+}
+//子项日期列表
+function childrenList(arry,inNum){
+   var html = "";
+    arry.forEach((item,index)=>{
+       html += `<li>
+        <a href="#" class="item-link item-content" onClick='showEventDetail(${inNum},"${item.time}","${item.name?item.name: "系统事件"}","${item.operator?item.operator: ""}","${item.event.replace(/\"/g,"")}")'> 
+            <div class="item-inner"> 
+                <div class="item-title-row"> 
+                    <div class="item-subtitle">${item.name?item.name:"系统事件"}</div> 
+                    <div class="item-after">  <span class="span-color-notsure sure-flag">${item.time.split(" ")[1]}</span>  </div> 
+                </div> 
+                <div class="item-text item-title fontweight-normal">${item.event}</div> 
+            </div> 
+        </a> 
+       </li>`;
+    });   
+  return html;
 }

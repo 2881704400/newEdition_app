@@ -1,0 +1,12 @@
+#Video_content_ref{
+    &>div{
+        height: 100%;
+        &>ul{padding: 1rem;
+         &>li{margin-bottom: 0.5rem;}
+        }
+    }
+}
+#VideoDetails_tree{
+	padding: 1rem;
+	li{margin-bottom: 0.5rem;}
+}

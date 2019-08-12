@@ -2,15 +2,53 @@
 @charset "utf-8";
 @import 'public.scss';
 // 报警排表
+.schedulePageContent{overflow: hidden;}
 .scheduleContainer{
-    height: 100%;position: relative;
+    height: 100%;position: relative;padding: 1rem;
+    h2{height: 64px;line-height: 64px;font-weight: 500;color: #2D2E30;}
+    #scheduleContainer-picker-header{
+        background: white;
+        .toolbar-inner{
+            justify-content: space-between;
+        }
+        .calendar{
+            transition: height 0.3s;
+            &>.toolbar{height: 44px!important;background: white;}
+            &>.calendar-week-header{height: 18px!important;background: white;}
+            &>.calendar-footer{height: 44px!important;background: white;}
+            &>.calendar-footer:before{height: 0!important;}
+        }
+        .heightSet{height: auto!important;}
+    }
+    #scheduleContainer-picker-container{
+        margin: 0;position: absolute; left: 0; top: 170px; right: 0; bottom: -10%; padding: 1rem;overflow: auto;padding-bottom: 20%;
+        ul{
+            li{
+             background: white;margin-bottom: 0.5rem;
+             a{
+                div.item-media{span{
+                    display: inline-block;
+                    padding: 5px 10px;
+                    border-radius: 20px;
+                    color: white;
+                    font-size: 14px;
+                 }
+                 .blue{background: #007AFF;}
+                 .gray{background: #BFBFBF;}
+                }
+                div.item-inner{.item-after{font-size: 12px;}}
+             }
+            }
+        }
+    }
+
     &>.subnavbarTabel{
     	height: 36px;line-height: 36px;
     	&>a{font-size: #{$tableHeaderFontSize};border-right: 0;height: 100%;white-space: nowrap;text-align: center;}
     }
     &>.scheduleContent{
         position: absolute;top: 36px;left: 0rem;right: 0rem;bottom: 0rem;overflow-y:auto; 
-        //人员  为你的错误买单/
+        //人员
     	#schedule_user{
              li{width: 100%;height: 40px;position: relative;
                 &>.schedule-content{ 
@@ -141,9 +179,17 @@
         &>div{height: 40px;line-height: 40px;}
     }
 }
-.scheduleModifyContainer{
-    height: 100%;background: white;
-    input,select{font-size: 1rem !important;}
+.scheduleModifyContainer,.NewlyBuildTable,.NewlyBuildTableUser,.NewlyBuildTableUser-udate,.NewlyBuildTableGroup,.GroupEdit,.NewlyBuildTableScope,.NewlyBuildTableScopeEdit{
+    height: 100%;background: white;padding: 1rem;
+    li{
+        height: 44px;line-height: 44px;
+        div.col-40{font-size: 1rem;color:  #575859;}
+        div.col-60{
+            font-size: 1rem;color: #000;
+             input,select{font-size: 1rem !important;text-align: center;}
+        }
+    }
+   
     &>div.linkageBtn{
         position: absolute;
         width: 100%;
@@ -179,6 +225,7 @@
     }
     ul{max-height: 60%;overflow-y: auto;
         li{
+
             .item-content{width: 100%;color: #333;font-size: 14px;} 
             .item-inner{i{font-size: 1.8rem;color: #4177e6;}} 
             .delBtn{color: white;background: #FF3B30;}
@@ -191,8 +238,9 @@
 .equipLinkage_edit_modify_child {
     padding: 1rem;
     ul{
+        li{font-size: 1rem;color: #000;}
         li.equipLinkage_edit_modify_childFirst{
-            padding: 20px 0;
+            margin-bottom: 1rem;
             &>div{
               i{font-size: 2rem;vertical-align: sub;}}
               .selectedIcorlor i{color: #{$selectedColor};
@@ -237,11 +285,9 @@
 
 //控制项增加上滑卡片
 .equipSelectSheet{
-
     .no-hairlines{
-        position: absolute;left: 0;top: 80px;right: 0;bottom: 0;padding: 1rem;overflow: auto;
+        position: absolute;left: 0;top: 100px;right: 0;bottom: 0;padding: 1rem;overflow: auto;
         a{
-
             padding: 10px;
             border-radius: 6px;
             background: #F5F5F5;//#2D2E30;
@@ -251,6 +297,67 @@
             text-overflow: ellipsis;
             overflow: hidden;
         }
+        .opacity{opacity: 0;pointer-events: none;};
         .selectedBgColor{color: white;background: #2D2E30;}
+    }
+}
+
+//人员管理
+.personnelManagementPageContent,.groupManagementPageContent,.scopeOfManagementPageContent {
+    &>div{
+        padding: 1rem;
+        margin: 0;
+        height: 100%;
+        overflow: auto;
+        &>ul{
+        &>li{
+            background: white;
+            margin-bottom: 0.5rem;                
+        }
+    }}
+}
+
+
+//排班搜索
+.scheduleSearch-main{
+    height: 100%;position: relative;
+    .snashot-header{
+        height: 44px;line-height: 44px;padding: 0 1rem;background: white;
+        a{
+            color: white;font-size: 14px;
+            border-radius: 12px;
+            padding: 5px 10px;
+            margin-right: 1rem;background: rgba(45,46,48,0.1);   
+        }
+    }
+    .title-large{
+        height: 44px;
+        background: white;box-shadow: 0 1px 0px 0 rgba(45,46,48,0.2);
+        padding: 0px 1rem;
+    }
+    &>div:nth-child(3){
+        margin: 0;position: absolute;left: 0;top: 88px;right: 0;bottom: -50px;padding: 1rem;    overflow: auto;
+        &>ul{padding-bottom: 50px;}
+    }
+    .selectListType{background: #2D2E30!important;}
+    #scheduleSearchContainer{
+        ul{
+            li{
+             background: white;margin-bottom: 0.5rem;
+             a{
+                div.item-media{span{
+                    display: inline-block;
+                    padding: 5px 10px;
+                    border-radius: 20px;
+                    color: white;
+                    font-size: 14px;
+                 }
+                 .blue{background: #007AFF;}
+                 .gray{background: #BFBFBF;}
+                }
+                div.item-inner{.item-after{font-size: 12px;}}
+             }
+            }
+        }
     }
 }

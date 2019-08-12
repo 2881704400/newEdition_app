@@ -1,14 +1,13 @@
-﻿<div class="page no-toolbar" data-page="equipLinkageModify" id="equipLinkageModify" >
-
-
-    <div class="navbar navbar-large">
-        <div class="navbar-inner navbar-inner-large navbar-current">
+﻿<div class="page no-toolbar" data-page="equipLinkageModify" id="equipLinkageModify">
+    <div class="navbar">
+        <div class="navbar-inner">
             <div class="left">
                 <a class="back" href="#">
-                    <i class="icon iconfont icon_Nav_fanhui"> </i>
+                    <i class="icon iconfont icon_Nav_fanhui">
+                    </i>
                 </a>
             </div>
-            <div class="title sliding title_1" >
+            <div class="title sliding title_1">
                 设备详情
             </div>
             <div class="right">
@@ -20,88 +19,81 @@
             </div>
         </div>
     </div>
-
-
     <div class="page-content scheduleModifyPageContent pageContent_102 pageContent_0">
-        <div class="scheduleModifyContainer equipLinkAgeModifyContainer list" >
-          <ul class="equipLinkageList">
-            <li>
-              <div class="item-content item-input">
-                <div class="item-inner">
-                  <div class="item-title item-label">触发设备</div>
-                  <div class="item-input-wrap">
-                    <input type="text" placeholder="请选择触发类型" class="equipTiggerName" id="equipTiggerName">
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="item-content item-input">
-                <div class="item-inner">
-                  <div class="item-title item-label">触发类型</div>
-                  <div class="item-input-wrap">
-                    <input type="text" placeholder="请选择触发类型" class="equipTiggerType" id="equipTiggerType">
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="item-content item-input">
-                <div class="item-inner">
-                  <div class="item-title item-label">触发点</div>
-                  <div class="item-input-wrap">
-                    <input type="text" placeholder="请选择触发点" class="equipTiggerSpot" id="equipTiggerSpot">
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="item-content item-input">
-                <div class="item-inner">
-                  <div class="item-title item-label">延时(ms)</div>
-                  <div class="item-input-wrap">
-                    <input type="text" placeholder="请输入延时时间" class="equipTiggerTime" id="equipTiggerTime">
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="item-content item-input">
-                <div class="item-inner">
-                  <div class="item-title item-label">联动设备</div>
-                  <div class="item-input-wrap">
-                    <input type="text" placeholder="请选择联动设备" class="equipTigger_Link" id="equipTigger_Link">
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="item-content item-input">
-                <div class="item-inner">
-                  <div class="item-title item-label">联动命令</div>
-                  <div class="item-input-wrap">
-                    <input type="text" placeholder="请选择联动命令" class="equipTiggerCom" id="equipTiggerCom">
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="item-content item-input">
-                <div class="item-inner">
-                  <div class="item-title item-label">备注信息</div>
-                  <div class="item-input-wrap">
-                    <input type="text" placeholder="请输入备注信息" class="equipTiggerInfo" id="equipTiggerInfo">
-                  </div>
-                </div>
-              </div>
-            </li>                        
-          </ul>
-          <div class="row linkageBtn">
-              <a href="#" class="col-50 comfirmModify comfirmCancel color-red back" >取消</a>
-              <a href="#" class="col-50 comfirmModify" id="equipLinkageModifyId" dataID="" >保存</a>
-          </div>
-
-        </div>  
+        <div class="scheduleModifyContainer equipLinkAgeModifyContainer list">
+            <ul class="equipLinkageList">
+                <li class="row bottomLine">
+                    <div class="col-40">
+                        触发设备
+                    </div>
+                    <div class="col-60">
+                        <input class="equipTiggerName" id="equipTiggerName" placeholder="请选择触发类型" type="text" />
+                        
+                    </div>
+                </li>
+                <li class="row bottomLine">
+                    <div class="col-40">
+                        触发类型
+                    </div>
+                    <div class="col-60">
+                        <input class="equipTiggerType" id="equipTiggerType" placeholder="请选择触发类型" type="text" />
+                        
+                    </div>
+                </li>
+                <li class="row bottomLine">
+                    <div class="col-40">
+                        触发点
+                    </div>
+                    <div class="col-60">
+                        <input class="equipTiggerSpot" id="equipTiggerSpot" placeholder="请选择触发点" type="text" />
+                        
+                    </div>
+                </li>
+                <li class="row bottomLine">
+                    <div class="col-40">
+                        延时(ms)
+                    </div>
+                    <div class="col-60">
+                        <input class="equipTiggerTime" id="equipTiggerTime" placeholder="请输入延时时间" type="text" />
+                        
+                    </div>
+                </li>
+                <li class="row bottomLine">
+                    <div class="col-40">
+                        联动设备
+                    </div>
+                    <div class="col-60">
+                        <input class="equipTigger_Link" id="equipTigger_Link" placeholder="请选择联动设备" type="text" />
+                        
+                    </div>
+                </li>
+                <li class="row bottomLine">
+                    <div class="col-40">
+                        联动命令
+                    </div>
+                    <div class="col-60">
+                        <input class="equipTiggerCom" id="equipTiggerCom" placeholder="请选择联动命令" type="text" />
+                        
+                    </div>
+                </li>
+                <li class="row bottomLine">
+                    <div class="col-40">
+                        备注信息
+                    </div>
+                    <div class="col-60">
+                        <input class="equipTiggerInfo" id="equipTiggerInfo" placeholder="请输入备注信息" type="text" />
+                        
+                    </div>
+                </li>
+            </ul>
+            <div class="row linkageBtn">
+                <a class="col-50 comfirmModify comfirmCancel color-red back" href="#">
+                    取消
+                </a>
+                <a class="col-50 comfirmModify" dataid="" href="#" id="equipLinkageModifyId">
+                    保存
+                </a>
+            </div>
+        </div>
     </div>
 </div>
-

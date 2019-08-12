@@ -53,37 +53,36 @@ function pptDetails() {
     function toURL1(thisValue) {
         switch (thisValue) {
             case "back2":
-                myApp.router.back();
+                myApp.views.main.router.back();
                 break;
             case "homeTool":
-                myApp.router.navigate('/home/');
+                myApp.views.main.router.navigate('/home/');
                 break;
             case "snapshotTool":
-                myApp.router.navigate('/snapshot/');
+                myApp.views.main.router.navigate('/snapshot/');
                 break;
             case "equipsTool":
-                myApp.router.navigate('/equips/');
+                myApp.views.main.router.navigate('/equips/');
                 break;
             case "eventSearchTool":
-                myApp.router.navigate('/eventSearch/');
+                myApp.views.main.router.navigate('/eventSearch/');
                 break;
             case "systemConfigTool":
-                myApp.router.navigate('/systemConfig/');
+                myApp.views.main.router.navigate('/systemConfig/');
                 break;
             case "scheduleTool":
-                myApp.router.navigate('/schedule/');
+                myApp.views.main.router.navigate('/schedule/');
                 break;
             case "equipLinkageTool":
-                myApp.router.navigate('/equipLinkage/');
+                myApp.views.main.router.navigate('/equipLinkage/');
                 break;
-            default:
-                ;
+            default: break;
         }
     }
     i = 1;
     $(".closeFile,.setScreenSizeChild").unbind();
     $(".closeFile,.setScreenSizeChild").bind('click', function() {
-        get_no_val(this, PPTcommand.closePPT.equipNo, PPTcommand.closePPT.setNo, "", "");
+        get_no_val(this, PPTcommand.closePPT.equipNo, PPTcommand.closePPT.setNo, "");
         if ($(this).hasClass("setScreenSizeChild")) {
             $(this).addClass("displayNone").siblings().removeClass("displayNone");
         }
@@ -148,18 +147,25 @@ function ajaxRequst() {
         spaceBetween: 10,
         slidesPerView: 5
     });
+
+    var urlRe;
     for (var i = 1; i <= parseInt(window.localStorage.sessionValue); i++) { //缩略图长度
         requestAjax(i, false);
     }
-}
-var firstImgStatus = true;
 
+}
+
+var firstImgStatus = true;
 function requestAjax(j, k) {
-    setTimeout(function() {
-        $(".mettingDetails_index div[indexid='" + j + "']").attr("src","#");
-        var urlRe = "/PPTImages/" + window.localStorage.sessionFilename + "/" + j + ".jpg";
-        $(".mettingDetails_index div[indexid='" + j + "']").html('<img src=' + urlRe + ' onerror="requestAjax(' + j + ',true)" />');
-    }, 800);
+
+    var urlRe = "/PPTImages/" + window.localStorage.sessionFilename + "/" + j + ".jpg";
+    $(".mettingDetails_index div[indexid='" + j + "']").find("img").attr("src","#");
+    setTimeout(function(){
+        $(".mettingDetails_index div[indexid='" + j + "']").find("img").attr("src","#");
+    },3000);
+
+    $(".mettingDetails_index div[indexid='" + j + "']").html('<img src=' + urlRe + ' onerror="requestAjax(' + j + ',true)" />');
+    
     //PPT跳转
     if (j == parseInt(window.localStorage.sessionValue) && window.localStorage.historyis == 1) {
         window.localStorage.historyis = 0;
@@ -179,14 +185,12 @@ function historyInit() {
     if (window.localStorage.pptUsername == window.localStorage.HistorypptUsername) {
         $.ajax({
             type: "POST",
-            url: "/GWService.asmx/SetupsCommand",
+            url: "/GWService.asmx/SetupsCommand2",
             timeout: 5000,
             data: {
                 equip_no: PPTcommand.setPage.equipNo,
-                main_instruction: 4,
-                minor_instruction: "-",
-                value: window.localStorage.savePage,
-                user_name: window.localStorage.userName
+                setNo: PPTcommand.setPage.setNo,
+                strValue: window.localStorage.savePage  
             },
             success: function(data) {
                 //跳转

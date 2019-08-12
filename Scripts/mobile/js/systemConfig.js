@@ -285,7 +285,6 @@ function getYcSelect(arr) {
                 $("#ycp").append(html);
             }
         }
-        myApp.dialog.close()
     })
 }
 

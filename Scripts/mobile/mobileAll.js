@@ -1,242 +1,263 @@
 ﻿//移动端js主入口
-var dynamicSheetAll,searchResult = [],myApp = new Framework7({
-    root: '#app',
-    name: 'My App',
-    id: 'com.myapp.gw',
-    panel: {
-        swipe: 'left',
-        swipeOnlyClose: true,
-    },
-    dialog: {
-        buttonOk: '确认',
-        buttonCancel: '取消',
-    },
-    statusbar: {
-        enabled: true,
-        overlay: true,
-        iosOverlaysWebView: true,
-    },
-    picker: {
-        toolbarCloseText: '确认',
-    },
-    routes: [{
-        path: '/home/',
-        url: 'home.html',
-    }, {
-        path: '/snapshot/',
-        url: 'snapshot.html',
-    }, {
-        path: '/equips/',
-        url: 'equips.html',
-    }, {
-        path: '/systemConfig/',
-        url: 'systemConfig.html',
-    }, {
-        path: '/eventSearch/',
-        url: 'eventSearch.html',
-    }, {
-        path: '/equipSearchDetail/',
-        url: 'equipSearchDetail.html',
-    }, {
-        path: '/schedule/',
-        url: 'schedule.html',
-    }, {
-        path: '/equipLinkage/',
-        url: 'equipLinkage.html',
-    }, {
-        path: '/UserInfor/',
-        url: 'UserInfor.html',
-    }, {
-        path: '/setPage/',
-        url: 'setPage.html',
-    }, {
-        path: '/snapShotDetail/',
-        url: 'snapShotDetail.html',
-    }, {
-        path: '/RealTimeList/',
-        content: '123',
-    }, {
-        path: '/resultEvent/',
-        content: '123',
-    }, {
-        path: '/ycAndyx/',
-        url: 'ycAndyx.html',
-    }, {
-        path: '/Video/',
-        url: 'Video.html',
-    }, {
-        path: '/videoControl/',
-        url: 'videoControl.html',
-    }, {
-        path: '/welcomeWords/',
-        url: 'welcomeWords.html',
-    }, {
-        path: '/pptSelection/',
-        url: 'pptSelection.html',
-    }, {
-        path: '/pptDetails/',
-        url: 'pptDetails.html',
-    }, {
-        path: '/scheduleModify/',
-        url: 'scheduleModify.html',
-    }, {
-        path: '/equipLinkageModify/',
-        url: 'equipLinkageModify.html',
-    }, {
-        path: '/equipConfigList/',
-        url: 'equipConfigList.html',
-    }, {
-        path: '/sysConfigEdict/',
-        url: 'sysConfigEdict.html',
-    }, 
-    {
-        path: '/scheduleModifyChild/',
-        url: 'scheduleModifyChild.html',
-    }, 
-    {
-        path: '/sceneEdit/',
-        url: 'sceneEdit.html',
-    }, 
-    {
-        path: '/sceneEditModify/',
-        url: 'sceneEditModify.html',
-    }, 
-    {
-        path: '/mobile-en/sceneEdit_en/',
-        url: 'mobile-en/sceneEdit_en.html',
-    }, 
-    {
-        path: '/mobile-en/sceneEditModify_en/',
-        url: 'mobile-en/sceneEditModify_en.html',
-    },                 
-    {
-        path: '/mobile-en/home_en/',
-        url: 'mobile-en/home_en.html',
-    }, {
-        path: '/mobile-en/snapshot_en/',
-        url: 'mobile-en/snapshot_en.html',
-    }, {
-        path: '/mobile-en/equips_en/',
-        url: 'mobile-en/equips_en.html',
-    }, {
-        path: '/mobile-en/systemConfig_en/',
-        url: 'mobile-en/systemConfig_en.html',
-    }, {
-        path: '/mobile-en/eventSearch_en/',
-        url: 'mobile-en/eventSearch_en.html',
-    }, {
-        path: '/mobile-en/equipSearchDetail_en/',
-        url: 'mobile-en/equipSearchDetail_en.html',
-    }, {
-        path: '/mobile-en/schedule_en/',
-        url: 'mobile-en/schedule_en.html',
-    }, {
-        path: '/mobile-en/equipLinkage_en/',
-        url: 'mobile-en/equipLinkage_en.html',
-    }, {
-        path: '/mobile-en/UserInfor_en/',
-        url: 'mobile-en/UserInfor_en.html',
-    }, {
-        path: '/mobile-en/setPage_en/',
-        url: 'mobile-en/setPage_en.html',
-    }, {
-        path: '/mobile-en/snapShotDetail_en/',
-        url: 'mobile-en/snapShotDetail_en.html',
-    }, {
-        path: '/mobile-en/RealTimeList/',
-        content: '123',
-    }, {
-        path: '/mobile-en/resultEvent/',
-        content: '123',
-    }, {
-        path: '/mobile-en/ycAndyx_en/',
-        url: 'mobile-en/ycAndyx_en.html',
-    }, {
-        path: '/mobile-en/Video_en/',
-        url: 'mobile-en/Video_en.html',
-    }, {
-        path: '/mobile-en/videoControl_en/',
-        url: 'mobile-en/videoControl_en.html',
-    }, {
-        path: '/mobile-en/welcomeWords_en/',
-        url: 'mobile-en/welcomeWords_en.html',
-    }, {
-        path: '/mobile-en/pptSelection_en/',
-        url: 'mobile-en/pptSelection_en.html',
-    }, {
-        path: '/mobile-en/pptDetails_en/',
-        url: 'mobile-en/pptDetails_en.html',
-    }, {
-        path: '/mobile-en/scheduleModify_en/',
-        url: 'mobile-en/scheduleModify_en.html',
-    }, {
-        path: '/mobile-en/equipLinkageModify_en/',
-        url: 'mobile-en/equipLinkageModify_en.html',
-    }, {
-        path: '/mobile-en/equipConfigList_en/',
-        url: 'mobile-en/equipConfigList_en.html',
-    }, {
-        path: '/mobile-en/sysConfigEdict_en/',
-        url: 'mobile-en/sysConfigEdict_en.html',
-    }, {
-        path: '/mobile-en/scheduleModifyChild_en/',
-        url: 'mobile-en/scheduleModifyChild_en.html',
-    }, {
-        path: '/equipsDetails/',
-        url: 'equipsDetails.html',
-    }, {
-        path: '/mobile-en/equipsDetails_en/',
-        url: 'mobile-en/equipsDetails_en.html',
-    }, {
-        path: '/functionalModule/',
-        url: 'functionalModule.html',
-    }, {
-        path: '/mobile-en/functionalModule_en/',
-        url: 'mobile-en/functionalModule_en.html',
-    }, {
-        path: '/VideoDetails/',
-        url: 'VideoDetails.html',
-    }, {
-        path: '/mobile-en/VideoDetails_en/',
-        url: 'mobile-en/VideoDetails_en.html',
-    }, {
-        path: '/pptSelectionDetails/',
-        url: 'pptSelectionDetails.html',
-    }, {
-        path: '/mobile-en/pptSelectionDetails_en/',
-        url: 'mobile-en/pptSelectionDetails_en.html',
-    }, 
-    {
-        path: '/snapShotInfoDetail/',
-        url: 'snapShotInfoDetail.html',
-    }, {
-        path: '/mobile-en/snapShotInfoDetail_en/',
-        url: 'mobile-en/snapShotInfoDetail_en.html',
-    }, {
-        path: '/search/',
-        url: 'search.html',
-    }, {
-        path: '/mobile-en/search_en/',
-        url: 'mobile-en/search_en.html',
-    }
-    ],
-    on: {
-        pageInit: function(page) {
-            try {hubConn.stop();} catch (e) {}
-            try{dynamicSheetAll.close();judgeOpenPage(page.route.path)}catch(e){}
-            $("#voiceContainer").addClass("voiceContainer");
-            // window.localStorage.languageList == 1 ? $(".right a.icon-only").attr("href", "/mobile-en/setPage_en/") : $(".right a.icon-only").attr("href", "/setPage/");
-            //初始化
-            IosToggle();
-             $("#app").removeClass("appAttrity");
-             try{myJavaFun.FinishQYVideoAct();}catch(e){}
-
+var dynamicSheetAll, searchResult = [],
+    myApp = new Framework7({
+        root: '#app',
+        name: 'My App',
+        id: 'com.myapp.gw',
+        panel: {
+            swipe: 'left',
+            swipeOnlyClose: true,
         },
-        popupOpen: function(popup) {},
-        init: function() {}
-    },
-});
-
+        dialog: {
+            buttonOk: '确认',
+            buttonCancel: '取消',
+        },
+        statusbar: {
+            enabled: true,
+            overlay: true,
+            iosOverlaysWebView: true,
+        },
+        picker: {
+            toolbarCloseText: '确认',
+        },
+        routes: [{
+            path: '/home/',
+            url: 'home.html',
+        }, {
+            path: '/snapshot/',
+            url: 'snapshot.html',
+        }, {
+            path: '/equips/',
+            url: 'equips.html',
+        }, {
+            path: '/systemConfig/',
+            url: 'systemConfig.html',
+        }, {
+            path: '/eventSearch/',
+            url: 'eventSearch.html',
+        }, {
+            path: '/equipSearchDetail/',
+            url: 'equipSearchDetail.html',
+        }, {
+            path: '/schedule/',
+            url: 'schedule.html',
+        }, {
+            path: '/equipLinkage/',
+            url: 'equipLinkage.html',
+        }, {
+            path: '/UserInfor/',
+            url: 'UserInfor.html',
+        }, {
+            path: '/setPage/',
+            url: 'setPage.html',
+        }, {
+            path: '/snapShotDetail/',
+            url: 'snapShotDetail.html',
+        }, {
+            path: '/RealTimeList/',
+            content: '123',
+        }, {
+            path: '/resultEvent/',
+            content: '123',
+        }, {
+            path: '/ycAndyx/',
+            url: 'ycAndyx.html',
+        }, {
+            path: '/Video/',
+            url: 'Video.html',
+        }, {
+            path: '/videoControl/',
+            url: 'videoControl.html',
+        }, {
+            path: '/welcomeWords/',
+            url: 'welcomeWords.html',
+        }, {
+            path: '/pptSelection/',
+            url: 'pptSelection.html',
+        }, {
+            path: '/pptDetails/',
+            url: 'pptDetails.html',
+        }, {
+            path: '/scheduleModify/',
+            url: 'scheduleModify.html',
+        }, {
+            path: '/equipLinkageModify/',
+            url: 'equipLinkageModify.html',
+        }, {
+            path: '/equipConfigList/',
+            url: 'equipConfigList.html',
+        }, {
+            path: '/sysConfigEdict/',
+            url: 'sysConfigEdict.html',
+        }, {
+            path: '/scheduleModifyChild/',
+            url: 'scheduleModifyChild.html',
+        }, {
+            path: '/sceneEdit/',
+            url: 'sceneEdit.html',
+        }, {
+            path: '/sceneEditModify/',
+            url: 'sceneEditModify.html',
+        }, {
+            path: '/mobile-en/sceneEdit_en/',
+            url: 'mobile-en/sceneEdit_en.html',
+        }, {
+            path: '/mobile-en/sceneEditModify_en/',
+            url: 'mobile-en/sceneEditModify_en.html',
+        }, {
+            path: '/mobile-en/home_en/',
+            url: 'mobile-en/home_en.html',
+        }, {
+            path: '/mobile-en/snapshot_en/',
+            url: 'mobile-en/snapshot_en.html',
+        }, {
+            path: '/mobile-en/equips_en/',
+            url: 'mobile-en/equips_en.html',
+        }, {
+            path: '/mobile-en/systemConfig_en/',
+            url: 'mobile-en/systemConfig_en.html',
+        }, {
+            path: '/mobile-en/eventSearch_en/',
+            url: 'mobile-en/eventSearch_en.html',
+        }, {
+            path: '/mobile-en/equipSearchDetail_en/',
+            url: 'mobile-en/equipSearchDetail_en.html',
+        }, {
+            path: '/mobile-en/schedule_en/',
+            url: 'mobile-en/schedule_en.html',
+        }, {
+            path: '/mobile-en/equipLinkage_en/',
+            url: 'mobile-en/equipLinkage_en.html',
+        }, {
+            path: '/mobile-en/UserInfor_en/',
+            url: 'mobile-en/UserInfor_en.html',
+        }, {
+            path: '/mobile-en/setPage_en/',
+            url: 'mobile-en/setPage_en.html',
+        }, {
+            path: '/mobile-en/snapShotDetail_en/',
+            url: 'mobile-en/snapShotDetail_en.html',
+        }, {
+            path: '/mobile-en/RealTimeList/',
+            content: '123',
+        }, {
+            path: '/mobile-en/resultEvent/',
+            content: '123',
+        }, {
+            path: '/mobile-en/ycAndyx_en/',
+            url: 'mobile-en/ycAndyx_en.html',
+        }, {
+            path: '/mobile-en/Video_en/',
+            url: 'mobile-en/Video_en.html',
+        }, {
+            path: '/mobile-en/videoControl_en/',
+            url: 'mobile-en/videoControl_en.html',
+        }, {
+            path: '/mobile-en/welcomeWords_en/',
+            url: 'mobile-en/welcomeWords_en.html',
+        }, {
+            path: '/mobile-en/pptSelection_en/',
+            url: 'mobile-en/pptSelection_en.html',
+        }, {
+            path: '/mobile-en/pptDetails_en/',
+            url: 'mobile-en/pptDetails_en.html',
+        }, {
+            path: '/mobile-en/scheduleModify_en/',
+            url: 'mobile-en/scheduleModify_en.html',
+        }, {
+            path: '/mobile-en/equipLinkageModify_en/',
+            url: 'mobile-en/equipLinkageModify_en.html',
+        }, {
+            path: '/mobile-en/equipConfigList_en/',
+            url: 'mobile-en/equipConfigList_en.html',
+        }, {
+            path: '/mobile-en/sysConfigEdict_en/',
+            url: 'mobile-en/sysConfigEdict_en.html',
+        }, {
+            path: '/mobile-en/scheduleModifyChild_en/',
+            url: 'mobile-en/scheduleModifyChild_en.html',
+        }, {
+            path: '/equipsDetails/',
+            url: 'equipsDetails.html',
+        }, {
+            path: '/mobile-en/equipsDetails_en/',
+            url: 'mobile-en/equipsDetails_en.html',
+        }, {
+            path: '/functionalModule/',
+            url: 'functionalModule.html',
+        }, {
+            path: '/mobile-en/functionalModule_en/',
+            url: 'mobile-en/functionalModule_en.html',
+        }, {
+            path: '/VideoDetails/',
+            url: 'VideoDetails.html',
+        }, {
+            path: '/mobile-en/VideoDetails_en/',
+            url: 'mobile-en/VideoDetails_en.html',
+        }, {
+            path: '/pptSelectionDetails/',
+            url: 'pptSelectionDetails.html',
+        }, {
+            path: '/mobile-en/pptSelectionDetails_en/',
+            url: 'mobile-en/pptSelectionDetails_en.html',
+        }, {
+            path: '/snapShotInfoDetail/',
+            url: 'snapShotInfoDetail.html',
+        }, {
+            path: '/mobile-en/snapShotInfoDetail_en/',
+            url: 'mobile-en/snapShotInfoDetail_en.html',
+        }, {
+            path: '/search/',
+            url: 'search.html',
+        }, {
+            path: '/mobile-en/search_en/',
+            url: 'mobile-en/search_en.html',
+        }, {
+            path: '/personnelManagement/',
+            url: 'personnelManagement.html',
+        }, {
+            path: '/mobile-en/personnelManagement_en/',
+            url: 'mobile-en/personnelManagement_en.html',
+        }, {
+            path: '/groupManagement/',
+            url: 'groupManagement.html',
+        }, {
+            path: '/mobile-en/groupManagement_en/',
+            url: 'mobile-en/groupManagement_en.html',
+        }, {
+            path: '/scopeOfManagement/',
+            url: 'scopeOfManagement.html',
+        }, {
+            path: '/mobile-en/scopeOfManagement_en/',
+            url: 'mobile-en/scopeOfManagement_en.html',
+        }, {
+            path: '/scheduleSearch/',
+            url: 'scheduleSearch.html',
+        }, {
+            path: '/mobile-en/scheduleSearch_en/',
+            url: 'mobile-en/scheduleSearch_en.html',
+        }],
+        on: {
+            pageInit: function(page) {
+                try {
+                    hubConn.stop();
+                } catch (e) {}
+                try {
+                    dynamicSheetAll.close();
+                    judgeOpenPage(page.route.path)
+                } catch (e) {}
+                $("#voiceContainer").addClass("voiceContainer");
+                //初始化
+                IosToggle();
+                $("#app").removeClass("appAttrity");
+                try {
+                    myJavaFun.FinishQYVideoAct();
+                } catch (e) {}
+            },
+            popupOpen: function(popup) {},
+            init: function() {}
+        },
+    });
 var mainView = myApp.views.create('.view-main'); //web接口地址
 var service = "/GWService.asmx",
     $$ = Framework7.$;
@@ -328,11 +349,13 @@ function loadNameMobile() {
             window.localStorage.terminal = '', window.localStorage.ac_appkey = '', window.localStorage.ac_infokey = '', window.localStorage.service_url = '';
         }
     } else {
-       try{ myJavaFuntion.GetCookie();}catch(e){}
+        try {
+            myJavaFuntion.GetCookie();
+        } catch (e) {}
     }
     setTimeout(function() {
         $.ajax({
-            type: "POST", 
+            type: "POST",
             url: "/api/GWServiceWebAPI/getClientTypeInfo",
             timeout: 5000,
             dataType: "json",
@@ -367,7 +390,7 @@ function loadNameMobile() {
                             window.localStorage.languageList = 0;
                             window.localStorage.voiceType = 0;
                         }
-                        tranformMenu(window.localStorage.languageList);
+                        //tranformMenu(window.localStorage.languageList);
                     }).fail(function(e) {});
                     $(".voiceDivs,.toolbar").removeClass("displayNone");
                 } else {
@@ -431,8 +454,10 @@ function onUserLogout() {
 }
 //关于事件
 var ApplicationVersion = "1.0";
+
 function onAbout() {
     var _url = "/api/server/version";
+
     function _success(data) {
         var version = data.HttpData.data;
         var versionNameHTML = '';
@@ -441,7 +466,7 @@ function onAbout() {
         }
         myApp.dialog.create({
             title: window.localStorage.languageList == 1 ? "About" : "关于",
-            text: "<br>"+(window.localStorage.languageList == 1 ? "App Edition：v" : "API版本：v") + version + versionNameHTML+"<br><br>"+(window.localStorage.languageList == 1 ? "Application version：v" : "应用版本：v") + ApplicationVersion,
+            text: "<br>" + (window.localStorage.languageList == 1 ? "App Edition：v" : "API版本：v") + version + versionNameHTML + "<br><br>" + (window.localStorage.languageList == 1 ? "Application version：v" : "应用版本：v") + ApplicationVersion,
             buttons: [{
                 text: window.localStorage.languageList == 1 ? "Confirm" : "确定"
             }]
@@ -449,7 +474,10 @@ function onAbout() {
     }
     JQajaxo("get", _url, true, "", _success);
 }
-function BackAppVersion(version){  ApplicationVersion = version;}
+
+function BackAppVersion(version) {
+    ApplicationVersion = version;
+}
 
 function backss() {
     var mainView = myApp.addView('.view-main');
@@ -485,17 +513,17 @@ function evil(fn) {
     return new Fn('return ' + fn)();
 }
 var alertMsgSuccess = myApp.notification.create({
-        title: window.localStorage.languageList == 1 ?'Tips':'系统提示',
+        title: window.localStorage.languageList == 1 ? 'Tips' : '系统提示',
         titleRightText: '',
         subtitle: '<br />',
-        text: window.localStorage.languageList == 1 ?'Successful operation':'操作成功',
+        text: window.localStorage.languageList == 1 ? 'Successful operation' : '操作成功',
         closeTimeout: 2000,
     }),
     alertMsgError = myApp.notification.create({
-        title: window.localStorage.languageList == 1 ?'Tips':'系统提示',
+        title: window.localStorage.languageList == 1 ? 'Tips' : '系统提示',
         titleRightText: '',
         subtitle: '<br />',
-        text: window.localStorage.languageList == 1 ?'operation failed':'操作失败或没有该命令配置',
+        text: window.localStorage.languageList == 1 ? 'operation failed' : '操作失败或没有该命令配置',
         closeTimeout: 1000,
     });
 //判断当前设备是否可查看
@@ -585,15 +613,11 @@ function exitLogin() {
 }
 //切换底部工具栏
 function switchToolbar(id) {
-    var srcOld = $(".view-menu-toolbar .no-gap").find("a.active img").attr("src").replace(".gif",".png");
-    $(".view-menu-toolbar .no-gap").find("a.active img").attr("src",srcOld);
-
+    var srcOld = $(".view-menu-toolbar .no-gap").find("a.active img").attr("src").replace(".gif", ".png");
+    $(".view-menu-toolbar .no-gap").find("a.active img").attr("src", srcOld);
     $("#" + id).addClass("active").siblings().removeClass("active");
-
-    var srcNew = $(".view-menu-toolbar .no-gap").find("a.active img").attr("src").replace(".png",".gif");
-    $(".view-menu-toolbar .no-gap").find("a.active img").attr("src",srcNew);
-
-    
+    var srcNew = $(".view-menu-toolbar .no-gap").find("a.active img").attr("src").replace(".png", ".gif");
+    $(".view-menu-toolbar .no-gap").find("a.active img").attr("src", srcNew);
 }
 //语音信息提示
 function voiceTooip(txt) {
@@ -650,20 +674,9 @@ function JQajaxo(_type, _url, _asycn, _data, _success, _error) {
 }
 //发送命令
 function get_no_val(that, set_equip, set_no, values) {
-    $.when(AlarmCenterContext.get("/api/GWServiceWebAPI/getSetParmRadioList", {
-        set_equip: set_equip,
-        set_no: set_no
-    })).done(function(n, l) {
-        var result = n.HttpData.data;
-        if (result.length > 0) {
-            if (!values) onSetCommand_return(that, set_equip, result[0].main_instruction, result[0].minor_instruction, result[0].value);
-            else onSetCommand_return(that, set_equip, result[0].main_instruction, result[0].minor_instruction, values);
-        } else {
-            alertMsgError.open();
-        }
-    }).fail(function(e) {
-        alertMsgError.open();
-    });
+
+    onSetCommand_return(that, set_equip, set_no, values);
+
 }
 
 function get_no_set(dt, values) {
@@ -674,43 +687,29 @@ function get_no_set(dt, values) {
             $(dt).find("i").removeClass("startAnimation");
         }, 1200);
     }
-    var set_equipOld = "",
-        set_noOld = "";
+    var set_equip = "",set_no = "";
     try {
-        set_equipOld = $(dt).attr("set_equip");
-        set_noOld = $(dt).attr("set_no");
+        set_equip = $(dt).attr("set_equip");
+        set_no = $(dt).attr("set_no");
     } catch (e) {}
-    if (!set_equipOld.trim() || set_equipOld.trim() == "") return false;
-    $.when(AlarmCenterContext.get("/api/GWServiceWebAPI/getSetParmRadioList", {
-        set_equip: set_equipOld,
-        set_no: set_noOld
-    })).done(function(n, l) {
-        var result = n.HttpData.data;
-        if (result.length > 0) {
-            if (values == "null" || values == "undefined" || !values || values.trim() == "") onSetCommand_return(dt, set_equipOld, result[0].main_instruction, result[0].minor_instruction, result[0].value);
-            else onSetCommand_return(dt, set_equipOld, result[0].main_instruction, result[0].minor_instruction, values);
-        } else {
-            alertMsgError.open();
-        }
-    }).fail(function(e) {
-        alertMsgError.open();
-    });
+
+   onSetCommand_return(dt, set_equip, set_no, values);
+
+
 }
 
-function onSetCommand_return(dt, equip_no, main_instr, mino_instr, valueset) {
+function onSetCommand_return(dt, equip_no, setNo, value) {
     $.ajax({
         type: "POST",
-        url: "/GWService.asmx/SetupsCommand",
+        url: "/GWService.asmx/SetupsCommand2",
         timeout: 5000,
         data: {
             equip_no: equip_no,
-            main_instruction: main_instr || "-",
-            minor_instruction: mino_instr || "-",
-            value: valueset,
-            user_name: window.localStorage.userName
+            setNo: setNo,
+            strValue: value,
         },
         success: function(data) {
-            $(data).find("string").text() == "true" ? alertMsgSuccess.open() : alertMsgError.open();
+            $(data).find("data").text() == "true" ? alertMsgSuccess.open() : alertMsgError.open();
             if ($(dt).hasClass("selectBorder")) {
                 $(".viewsPng").find("img").attr("src", $(dt).find("img").attr("src"));
             }
@@ -735,35 +734,35 @@ function videoControlDirction(EquipNum, main_instruction, direction) {
     switch (direction) {
         case "left_start":
             // get_no("", EquipNum, 13, "");
-            onSetCommand_return("", EquipNum, main_instruction, "0", "true");
+            onSetCommand_return("", EquipNum,13,"true");
             break;
         case "left_stop":
             // get_no("", EquipNum, 14, "");
-            onSetCommand_return("", EquipNum, main_instruction, "0", "false");
+            onSetCommand_return("", EquipNum,14,"false");
             break;
         case "top_start":
             // get_no("", EquipNum, 17, ""); 
-            onSetCommand_return("", EquipNum, main_instruction, "1", "true");
+            onSetCommand_return("", EquipNum,17,"true");
             break;
         case "top_stop":
             // get_no("", EquipNum, 18, "");
-            onSetCommand_return("", EquipNum, main_instruction, "1", "false");
+            onSetCommand_return("", EquipNum,18,"false");
             break;
         case "right_start":
             // get_no("", EquipNum, 15, "");
-            onSetCommand_return("", EquipNum, main_instruction, "2", "true");
+            onSetCommand_return("", EquipNum,15,"true");
             break;
         case "right_stop":
             // get_no("", EquipNum, 16, "");
-            onSetCommand_return("", EquipNum, main_instruction, "2", "false");
+            onSetCommand_return("", EquipNum,16,"false");
             break;
         case "bottom_start":
             // get_no("", EquipNum, 19, "");
-            onSetCommand_return("", EquipNum, main_instruction, "3", "true");
+            onSetCommand_return("", EquipNum,19,"true");
             break;
         case "bottom_stop":
             // get_no("", EquipNum, 20, "");
-            onSetCommand_return("", EquipNum, main_instruction, "3", "false");
+            onSetCommand_return("", EquipNum,20,"false");
             break;
         default:
             break;
@@ -771,7 +770,6 @@ function videoControlDirction(EquipNum, main_instruction, direction) {
 }
 //修改界面字体
 function modifyZnUs() {
-
     getLanguageChoice(window.localStorage.languageList, window.localStorage.voiceType);
 }
 //切换语音
@@ -926,7 +924,7 @@ function tranformMenu(val) {
     val == 1 ? obj = selLanguageEN : obj = selLanguageZH;
     obj.forEach(function(item, index) {
         if (item.id == "setPageTool") {
-            $(".navbar div.right a").attr("href", item.url);
+            // $(".navbar div.right a").attr("href", item.url);
         } else {
             $("#" + item.id).attr("href", item.url).find("span").text(item.name);
         }
@@ -984,21 +982,54 @@ function IosToggle() {
         }, 100)
     }
 }
-//弹窗模板
-function ststemSet(title,id,html){
-    myApp.request.get("plug/popoverTemplate.html", "", function (data) {
-        var popoverHTML=data;
-        popover  = myApp.popover.create({
-            targetEl: "#"+id,
+//弹窗模板  
+function ststemSet(title, id, html) {
+    myApp.request.get("plug/popoverTemplate.html", "", function(data) {
+        var popoverHTML = data;
+        popover = myApp.popover.create({
+            targetEl: "#" + id,
             content: popoverHTML,
         }).open();
-        $(".publicHeader-back").unbind().bind("click",function(){ try{toastBottom.close();} catch(e){}});
+        $(".publicHeader-back").unbind().bind("click", function() {
+            try {
+                toastBottom.close();
+            } catch (e) {}
+        });
         $(".publicHeader span").html(title);
         $(".popup-public section").html(html);
     });
 }
-
-//视频返回显示标题
-function displayNavbar(){
+//视频返回显示标题 -- 底层调用方法
+function displayNavbar() {
     $("#app").removeClass("appAttrity");
+}
+//时间线处理
+function eventListHandle(sTime, eTime) {
+    var obj = [],
+        stime_handle, etime_handle, day;
+    stime_handle = new Date(sTime).getTime();
+    etime_handle = new Date(eTime).getTime();
+    day = parseInt((etime_handle - stime_handle) / (1000 * 60 * 60 * 24))
+    for (var i = 0; i <= day; i++) {
+        obj.push({
+            time: GetDateHandle(sTime, i),
+            children: []
+        });
+    }
+    return obj;
+}
+//获取几天之后的日期
+function GetDateHandle(sTime, AddDayCount) {
+    var dd = new Date(sTime);
+    dd.setDate(dd.getDate() + AddDayCount); //获取AddDayCount天后的日期 
+    var y = dd.getFullYear();
+    var m = dd.getMonth() + 1; //获取当前月份的日期 
+    var d = dd.getDate();
+    if (m < 10) {
+        m = '0' + m;
+    }
+    if (d < 10) {
+        d = '0' + d;
+    }
+    return y + "/" + m + "/" + d;
 }

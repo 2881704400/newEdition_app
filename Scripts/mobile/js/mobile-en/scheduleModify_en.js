@@ -465,7 +465,7 @@ function initSceneList_view_en() {
         let rt = n.HttpData,
             equipRt = l.HttpData;
         if (n.HttpData.code == 200 && l.HttpData.code == 200) {
-            myApp.dialog.close();
+           
             sceneData = rt.data, scaneEquipData = equipRt.data;
             setList = rt.data, equipList = equipRt.data;
             // 场景名称
@@ -513,7 +513,7 @@ function initSceneList_view_en() {
             }
         }
     }).fail(function(e) {
-        myApp.dialog.close();
+       
     });
 }
 //过滤函数
@@ -663,7 +663,7 @@ function scenalControlPro_init_en() {
             $(".equipLinkage_edit_modify_child_equip").html(l_html);
         }
     }).fail(function(e) {
-        myApp.dialog.close();
+       
     });
 }
 //删除当前控制项

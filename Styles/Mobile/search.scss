@@ -16,15 +16,15 @@
   }
 
   .searchContainer {
+    overflow: hidden;
     section{
-      width: 100%;height: 100%;padding: 1rem;
+      width: 100%;height: 110%;padding: 1rem;
       .searchContainer-searchResult{
-           width: 100%;height: 100%;position: relative;
+          width: 100%;height: 100%;position: relative;
           h3{height: 30px;color: #2D2E30;}
           &>div{
-            position: absolute;left: 0;top: 30px;right: 0;bottom: 0;margin: 0;overflow-y: auto;
+            position: absolute;left: 0;top: 30px;right: 0;bottom: 0;margin: 0;overflow-y: auto;padding-bottom: 20%;
           }
-
       }
     }
   }
@@ -32,9 +32,34 @@
   //搜索定制内容
   .searchContainer{
     .snapshot-ul {li a{background: white;}}
+    .media-list{li{ i{font-size: 2rem;}}}
     .snapshotMessage-ul {li{ 
       background: white;
       margin-bottom: 0.5rem;
-      i{font-size: 2rem;}
-    }} 
+      .confirmed{color: green;}
+      .notConfirmed{color: red;}
+    }}
+
+  //设备列表
+  .equip-list,.equipsDetails-equip-listbreak {
+        margin-bottom: 30px; // background: #fff; 
+        li {
+            i {
+                color: #7D828F;
+                &.noCom {
+                    color: #7D828F;
+                }
+                &.alarm {
+                    color: #FE4445;
+                }
+                &.comOk {
+                    color: #54BB5C;
+                }
+            }
+            a{.no-before:before{content: ""!important;};}
+        }
+        &:before {
+            height: 0px !important;
+        }
+    } 
   }

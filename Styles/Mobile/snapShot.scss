@@ -50,6 +50,7 @@
         }
         &>div{label.col-60{text-align: right;};}
         .msgInfo{
+            display: none;
             &>label{height: 44px;line-height: 44px;padding: 0;}
             .procsContent{max-height:300px;overflow-y: auto;display:block;margin: 0;}
         }

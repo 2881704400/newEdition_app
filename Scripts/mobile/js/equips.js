@@ -2,23 +2,24 @@
 
 function equips() {
     switchToolbar("equipsTool");
-    myApp.dialog.progress('<a style="font-size: 1rem">加载中...</a>');
-          
+    $(".sliding").text("设备列表");
+    loadFun();
+    searchResult.length = 0;
     allEquipSatatus();
     //获取所有设备的状态
-    var $ptrContent = $$('.equipPageContent');
-    $ptrContent.on('ptr:refresh', function(e) {
-        setTimeout(function() {
-            allEquipSatatus();
-            // 加载完毕需要重置
-            e.detail();
-            myApp.toast.create({
-                text: '数据加载成功!',
-                position: 'center',
-                closeTimeout: 500,
-            }).open();
-        }, 2000);
-    })
+    // var $ptrContent = $$('.equipPageContent');
+    // $ptrContent.on('ptr:refresh', function(e) {
+    //     setTimeout(function() {
+    //         allEquipSatatus();
+    //         // 加载完毕需要重置
+    //         e.detail();
+    //         myApp.toast.create({
+    //             text: '数据加载成功!',
+    //             position: 'center',
+    //             closeTimeout: 500,
+    //         }).open();
+    //     }, 2000);
+    // })
     $(".ios .ptr-preloader").css({
         zIndex: "99"
     })
@@ -33,13 +34,13 @@ function equips() {
         searchContainer: '.equip-list',
         searchIn: '.item-title',
     });
-
 }
 
 var AllEquipStat;
 function allEquipSatatus() {
     AllEquipStat = null, _url = service + "/GetEquipAllState";
     JQajaxo("post", _url, true, "", _successf);
+
     function _successf(data) {
         var resultStr = $(data).children("string").text();
         if (resultStr != 'false') {
@@ -65,20 +66,17 @@ function treeConfList() {
                 var name = $(this).attr('name');
                 var equip_no = $(this).attr('EquipNo');
                 treeHTML(len, name, equip_no, $('.equip-list'));
-                myApp.dialog.close();
             });
         }
     }
 }
 //添加节点到html
 function treeHTML(len, name, equip_no, thisDom) {
-
     if (equipListStatus) //开启signalR    
     {
         signalR.connectServer(equip_no);
         equipListStatus = false;
     }
-
     var newRow = "";
     if (len > 0) {
         var alarm = selectAlarm(name);
@@ -88,7 +86,6 @@ function treeHTML(len, name, equip_no, thisDom) {
         } else {
             alarmClass = 'comOk';
         }
-        // onclick="onTreePar(this,'${name}',event)" class="accordion-item"
         newRow = `<li>
                  <a href="/equipsDetails/#${name}" class="item-link item-content">
                     <div class="item-media equipListStatus_${equip_no}">
@@ -98,15 +95,17 @@ function treeHTML(len, name, equip_no, thisDom) {
                       <div class="item-title">${name}</div>
                       <div class="item-after"><span class="badge">${len}组</span></div>
                     </div>
-                </a>
+                 </a>
                 <div class="accordion-item-content " style="padding-left: 15px;">
                     <ul></ul>
                 </div>
             </li>`
         if (alarm > 0) {
             thisDom.prepend(newRow);
+            searchResult.unshift(newRow);
         } else {
             thisDom.append(newRow);
+            searchResult.push(newRow);
         }
     } else {
         if (Browse_Equip_List(equip_no) || Browse_SpecialEquip_List(equip_no, false)) {
@@ -115,7 +114,7 @@ function treeHTML(len, name, equip_no, thisDom) {
                 var iconColorClass = getIconColor(allEquipStat[2]);
                 if (equip_no == allEquipStat[0]) {
                     if (name == '') {
-                      name = allEquipStat[1];
+                        name = allEquipStat[1];
                     }
                     newRow = `<li>
                                 <a href="/ycAndyx/#${equip_no}&${name}" class="item-link item-content">
@@ -124,14 +123,15 @@ function treeHTML(len, name, equip_no, thisDom) {
                                     </div>
                                     <div class="item-inner no-before">
                                       <div class="item-title">${name}</div>
-
                                     </div>
                                 </a>
                              </li>`;
                     if (allEquipStat[2] == 'HaveAlarm') {
                         thisDom.prepend(newRow);
+                        searchResult.unshift(newRow);
                     } else {
                         thisDom.append(newRow);
+                        searchResult.push(newRow);
                     }
                 }
             }
@@ -146,6 +146,7 @@ function treeHTML(len, name, equip_no, thisDom) {
                             </a>
                         </li>`;
                 thisDom.append(newRow);
+                searchResult.push(newRow);
             }
             thisDom.attr('equiplist', 'true');
         }
@@ -191,8 +192,7 @@ function selectAlarm(name) {
 }
 
 function onTreePar(dt, name, e) {
-    
-    var doms = selectDom(name); 
+    var doms = selectDom(name);
     $(dt).find("ul").html("");
     doms.each(function() {
         var len = $(this).children('GWEquipTreeItem').length;
@@ -204,13 +204,11 @@ function onTreePar(dt, name, e) {
         treeHTML(len, name, equip_no, $(dt).find("ul"));
     });
     $(dt).children("a").next(".accordion-item-content").children("ul").click(function(e) {
-       e.stopPropagation();
+        e.stopPropagation();
     })
-
 }
 
 function selectDom(name) {
-
     var selectDomRT = null;
     $(GetEquipTreeLists2).find('GWEquipTreeItem').each(function() {
         if ($(this).attr('Name') == name) {
@@ -218,5 +216,4 @@ function selectDom(name) {
         }
     });
     return selectDomRT;
-
 }

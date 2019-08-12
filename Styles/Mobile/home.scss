@@ -3,8 +3,6 @@ mixin：sass宏mixin
 */
 @charset "utf-8";
 @import 'public.scss';
-
-
 #homeContents{
     width: 100%;height: 100%;
     &>ul.charts-block{
@@ -104,8 +102,9 @@ mixin：sass宏mixin
       text-indent: 0.7rem;
       width: 20%;height: 43px;line-height: 43px;
       i{font-size: 1.5rem;}
+      i:before{margin-left: -0.5rem;}
     }
-    &>span{font-size: 1.5rem;width: 100%;height: 100%;height: 43px;text-indent: 1.5rem;line-height: 43px;text-align: left;display: block;}    
+    &>span{font-size: 1.5rem;width: 100%;height: 100%;height: 43px;text-indent: 1rem;line-height: 43px;text-align: left;display: block;}    
   }
   &>section{
     position: absolute;top: 86px;right: 0;bottom: 0;left: 0;overflow-y: auto;
@@ -131,7 +130,7 @@ mixin：sass宏mixin
      }
    &>.popoverSceneBtn:after {content: ""; flex: 0.85;}
    &>.popoverVideoExplain{
-      width: 100%;height: 100%;padding: 1.5rem;text-align: center;
+      width: 100%;height: 100%;padding: 1rem;text-align: center;
       a{text-align: center;}
       &>a{
         font-size: 1rem;

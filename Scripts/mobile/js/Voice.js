@@ -6,16 +6,14 @@ var startX, //触摸时的坐标
     x, //滑动的距离   
     y,
     aboveY = 0; //设一个全局变量记录上一次内部块滑动的位置    
-function voice(){
-
-        modifyZnUs();
-        //移除监听
-        document.getElementById("videoContentBtnId").removeEventListener('touchstart', onTouchStart);
-        document.getElementById("videoContentBtnId").removeEventListener('touchend', onTouchEnd);
-        // 监听
-        document.getElementById("videoContentBtnId").addEventListener('touchstart', onTouchStart);
-        document.getElementById("videoContentBtnId").addEventListener('touchend', onTouchEnd);
-
+function voice() {
+    modifyZnUs();
+    //移除监听
+    document.getElementById("videoContentBtnId").removeEventListener('touchstart', onTouchStart);
+    document.getElementById("videoContentBtnId").removeEventListener('touchend', onTouchEnd);
+    // 监听
+    document.getElementById("videoContentBtnId").addEventListener('touchstart', onTouchStart);
+    document.getElementById("videoContentBtnId").addEventListener('touchend', onTouchEnd);
     //记录选择
     try {
         myJavaFun.VoiceOpen();
@@ -23,31 +21,31 @@ function voice(){
 };
 
 function changeContentBoxBg() {
-    setTimeout(function(){
     document.getElementById("videoContentBtnId").addEventListener('touchstart', onTouchStart);
     document.getElementById("videoContentBtnId").addEventListener('touchend', onTouchEnd);
-    $(".voiceView").find("label").removeClass("displayNone");voiceInt();
-    },1500);
+    $(".voiceView").find("label").removeClass("displayNone");
+    voiceInt();
 }
 
 function onTouchStart(e) {
     $(".voiceView").find("label").addClass("displayNone");
+    $(".voiceView").find(".title_1").addClass("displayNone");
+    $(".voiceView div.loader").removeClass("displayNone");
     voiceAnimateMove();
     try {
         if (window.localStorage.voiceType == "0") myJavaFun.StartVoice("1");
         else {
             myJavaFun.startMicrosoftSpeech();
         }
-    } catch (ex) {
-
-    }
-   
+    } catch (ex) {}
     orderFlag = true;
 }
 
 function onTouchEnd(e) {
     if (orderFlag) {
         orderFlag = false;
+        $(".voiceView div.loader").addClass("displayNone");
+        $(".voiceView").find(".title_1").removeClass("displayNone").html("识别中...");
         //移除监听 
         document.getElementById("videoContentBtnId").removeEventListener('touchstart', onTouchStart);
         document.getElementById("videoContentBtnId").removeEventListener('touchend', onTouchEnd);
@@ -72,7 +70,6 @@ function StartVoiceXF() {
 }
 
 function callbackVoiceXFMessage(dt) {
-
     strAnimate(window.localStorage.languageList == "0" ? "您好像没有说话哦！" : "You don't seem to be talking！");
     voiceInt();
     document.getElementById("videoContentBtnId").addEventListener('touchstart', onTouchStart);
@@ -90,7 +87,6 @@ function waitForPasswords() {
 }
 //返回
 function callbackVoiceXFData(dt) {
-
     var voiceString = dt;
     var _url = "/api/Voice/voice_string",
         _data = {
@@ -98,32 +94,33 @@ function callbackVoiceXFData(dt) {
             userName: window.localStorage.userName
         };
     ajaxServiceSendVoice("post", _url, true, _data, _successf, _error);
+
     function _successf(dt) {
         if (dt.HttpStatus == 200 && dt.HttpData.data) {
             var result = dt.HttpData.data;
             if (result == "") {
                 $(".voiceView").find("h2").html(window.localStorage.languageList == "0" ? "<span>未识别！</span>" : "<span> Unidentified！</span>");
             } else {
-                
                 result = handleString(result);
-                $(".voiceView").find("h2").html(result);
-                $(".voiceView").find("label").html(result);
+                let contentTxt = result.replace(/打/g, "").replace(/开/g, "");
+                if (result.indexOf("打") != -1 || result.indexOf("开") != -1) {
+                    $(".voiceView").find("h2").html((window.localStorage.languageList == "0" ? (contentTxt + "已经打开") : "Already implemented"));
+                } else {
+                    $(".voiceView").find("h2").html((window.localStorage.languageList == "0" ? (contentTxt + "已执行") : "Already implemented"));
+                }
+                document.getElementById("videoContentBtnId").addEventListener('touchstart', onTouchStart);
+                document.getElementById("videoContentBtnId").addEventListener('touchend', onTouchEnd);                
                 //每次说话
-                setTimeout(function(){voiceAnimateEnd();},500);
                 setTimeout(function() {
-                    let contentTxt = result.replace(/打/g, "").replace(/开/g, "");
-                    if (result.indexOf("打") != -1 || result.indexOf("开") != -1) {
-                        $(".voiceView").find("h2").html((window.localStorage.languageList == "0" ? (contentTxt + "已经打开") : "Already implemented"));
-                    } else {
-                        $(".voiceView").find("h2").html((window.localStorage.languageList == "0" ? (contentTxt + "已执行") : "Already implemented"));
-                    }
-                    changeContentBoxBg();
+                    $(".voiceView").find("label").removeClass("displayNone").html(result);
+                    strAnimate("请按下说话!");
                 }, 1000);
             }
         } else {
             result = handleString(result);
-            $(".voiceView").find("h2").html(voiceString + (window.localStorage.languageList == "0" ? "指令异常，执行失败" : " Instruction exception, execution failure!") );
-            changeContentBoxBg();
+            $(".voiceView").find("h2").html(voiceString + (window.localStorage.languageList == "0" ? "指令异常，执行失败" : " Instruction exception, execution failure!"));
+            document.getElementById("videoContentBtnId").addEventListener('touchstart', onTouchStart);
+            document.getElementById("videoContentBtnId").addEventListener('touchend', onTouchEnd);
         }
     }
 
@@ -134,7 +131,7 @@ function callbackVoiceXFData(dt) {
     }
 }
 //处理字符串
-function handleString(str){
+function handleString(str) {
     var result = str;
     result = result.replace("未识别语音,内容", "");
     result = result.replace("已处理语音,内容", "");
@@ -142,7 +139,6 @@ function handleString(str){
     result = result.replace("。", "");
     return result;
 }
-
 
 function microsoftSpeech(dt) {
     callbackVoiceXFData(dt);
@@ -172,7 +168,6 @@ function ajaxServiceSendVoice(_type, _url, _asycn, _data, _success, _error) {
         }
     });
 }
-
 //key或者授权过期提示
 function voiceErrorAlert() {
     $(".voiceView").find("h2").html("<span>" + window.localStorage.languageList == "0" ? "keys值错误或者授权过期" : "Key value error or authorization expiration" + "</span>");

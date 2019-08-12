@@ -83,7 +83,7 @@ function pptDetails_en() {
     i = 1;
     $(".closeFile,.setScreenSizeChild").unbind();
     $(".closeFile,.setScreenSizeChild").bind('click', function() {
-        get_no_val(this, PPTcommand.closePPT.equipNo, PPTcommand.closePPT.setNo, "", "");
+        get_no_val(this, PPTcommand.closePPT.equipNo, PPTcommand.closePPT.setNo, "");
         if ($(this).hasClass("setScreenSizeChild")) {
             $(this).addClass("displayNone").siblings().removeClass("displayNone");
         }

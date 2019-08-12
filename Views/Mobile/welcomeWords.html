@@ -1,19 +1,19 @@
-﻿<div data-page="welcomeWords" class="page" id="welcomeWords">
-
-
+﻿<div class="page no-toolbar" data-page="welcomeWords" id="welcomeWords">
     <div class="navbar navbar-large">
         <div class="navbar-inner navbar-inner-large navbar-current">
             <div class="left">
                 <a class="back" href="#">
-                    <i class="icon iconfont icon_Nav_fanhui"></i>
+                    <i class="icon iconfont icon_Nav_fanhui">
+                    </i>
                 </a>
             </div>
-            <div class="title sliding title_1" >
+            <div class="title sliding title_1">
                 欢迎词
             </div>
             <div class="right">
                 <a class="link icon-only saveWelcomeWords" style="line-height: 59px;">
-                    <i class="icon iconfont iconiconset0238"></i>
+                    <i class="icon iconfont iconiconset0238">
+                    </i>
                 </a>
             </div>
             <div class="title-large">
@@ -21,143 +21,210 @@
                     欢迎词
                 </div>
             </div>
-            <form class="searchbar searchbar-expandable searchbar-components searchbar-init" data-search-container=".components-list" data-search-in="a">
-                <div class="searchbar-inner">
-                    <div class="searchbar-input-wrap">
-                        <input class="" placeholder="Search components" type="search">
-                            <i class="searchbar-icon">
-                            </i>
-                            <span class="input-clear-button">
-                            </span>
-                        </input>
-                    </div>
-                    <span class="searchbar-disable-button if-not-aurora">
-                        Cancel
-                    </span>
-                </div>
-            </form>
         </div>
     </div>
+    <div class="page-content welcomePageContents pageContent_102 pageContent_0">
+        <div class="welcomeWordContents">
+            <div class="welcome-Word-boxs">
+                <textarea class="col-100 publicInputEdit welcomeInput" onfocus="getFocusValue()" placeholder="请输入欢迎词……" value="">
+                </textarea>
+            </div>
+            <ul class="tabs welcome-Word-control-boxs">
+                <li>
+                    <i class="icon iconfont icon_huanyingci_ziti tab-link tab-link-active selectMenuWelcomewords" href="#tab22">
+                    </i>
+                </li>
+                <li>
+                    <i class="icon iconfont icon_huanyingci_tupian tab-link" href="#tab33">
+                    </i>
+                </li>
+                <li>
+                    <i class="icon iconfont icon_huanyingci_daping tab-link" href="#tab44">
+                    </i>
+                </li>
+            </ul>
+            <div class="tabs welcome-Word-control-tabs">
+                <div class="welcome-Word-control-tab tab tab-active" id="tab22">
+                    <dl>
+                        <dt>
+                            对齐
+                        </dt>
+                        <dd id="alignControlId">
+                            <i class="icon iconfont icon_huanyingci_zuoduiqi welcome-Word-control-tab-align control-active-color">
+                            </i>
+                            <i class="icon iconfont icon_huanyingci_juzhong welcome-Word-control-tab-align">
+                            </i>
+                            <i class="icon iconfont icon_huanyingci_youduiqi welcome-Word-control-tab-align">
+                            </i>
+                            <i class="icon iconfont icon_huanyingci_shuipingjuzhong welcome-Word-control-tab-align">
+                            </i>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            字体
+                        </dt>
+                        <dd>
+                            <select class="publicInput" id="fontFamily" style="width: 60%;">
+                                <option data-font="Microsoft JhengHei" sselected="selected">
+                                    微软雅黑
+                                </option>
+                                <option data-font="SimSun">
+                                    宋体
+                                </option>
+                                <option data-font="SimHei">
+                                    黑体
+                                </option>
+                                <option data-font="Microsoft JhengHei">
+                                    微软正黑体
+                                </option>
+                                <option data-font="NSimSun">
+                                    新宋体
+                                </option>
+                                <option data-font="PMingLiU">
+                                    新细明体
+                                </option>
+                                <option data-font="MingLiU">
+                                    细明体
+                                </option>
+                                <option data-font="DFKai-SB">
+                                    标楷体
+                                </option>
+                                <option data-font="FangSong">
+                                    仿宋
+                                </option>
+                                <option data-font="KaiTi">
+                                    楷体
+                                </option>
+                                <option data-font="FangSong_GB2312">
+                                    仿宋_GB2312
+                                </option>
+                                <option data-font="KaiTi_GB2312">
+                                    楷体_GB2312
+                                </option>
+                                <option data-font="fantasy">
+                                    fantasy
+                                </option>
+                                <option data-font="monospace">
+                                    monospace
+                                </option>
+                                <option data-font="LiHei Pro Medium">
+                                    LiHei Pro Medium
+                                </option>
+                                <option data-font="cursive">
+                                    cursive
+                                </option>
+                            </select>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            大小
+                        </dt>
+                        <dd>
+                            <span class="welcome-Word-control-tab-align control-active-color" id="controlrangeSliderValueId" style="font-size: 1.2rem !important;">
+                                22
+                            </span>
+                            <div class="range-slider range-slider-init color-lightblue welcome-Word-control-tab-range-slider" id="controlrangeSliderId">
+                                <input max="200" min="10" step="1" type="range" value="22">
+                                </input>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            粗细
+                        </dt>
+                        <dd id="thickControlId">
+                            <i class="iconfont icon-changgui welcome-Word-control-tab-align control-active-color">
+                            </i>
+                            <i class="iconfont icon-jiacu welcome-Word-control-tab-align">
+                            </i>
+                            <i class="iconfont icon-qingxie welcome-Word-control-tab-align">
+                            </i>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            颜色
+                        </dt>
+                        <dd>
+                            <div class="welcome-Word-control-tab-align">
+                                <a class="activeSkin welcome-Word-active-Color " href="#">
+                                </a>
+                                <div class="setStyle_color col-33 displayNone" id="SelectSkin">
+                                    <div id="colorSkin">
+                                        <div class="row">
+                                            <a class="col-33" href="#">
+                                                <i>
+                                                </i>
+                                            </a>
+                                            <a class="col-33" href="#">
+                                                <i>
+                                                </i>
+                                            </a>
+                                            <a class="col-33" href="#">
+                                                <i>
+                                                </i>
+                                            </a>
+                                            <a class="col-33" href="#">
+                                                <i>
+                                                </i>
+                                            </a>
+                                            <a class="col-33" href="#">
+                                                <i>
+                                                </i>
+                                            </a>
+                                            <a class="col-33" href="#">
+                                                <i>
+                                                </i>
+                                            </a>
+                                            <a class="col-33" href="#">
+                                                <i>
+                                                </i>
+                                            </a>
+                                            <a class="col-33" href="#">
+                                                <i>
+                                                </i>
+                                            </a>
+                                            <a class="col-33" href="#">
+                                                <i>
+                                                </i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
 
+                <div class="welcome-Word-control-tab tab wecomeButtom" id="tab33">
+<!-- <i class="icon iconfont icongouxuan welcome-Word-control-icon-check" style="display:inline;"></i> -->
+                    <div class="row welBgImage">
 
+                    </div>
+         
+                </div>
+                    <div class="welcome-Word-control-tab tab" id="tab44">
+                        <div class="welcome-Word-control-icon-mutual" set_equip="1005" set_no="4020">
+                            <i class="icon iconfont icon_huanyingci_dapingyulan">
+                            </i>
+                            <span>
+                                大屏预览
+                            </span>
+                        </div>
+                        <div class="welcome-Word-control-icon-mutual" set_equip="1005" set_no="4021">
+                            <i class="icon iconfont icon_huanyingci_guanbidaping">
+                            </i>
+                            <span>
+                                关闭大屏
+                            </span>
+                        </div>
+                    </div>
 
-	<div class="page-content welcomePageContents pageContent_102">
-		<div class="welcomeWordContents">
-			<div class="welcome-Word-boxs">
-				<textarea placeholder="请输入欢迎词……" value="" onfocus="getFocusValue()" class="col-100 publicInputEdit welcomeInput"></textarea>
-			</div>
-			<ul class="tabs welcome-Word-control-boxs">
-				<li><i class="icon iconfont icon_huanyingci_jianpan tab-link" href="#tab11"></i></li>
-				<li><i class="icon iconfont icon_huanyingci_ziti tab-link tab-link-active selectMenuWelcomewords" href="#tab22" ></i></li>
-				<li><i class="icon iconfont icon_huanyingci_tupian tab-link" href="#tab33"></i></li>
-				<li><i class="icon iconfont icon_huanyingci_daping tab-link" href="#tab44"></i></li>
-			</ul>
-			<div class="tabs welcome-Word-control-tabs">
-				<div class="welcome-Word-control-tab tab" id="tab11"></div>
-				<div class="welcome-Word-control-tab tab tab-active" id="tab22">
-					<dl>
-						<dt>对齐</dt>
-						<dd id="alignControlId">
-							<i class="icon iconfont icon_huanyingci_zuoduiqi welcome-Word-control-tab-align control-active-color"></i>
-							<i class="icon iconfont icon_huanyingci_juzhong welcome-Word-control-tab-align"></i>
-							<i class="icon iconfont icon_huanyingci_youduiqi welcome-Word-control-tab-align"></i>
-							<i class="icon iconfont icon_huanyingci_shuipingjuzhong welcome-Word-control-tab-align"></i>
-						</dd>
-					</dl>
-					<dl>
-						<dt>字体</dt>
-						<dd>
-							<select class="publicInput" style="width: 60%;" id="fontFamily">
-								<option sselected="selected" data-font="Microsoft JhengHei">微软雅黑</option>
-								<option data-font="SimSun">宋体</option>
-								<option data-font="SimHei">黑体</option>
-								<option data-font="Microsoft JhengHei">微软正黑体</option>
-								<option data-font="NSimSun">新宋体</option>
-								<option data-font="PMingLiU">新细明体</option>
-								<option data-font="MingLiU">细明体</option>
-								<option data-font="DFKai-SB">标楷体</option>
-								<option data-font="FangSong">仿宋</option>
-								<option data-font="KaiTi">楷体</option>
-								<option data-font="FangSong_GB2312">仿宋_GB2312</option>
-								<option data-font="KaiTi_GB2312">楷体_GB2312</option>
-								<option data-font="fantasy">fantasy</option>
-								<option data-font="monospace">monospace</option>
-								<option data-font="LiHei Pro Medium">LiHei Pro Medium</option>
-								<option data-font="cursive">cursive</option>
-							</select>
-						</dd>
-					</dl>
-					<dl>
-						<dt>大小</dt>
-						<dd>
-							<span class="welcome-Word-control-tab-align control-active-color" id="controlrangeSliderValueId" style="font-size: 1.2rem !important;">22</span>
-							<!-- range slider, enable labels -->
-							<div class="range-slider range-slider-init color-lightblue welcome-Word-control-tab-range-slider" id="controlrangeSliderId">
-								<input type="range" min="10" max="200" step="1" value="22">
-							</div>
-						</dd>
-					</dl>
-					<dl>
-						<dt>粗细</dt>
-						<dd id="thickControlId">
-							<i class="iconfont icon-changgui welcome-Word-control-tab-align control-active-color"></i>
-							<i class="iconfont icon-jiacu welcome-Word-control-tab-align"></i>
-							<i class="iconfont icon-qingxie welcome-Word-control-tab-align"></i>
-						</dd>
-					</dl>
-					<dl>
-						<dt>颜色</dt>
-						<dd>
-							<div class="welcome-Word-control-tab-align">
-								<a href="#" class="activeSkin welcome-Word-active-Color "></a>
-								<div class="setStyle_color col-33 displayNone" id="SelectSkin">
-									<div id="colorSkin">
-										<div class="row">
-											<a href="#" class="col-33"><i></i></a>
-											<a href="#" class="col-33"><i></i></a>
-											<a href="#" class="col-33"><i></i></a>
-											<a href="#" class="col-33"><i></i></a>
-											<a href="#" class="col-33"><i></i></a>
-											<a href="#" class="col-33"><i></i></a>
-											<a href="#" class="col-33"><i></i></a>
-											<a href="#" class="col-33"><i></i></a>
-											<a href="#" class="col-33"><i></i></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</dd>
-					</dl>
-				</div>
-				<div class="welcome-Word-control-tab tab wecomeButtom" id="tab33">
-					<div class="swiper-container swiper-3">
-						<div class="swiper-wrapper setBackground">
-							<div class="swiper-slide">
-								<img src="/BGImages/201801111111.jpg"/>
-								<i class="icon iconfont icongouxuan welcome-Word-control-icon-check"></i>
-							</div>
-							<div class="swiper-slide">
-								<img src="/BGImages/bg_2.jpg"/>
-								<i class="icon iconfont icongouxuan welcome-Word-control-icon-check"></i>
-							</div>
-							<div class="swiper-slide">
-								<img src="/BGImages/bg_3.jpg"/>
-								<i class="icon iconfont icongouxuan welcome-Word-control-icon-check"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="welcome-Word-control-tab tab" id="tab44">
-					<div class="welcome-Word-control-icon-mutual" set_no="4020" set_equip="1005">
-						<i class="icon iconfont icon_huanyingci_dapingyulan"></i>
-						<span>大屏预览</span>
-					</div>
-					<div class="welcome-Word-control-icon-mutual" set_no="4021" set_equip="1005">
-						<i class="icon iconfont icon_huanyingci_guanbidaping"></i>
-						<span>关闭大屏</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

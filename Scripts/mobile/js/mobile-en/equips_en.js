@@ -1,6 +1,6 @@
 ﻿function equips_en() {
     switchToolbar("equipsTool");
-    myApp.dialog.progress('<a style="font-size: 1rem">Loading...</a>');
+    loadFun();
     allEquipSatatus_en();
     //获取所有设备的状态
     var $ptrContent = $$('.equipPageContent');
@@ -58,11 +58,8 @@ function treeConfList_en() {
             GetEquipTreeLists2 = null;
             GetEquipTreeLists2 = str;
             $(str).children('GWEquipTreeItem').each(function() {
-                var len = $(this).children('GWEquipTreeItem').length;
-                var name = $(this).attr('name');
-                var equip_no = $(this).attr('EquipNo');
+                var len = $(this).children('GWEquipTreeItem').length,name = $(this).attr('name'),equip_no = $(this).attr('EquipNo');
                 treeHTML_en(len, name, equip_no, $('.equip-list'));
-                myApp.dialog.close();
             });
         }
     }

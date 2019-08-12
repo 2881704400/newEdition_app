@@ -5,9 +5,8 @@ function onHomePage() {
     getJurisdictionData();
     getAppStatusBarHeight();
     tranformMenu(window.localStorage.languageList);
-    
+    // myApp.views.main.router.navigate("/welcomeWords/");
 }
-
 //响应App绑定函数-获取状态栏高度 
 function getStatusBarHeight(height, ScreenHeight) {
     var heightRate = height / ScreenHeight;
@@ -26,7 +25,6 @@ function getAppStatusBarHeight() {
         }
     }
 }
-
 //授权名称
 function authorizationName() {
     var ajaxVar = $.ajax({
@@ -52,21 +50,6 @@ function authorizationName() {
     });
 }
 
-//提示窗口
-function tipsInformtion(tipsStr, tipsEvent) {
-    myApp.dialog.create({
-        title: window.localStorage.languageList == 1 ? "Tips" : "提示",
-        text: tipsStr,
-        buttons: [{
-            text: window.localStorage.languageList == 1 ? "Cancel" : "取消"
-        }, {
-            text: window.localStorage.languageList == 1 ? "confirm" : "确定",
-            onClick: function() {
-                tipsEvent();
-            }
-        }]
-    }).open();
-}
 //常用
 function commonlyUsedFun(className, classListName, jsonString) {
     $("." + className).html("");
@@ -144,7 +127,7 @@ function snashotCount(btnInfoLevels_home) {
 }
 //配置界面
 function getJurisdictionData() {
-    myApp.dialog.progress((window.localStorage.languageList == 1 ? '<a style="font-size: 1rem">Loading...</a>' : '<a style="font-size: 1rem">加载中...</a>'));
+    loadFun();
     // 权限管理 
     var JurisdictionArray = [];
     $.when(AlarmCenterContext.post("/api/GWServiceWebAPI/getJurisdictionData", {
@@ -160,7 +143,6 @@ function getJurisdictionData() {
                 url: service + "/UserPermissions",
                 data: "userName=" + window.localStorage.userName,
                 success: function(usersDt) {
-                    myApp.dialog.close();
                     $("#homeContents>ul").html("");
                     getWebUser = $(usersDt).children("UserItem");
                     let resultControl = $(usersDt).find("RoleItem").find("AddinModule_List").find("int"),
@@ -315,7 +297,6 @@ function functionalModule(className, htmlStr) {
     }
     return html;
 }
-
 //视频讲解
 function videoExplain() {
     var htmlContent = `<div class="popoverVideoExplain">
@@ -393,41 +374,40 @@ function JumpPage(dt) {
 //场景切换
 function sceneSwitching() {
     var htmlContent = `<div class="popoverVideoExplain">
-       ${returnSceneHtml()}
+       ${getSceneHtml()}
     </div>
     `;
     ststemSet(window.localStorage.languageList == 1 ? "Scene switching" : "场景切换", "sceneBtnControl", htmlContent);
 }
-function returnSceneHtml(){
-   var headerHtml = "",contentHtml = "",allHtml = "";
-    KOvm.forEach((item,index)=>{
-       headerHtml = `<h4><span>${item.title}</span></h4>`;
-       contentHtml = `
+function getSceneHtml() {
+    var headerHtml = "",
+        contentHtml = "",
+        allHtml = "";
+    KOvm.forEach((item, index) => {
+        headerHtml = `<h4><span>${item.title}</span></h4>`;
+        contentHtml = `
          <div class="row">
             ${returnSceneChildHtml(item.child)}                            
          </div>
        `;
-       allHtml += (headerHtml + contentHtml);
+        allHtml += (headerHtml + contentHtml);
     });
-   return allHtml;
+    return allHtml;
 }
-function returnSceneChildHtml(dom){
-  var allHtml = "";
-  dom.forEach((item,index)=>{
-     allHtml += `
-           <a href="#" class="popoverVideoExplain col-25"  set_equip="${item.equipNo}" set_no="${item.setNo}" onclick="get_no_set(this,null)" >
+
+function returnSceneChildHtml(dom) {
+    var allHtml = "";
+    dom.forEach((item, index) => {
+        allHtml += `<a href="#" class="popoverVideoExplain col-25"  set_equip="${item.equipNo}" set_no="${item.setNo}" onclick="get_no_set(this,null)" >
                  <i class="${item.icon}"></i>
               <p class="title_4">${window.localStorage.languageList == 1 ?item.name_en:item.name}</p>
-           </a>                              
-     `;
-  });
-  allHtml +=`<a href="#" class="col-25"></a><a href="#" class="col-25"></a><a href="#" class="col-25"></a>`;
-  return allHtml;
+     </a>`;
+    });
+    allHtml += `<a href="#" class="col-25"></a><a href="#" class="col-25"></a><a href="#" class="col-25"></a>`;
+    return allHtml;
 }
-
 //模块功能
 function functionalModule_page() {
-
     dynamicSheetAll = myApp.sheet.create({
         content: `
        <div class="sheet-modal my-sheet-swipe-to-step fm-modal" style="height:auto; --f7-sheet-bg-color: #fff;">
@@ -439,7 +419,6 @@ function functionalModule_page() {
             </div>
             <div class="block-title block-title-medium margin-top title_2" style="${window.localStorage.moduleRecord?"":"display: none;"}">近期使用</div>
             <div class="no-hairlines">
-
               <div data-pagination='{"el": ".swiper-pagination-header"}' data-space-between="10" data-slides-per-view="3" class="swiper-container-header swiper-init demo-swiper">
                 <div class="swiper-wrapper">
                     ${historyHTML()}
@@ -474,7 +453,6 @@ function functionalModule_page() {
                       </p>
                       <span class="title_4">报警排表</span>
                     </a>
-                    
                   </div>
                   <div class="swiper-slide">
                     <a href="/equipLinkage/">
@@ -500,30 +478,27 @@ function functionalModule_page() {
         // Events
         on: {
             open: function(sheet) {
-              var swiper = myApp.swiper.create('.swiper-container-header,.swiper-container-content', {
-                  speed: 400,
-                  spaceBetween: 10,
-                  slidesPerView: 4.5
-              });
+                var swiper = myApp.swiper.create('.swiper-container-header,.swiper-container-content', {
+                    speed: 400,
+                    spaceBetween: 10,
+                    slidesPerView: 4.5
+                });
             },
             opened: function(sheet) {},
         },
-        swipeToClose: true,
+        swipeToClose: false,
         swipeToStep: false,
         backdrop: true,
     });
     dynamicSheetAll.open();
 }
-
 //近期使用
-function historyHTML(){
-  var historyRecord,html = "";
-   if(window.localStorage.moduleRecord)
-   {
-       historyRecord = JSON.parse(window.localStorage.moduleRecord);
-       for(var val of historyRecord)
-       {
-          html += `
+function historyHTML() {
+    var historyRecord, html = "";
+    if (window.localStorage.moduleRecord) {
+        historyRecord = JSON.parse(window.localStorage.moduleRecord);
+        for (var val of historyRecord) {
+            html += `
            <div class="swiper-slide">
             <a href="/${val.split("&")[0]}/">
               <p class="icon iconfont icon_gongnengrukou_ditu">
@@ -531,57 +506,84 @@ function historyHTML(){
               </p>
               <span class="title_4">${val.split("&")[2]}</span>
            </a></div>`;
-       }  
-   }
-   return html;
+        }
+    }
+    return html;
 }
 
-function addModuleRecord(value){
-   var historyRecord;
-   if(window.localStorage.moduleRecord)
-   {
-       historyRecord = JSON.parse(window.localStorage.moduleRecord);
-       if(historyRecord.join(",").indexOf(value) == -1)
-          historyRecord.push(value);
-       if(historyRecord.length>3)
-          historyRecord.shift();   
-   }
-   else
-   {
-       historyRecord = [];
-       historyRecord.push(value);
-   }
-   window.localStorage.moduleRecord = JSON.stringify(historyRecord);
+function addModuleRecord(value) {
+    var historyRecord;
+    if (window.localStorage.moduleRecord) {
+        historyRecord = JSON.parse(window.localStorage.moduleRecord);
+        if (historyRecord.join(",").indexOf(value) == -1) historyRecord.push(value);
+        if (historyRecord.length > 3) historyRecord.shift();
+    } else {
+        historyRecord = [];
+        historyRecord.push(value);
+    }
+    window.localStorage.moduleRecord = JSON.stringify(historyRecord);
 }
 
-function judgeOpenPage(url){
-   switch(url)
-   {
-      case "/eventSearch/": addModuleRecord("eventSearch&icon iconfont icon_gongnengmokuai_shijianchaxun&事件查询");break;
-      case "/equipConfigList/": addModuleRecord("equipConfigList&icon iconfont icon_gongnengmokuai_xitongpeizhi&系统配置");break;
-      case "/schedule/": addModuleRecord("schedule&icon iconfont icon_gongnengmokuai_baojingpaiban&报警排表");break;
-      case "/equipLinkage/": addModuleRecord("equipLinkage&icon iconfont icon_gongnengmokuai_shebeiliandong&设备联动");break;
-      case "/sceneEdit/": addModuleRecord("sceneEdit&icon iconfont icon_gongnengmokuai_changjingpeizhi&场景编辑");break;
-      default: break;
-   }
+function judgeOpenPage(url) {
+    switch (url) {
+        case "/eventSearch/":
+            addModuleRecord("eventSearch&icon iconfont icon_gongnengmokuai_shijianchaxun&事件查询");
+            break;
+        case "/equipConfigList/":
+            addModuleRecord("equipConfigList&icon iconfont icon_gongnengmokuai_xitongpeizhi&系统配置");
+            break;
+        case "/schedule/":
+            addModuleRecord("schedule&icon iconfont icon_gongnengmokuai_baojingpaiban&报警排表");
+            break;
+        case "/equipLinkage/":
+            addModuleRecord("equipLinkage&icon iconfont icon_gongnengmokuai_shebeiliandong&设备联动");
+            break;
+        case "/sceneEdit/":
+            addModuleRecord("sceneEdit&icon iconfont icon_gongnengmokuai_changjingpeizhi&场景编辑");
+            break;
+        default:
+            break;
+    }
 }
-
 //语音
 function voiceSheet() {
     var voiceSheet = myApp.sheet.create({
         content: `
        <div class="sheet-modal my-sheet-swipe-to-step fm-modal" style="height:auto; --f7-sheet-bg-color: #fff;">
           <div class="sheet-modal-inner">
-
             <div class="sheet-modal-swipe-step">
               <div class="display-flex padding justify-content-space-between align-items-center header_center_gray">
                  <div></div>
               </div>
             </div>
-
             <div class="voiceView">
+                <br />
                 <label class="displayNone"></label>
                 <h2 class="title_1"> </h2>
+                <div class="loader displayNone">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>                        
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                  </div>
+                  <br />
                 <div id="videoContentBtnId"></div>
             </div> 
 
@@ -589,100 +591,92 @@ function voiceSheet() {
         </div>`,
         on: {
             open: function(sheet) {
-              addScript("voiceAnimate");
-              voiceAnimateStart();
+                addScript("voiceAnimate");
+                voiceAnimateStart();
             },
             opened: function(sheet) {
-              voice();
+                voice();
             },
-            close: function(sheet){
-
-            }
+            close: function(sheet) {}
         },
-        swipeToClose: true,
+        swipeToClose: false,
         swipeToStep: false,
         backdrop: true,
     });
     voiceSheet.open();
 }
 
-function voiceAnimateStart(){
+function voiceAnimateStart() {
     $("#videoContentBtnId").html("");
-    $(".voiceView").find("h2").addClass("voiceAnimateShow").text("想要做什么呢？");
-    try{
-      var paramsStart = {
-            container: document.getElementById('videoContentBtnId'),
-            renderer: 'svg',
-            loop: true,
-            autoplay: true,
-            animationData: animationDataStart
-        };
-      lottie.loadAnimation(paramsStart);}catch(e){}
-}
-
-function voiceAnimateMove(){
-  
-  $("#videoContentBtnId").html("");
-    strAnimate("识别中...");
-    try{
-      var paramsMove = {
-            container: document.getElementById('videoContentBtnId'),
-            renderer: 'svg',
-            loop: true,
-            autoplay: true,
-            animationData: animationDataStart//animationDataMove
-        };
-      lottie.loadAnimation(paramsMove);}catch(e){}
-}
-
-function voiceAnimateEnd(){
-  $("#videoContentBtnId").html("");
-    try{
-      var paramsEnd = {
+    $(".voiceView").find("h2").addClass("voiceAnimateShow").text("请按下说话!");
+    try {
+        var paramsStart = {
             container: document.getElementById('videoContentBtnId'),
             renderer: 'svg',
             loop: false,
-            autoplay: true,
-            animationData: animationDataEnd
-        };
-      lottie.loadAnimation(paramsEnd);}catch(e){}
-}
-
-function voiceInt(){
-
-    $("#videoContentBtnId").html("");
-    strAnimate("还有什么可以效劳呢？");
-
-    try{
-      var paramsStart = {
-            container: document.getElementById('videoContentBtnId'),
-            renderer: 'svg',
-            loop: true,
-            autoplay: true,
+            autoplay: false,
             animationData: animationDataStart
         };
-    lottie.loadAnimation(paramsStart);}catch(e){}
-
+        lottie.loadAnimation(paramsStart);
+    } catch (e) {}
 }
 
+function voiceAnimateMove() {
+    $("#videoContentBtnId").html("");
+    try {
+        var paramsMove = {
+            container: document.getElementById('videoContentBtnId'),
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            animationData: animationDataStart //animationDataMove
+        };
+        lottie.loadAnimation(paramsMove);
+    } catch (e) {}
+}
 
+function voiceAnimateEnd() {
+    $("#videoContentBtnId").html("");
+    try {
+        var paramsEnd = {
+            container: document.getElementById('videoContentBtnId'),
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            animationData: animationDataEnd
+        };
+        lottie.loadAnimation(paramsEnd);
+    } catch (e) {}
+}
+
+function voiceInt() {
+    $("#videoContentBtnId").html("");
+    strAnimate("请按下说话!");
+    try {
+        var paramsStart = {
+            container: document.getElementById('videoContentBtnId'),
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            animationData: animationDataStart
+        };
+        lottie.loadAnimation(paramsStart);
+    } catch (e) {}
+}
 //添加脚本
-function addScript(dt){
-     if ($("#" + dt + "_id").length == 0) {
+function addScript(dt) {
+    if ($("#" + dt + "_id").length == 0) {
         var pagejs = document.createElement("script");
         pagejs.id = dt + "_id";
         pagejs.setAttribute("src", "/Scripts/mobile/js/voice/" + dt + ".js?v" + Math.random());
         document.body.appendChild(pagejs);
-     }
+    }
 }
-
 //字符动画
-function strAnimate(str){
-
-  $(".voiceView").find("h2").removeClass("voiceAnimateShow").addClass("voiceAnimateHide");
-  setTimeout(function(){
-    $(".voiceView").find("h2").removeClass("voiceAnimateHide").addClass("voiceAnimateShow");
-    $(".voiceView").find("h2").text(str);
-  },300);
-
+function strAnimate(str) {
+    $(".voiceView").find("h2").removeClass("voiceAnimateShow").addClass("voiceAnimateHide");
+    setTimeout(function() {
+        $(".voiceView").find("h2").removeClass("voiceAnimateHide").addClass("voiceAnimateShow");
+        $(".voiceView").find("h2").text(str);
+    }, 300);
 }

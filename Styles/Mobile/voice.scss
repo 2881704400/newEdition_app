@@ -1,381 +1,238 @@
-
-    .video-content-btn {
-        width: 70px;
-        height: 35px;
-        border-radius: 0 0 70px 70px;
-        position: absolute;
-        left: 50%;
-        bottom: 5px;
-        margin-left: -35px;
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-    }
-    .video-content-btn div {
-        width: 50px;
-        height: 50px;
-        background: #4E4F50;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0px 0px 50px white;
-    }
-    .video-content-btn-Curtain {
-        width: 80px;
-        height: 35px;
-        border-radius: 0 0 80px 80px;
-        position: absolute;
-        left: 50%;
-        bottom: 10%;
-        margin-left: -40px;
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-    }
-    .video-content-btn-Curtain div {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        margin-bottom: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0px 0px 50px white;
-    }
-    .video-content-btn div img {
-        height: 100%;
-        width: auto;
-    }
-
-.popup-voices {
-    background: rgba(51, 51, 51, 0.70);
-
-     .voice-header {
-        font-family: Source Han Sans Bold;
-        font-size: 1rem;
-        color: #FFFFFF;
-        letter-spacing: 1px;
-        text-align: center;
-        width: 100%;
-        height: 50px;
-        line-height: 50px;
-        position: relative;
-        top: 3%;
-    }
-     .voice-header .voice-header-back {
-        width: 50px;
-        height: 50px;
-        position: absolute;
-        left: 5%;
-        text-align: left;
-    }
-     .voice-header .voice-header-back .icon-back {
-        background-image: none;
-    }
-     .voice-container {
-        width: 100%;
-        height: 70%;
-        padding: 0 5%;
-        font-family: Source Han Sans Bold;
-        font-size: 1rem;
-        color: #222222;
-        letter-spacing: 1px;
-        position: relative;
-        top: 3%;
-        overflow-y: auto;
-    }
-     .voice-container::-webkit-scrollbar {
-        /*滚动条整体样式*/
-        width: 0px;
-        /*高宽分别对应横竖滚动条的尺寸*/
-        height: 4px;
-    }
-     .voice-container::-webkit-scrollbar-thumb {
-        /*滚动条里面小方块*/
-        border-radius: 5px;
-        -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-        background: rgba(0, 0, 0, 0.2);
-    }
-     .voice-container::-webkit-scrollbar-track {
-        /*滚动条里面轨道*/
-        -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-        border-radius: 0;
-        background: rgba(0, 0, 0, 0.1);
-    }
-    .clear:after {
-        content: "";
-        width: 100%;
-        height: 1px;
-        display: inline-block;
-    }
-     .voice-container .pannel-chat-info {
-        width: 100%;
-        height: auto;
-        clear: both;
-        position: relative;
-    }
-     .voice-container .pannel-chat-info .chart-content {
-        padding: 10px 14px;
-        max-width: 70%;
-        margin-top: 13px;
-        float: left;
-        background: #fff;
-        color: rgb(102, 102, 102);
-        font-size: 1rem;
-        letter-spacing: 1px;
-        font-family: "-webkit-pictograph";
-        border-bottom-right-radius: 12px;
-        border-top-right-radius: 12px;
-        border-bottom-left-radius: 2px;
-        border-top-left-radius: 15px;
-        position: relative;
-    }
-     .voice-container .pannel-chat-info .chart-content>label {
-        color: white;
-        position: absolute;
-        left: -40%;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 1.2rem;
-    }
-     .voice-container .pannel-chat-info .chart-content span {
-        display: flex;
-        text-align: justify;
-    }
-    .stay-right {
-        color: #FFFFFF !important;
-        background: #2d8cf0 !important;
-        float: right !important;
-        border-bottom-right-radius: 2px !important;
-        border-top-right-radius: 15px !important;
-        border-bottom-left-radius: 12px !important;
-        border-top-left-radius: 12px !important;
-    }
-    .chart-content-old {
-        opacity: 0.6;
-    }
-     .voice-arrow-cancel {
-        width: 87px;
-        height: 30px;
-        position: absolute;
-        left: 50%;
-        margin-left: -43.5px;
-        bottom: 170px;
-        color: #FFFFFF;
-        font-size: 0.75rem;
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 1);
-        border-radius: 5px;
-        text-align: center;
-        line-height: 30px;
-        display: none;
-    }
-     .voice-arrow-dialog {
-        height: 24px;
-        position: absolute;
-        left: 50%;
-        bottom: 25%;
-        color: #FFFFFF;
-        text-align: center;
-        line-height: 24px;
-        white-space: nowrap;
-        transform: translateX(-50%);
-    }
-     .voice-arrow-box {
-        width: 100px;
-        height: 80px;
-        position: absolute;
-        left: 50%;
-        margin-left: -50px;
-        bottom: 70px;
-        display: none;
-    }
-     .voice-arrow-box .voice-arrow-ani {
-        width: 40px;
-        height: 13px;
-        margin: auto;
-        background: url(/Image/arrow_ani.png) no-repeat center center/100% 100%;
-        position: relative;
-        top: 10px;
-        opacity: .2;
-    }
-     .voice-arrow-box .voice-arrow-ani:nth-child(2) {
-        top: 8px;
-        opacity: .6;
-    }
-     .voice-arrow-box .voice-arrow-ani:nth-child(3) {
-        top: 6px;
-        opacity: 1;
-    }
-    .IndexIconAnimation1 {
-        animation: IndexIconAnimation1 1.5s 0s both infinite;
-    }
-    .IndexIconAnimation2 {
-        animation: IndexIconAnimation2 1.5s 0s both infinite;
-    }
-    .IndexIconAnimation3 {
-        animation: IndexIconAnimation3 1.5s 0s both infinite;
-    }
-    @keyframes IndexIconAnimation1 {
-        0% {
-            opacity: 0.6;
-            /*初始状态 透明度为0*/
-        }
-        33.33% {
-            opacity: 1;
-            /*结尾状态 透明度为1*/
-        }
-        100% {
-            opacity: 1;
-            /*结尾状态 透明度为1*/
-        }
-    }
-    @keyframes IndexIconAnimation2 {
-        0% {
-            opacity: 0.4;
-            /*初始状态 透明度为0*/
-        }
-        33.33% {
-            opacity: 0.4;
-            /*结尾状态 透明度为1*/
-        }
-        66.66% {
-            opacity: 1;
-            /*结尾状态 透明度为1*/
-        }
-        100% {
-            opacity: 1;
-            /*结尾状态 透明度为1*/
-        }
-    }
-    @keyframes IndexIconAnimation3 {
-        0% {
-            opacity: 0.2;
-            /*初始状态 透明度为0*/
-        }
-        33.33% {
-            opacity: 0.2;
-            /*结尾状态 透明度为1*/
-        }
-        66.66% {
-            opacity: 0.2;
-            /*结尾状态 透明度为1*/
-        }
-        100% {
-            opacity: 1;
-            /*结尾状态 透明度为1*/
-        }
-    }
-    .homeHuanAnimation {
-        -webkit-animation-name: pulsate;
-        -webkit-animation-duration: 3s;
-        -webkit-animation-iteration-count: infinite;
-    }
-    .appAttrity {
-        padding-top: 0!important;
-    }
-    .appAttrity .navbar {
-        display: none;
-    }
-    .appAttrity #Video_content_ref {
-        padding-top: 0!important;
-    }
-
-    @-webkit-keyframes pulsate {
-        0% {
-            -webkit-box-shadow: 0px 0px 0px #2d8cf0;
-        }
-        25% {
-            -webkit-box-shadow: 0px 0px 35px #2d8cf0;
-        }
-        50% {
-            -webkit-box-shadow: 0px 0px 0px #2d8cf0;
-        }
-        75% {
-            -webkit-box-shadow: 0px 0px 35px #2d8cf0;
-        }
-        100% {
-            -webkit-box-shadow: 0px 0px 0px #2d8cf0;
-        }
-    }
-}
-
-// 视频监控
-#Video_content_ref,#VideoDetails_content_ref{
-    div.list-page{
-        padding: 1rem;
-        &>ul{margin: 0;&>li{
-            margin-bottom: 0.5rem;
-        }}
-    }
-}
-#VideoDetails_content_ref{
-    div.list-page{
-        &>ul{&>li{
-            div.item-inner:before{content: ""!important;}
-        }}
-    }
-}
-
-
 //新版语音
-.voice-container{
-    width: 100%;height: 100%;position: absolute;left: 0;bottom: 0;z-index: 499;background: rgba(0,0,0,0.5);
-    &>div{
-        width: 90%;bottom: 80px;
+.video-content-btn {
+    width: 70px;
+    height: 35px;
+    border-radius: 0 0 70px 70px;
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    margin-left: -35px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.video-content-btn div {
+    width: 50px;
+    height: 50px;
+    background: #4E4F50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 50px white;
+}
+.video-content-btn-Curtain {
+    width: 80px;
+    height: 35px;
+    border-radius: 0 0 80px 80px;
+    position: absolute;
+    left: 50%;
+    bottom: 10%;
+    margin-left: -40px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.video-content-btn-Curtain div {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 50px white;
+}
+.video-content-btn div img {
+    height: 100%;
+    width: auto;
+}
+.voice-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 499;
+    background: rgba(0, 0, 0, 0.5);
+    &>div {
+        width: 90%;
+        bottom: 80px;
         margin: auto;
         position: absolute;
         margin-left: 5%;
         background: white;
         padding: 1rem;
         border-radius: 6px;
-        &>p{
-          text-align: center;margin-bottom: 1rem;
+        &>p {
+            text-align: center;
+            margin-bottom: 1rem;
         }
-        &>div{
-          width: 200px;height: 200px;margin: auto;border: 1px solid red;
+        &>div {
+            width: 200px;
+            height: 200px;
+            margin: auto;
+            border: 1px solid red;
         }
     }
 }
-.background_05{background: rgba(0,0,0,0.5);}
-.voiceView{
-  label{    position: absolute; left: 50%; transform: translateX(-50%) skew(-10deg, 0deg); color: #999;}
-  h2{font-weight: 500;text-align: center;padding-top: 2rem;}
-  div{ 
-    width: 150px; height: 150px; margin: 0 auto 2rem auto;
-    svg{pointer-events: none;}
-  }
+.background_05 {
+    background: rgba(0, 0, 0, 0.5);
 }
-.voiceAnimateShow{
-   animation: fadeInUp 0.3s 0s linear;
+.voiceView {
+    label {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%) skew(-10deg, 0deg);
+        color: #999;
+    }
+    h2 {
+        font-weight: 500;
+        height: 70px;
+        text-align: center;
+        padding-top: 2rem;
+    }
+    #videoContentBtnId {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 2rem auto;
+        svg {
+            pointer-events: none;
+        }
+    }
+
 }
-.voiceAnimateHide{
-   animation: slideOutUp 0.3s 0s linear;
+.voiceAnimateShow {
+    animation: fadeInUp 0.3s 0s linear;
 }
-.displayNone{display: none;}
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 50%, 0);
-    transform: translate3d(0, 50%, 0);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
+.voiceAnimateHide {
+    animation: slideOutUp 0.3s 0s linear;
+}
+.displayNone {
+    display: none;
 }
 
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 50%, 0);
+        transform: translate3d(0, 50%, 0);
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
 @-webkit-keyframes slideOutUp {
-  from {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
-  to {
-    -webkit-transform: translate3d(0, -50%, 0);
-    transform: translate3d(0, -50%, 0);
-    opacity: 0;
-  }
+    from {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+    to {
+        -webkit-transform: translate3d(0, -50%, 0);
+        transform: translate3d(0, -50%, 0);
+        opacity: 0;
+    }
+}
+
+//语音动画
+.loader {
+    margin: auto;
+    width: 250px;
+    height: 70px;
+}
+.loader span {
+    display: block;
+    background: #3995FF;
+    width: 7px;
+    height: 10%;
+    border-radius: 14px;
+    margin-right: 5px;
+    float: left;
+    margin-top: 40px;
+}
+.loader span:last-child {
+    margin-right: 0px;
+}
+.loader span:nth-child(1) {
+ animation: load 1.5s 1s infinite linear;
+}
+.loader span:nth-child(2) {
+ animation: load 1.5s 0.9s infinite linear;
+}
+.loader span:nth-child(3) {
+ animation: load 1.5s 0.8s infinite linear;
+}
+.loader span:nth-child(4) {
+ animation: load 1.5s 0.7s infinite linear;
+}
+.loader span:nth-child(5) {
+ animation: load 1.5s 0.6s infinite linear;
+}
+.loader span:nth-child(6) {
+ animation: load 1.5s 0.5s infinite linear;
+}
+.loader span:nth-child(7) {
+ animation: load 1.5s 0.4s infinite linear;
+}
+.loader span:nth-child(8) {
+ animation: load 1.5s 0.3s infinite linear;
+}
+.loader span:nth-child(9) {
+ animation: load 1.5s 0.2s infinite linear;
+}
+.loader span:nth-child(10) {
+ animation: load 1.5s 0.1s infinite linear;
+}
+.loader span:nth-child(11) {
+ animation: load 1.5s 0s infinite linear;
+}
+.loader span:nth-child(12) {
+ animation: load 1.5s 0.1s infinite linear;
+}
+.loader span:nth-child(13) {
+ animation: load 1.5s 0.2s infinite linear;
+}
+.loader span:nth-child(14) {
+ animation: load 1.5s 0.3s infinite linear;
+}
+.loader span:nth-child(15) {
+ animation: load 1.5s 0.4s infinite linear;
+}
+.loader span:nth-child(16) {
+ animation: load 1.5s 0.5s infinite linear;
+}
+.loader span:nth-child(17) {
+ animation: load 1.5s 0.6s infinite linear;
+}
+.loader span:nth-child(18) {
+ animation: load 1.5s 0.7s infinite linear;
+}
+.loader span:nth-child(19) {
+ animation: load 1.5s 0.8s infinite linear;
+}
+.loader span:nth-child(20) {
+ animation: load 1.5s 0.9s infinite linear;
+}
+.loader span:nth-child(21) {
+ animation: load 1.5s 1s infinite linear;
+}
+@keyframes load {
+ 0% {
+ background: #ACCFFF;
+ margin-top: 15%;
+ height: 15%;
+}
+ 50% {
+ background: #5AB4F9;
+ height: 100%;
+ margin-top: 0%;
+}
+ 100% {
+ background: #ACCFFF;
+ height: 15%;
+ margin-top: 15%;
+}
 }

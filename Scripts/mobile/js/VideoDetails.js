@@ -4,5 +4,6 @@ function VideoDetails() {
     var url = urlstr[leng - 1].split("#")[1]
     var dll = url.split("-")[0];
     var equip_no = url.split("-")[1];
+     // searchResult.length = 0;
     videoListLi(dll,equip_no,"#VideoDetails_tree");
 }

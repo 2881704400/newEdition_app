@@ -59,36 +59,35 @@ html.device-ios.device-iphone-x .statusbar{height: 20px;}
         }
     }
     /*顶部导航栏*/
-
     .navbar{
         background-color: #{$headerBgc}; box-shadow: 0 1px 0px 0 #{$headerBoxShadow};
         &>.navbar-inner{ 
             .left{
-               height: 100%;margin: 0;
+               height: 100%;
                 i{font-size: 1.5rem;color: #{$toolbarFontColor};margin-left: -7px;}
                 i.icon-back{width: auto;height: auto;background-image: url()!important;}
                 i.icon{font-family: "iconfont" !important; font-size: 2rem; font-style: normal; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
                 a{
                     padding: 0;font-size: 1.1rem;color: #{$toolbarFontColor}; width: 100%;height: 100%;line-height: 59px;display: inline-block;    
+                    margin-left: 10px;left: -5px;position: relative;
                     i.icon-f7_add{font-size: 2rem;color: #{$allFontColor};} i.icon-scanIcon{font-size: 1.5rem;}
                 }
              }
             .title{color: #{$toolbarFontColor}; title{color: #{$toolbarFontColor};max-width: 200px;overflow: hidden;text-overflow: ellipsis; }}
             .right{
-                width: 15%;height: 100%;margin: 0;text-align: right;    
+                min-width: 15%;height: 100%;margin: 0;text-align: right;    
                 a{
-                    padding: 0;color: #{$headerFontColor}; width: 100%;height: 100%;line-height: 35px;display: inline-block;    
+                    padding: 0;color: #{$headerFontColor}; width: 100%;height: 100%;line-height: 35px;display: inline-block;margin-left: 10px;    
                     text-align: center; i{font-size: 2rem!important;}
                     p{    line-height: 20px;}
                 }
             }
         }
     }
-    // .navbar-large{box-shadow: none;}
+
     .navbar:after{height: 0px;}
     /*底部菜单*/
     .view-menu-toolbar{
-        
         .toolbar-inner{ 
             z-index: 99;
             &>a{color: #{$toolbarFontColor}; }
@@ -190,7 +189,7 @@ html.ios:not(.device-ios):not(.device-android) .statusbar {
     .half-select-box label,.half-select-box-bottom label,.half-select-box-input input,.half-select-box-bottom input,.half-select-box-bottom input:last-child{color: #{$situationFontColor};}
  }
 }
-.equipSearchDetailContent.page-content{background: #{$situationBgc}; .eventDetailList{color:  #{$situationFontColor};background: #{$situationContainerBgc}; input{color:  #{$situationFontColor};}} }
+.equipSearchDetailContent.page-content{background: #{$situationBgc}; .eventDetailList{color:  #{$situationFontColor}; input{color:  #{$situationFontColor};}} }
 
 //系统配置
 #equipConfigList .content-wrap .sele-tile{color:  #{$situationFontColor};}

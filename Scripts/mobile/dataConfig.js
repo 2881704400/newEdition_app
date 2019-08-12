@@ -967,6 +967,37 @@ $(document).on("page:beforein", ".page[data-page='search']", function (e) {
     initPageJS('search', '/Scripts/mobile/js/');
 });
 
+//新增人员管理
+$(document).on("page:beforein", ".page[data-page='personnelManagement']", function (e) {
+    initPageJS('personnelManagement', '/Scripts/mobile/js/');
+});
+$(document).on("page:beforein", ".page[data-page='personnelManagement_en']", function (e) {
+    initPageJS('personnelManagement_en', '/Scripts/mobile/js/mobile-en/');
+});
+
+//新增分组管理
+$(document).on("page:beforein", ".page[data-page='groupManagement']", function (e) {
+    initPageJS('groupManagement', '/Scripts/mobile/js/');
+});
+$(document).on("page:beforein", ".page[data-page='groupManagement_en']", function (e) {
+    initPageJS('groupManagement_en', '/Scripts/mobile/js/mobile-en/');
+});
+
+//管理范围
+$(document).on("page:beforein", ".page[data-page='scopeOfManagement']", function (e) {
+    initPageJS('scopeOfManagement', '/Scripts/mobile/js/');
+});
+$(document).on("page:beforein", ".page[data-page='scopeOfManagement_en']", function (e) {
+    initPageJS('scopeOfManagement_en', '/Scripts/mobile/js/mobile-en/');
+});
+
+//报警排表查询
+$(document).on("page:beforein", ".page[data-page='scheduleSearch']", function (e) {
+    initPageJS('scheduleSearch', '/Scripts/mobile/js/');
+});
+$(document).on("page:beforein", ".page[data-page='scheduleSearch_en']", function (e) {
+    initPageJS('scheduleSearch_en', '/Scripts/mobile/js/mobile-en/');
+});
 // *************************************************
 // ------------------接口配置 start----------------- 
 // *************************************************

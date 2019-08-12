@@ -286,7 +286,7 @@ function getYcSelect(arr) {
             }
             $("#ycp_en").append(html);
         }
-        myApp.dialog.close();
+        loadFun();
     })
 }
 var alarmCode = 0,

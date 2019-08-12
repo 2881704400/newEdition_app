@@ -1,8 +1,7 @@
 ﻿var toastCenterLinkage,toastCenterLinkageSuccess;
 function equipLinkage_en() {
     switchToolbar("configTool");
-
-    myApp.dialog.progress('<a style="font-size: 1rem">Loading...</a>');
+    loadFun();
     initAddList_en();//联动设置
     toastCenterLinkage = myApp.toast.create({text: "operation failed", position: 'center', closeTimeout: 2000, });
     toastCenterLinkageSuccess = myApp.toast.create({text: "Successful operation", position: 'center', closeTimeout: 2000, });
@@ -47,11 +46,11 @@ function initAddList_en() {
                 })
                 setparm_init = lObject; linkage_init = hObject;
                 equipLinkList_en();
-                myApp.dialog.close();
+
         }
     }).fail(function(e){
       toastCenterLinkage.open();
-      myApp.dialog.close();
+
     });
 
 }

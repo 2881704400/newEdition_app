@@ -9504,8 +9504,8 @@ a.bodymovin = a.lottie));
     paramsStart = {
         container: document.getElementById('videoContentBtnId'),
         renderer: 'svg',
-        loop: true,
-        autoplay: true,
+        loop: false,
+        autoplay: false,
         animationData: animationDataStart
     };
 

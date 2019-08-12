@@ -16,11 +16,9 @@ function pptSelection() {
     $(".pptFileSelectContent>div").bind('click', function() {
         let htmlContent = "";
         if ($(this).attr("dataset") == "1") {
-            myApp.views.main.router.navigate('/pptSelectionDetails/'); 
-            //ststemSetPPT(window.localStorage.languageList == 1 ? "PowerPoint" : "PowerPoint", "sceneBtnControl", PowerPointHtml[0].html, "");
+            myApp.views.main.router.navigate('/pptSelectionDetails/#0'); 
         } else {
-            myApp.views.main.router.navigate('/pptSelectionDetails/'); 
-            //ststemSetPPT(window.localStorage.languageList == 1 ? "Mobile Storage" : "移动设备", "sceneBtnControl", PowerPointHtml[1].html, "u");
+            myApp.views.main.router.navigate('/pptSelectionDetails/#1'); 
         }
     });
     isFilePPT();
@@ -131,19 +129,19 @@ function isFilePPT() {
 }
 
 function setMenu(that, value, slideIndex) {
-    openFileCommand(that, $(that).attr("set_equip"), 1, "-", (value ? value : $(that).attr("data-url")), "test", slideIndex);
+    openFileCommand(that, $(that).attr("set_equip"),$(that).attr("set_no"),(value ? value : $(that).attr("data-url")));
 }
+
 //设置命令-确定
-function openFileCommand(dt, equip_no, main_instruction, minor_instruction, value, set_nm, slideIndex) { //equip_no,main_instruction,minor_instruction,value,set_nm
+function openFileCommand(dt, equip_no, setNo,value) { //equip_no,main_instruction,minor_instruction,value,set_nm
     var userName = window.localStorage.userName;
-    $.when(AlarmCenterContext.post("/api/Real/setup", {
+    $.when(AlarmCenterContext.post("/GWService.asmx/SetupsCommand2", {
         equip_no: equip_no,
-        main_instr: main_instruction,
-        mino_instr: minor_instruction,
-        value: value
+        setNo: setNo,
+        strValue: value    
     })).done(function(n) {
-        if (n.HttpData.code == 200 || n.HttpData.code == 201) {
-            myApp.dialog.progress('<a style="font-size: 1rem">加载中...</a>');
+        if ($(n).find("data").text() == "true") {
+            loadStart();
             $(dt).hasClass("historyPPT") ? window.localStorage.historyis = 1 : window.localStorage.historyis = 0;
             if (!isStucture($(dt).text()) && $(dt).text() != "") {
                 $.setFounction(dt);
@@ -153,36 +151,37 @@ function openFileCommand(dt, equip_no, main_instruction, minor_instruction, valu
             } catch (e) {};
             if ($(".page-current>div").hasClass("mettingPPTContent")) //ppt列表
             {
-                var setTimeout = setInterval(function() {
-                    $.when(AlarmCenterContext.setYcConfig(4001)).done(function(n) {
-                        var result = n.HttpData;
-                        if (result.code == 200 && result.data[1].Reserve1 != -1) {
-                            window.localStorage.sessionFilename = result.data[0].Reserve1; //data[1];
-                            window.localStorage.sessionValue = result.data[1].Reserve1; //data[1];
-                            myApp.dialog.close();
-                            clearInterval(setTimeout);
-                            myApp.popover.close(".popup-public");
-                
-                            myApp.views.main.router.navigate('/pptDetails/');
-                        }
-                    }).fail(function(e) {
-                        myApp.dialog.close();
-                        clearInterval(setTimeout);
-                        myApp.popover.close(".popup-public");
-                        myApp.popover.close(".popup-public");
-                    });
-                }, 500);
+                repeatRequest()
             }
-        } else {
-            myApp.dialog.close();
-        }
-    }).fail(function(e) {
-        myApp.dialog.close();
-    });
+        } else {}
+    }).fail(function(e) {});
+}
+
+function repeatRequest(){
+        $.when(AlarmCenterContext.setYcConfig(4001)).done(function(n) {
+            var result = n.HttpData;
+            if (result.code == 200 && result.data[1].Reserve1 != -1) {
+                window.localStorage.sessionFilename = result.data[0].Reserve1; //data[1];
+                window.localStorage.sessionValue = result.data[1].Reserve1; //data[1];
+                clearInterval(setTimeout);
+                loadEnd();
+                myApp.popover.close(".popup-public");
+                myApp.views.main.router.navigate('/pptDetails/');
+            }
+            else 
+            {
+                
+                repeatRequest();
+            }
+        }).fail(function(e) {
+            repeatRequest();
+            loadEnd();
+            myApp.popover.close(".popup-public");
+            myApp.popover.close(".popup-public");
+        });    
 }
 //ppt 弹窗
 var popoverPPT;
-
 function ststemSetPPT(title, id, html, value) {
     myApp.request.get("plug/popoverTemplate.html", "", function(data) {
         var popoverHTML = data;

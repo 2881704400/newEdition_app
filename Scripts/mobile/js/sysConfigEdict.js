@@ -294,14 +294,11 @@ function getYcSingle(equip, ycno, ychtml) {
             var dat = e.HttpData.data,
                 lg = dat.length;
             for (var i = 0; i < lg; i++) {
-                var value = dat[i];
-                var valueStr = value;
-                //				var valueStr=JSON.stringify(value).replace(/"/g,"'"); 	
+                var value = dat[i],valueStr = value;	
                 loadInfor(1, valueStr, ychtml)
-                //				$("#equipTable").append(html);
             }
         }
-        //		myApp.dialog.close()
+     
     })
 }
 
@@ -312,14 +309,10 @@ function getYxSingle(equip, yxno, yxhtml) {
             var dat = e.HttpData.data,
                 lg = dat.length;
             for (var i = 0; i < lg; i++) {
-                var value = dat[i];
-                var valueStr = value;
-                //				var valueStr=JSON.stringify(value).replace(/"/g,"'"); 	
+                var value = dat[i],valueStr = value;	
                 loadInfor(2, valueStr, yxhtml)
-                //				$("#equipTable").append(html);
             }
         }
-        //		myApp.dialog.close()
     })
 }
 
@@ -330,9 +323,7 @@ function setSetSingle(equip, yxno, sethtml) {
             var dat = e.HttpData.data,
                 lg = dat.length;
             for (var i = 0; i < lg; i++) {
-                var value = dat[i];
-                var valueStr = value;
-                //				var valueStr=JSON.stringify(value).replace(/"/g,"'"); 	
+                var value = dat[i],valueStr = value;
                 loadInfor(3, valueStr, sethtml)
             }
         }
