@@ -170,7 +170,6 @@ function repeatRequest(){
             }
             else 
             {
-                
                 repeatRequest();
             }
         }).fail(function(e) {

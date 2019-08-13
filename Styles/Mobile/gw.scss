@@ -1,13 +1,13 @@
 ﻿@import 'style.scss'; //公用
+@import 'layout.scss'; //公用
 @import 'home.scss'; //首页
 @import 'setPage.scss'; //设置
 @import 'welcomeWords.scss';  //欢迎词
 @import 'ppt.scss';  //ppt
 @import 'schedule.scss';//报警排表
-@import 'layout.scss'; 
 @import 'equips.scss';  //设备
 @import 'eventSearch.scss'; //事件查询
 @import 'voice.scss'; //语音
 @import 'snapShot.scss'; //实时快照 	
 @import 'search.scss'; //搜索页面
-@import 'video.scss'; //搜索页面
+@import 'video.scss'; //视频界面

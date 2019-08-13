@@ -159,11 +159,8 @@ var firstImgStatus = true;
 function requestAjax(j, k) {
 
     var urlRe = "/PPTImages/" + window.localStorage.sessionFilename + "/" + j + ".jpg";
-    $(".mettingDetails_index div[indexid='" + j + "']").find("img").attr("src","#");
-    setTimeout(function(){
-        $(".mettingDetails_index div[indexid='" + j + "']").find("img").attr("src","#");
-    },3000);
-
+    $(".mettingDetails_index div[indexid='" + j + "']").find("img").attr("src",urlRe);
+    if(!k)
     $(".mettingDetails_index div[indexid='" + j + "']").html('<img src=' + urlRe + ' onerror="requestAjax(' + j + ',true)" />');
     
     //PPT跳转

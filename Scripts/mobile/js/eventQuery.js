@@ -58,14 +58,15 @@ function selectEvent() {
         getEventSys(data);
     }
 }
+
 function loadEvent(data) {}
+
 function getEventEquip(data) {
     if (!data.equip_no_list) {
         myApp.dialog.alert('请选择查询设备', "温馨提示");
         return;
     }
-    $.when(AlarmCenterContext.getEquipEvent()).done(function(e) {
-    })
+    $.when(AlarmCenterContext.getEquipEvent()).done(function(e) {})
 }
 
 function getEventSet(data) {
@@ -73,8 +74,7 @@ function getEventSet(data) {
         myApp.dialog.alert('请选择查询设备', "温馨提示");
         return;
     }
-    $.when(AlarmCenterContext.getSetEvent()).done(function(e) {
-    })
+    $.when(AlarmCenterContext.getSetEvent()).done(function(e) {})
 }
 
 function getEventSys(data) {
@@ -101,6 +101,7 @@ function getData() {
         }
     });
 }
+
 function getEvent() {
     if ($("#timePicker").val() == "") {
         myApp.dialog.alert('请选择开始日期', "温馨提示");
@@ -110,6 +111,7 @@ function getEvent() {
         $(".tabListQuery a.tab-link-active").click();
     }
 }
+
 function QueryEquipEvt(data) {
     $("#equipEventContent ul").html("");
     $.ajax({
@@ -153,10 +155,9 @@ function QueryEquipEvt(data) {
                 $("#equipEventContent>div").html("<ul>" + html + "</ul>");
             }
         }
-
-
     });
 }
+
 function QuerySetupsEvt(data) {
     $("#setEventContent ul").html("")
     $.ajax({
@@ -202,6 +203,7 @@ function QuerySetupsEvt(data) {
         }
     });
 }
+
 function getSetEvent() {
     var start = $("#timePicker").val(),
         end = $("#timePicker2").val();

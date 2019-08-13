@@ -134,7 +134,7 @@
                 }
                 .val {
                     font-weight: 600;
-                    max-width: 100%;
+                    max-width: 30%;
                     display: inline-block;
                     white-space: nowrap;
                     text-overflow: ellipsis;
@@ -279,7 +279,7 @@
             }
             #equipTable {
                 background: transparent;
-                padding-bottom: 100px;
+                    padding: 1rem 1rem 100px 1rem;
                 .item-title {
                     color: $titColor;
                 }
